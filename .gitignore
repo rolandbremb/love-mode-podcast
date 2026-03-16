@@ -20,6 +20,9 @@ yarn-error.log*
 # env files
 .env*.local
 
+# sanity
+.sanity/
+
 # vercel
 .vercel
 
