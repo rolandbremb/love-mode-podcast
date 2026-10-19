@@ -134,7 +134,9 @@
       "Expertise in relationships, psychology, or self-love",
       "Openness to talk honestly, with humor and heart"
     ],
-    "handNote": "we read every single one!"
+    "handNote": "we read every single one!",
+    "successTitle": "You're on our list!",
+    "successBody": "Thanks for applying. We read every application and will reach out if it's a fit."
   },
   "collaborate": {
     "title": "Let's Collaborate",
@@ -162,7 +164,9 @@
     "label": "For brands",
     "sideTitle": "Why Love Mode?",
     "typeHint": "Pick the one that fits best",
-    "budgetHint": "Optional, but it helps us plan"
+    "budgetHint": "Optional, but it helps us plan",
+    "successTitle": "Proposal received!",
+    "successBody": "Thank you! We'll get back to you within 48 hours."
   },
   "about": {
     "meetYourHost": "Meet Your Host",
@@ -195,5 +199,12 @@
     "followUs": "Follow along",
     "brandsTitle": "Got a brand in mind?",
     "workWithUs": "Work with us"
+  },
+  "forms": {
+    "sending": "Sending…",
+    "errorInvalid": "Please fill in the required fields and check your email address.",
+    "errorFailed": "Something went wrong and your message wasn't sent. Please try again in a minute.",
+    "sendAnother": "Send another",
+    "honeypot": "Leave this field empty"
   }
 }

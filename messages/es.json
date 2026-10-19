@@ -134,7 +134,9 @@
       "Experiencia en relaciones, psicología o amor propio",
       "Ganas de hablar con honestidad, humor y corazón"
     ],
-    "handNote": "¡leemos todas!"
+    "handNote": "¡leemos todas!",
+    "successTitle": "¡Ya estás en nuestra lista!",
+    "successBody": "Gracias por postularte. Leemos todas las solicitudes y te contactaremos si encajas."
   },
   "collaborate": {
     "title": "Colaboremos",
@@ -162,7 +164,9 @@
     "label": "Para marcas",
     "sideTitle": "¿Por qué Love Mode?",
     "typeHint": "Elige la que mejor encaje",
-    "budgetHint": "Opcional, pero nos ayuda a planear"
+    "budgetHint": "Opcional, pero nos ayuda a planear",
+    "successTitle": "¡Propuesta recibida!",
+    "successBody": "¡Gracias! Te responderemos en un máximo de 48 horas."
   },
   "about": {
     "meetYourHost": "Conoce a tu Anfitriona",
@@ -195,5 +199,12 @@
     "followUs": "Síguenos",
     "brandsTitle": "¿Tienes una marca en mente?",
     "workWithUs": "Colaboremos"
+  },
+  "forms": {
+    "sending": "Enviando…",
+    "errorInvalid": "Completa los campos obligatorios y revisa tu correo electrónico.",
+    "errorFailed": "Algo salió mal y tu mensaje no se envió. Inténtalo de nuevo en un minuto.",
+    "sendAnother": "Enviar otra",
+    "honeypot": "Deja este campo vacío"
   }
 }

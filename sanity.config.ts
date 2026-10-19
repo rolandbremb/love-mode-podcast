@@ -18,6 +18,34 @@ export default defineConfig({
         S.list()
           .title("Content")
           .items([
+            // Inbox: submissions from the website forms, newest first
+            S.listItem()
+              .title("Inbox")
+              .child(
+                S.list()
+                  .title("Inbox")
+                  .items([
+                    S.listItem()
+                      .title("Brand Inquiries")
+                      .schemaType("brandInquiry")
+                      .child(
+                        S.documentTypeList("brandInquiry")
+                          .title("Brand Inquiries")
+                          .defaultOrdering([{ field: "submittedAt", direction: "desc" }])
+                      ),
+                    S.listItem()
+                      .title("Guest Applications")
+                      .schemaType("guestApplication")
+                      .child(
+                        S.documentTypeList("guestApplication")
+                          .title("Guest Applications")
+                          .defaultOrdering([{ field: "submittedAt", direction: "desc" }])
+                      ),
+                  ])
+              ),
+
+            S.divider(),
+
             // Singleton: Site Settings
             S.listItem()
               .title("Site Settings")

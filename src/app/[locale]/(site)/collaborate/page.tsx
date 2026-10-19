@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import BrandInquiryForm from "@/components/forms/BrandInquiryForm";
 import { formatStat } from "@/lib/format";
 import { getAllEpisodes } from "@/lib/rss";
 import { getSiteSettings } from "@/sanity/client";
@@ -12,10 +13,6 @@ function Sparkle({ className }: { className?: string }) {
     </svg>
   );
 }
-
-const labelClass = "mb-2 block text-sm font-bold text-ink";
-const pillClass =
-  "inline-block rounded-full border-2 border-ink bg-white px-4 py-2 text-sm font-semibold text-ink transition-all hover:bg-blush peer-checked:bg-brand-600 peer-checked:text-white peer-checked:shadow-pop-sm peer-focus-visible:ring-4 peer-focus-visible:ring-butter";
 
 export default async function CollaboratePage({
   params,
@@ -35,21 +32,6 @@ export default async function CollaboratePage({
     totalViews > 0 && { value: formatStat(totalViews), label: tHome("statViews") },
     platformCount > 0 && { value: String(platformCount), label: tHome("statPlatforms") },
   ].filter(Boolean) as { value: string; label: string }[];
-
-  const collabTypes = [
-    { value: "sponsorship", label: t("podcastSponsorship") },
-    { value: "brand-partnership", label: t("brandPartnership") },
-    { value: "content-collab", label: t("contentCollab") },
-    { value: "affiliate", label: t("affiliatePartnership") },
-    { value: "other", label: t("other") },
-  ];
-  const budgets = [
-    { value: "", label: t("preferNotToSay") },
-    { value: "under-500", label: t("under500") },
-    { value: "500-2000", label: t("500to2000") },
-    { value: "2000-5000", label: t("2000to5000") },
-    { value: "5000+", label: t("5000plus") },
-  ];
 
   return (
     <div>
@@ -96,94 +78,7 @@ export default async function CollaboratePage({
           </aside>
 
           {/* ===== FORM ===== */}
-          <form
-            action="https://formspree.io/f/YOUR_FORM_ID"
-            method="POST"
-            className="space-y-7 rounded-[2rem] border-2 border-ink bg-white p-6 shadow-pop-lg sm:p-8 md:p-10"
-          >
-            <div className="grid gap-6 sm:grid-cols-2">
-              <div>
-                <label htmlFor="name" className={labelClass}>
-                  {t("nameCompany")} <span className="text-brand-600">*</span>
-                </label>
-                <input type="text" id="name" name="name" required autoComplete="organization" className="theme-field" />
-              </div>
-              <div>
-                <label htmlFor="email" className={labelClass}>
-                  {t("email")} <span className="text-brand-600">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  autoComplete="email"
-                  className="theme-field"
-                  placeholder="you@company.com"
-                />
-              </div>
-            </div>
-
-            <fieldset>
-              <legend className="text-sm font-bold text-ink">
-                {t("typeOfCollaboration")} <span className="text-brand-600">*</span>
-              </legend>
-              <p className="mb-3 mt-1 text-xs text-ink/60">{t("typeHint")}</p>
-              <div className="flex flex-wrap gap-2.5">
-                {collabTypes.map(({ value, label }) => (
-                  <label key={value} className="cursor-pointer">
-                    <input type="radio" name="type" value={value} required className="peer sr-only" />
-                    <span className={pillClass}>{label}</span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
-
-            <div>
-              <label htmlFor="website" className={labelClass}>
-                {t("websiteSocial")}
-              </label>
-              <input type="text" id="website" name="website" className="theme-field" placeholder="https://..." />
-            </div>
-
-            <fieldset>
-              <legend className="text-sm font-bold text-ink">{t("budgetRange")}</legend>
-              <p className="mb-3 mt-1 text-xs text-ink/60">{t("budgetHint")}</p>
-              <div className="flex flex-wrap gap-2.5">
-                {budgets.map(({ value, label }) => (
-                  <label key={value || "none"} className="cursor-pointer">
-                    <input
-                      type="radio"
-                      name="budget"
-                      value={value}
-                      defaultChecked={value === ""}
-                      className="peer sr-only"
-                    />
-                    <span className={pillClass}>{label}</span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
-
-            <div>
-              <label htmlFor="proposal" className={labelClass}>
-                {t("tellUsIdea")} <span className="text-brand-600">*</span>
-              </label>
-              <textarea
-                id="proposal"
-                name="proposal"
-                required
-                rows={5}
-                className="theme-field"
-                placeholder={t("tellUsPlaceholder")}
-              />
-            </div>
-
-            <button type="submit" className="btn-primary w-full !py-4 !text-base">
-              {t("submit")}
-            </button>
-            <p className="text-center text-sm text-ink/60">{t("note")}</p>
-          </form>
+          <BrandInquiryForm />
         </div>
       </div>
     </div>
