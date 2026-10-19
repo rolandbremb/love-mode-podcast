@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import EpisodeCard from "@/components/EpisodeCard";
 import FadeIn from "@/components/FadeIn";
 import { Link } from "@/i18n/navigation";
+import { formatStat } from "@/lib/format";
 import { getAllEpisodes } from "@/lib/rss";
 import { getAboutPage, getSiteSettings } from "@/sanity/client";
 
@@ -76,13 +77,6 @@ const offerIcons = [
 ];
 
 const offerStyles = ["bg-cream -rotate-2", "bg-butter rotate-1", "bg-blush rotate-1", "bg-white -rotate-1"];
-
-// Rounds down so "245K+" never overstates: 245,900 -> "245K+", 1,280,000 -> "1.2M+"
-function formatStat(n: number) {
-  if (n >= 1_000_000) return `${Math.floor(n / 100_000) / 10}M+`;
-  if (n >= 1_000) return `${Math.floor(n / 1_000)}K+`;
-  return String(n);
-}
 
 const platformIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   youtube: YouTubeIcon,

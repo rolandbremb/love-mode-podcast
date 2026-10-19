@@ -82,10 +82,16 @@
     "listenNow": "Escuchar Ahora",
     "comingSoon": "Próximamente",
     "episodesComingSoon": "Los episodios aparecerán aquí automáticamente una vez que conectes tu feed.",
-    "setRssUrl": "Configura la URL del feed en los ajustes del sitio en Sanity."
+    "setRssUrl": "Configura la URL del feed en los ajustes del sitio en Sanity.",
+    "latest": "Último episodio",
+    "count": "{count} episodios",
+    "searchLabel": "Buscar episodios",
+    "searchPlaceholder": "Busca por tema, invitado o título",
+    "noResults": "Ningún episodio coincide con “{query}”"
   },
   "episodeCard": {
-    "listenNow": "Ver Ahora"
+    "listenNow": "Ver Ahora",
+    "views": "{count} vistas"
   },
   "products": {
     "title": "Productos Digitales",
@@ -120,7 +126,15 @@
     "whyGuest": "¿Por qué serías un gran invitado?",
     "whyGuestPlaceholder": "Cuéntanos sobre ti y lo que aportarías a la conversación...",
     "submit": "Enviar Solicitud",
-    "note": "¡Revisamos cada solicitud y nos pondremos en contacto si encaja!"
+    "note": "¡Revisamos cada solicitud y nos pondremos en contacto si encaja!",
+    "label": "Únete a la conversación",
+    "perksTitle": "Lo que buscamos",
+    "perks": [
+      "Una historia real de amor, citas o desamor",
+      "Experiencia en relaciones, psicología o amor propio",
+      "Ganas de hablar con honestidad, humor y corazón"
+    ],
+    "handNote": "¡leemos todas!"
   },
   "collaborate": {
     "title": "Colaboremos",
@@ -144,7 +158,11 @@
     "tellUsIdea": "Cuéntanos sobre tu Idea",
     "tellUsPlaceholder": "¿Qué tienes en mente? ¿Cómo sería una colaboración exitosa?",
     "submit": "Enviar Propuesta",
-    "note": "Revisaremos tu propuesta y te responderemos en 48 horas."
+    "note": "Revisaremos tu propuesta y te responderemos en 48 horas.",
+    "label": "Para marcas",
+    "sideTitle": "¿Por qué Love Mode?",
+    "typeHint": "Elige la que mejor encaje",
+    "budgetHint": "Opcional, pero nos ayuda a planear"
   },
   "about": {
     "meetYourHost": "Conoce a tu Anfitriona",
@@ -157,7 +175,9 @@
     "guestCta": "Aplicar Ahora",
     "supportTitle": "Apoya el Show",
     "supportDesc": "¿Te encanta el podcast? Ayúdanos a seguir con un café.",
-    "supportCta": "Invítame un Café"
+    "supportCta": "Invítame un Café",
+    "hello": "hola, soy",
+    "missionNote": "la razón de todo"
   },
   "footer": {
     "tagline": "Conversaciones reales sobre amor, citas y construir relaciones significativas.",
@@ -171,6 +191,9 @@
     "shop": "Tienda",
     "digitalProducts": "Productos Digitales",
     "courses": "Cursos",
-    "copyright": "© {year} Love Mode Podcast. Todos los derechos reservados."
+    "copyright": "© {year} Love Mode Podcast. Todos los derechos reservados.",
+    "followUs": "Síguenos",
+    "brandsTitle": "¿Tienes una marca en mente?",
+    "workWithUs": "Colaboremos"
   }
 }

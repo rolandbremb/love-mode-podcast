@@ -29,59 +29,98 @@ export default async function Footer({
       ? settings.socialLinks
       : defaultSocialLinks;
 
+  const podcastLinks = [
+    { href: "/about", label: t("about") },
+    { href: "/episodes", label: t("allEpisodes") },
+    { href: "/apply", label: t("beAGuest") },
+    { href: "/collaborate", label: t("collaborate") },
+  ];
+  const resourceLinks = [
+    showShop && { href: "/shop", label: t("shop") },
+    showProducts && { href: "/products", label: t("digitalProducts") },
+    showCourses && { href: "/courses", label: t("courses") },
+  ].filter(Boolean) as { href: string; label: string }[];
+
   return (
-    <footer className="border-t border-brand-100 bg-brand-950 text-brand-200">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="relative overflow-hidden border-t-2 border-ink bg-ink text-cream">
+      <div className="mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.8fr)_minmax(0,0.8fr)_minmax(0,1.1fr)]">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="font-serif text-lg font-bold text-white">Love Mode</span>
-            </div>
-            <p className="mt-3 text-sm leading-relaxed text-brand-300">{t("tagline")}</p>
-          </div>
-
-          <div>
-            <h3 className="font-semibold text-white">{t("podcast")}</h3>
-            <ul className="mt-3 space-y-2 text-sm">
-              <li><Link href="/about" className="hover:text-white">{t("about")}</Link></li>
-              <li><Link href="/episodes" className="hover:text-white">{t("allEpisodes")}</Link></li>
-              <li><Link href="/apply" className="hover:text-white">{t("beAGuest")}</Link></li>
-              <li><Link href="/collaborate" className="hover:text-white">{t("collaborate")}</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold text-white">{t("resources")}</h3>
-            <ul className="mt-3 space-y-2 text-sm">
-              {showShop && <li><Link href="/shop" className="hover:text-white">{t("shop")}</Link></li>}
-              {showProducts && <li><Link href="/products" className="hover:text-white">{t("digitalProducts")}</Link></li>}
-              {showCourses && <li><Link href="/courses" className="hover:text-white">{t("courses")}</Link></li>}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold text-white">{t("connect")}</h3>
-            <ul className="mt-3 space-y-2 text-sm">
-              {socialLinks.map((link) => (
-                <li key={link.platform}>
+            <p className="max-w-sm -rotate-1 font-hand text-3xl font-medium leading-tight text-brand-300">
+              {t("tagline")}
+            </p>
+            <h3 className="mt-8 text-xs font-bold uppercase tracking-[0.2em] text-cream/50">
+              {t("followUs")}
+            </h3>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {socialLinks.map((link) => {
+                const external = link.url && link.url !== "#";
+                return (
                   <a
+                    key={link.platform}
                     href={link.url || "#"}
-                    target={link.url && link.url !== "#" ? "_blank" : undefined}
-                    rel={link.url && link.url !== "#" ? "noopener noreferrer" : undefined}
-                    className="hover:text-white"
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    className="rounded-full border-2 border-cream/30 px-4 py-1.5 text-sm font-semibold transition-colors hover:border-butter hover:bg-butter hover:text-ink"
                   >
                     {link.platform}
                   </a>
+                );
+              })}
+            </div>
+          </div>
+
+          <nav aria-label={t("podcast")}>
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-cream/50">{t("podcast")}</h3>
+            <ul className="mt-4 space-y-2">
+              {podcastLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <Link href={href} className="font-display text-xl font-bold transition-colors hover:text-brand-300">
+                    {label}
+                  </Link>
                 </li>
               ))}
             </ul>
+          </nav>
+
+          {resourceLinks.length > 0 ? (
+            <nav aria-label={t("resources")}>
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-cream/50">{t("resources")}</h3>
+              <ul className="mt-4 space-y-2">
+                {resourceLinks.map(({ href, label }) => (
+                  <li key={href}>
+                    <Link href={href} className="font-display text-xl font-bold transition-colors hover:text-brand-300">
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ) : (
+            <div className="hidden lg:block" />
+          )}
+
+          <div className="self-start rounded-3xl border-2 border-cream/20 p-6 md:col-span-2 lg:col-span-1">
+            <p className="font-display text-2xl font-extrabold lowercase leading-tight tracking-tight">
+              {t("brandsTitle")}
+            </p>
+            <Link href="/collaborate" className="btn-primary mt-5">
+              {t("workWithUs")}
+            </Link>
           </div>
         </div>
 
-        <div className="mt-10 border-t border-brand-800 pt-6 text-center text-xs text-brand-400">
+        <p className="mt-14 border-t border-cream/15 pt-6 text-xs text-cream/50">
           {t("copyright", { year: new Date().getFullYear() })}
-        </div>
+        </p>
       </div>
+
+      <p
+        className="-mb-[0.18em] select-none whitespace-nowrap text-center font-display text-[23vw] font-extrabold lowercase leading-none tracking-[-0.06em] text-brand-600 xl:text-[18rem]"
+        aria-hidden="true"
+      >
+        love mode
+      </p>
     </footer>
   );
 }

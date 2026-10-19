@@ -82,10 +82,16 @@
     "listenNow": "Listen Now",
     "comingSoon": "Coming Soon",
     "episodesComingSoon": "Episodes will appear here automatically once you connect your feed.",
-    "setRssUrl": "Set the Podcast RSS Feed URL in Sanity Site Settings to connect your feed."
+    "setRssUrl": "Set the Podcast RSS Feed URL in Sanity Site Settings to connect your feed.",
+    "latest": "Latest episode",
+    "count": "{count} episodes",
+    "searchLabel": "Search episodes",
+    "searchPlaceholder": "Search by topic, guest, or title",
+    "noResults": "No episodes match “{query}”"
   },
   "episodeCard": {
-    "listenNow": "Watch Now"
+    "listenNow": "Watch Now",
+    "views": "{count} views"
   },
   "products": {
     "title": "Digital Products",
@@ -120,7 +126,15 @@
     "whyGuest": "Why would you be a great guest?",
     "whyGuestPlaceholder": "Tell us about yourself and what you'd bring to the conversation...",
     "submit": "Submit Application",
-    "note": "We review every application and will reach out if it's a fit!"
+    "note": "We review every application and will reach out if it's a fit!",
+    "label": "Join the conversation",
+    "perksTitle": "What we look for",
+    "perks": [
+      "A real story about love, dating, or heartbreak",
+      "Expertise in relationships, psychology, or self-love",
+      "Openness to talk honestly, with humor and heart"
+    ],
+    "handNote": "we read every single one!"
   },
   "collaborate": {
     "title": "Let's Collaborate",
@@ -144,7 +158,11 @@
     "tellUsIdea": "Tell Us About Your Idea",
     "tellUsPlaceholder": "What do you have in mind? What would a successful collaboration look like?",
     "submit": "Submit Proposal",
-    "note": "We'll review your proposal and get back to you within 48 hours."
+    "note": "We'll review your proposal and get back to you within 48 hours.",
+    "label": "For brands",
+    "sideTitle": "Why Love Mode?",
+    "typeHint": "Pick the one that fits best",
+    "budgetHint": "Optional, but it helps us plan"
   },
   "about": {
     "meetYourHost": "Meet Your Host",
@@ -157,7 +175,9 @@
     "guestCta": "Apply Now",
     "supportTitle": "Support the Show",
     "supportDesc": "Love the podcast? Help keep Love Mode going with a coffee.",
-    "supportCta": "Buy Me a Coffee"
+    "supportCta": "Buy Me a Coffee",
+    "hello": "hey, I'm",
+    "missionNote": "the whole point"
   },
   "footer": {
     "tagline": "Real conversations about love, dating, and building meaningful relationships.",
@@ -171,6 +191,9 @@
     "shop": "Shop",
     "digitalProducts": "Digital Products",
     "courses": "Courses",
-    "copyright": "© {year} Love Mode Podcast. All rights reserved."
+    "copyright": "© {year} Love Mode Podcast. All rights reserved.",
+    "followUs": "Follow along",
+    "brandsTitle": "Got a brand in mind?",
+    "workWithUs": "Work with us"
   }
 }
