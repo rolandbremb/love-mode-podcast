@@ -63,7 +63,7 @@ export default async function EpisodesPage({
               {t("count", { count: episodes.length })}
             </span>
           )}
-          <h1 className="mt-5 font-display text-6xl font-extrabold lowercase leading-[0.85] tracking-[-0.04em] text-brand-700 motion-safe:animate-rise [animation-delay:80ms] md:text-8xl">
+          <h1 className="mt-5 font-display text-[clamp(2.75rem,13vw,3.75rem)] font-extrabold lowercase leading-[0.85] tracking-[-0.04em] text-brand-700 motion-safe:animate-rise [animation-delay:80ms] md:text-8xl">
             {t("title")}
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/75 motion-safe:animate-rise [animation-delay:160ms]">

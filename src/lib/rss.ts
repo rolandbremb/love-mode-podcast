@@ -14,6 +14,9 @@ export interface Episode {
 const FALLBACK_RSS_URL = process.env.PODCAST_RSS_URL || "";
 const MIN_EPISODE_SECONDS = 5 * 60; // 5 minutes
 
+// YouTube data changes slowly: reuse responses for an hour to save API quota and speed up pages
+const YOUTUBE_CACHE = { next: { revalidate: 3600 } };
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const parser = new (Parser as any)({
   customFields: {
@@ -77,7 +80,7 @@ async function getAllChannelEpisodes(
     url.searchParams.set("key", apiKey);
     if (pageToken) url.searchParams.set("pageToken", pageToken);
 
-    const res = await fetch(url.toString());
+    const res = await fetch(url.toString(), YOUTUBE_CACHE);
     if (!res.ok) break;
     const data = await res.json();
 
@@ -96,7 +99,8 @@ async function getAllChannelEpisodes(
   for (let i = 0; i < videoIds.length; i += 50) {
     const batch = videoIds.slice(i, i + 50).join(",");
     const res = await fetch(
-      `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${batch}&key=${apiKey}`
+      `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${batch}&key=${apiKey}`,
+      YOUTUBE_CACHE
     );
     if (!res.ok) continue;
     const data = await res.json();
@@ -139,7 +143,8 @@ async function fetchYouTubeDurations(
   try {
     const ids = videoIds.slice(0, 50).join(",");
     const res = await fetch(
-      `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${ids}&key=${apiKey}`
+      `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${ids}&key=${apiKey}`,
+      YOUTUBE_CACHE
     );
     if (!res.ok) return {};
     const data = await res.json();

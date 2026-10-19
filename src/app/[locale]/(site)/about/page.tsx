@@ -122,7 +122,7 @@ export default async function AboutPage({
             <p className="-rotate-2 font-hand text-3xl font-medium text-brand-500 motion-safe:animate-rise md:text-4xl">
               {t("hello")}
             </p>
-            <h1 className="mt-1 font-display text-6xl font-extrabold lowercase leading-[0.85] tracking-[-0.04em] text-brand-700 motion-safe:animate-rise [animation-delay:80ms] md:text-8xl">
+            <h1 className="mt-1 font-display text-[clamp(2.75rem,13vw,3.75rem)] font-extrabold lowercase leading-[0.85] tracking-[-0.04em] text-brand-700 motion-safe:animate-rise [animation-delay:80ms] md:text-8xl">
               {hostName}
             </h1>
             <div className="mt-8 space-y-5 motion-safe:animate-rise [animation-delay:160ms]">
