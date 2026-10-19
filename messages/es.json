@@ -1,0 +1,132 @@
+{
+  "nav": {
+    "about": "Acerca de",
+    "episodes": "Episodios",
+    "beAGuest": "Sé Invitado",
+    "collaborate": "Colaborar",
+    "shop": "Tienda",
+    "products": "Productos",
+    "courses": "Cursos",
+    "support": "Apoya el Show"
+  },
+  "home": {
+    "listenToEpisodes": "Escuchar Episodios",
+    "listenOn": "Escucha en",
+    "meetYourHost": "Conoce a tu Anfitriona",
+    "meetHostCta": "Más Sobre {name}",
+    "beAGuest": "Sé Invitado",
+    "mostViewedEpisodes": "Episodios Más Vistos",
+    "viewAllEpisodes": "Ver Todos los Episodios",
+    "wantToBeAGuest": "¿Quieres ser Invitado?",
+    "guestLabel": "Únete a la Conversación",
+    "guestDescription": "¿Tienes una historia que compartir? ¿Una perspectiva única sobre el amor y las relaciones? Queremos escucharte. Aplica para ser invitado en Love Mode.",
+    "applyNow": "Aplicar Ahora",
+    "letsCollaborate": "Colaboremos",
+    "collaborateLabel": "Trabaja Con Nosotros",
+    "collaborateDescription": "Marcas, creadores y coaches — construyamos algo juntos. Patrocinios, alianzas y colaboraciones creativas.",
+    "getInTouch": "Contáctanos",
+    "supportLabel": "Ayúdanos a Continuar",
+    "supportTheShow": "Apoya el Show",
+    "supportDescription": "¿Te encanta el podcast? ¡Ayúdanos a mantener Love Mode! Cada café impulsa otro episodio de conversaciones reales sobre el amor.",
+    "buyMeCoffee": "Invítame un Café",
+    "episodesComingSoon": "Los episodios aparecerán aquí automáticamente una vez que conectes tu feed.",
+    "setRssUrl": "Configura la URL del feed en los ajustes del sitio en Sanity."
+  },
+  "episodes": {
+    "title": "Todos los Episodios",
+    "subtitle": "Ponte al día con cada conversación. Nuevos episodios cada semana.",
+    "listenNow": "Escuchar Ahora",
+    "comingSoon": "Próximamente",
+    "episodesComingSoon": "Los episodios aparecerán aquí automáticamente una vez que conectes tu feed.",
+    "setRssUrl": "Configura la URL del feed en los ajustes del sitio en Sanity."
+  },
+  "episodeCard": {
+    "listenNow": "Ver Ahora"
+  },
+  "products": {
+    "title": "Productos Digitales",
+    "subtitle": "Herramientas y recursos para mejorar tu vida amorosa — creados con amor por el equipo de Love Mode.",
+    "getItNow": "Obtenerlo Ahora"
+  },
+  "courses": {
+    "title": "Cursos",
+    "subtitle": "Profundiza con cursos estructurados sobre amor, citas y construir relaciones duraderas.",
+    "comingSoon": "Próximamente",
+    "notifyMe": "Notificarme Cuando Esté Disponible",
+    "enrollNow": "Inscribirme Ahora",
+    "coachingTitle": "Coaching 1:1 — Próximamente",
+    "coachingDescription": "El coaching personalizado de citas y relaciones está en camino. Obtén orientación directa, responsabilidad y un plan adaptado a tu vida amorosa.",
+    "joinWaitlist": "Unirme a la Lista de Espera"
+  },
+  "shop": {
+    "title": "Nuestras Recomendaciones",
+    "subtitle": "Recomendaciones curadas del equipo de Love Mode. Solo compartimos lo que genuinamente amamos.",
+    "affiliateNote": "Algunos enlaces son de afiliados — nos ayudan a apoyar el show sin costo adicional para ti.",
+    "browseCollection": "Ver Colección →"
+  },
+  "apply": {
+    "title": "Sé Invitado",
+    "subtitle": "¿Tienes una historia que compartir? ¿Una perspectiva única sobre el amor o las relaciones? Nos encantaría escucharte.",
+    "fullName": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "socialLinks": "Redes Sociales",
+    "socialPlaceholder": "Instagram, TikTok, LinkedIn, etc.",
+    "expertise": "Tu Experiencia / Tema",
+    "expertisePlaceholder": "p.ej. Estilos de apego, Citas después del divorcio, Amor propio",
+    "whyGuest": "¿Por qué serías un gran invitado?",
+    "whyGuestPlaceholder": "Cuéntanos sobre ti y lo que aportarías a la conversación...",
+    "submit": "Enviar Solicitud",
+    "note": "¡Revisamos cada solicitud y nos pondremos en contacto si encaja!"
+  },
+  "collaborate": {
+    "title": "Colaboremos",
+    "subtitle": "Marcas, creadores y coaches — creemos algo significativo juntos. Estamos abiertos a patrocinios, alianzas y colaboraciones creativas.",
+    "nameCompany": "Nombre / Empresa",
+    "email": "Correo Electrónico",
+    "typeOfCollaboration": "Tipo de Colaboración",
+    "selectOne": "Selecciona uno...",
+    "podcastSponsorship": "Patrocinio del Podcast",
+    "brandPartnership": "Alianza de Marca",
+    "contentCollab": "Colaboración de Contenido",
+    "affiliatePartnership": "Alianza de Afiliados",
+    "other": "Otro",
+    "websiteSocial": "Sitio Web / Redes Sociales",
+    "budgetRange": "Rango de Presupuesto",
+    "preferNotToSay": "Prefiero no decir",
+    "under500": "Menos de $500",
+    "500to2000": "$500 - $2,000",
+    "2000to5000": "$2,000 - $5,000",
+    "5000plus": "$5,000+",
+    "tellUsIdea": "Cuéntanos sobre tu Idea",
+    "tellUsPlaceholder": "¿Qué tienes en mente? ¿Cómo sería una colaboración exitosa?",
+    "submit": "Enviar Propuesta",
+    "note": "Revisaremos tu propuesta y te responderemos en 48 horas."
+  },
+  "about": {
+    "meetYourHost": "Conoce a tu Anfitriona",
+    "ourMission": "Nuestra Misión",
+    "listenTitle": "Escuchar Episodios",
+    "listenDesc": "Ponte al día con cada conversación — nuevos episodios cada semana.",
+    "listenCta": "Ver Episodios",
+    "guestTitle": "Sé Invitado",
+    "guestDesc": "¿Tienes una historia sobre amor o relaciones? Aplica para aparecer en el show.",
+    "guestCta": "Aplicar Ahora",
+    "supportTitle": "Apoya el Show",
+    "supportDesc": "¿Te encanta el podcast? Ayúdanos a seguir con un café.",
+    "supportCta": "Invítame un Café"
+  },
+  "footer": {
+    "tagline": "Conversaciones reales sobre amor, citas y construir relaciones significativas.",
+    "podcast": "Podcast",
+    "resources": "Recursos",
+    "connect": "Conectar",
+    "allEpisodes": "Todos los Episodios",
+    "about": "Acerca de",
+    "beAGuest": "Sé Invitado",
+    "collaborate": "Colaborar",
+    "shop": "Tienda",
+    "digitalProducts": "Productos Digitales",
+    "courses": "Cursos",
+    "copyright": "© {year} Love Mode Podcast. Todos los derechos reservados."
+  }
+}

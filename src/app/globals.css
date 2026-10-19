@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --theme-body-font: ui-sans-serif, system-ui, sans-serif;
+  --theme-heading-font: Georgia, Cambria, "Times New Roman", serif;
+  --theme-page-bg: #fafafa;
+  --theme-soft-bg: #f5f4f2;
+  --theme-surface-bg: #ffffff;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -10,26 +18,64 @@
   body {
     @apply bg-white text-stone-900 antialiased;
   }
+
+  .site-theme {
+    min-height: 100vh;
+    background-color: var(--theme-page-bg);
+    color: #1c1917;
+    font-family: var(--theme-body-font);
+  }
+
+  .site-theme .font-serif {
+    font-family: var(--theme-heading-font);
+  }
+
+  .site-theme .theme-page {
+    background-color: var(--theme-page-bg);
+  }
+
+  .site-theme .theme-soft {
+    background-color: var(--theme-soft-bg);
+  }
+
+  .site-theme .theme-surface {
+    background-color: var(--theme-surface-bg);
+  }
 }
 
 @layer components {
+  .section-label {
+    @apply text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-brand-500;
+  }
+
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-700 hover:shadow-lg;
+    @apply inline-flex items-center justify-center rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition-all active:scale-[0.98] hover:bg-brand-700 hover:shadow-md;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-full border-2 border-brand-600 px-6 py-3 text-sm font-semibold text-brand-600 transition-all hover:bg-brand-50;
+    @apply inline-flex items-center justify-center rounded-full border-2 border-brand-600 px-6 py-3 text-sm font-semibold text-brand-600 transition-all active:scale-[0.98] hover:bg-brand-50;
   }
 
-  .btn-gold {
-    @apply inline-flex items-center justify-center rounded-full bg-gold-500 px-6 py-3 text-sm font-semibold text-stone-900 transition-all hover:bg-gold-400 hover:shadow-lg;
+  .btn-accent {
+    @apply inline-flex items-center justify-center rounded-full bg-stone-900 px-6 py-3 text-sm font-semibold text-white transition-all active:scale-[0.98] hover:bg-stone-800 hover:shadow-md;
   }
 
   .section-padding {
     @apply px-4 py-16 sm:px-6 md:py-24 lg:px-8;
   }
 
+  .editorial-panel {
+    @apply rounded-[1.75rem] border border-stone-100 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.1)];
+    background-color: var(--theme-surface-bg);
+  }
+
   .card {
-    @apply rounded-2xl bg-white p-6 shadow-md transition-all hover:shadow-xl;
+    @apply rounded-2xl p-6 shadow-sm transition-all hover:shadow-md;
+    background-color: var(--theme-surface-bg);
+  }
+
+  .theme-field {
+    @apply w-full rounded-xl border border-stone-300 px-4 py-3 text-sm transition-colors focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20;
+    background-color: var(--theme-surface-bg);
   }
 }

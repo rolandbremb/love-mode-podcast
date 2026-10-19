@@ -1,0 +1,132 @@
+{
+  "nav": {
+    "about": "About",
+    "episodes": "Episodes",
+    "beAGuest": "Be a Guest",
+    "collaborate": "Collaborate",
+    "shop": "Shop",
+    "products": "Products",
+    "courses": "Courses",
+    "support": "Support the Show"
+  },
+  "home": {
+    "listenToEpisodes": "Listen to Episodes",
+    "listenOn": "Listen on",
+    "meetYourHost": "Meet Your Host",
+    "meetHostCta": "More About {name}",
+    "beAGuest": "Be a Guest",
+    "mostViewedEpisodes": "Most Viewed Episodes",
+    "viewAllEpisodes": "View All Episodes",
+    "wantToBeAGuest": "Want to Be a Guest?",
+    "guestLabel": "Join the Conversation",
+    "guestDescription": "Got a story to share? A unique perspective on love and relationships? We want to hear from you. Apply to be a guest on Love Mode.",
+    "applyNow": "Apply Now",
+    "letsCollaborate": "Let's Collaborate",
+    "collaborateLabel": "Work With Us",
+    "collaborateDescription": "Brands, creators, and coaches — let's build something together. Sponsorships, partnerships, and creative collaborations.",
+    "getInTouch": "Get in Touch",
+    "supportLabel": "Keep Us Going",
+    "supportTheShow": "Support the Show",
+    "supportDescription": "Love the podcast? Help keep Love Mode going! Every coffee fuels another episode of real talk about love and relationships.",
+    "buyMeCoffee": "Buy Me a Coffee",
+    "episodesComingSoon": "Episodes will appear here automatically once you connect your feed.",
+    "setRssUrl": "Set the Podcast RSS Feed URL in Sanity Site Settings to connect your feed."
+  },
+  "episodes": {
+    "title": "All Episodes",
+    "subtitle": "Catch up on every conversation. New episodes drop weekly.",
+    "listenNow": "Listen Now",
+    "comingSoon": "Coming Soon",
+    "episodesComingSoon": "Episodes will appear here automatically once you connect your feed.",
+    "setRssUrl": "Set the Podcast RSS Feed URL in Sanity Site Settings to connect your feed."
+  },
+  "episodeCard": {
+    "listenNow": "Watch Now"
+  },
+  "products": {
+    "title": "Digital Products",
+    "subtitle": "Tools and resources to help you level up your love life — created with love by the Love Mode team.",
+    "getItNow": "Get It Now"
+  },
+  "courses": {
+    "title": "Courses",
+    "subtitle": "Go deeper with structured courses on love, dating, and building relationships that last.",
+    "comingSoon": "Coming Soon",
+    "notifyMe": "Notify Me When Available",
+    "enrollNow": "Enroll Now",
+    "coachingTitle": "1:1 Coaching — Coming Soon",
+    "coachingDescription": "Personalized dating and relationship coaching is on the way. Get direct guidance, accountability, and a plan tailored to your love life.",
+    "joinWaitlist": "Join the Waitlist"
+  },
+  "shop": {
+    "title": "Shop Our Picks",
+    "subtitle": "Curated recommendations from the Love Mode team. We only share things we genuinely love.",
+    "affiliateNote": "Some links are affiliate links — they help support the show at no extra cost to you.",
+    "browseCollection": "Browse Collection →"
+  },
+  "apply": {
+    "title": "Be a Guest",
+    "subtitle": "Have a story to share? A unique take on love, dating, or relationships? We'd love to hear from you.",
+    "fullName": "Full Name",
+    "email": "Email",
+    "socialLinks": "Social Media Links",
+    "socialPlaceholder": "Instagram, TikTok, LinkedIn, etc.",
+    "expertise": "Your Expertise / Topic",
+    "expertisePlaceholder": "e.g. Attachment styles, Dating after divorce, Self-love",
+    "whyGuest": "Why would you be a great guest?",
+    "whyGuestPlaceholder": "Tell us about yourself and what you'd bring to the conversation...",
+    "submit": "Submit Application",
+    "note": "We review every application and will reach out if it's a fit!"
+  },
+  "collaborate": {
+    "title": "Let's Collaborate",
+    "subtitle": "Brands, content creators, and coaches — let's create something meaningful together. We're open to sponsorships, partnerships, and creative collaborations.",
+    "nameCompany": "Name / Company",
+    "email": "Email",
+    "typeOfCollaboration": "Type of Collaboration",
+    "selectOne": "Select one...",
+    "podcastSponsorship": "Podcast Sponsorship",
+    "brandPartnership": "Brand Partnership",
+    "contentCollab": "Content Collaboration",
+    "affiliatePartnership": "Affiliate Partnership",
+    "other": "Other",
+    "websiteSocial": "Website / Social Links",
+    "budgetRange": "Budget Range",
+    "preferNotToSay": "Prefer not to say",
+    "under500": "Under $500",
+    "500to2000": "$500 - $2,000",
+    "2000to5000": "$2,000 - $5,000",
+    "5000plus": "$5,000+",
+    "tellUsIdea": "Tell Us About Your Idea",
+    "tellUsPlaceholder": "What do you have in mind? What would a successful collaboration look like?",
+    "submit": "Submit Proposal",
+    "note": "We'll review your proposal and get back to you within 48 hours."
+  },
+  "about": {
+    "meetYourHost": "Meet Your Host",
+    "ourMission": "Our Mission",
+    "listenTitle": "Listen to Episodes",
+    "listenDesc": "Catch up on every conversation — new episodes drop weekly.",
+    "listenCta": "Browse Episodes",
+    "guestTitle": "Be a Guest",
+    "guestDesc": "Got a story about love or relationships? Apply to be on the show.",
+    "guestCta": "Apply Now",
+    "supportTitle": "Support the Show",
+    "supportDesc": "Love the podcast? Help keep Love Mode going with a coffee.",
+    "supportCta": "Buy Me a Coffee"
+  },
+  "footer": {
+    "tagline": "Real conversations about love, dating, and building meaningful relationships.",
+    "podcast": "Podcast",
+    "resources": "Resources",
+    "connect": "Connect",
+    "allEpisodes": "All Episodes",
+    "about": "About",
+    "beAGuest": "Be a Guest",
+    "collaborate": "Collaborate",
+    "shop": "Shop",
+    "digitalProducts": "Digital Products",
+    "courses": "Courses",
+    "copyright": "© {year} Love Mode Podcast. All rights reserved."
+  }
+}
