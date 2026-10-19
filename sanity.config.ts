@@ -108,8 +108,8 @@ export default defineConfig({
           ]),
     }),
     presentationTool({
+      // The Studio lives inside the site, so previews use whatever domain it's opened on
       previewUrl: {
-        origin: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
         previewMode: {
           enable: "/api/draft-mode/enable",
         },
