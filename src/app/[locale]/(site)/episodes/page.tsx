@@ -1,3 +1,5 @@
+import type { Metadata, ResolvingMetadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import EpisodesBrowser from "@/components/EpisodesBrowser";
@@ -21,6 +23,17 @@ function Sparkle({ className }: { className?: string }) {
       <path d="M12 0c.9 6.6 4.8 10.9 12 12-7.2 1.1-11.1 5.4-12 12-.9-6.6-4.8-10.9-12-12C7.2 10.9 11.1 6.6 12 0z" />
     </svg>
   );
+}
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ locale: string }> },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "episodes" });
+  const title = t("title");
+  const description = t("subtitle");
+  return pageMetadata(parent, title, description);
 }
 
 export default async function EpisodesPage({

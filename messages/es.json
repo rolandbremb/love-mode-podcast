@@ -206,5 +206,11 @@
     "errorFailed": "Algo salió mal y tu mensaje no se envió. Inténtalo de nuevo en un minuto.",
     "sendAnother": "Enviar otra",
     "honeypot": "Deja este campo vacío"
+  },
+  "meta": {
+    "title": "Love Mode Podcast",
+    "description": "Conversaciones reales sobre amor, citas y cómo construir relaciones que sí duran. Nuevos episodios cada viernes, con Andrea Moreno.",
+    "aboutTitle": "Acerca de",
+    "brandsDescription": "Colabora con Love Mode: patrocinios del podcast, alianzas de marca y contenido con una audiencia apasionada por el amor y el autocuidado."
   }
 }

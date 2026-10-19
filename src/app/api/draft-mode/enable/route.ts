@@ -1,16 +1,18 @@
-import { draftMode } from "next/headers";
-import { redirect } from "next/navigation";
-import { type NextRequest } from "next/server";
+import { createClient } from "next-sanity";
+import { defineEnableDraftMode } from "next-sanity/draft-mode";
 
-export async function GET(request: NextRequest) {
-  const secret = request.nextUrl.searchParams.get("secret");
-  const previewSecret = process.env.NEXT_PUBLIC_SANITY_PREVIEW_SECRET;
+// The Studio's Presentation tool creates a short-lived secret for each preview;
+// this checks it with Sanity and only redirects to paths on this site
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 
-  if (previewSecret && secret !== previewSecret) {
-    return new Response("Invalid secret", { status: 401 });
-  }
-
-  const redirectTo = request.nextUrl.searchParams.get("redirect") ?? "/";
-  (await draftMode()).enable();
-  redirect(redirectTo);
-}
+export const GET = projectId
+  ? defineEnableDraftMode({
+      client: createClient({
+        projectId,
+        dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+        apiVersion: "2024-01-01",
+        useCdn: false,
+        token: process.env.SANITY_API_TOKEN,
+      }),
+    }).GET
+  : () => new Response("Sanity is not configured", { status: 500 });

@@ -206,5 +206,11 @@
     "errorFailed": "Something went wrong and your message wasn't sent. Please try again in a minute.",
     "sendAnother": "Send another",
     "honeypot": "Leave this field empty"
+  },
+  "meta": {
+    "title": "Love Mode Podcast",
+    "description": "Real conversations about love, dating, and building relationships that actually last. New episodes every Friday, hosted by Andrea Moreno.",
+    "aboutTitle": "About",
+    "brandsDescription": "Partner with Love Mode: podcast sponsorships, brand partnerships, and content collaborations with an audience that's all about love and self-care."
   }
 }

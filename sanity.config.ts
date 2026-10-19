@@ -110,8 +110,8 @@ export default defineConfig({
     presentationTool({
       previewUrl: {
         origin: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-        draftMode: {
-          enable: `/api/draft-mode/enable?secret=${process.env.NEXT_PUBLIC_SANITY_PREVIEW_SECRET}`,
+        previewMode: {
+          enable: "/api/draft-mode/enable",
         },
       },
     }),

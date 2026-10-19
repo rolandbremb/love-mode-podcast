@@ -1,3 +1,5 @@
+import type { Metadata, ResolvingMetadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { getTranslations } from "next-intl/server";
 import GuestApplicationForm from "@/components/forms/GuestApplicationForm";
 
@@ -9,6 +11,16 @@ function Sparkle({ className }: { className?: string }) {
   );
 }
 
+export async function generateMetadata(
+  { params }: { params: Promise<{ locale: string }> },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "apply" });
+  const title = t("title");
+  const description = t("subtitle");
+  return pageMetadata(parent, title, description);
+}
 
 export default async function ApplyPage({
   params,

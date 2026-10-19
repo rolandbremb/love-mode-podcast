@@ -1,3 +1,5 @@
+import type { Metadata, ResolvingMetadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import { draftMode } from "next/headers";
 import { getTranslations } from "next-intl/server";
@@ -30,6 +32,17 @@ function ArrowRight({ className }: { className?: string }) {
       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
     </svg>
   );
+}
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ locale: string }> },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
+  const title = t("aboutTitle");
+  const description = t("description");
+  return pageMetadata(parent, title, description);
 }
 
 export default async function AboutPage({
