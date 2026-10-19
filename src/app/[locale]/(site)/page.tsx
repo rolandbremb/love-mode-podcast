@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 import EpisodeCard from "@/components/EpisodeCard";
 import FadeIn from "@/components/FadeIn";
 import { Link } from "@/i18n/navigation";
-import { getTopEpisodesByViews } from "@/lib/rss";
+import { getAllEpisodes } from "@/lib/rss";
 import { getAboutPage, getSiteSettings } from "@/sanity/client";
 
 export const revalidate = 3600;
@@ -35,6 +35,55 @@ function ApplePodcastsIcon({ className }: { className?: string }) {
   );
 }
 
+function Sparkle({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 0c.9 6.6 4.8 10.9 12 12-7.2 1.1-11.1 5.4-12 12-.9-6.6-4.8-10.9-12-12C7.2 10.9 11.1 6.6 12 0z" />
+    </svg>
+  );
+}
+
+function Heart({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.1 4 6.3 4c2.4 0 4 1.4 5.7 3.4C13.7 5.4 15.3 4 17.7 4 21.9 4 23.7 8.4 22 11.7 19.5 16.4 12 21 12 21z" />
+    </svg>
+  );
+}
+
+function ArrowRight({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+    </svg>
+  );
+}
+
+function OutlineIcon({ d, className }: { d: string; className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d={d} />
+    </svg>
+  );
+}
+
+// Microphone, sparkles, video camera, tag — one per brand offer
+const offerIcons = [
+  "M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z",
+  "M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z",
+  "M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z",
+  "M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3zM6 6h.008v.008H6V6z",
+];
+
+const offerStyles = ["bg-cream -rotate-2", "bg-butter rotate-1", "bg-blush rotate-1", "bg-white -rotate-1"];
+
+// Rounds down so "245K+" never overstates: 245,900 -> "245K+", 1,280,000 -> "1.2M+"
+function formatStat(n: number) {
+  if (n >= 1_000_000) return `${Math.floor(n / 100_000) / 10}M+`;
+  if (n >= 1_000) return `${Math.floor(n / 1_000)}K+`;
+  return String(n);
+}
+
 const platformIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   youtube: YouTubeIcon,
   spotify: SpotifyIcon,
@@ -60,7 +109,8 @@ export default async function Home({
     getSiteSettings({ preview, locale }),
     getAboutPage({ preview, locale }),
   ]);
-  const topEpisodes = await getTopEpisodesByViews(3, settings?.podcastRssUrl);
+  const allEpisodes = await getAllEpisodes(settings?.podcastRssUrl);
+  const topEpisodes = [...allEpisodes].sort((a, b) => b.views - a.views).slice(0, 3);
 
   const heroTagline = settings?.heroTagline ?? "The Podcast";
   const heroTitle = settings?.heroTitle ?? "Love Mode";
@@ -70,10 +120,13 @@ export default async function Home({
   const episodeSchedule = settings?.episodeSchedule ?? "New episodes every Friday";
   const platforms = settings?.platformLinks ?? [];
   const aboutTitle = settings?.aboutTitle ?? "What is Love Mode?";
-  const aboutParagraphs = settings?.aboutParagraphs ?? [
-    "Love Mode is more than a podcast — it's a movement. We dive deep into the messy, beautiful, complicated world of modern love and relationships.",
-    "Every episode brings raw, unfiltered conversations with real people and experts who get it.",
-  ];
+  const savedParagraphs = (settings?.aboutParagraphs ?? []).filter((p) => p.trim());
+  const aboutParagraphs = savedParagraphs.length
+    ? savedParagraphs
+    : [
+        "Love Mode is more than a podcast — it's a movement. We dive deep into the messy, beautiful, complicated world of modern love and relationships.",
+        "Every episode brings raw, unfiltered conversations with real people and experts who get it.",
+      ];
   const buyMeCoffeeUrl = settings?.buyMeCoffeeUrl ?? "#";
   const supportTarget = buyMeCoffeeUrl !== "#" ? "_blank" : undefined;
   const supportRel =
@@ -82,198 +135,214 @@ export default async function Home({
   const hostName = aboutData?.hostName ?? "Your Host";
   const hostBio = aboutData?.hostBio?.[0] ?? "";
   const hostPhoto = aboutData?.hostPhoto?.asset?.url ?? "/images/host.jpg";
+  const hostFirstName = hostName.split(" ")[0];
+  const topics = t.raw("topics") as string[];
+  const brandOffers = t.raw("brandOffers") as { title: string; description: string }[];
+
+  const totalViews = allEpisodes.reduce((sum, episode) => sum + (episode.views || 0), 0);
+  const stats = [
+    allEpisodes.length > 0 && { value: String(allEpisodes.length), label: t("statEpisodes") },
+    totalViews > 0 && { value: formatStat(totalViews), label: t("statViews") },
+    platforms.length > 0 && { value: String(platforms.length), label: t("statPlatforms") },
+  ].filter(Boolean) as { value: string; label: string }[];
 
   return (
     <>
-      {/* ===== FULL-BLEED PHOTO HERO ===== */}
-      <section className="relative">
-        <div className="relative min-h-[70vh] overflow-hidden md:min-h-[85vh]">
-          <Image
-            src="/images/hero.jpg"
-            alt="Love Mode Podcast studio"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[center_30%]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/30 to-transparent" />
+      {/* ===== SOFT POP HERO ===== */}
+      <section className="theme-soft relative overflow-hidden">
+        <Sparkle className="absolute left-[30%] top-28 hidden h-7 w-7 text-brand-400 motion-safe:animate-float md:block" />
+        <Sparkle className="absolute right-[46%] top-24 hidden h-5 w-5 text-butter lg:block" />
+        <Sparkle className="absolute bottom-16 left-[42%] hidden h-9 w-9 text-butter motion-safe:animate-float lg:block" />
 
-          <div className="relative flex min-h-[70vh] items-end md:min-h-[85vh]">
-            <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 pb-16 md:flex-row md:items-end md:justify-between md:pb-24 lg:px-8">
-              {/* Left — headline + CTAs */}
-              <div>
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-white/60">
-                  {heroTagline}
-                </p>
-                <h1 className="mt-4 max-w-2xl font-serif text-5xl font-bold leading-[0.94] text-white md:text-6xl lg:text-7xl">
-                  {heroTitle}
-                </h1>
-                <p className="mt-5 max-w-lg text-base leading-relaxed text-white/75 md:text-lg">
-                  {heroDescription}
-                </p>
-
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <Link
-                    href="/episodes"
-                    className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-stone-900 transition-all active:scale-[0.98] hover:bg-stone-100"
-                  >
-                    {t("listenToEpisodes")}
-                  </Link>
-                  <Link
-                    href="/apply"
-                    className="inline-flex items-center justify-center rounded-full border-2 border-white/50 px-6 py-3 text-sm font-semibold text-white transition-all active:scale-[0.98] hover:border-white/80 hover:bg-white/10"
-                  >
-                    {t("beAGuest")}
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right — schedule + platform icons */}
-              <div className="flex items-center gap-4 rounded-full border border-white/15 bg-white/5 px-5 py-3 backdrop-blur-sm md:self-end">
-                <p className="text-xs font-medium tracking-wide text-white/80">
-                  {episodeSchedule}
-                </p>
-                {platforms.length > 0 && (
-                  <>
-                    <div className="h-4 w-px bg-white/20" aria-hidden="true" />
-                    <div className="flex items-center gap-2">
-                      {platforms.map(({ platform, url }) => {
-                        const Icon = platformIcons[platform];
-                        if (!Icon) return null;
-                        return (
-                          <a
-                            key={platform}
-                            href={url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={platformLabels[platform] ?? platform}
-                            className="text-white/60 transition-colors hover:text-white"
-                          >
-                            <Icon className="h-[1.1rem] w-[1.1rem]" />
-                          </a>
-                        );
-                      })}
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== ABOUT / EDITORIAL SECTION ===== */}
-      <section className="section-padding theme-soft">
-        <FadeIn className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]">
-          <div className="self-start lg:sticky lg:top-28">
-            <p className="section-label">{heroTagline}</p>
-            <h2 className="mt-6 max-w-md font-serif text-4xl font-bold leading-tight text-stone-950 md:text-5xl">
-              {aboutTitle}
-            </h2>
-            <div
-              className="mt-8 h-px w-full max-w-xs bg-gradient-to-r from-brand-500 via-brand-200 to-transparent"
-              aria-hidden="true"
-            />
-          </div>
-
-          <div className="grid gap-5">
-            {aboutParagraphs.map((paragraph, index) => (
-              <div
-                key={index}
-                className={`editorial-panel p-6 sm:p-8 ${
-                  index % 2 === 0 ? "lg:mr-16" : "lg:ml-16"
-                }`}
-              >
-                <p className="text-lg leading-relaxed text-stone-600">
-                  {paragraph}
-                </p>
-              </div>
-            ))}
-
-            <div className="grid gap-4 md:grid-cols-3">
-              <Link
-                href="/episodes"
-                className="editorial-panel p-5 transition-transform duration-200 hover:-translate-y-1"
-              >
-                <p className="section-label">{t("listenToEpisodes")}</p>
-                <p className="mt-4 font-serif text-2xl font-bold text-stone-950">
-                  {t("viewAllEpisodes")}
-                </p>
-              </Link>
-
-              <Link
-                href="/apply"
-                className="rounded-[1.75rem] bg-brand-600 p-5 text-white shadow-[0_8px_30px_-12px_rgba(160,81,103,0.5)] transition-transform duration-200 hover:-translate-y-1"
-              >
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-white/65">
-                  {t("beAGuest")}
-                </p>
-                <p className="mt-4 font-serif text-2xl font-bold">
-                  {t("applyNow")}
-                </p>
-              </Link>
-
-              <Link
-                href="/collaborate"
-                className="rounded-[1.75rem] bg-stone-900 p-5 text-white shadow-[0_8px_30px_-12px_rgba(0,0,0,0.3)] transition-transform duration-200 hover:-translate-y-1"
-              >
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-white/65">
-                  {t("letsCollaborate")}
-                </p>
-                <p className="mt-4 font-serif text-2xl font-bold">
-                  {t("getInTouch")}
-                </p>
-              </Link>
-            </div>
-          </div>
-        </FadeIn>
-      </section>
-
-      {/* ===== MEET YOUR HOST ===== */}
-      <section className="section-padding theme-page">
-        <div className="mx-auto max-w-7xl">
-          <FadeIn className="grid items-center gap-8 md:grid-cols-[auto_minmax(0,1fr)] lg:gap-14">
-            <div className="relative mx-auto h-48 w-48 shrink-0 overflow-hidden rounded-full md:h-56 md:w-56">
-              <Image
-                src={hostPhoto}
-                alt={hostName}
-                fill
-                sizes="224px"
-                className="object-cover"
-              />
+        <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 pb-20 pt-10 sm:px-6 md:pt-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-10 lg:px-8 lg:pb-24">
+          {/* Left — headline + CTAs */}
+          <div>
+            <div className="motion-safe:animate-rise">
+              <span className="sticker">
+                <Sparkle className="h-3 w-3" />
+                {heroTagline}
+              </span>
             </div>
 
-            <div className="text-center md:text-left">
-              <p className="section-label">{t("meetYourHost")}</p>
-              <h2 className="mt-3 font-serif text-3xl font-bold text-stone-950 md:text-4xl">
-                {hostName}
-              </h2>
-              {hostBio && (
-                <p className="mt-4 max-w-xl text-base leading-relaxed text-stone-600">
-                  {hostBio}
-                </p>
-              )}
-              <Link
-                href="/about"
-                className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 transition-colors hover:text-brand-700"
+            <div className="motion-safe:animate-rise [animation-delay:80ms]">
+              <h1 className="mt-6 font-display text-[clamp(4.25rem,14vw,9.5rem)] font-extrabold lowercase leading-[0.82] tracking-[-0.045em] text-brand-700">
+                {heroTitle}
+              </h1>
+              <svg
+                className="mt-3 h-4 w-56 text-brand-400 md:w-72"
+                viewBox="0 0 280 16"
+                fill="none"
+                aria-hidden="true"
               >
-                {t("meetHostCta", { name: hostName })}
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                <path
+                  d="M3 9c20-8 40 8 60 0s40-8 60 0 40 8 60 0 40-8 54 0"
+                  stroke="currentColor"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+
+            <div className="motion-safe:animate-rise [animation-delay:160ms]">
+              <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/80">
+                {heroDescription}
+              </p>
+            </div>
+
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row motion-safe:animate-rise [animation-delay:240ms]">
+              <Link href="/episodes" className="btn-primary !px-7 !py-3.5 !text-base">
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M8 5.5v13a1 1 0 001.5.86l10.5-6.5a1 1 0 000-1.72L9.5 4.64A1 1 0 008 5.5z" />
+                </svg>
+                {t("listenNow")}
+              </Link>
+              <Link href="/collaborate" className="btn-secondary !px-7 !py-3.5 !text-base">
+                {t("workWithUs")}
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                 </svg>
               </Link>
             </div>
-          </FadeIn>
+
+            {platforms.length > 0 && (
+              <div className="mt-10 flex items-center gap-4 motion-safe:animate-rise [animation-delay:320ms]">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-ink/60">
+                  {t("listenOn")}
+                </p>
+                <div className="flex items-center gap-2.5">
+                  {platforms.map(({ platform, url }) => {
+                    const Icon = platformIcons[platform];
+                    if (!Icon) return null;
+                    return (
+                      <a
+                        key={platform}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={platformLabels[platform] ?? platform}
+                        className="grid h-11 w-11 place-items-center rounded-full border-2 border-ink bg-white text-ink shadow-pop-sm transition-all hover:-translate-y-0.5 hover:bg-butter"
+                      >
+                        <Icon className="h-5 w-5" />
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Right — arch photo with stickers */}
+          <div className="relative mx-auto w-full max-w-sm sm:max-w-md lg:mr-4 motion-safe:animate-rise [animation-delay:120ms]">
+            <div
+              className="absolute inset-0 translate-x-4 translate-y-4 rounded-b-[2.5rem] rounded-t-full border-2 border-ink bg-butter"
+              aria-hidden="true"
+            />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-b-[2.5rem] rounded-t-full border-2 border-ink bg-brand-200">
+              <Image
+                src="/images/hero.jpg"
+                alt="Love Mode Podcast studio"
+                fill
+                priority
+                sizes="(min-width: 1024px) 28rem, 90vw"
+                className="object-cover object-[52%_center]"
+              />
+            </div>
+
+            {/* Spinning schedule sticker */}
+            <div className="absolute -bottom-6 -left-2 grid h-32 w-32 place-items-center rounded-full border-2 border-ink bg-brand-600 shadow-pop sm:-left-10 sm:h-36 sm:w-36">
+              <svg
+                className="absolute inset-0 h-full w-full motion-safe:animate-spin-slow"
+                viewBox="0 0 120 120"
+                aria-hidden="true"
+              >
+                <defs>
+                  <path id="schedule-circle" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0" />
+                </defs>
+                <text className="fill-cream text-[10px] font-bold uppercase tracking-[0.18em]">
+                  <textPath href="#schedule-circle" textLength="272" lengthAdjust="spacing">
+                    {`${episodeSchedule} ✶`}
+                  </textPath>
+                </text>
+              </svg>
+              <Heart className="h-9 w-9 text-butter" />
+              <span className="sr-only">{episodeSchedule}</span>
+            </div>
+
+            {/* Host tag */}
+            {aboutData?.hostName && (
+              <div className="absolute right-2 top-12 rotate-6 sm:-right-3 motion-safe:animate-float">
+                <span className="sticker bg-white normal-case tracking-normal">
+                  {t("hostedBy", { name: hostName })}
+                </span>
+              </div>
+            )}
+          </div>
         </div>
+      </section>
+
+      {/* ===== TOPIC MARQUEE ===== */}
+      <div className="overflow-hidden bg-[linear-gradient(to_bottom,var(--theme-soft-bg)_50%,var(--theme-page-bg)_50%)] py-6">
+        <div className="-mx-4 -rotate-1 border-y-2 border-ink bg-brand-600 py-3 text-cream">
+          <div className="flex w-max motion-safe:animate-marquee">
+            {[0, 1].map((copy) => (
+              <ul key={copy} className="flex shrink-0 items-center" aria-hidden={copy === 1}>
+                {topics.map((topic) => (
+                  <li key={topic} className="flex items-center">
+                    <span className="px-6 font-display text-2xl font-extrabold lowercase tracking-tight md:text-3xl">
+                      {topic}
+                    </span>
+                    <Sparkle className="h-5 w-5 text-butter" />
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ===== ABOUT ===== */}
+      <section className="section-padding theme-page">
+        <FadeIn className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
+          <div>
+            <h2 className="font-display text-5xl font-extrabold lowercase leading-[0.9] tracking-tight text-brand-700 md:text-7xl">
+              {aboutTitle}
+            </h2>
+            <p className="mt-6 inline-flex -rotate-2 items-center gap-2 font-hand text-2xl font-medium text-brand-500 md:text-3xl">
+              {t("aboutSpoiler")}
+              <svg className="h-6 w-12 shrink-0" viewBox="0 0 60 30" fill="none" aria-hidden="true">
+                <path d="M2 22c14-14 32-18 52-8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                <path d="M45 6l9 8-11 4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </p>
+          </div>
+
+          <div className="space-y-6 lg:pt-3">
+            {aboutParagraphs.map((paragraph, index) => (
+              <p
+                key={index}
+                className={
+                  index === 0
+                    ? "font-display text-2xl font-semibold leading-snug tracking-tight text-ink md:text-3xl"
+                    : "text-lg leading-relaxed text-ink/75"
+                }
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </FadeIn>
       </section>
 
       {/* ===== MOST VIEWED EPISODES ===== */}
       <section className="section-padding theme-soft">
         <div className="mx-auto max-w-7xl">
-          <FadeIn className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <FadeIn className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="section-label">{heroTagline}</p>
-              <h2 className="mt-4 font-serif text-3xl font-bold text-stone-950 md:text-4xl">
+              <span className="sticker">
+                <Sparkle className="h-3 w-3" />
+                {t("mostViewedLabel")}
+              </span>
+              <h2 className="mt-5 font-display text-4xl font-extrabold lowercase leading-[0.95] tracking-tight text-ink md:text-6xl">
                 {t("mostViewedEpisodes")}
               </h2>
             </div>
@@ -281,96 +350,172 @@ export default async function Home({
             {topEpisodes.length > 0 && (
               <Link href="/episodes" className="btn-secondary self-start md:self-auto">
                 {t("viewAllEpisodes")}
+                <ArrowRight className="h-4 w-4" />
               </Link>
             )}
           </FadeIn>
 
           {topEpisodes.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {topEpisodes.map((episode, index) => (
-                <FadeIn key={index} delay={index * 0.12}>
-                  <EpisodeCard episode={episode} />
+                <FadeIn key={episode.link} delay={index * 0.12}>
+                  <EpisodeCard episode={episode} rank={index + 1} />
                 </FadeIn>
               ))}
             </div>
           ) : (
-            <div className="editorial-panel rounded-[2rem] border-2 border-dashed border-brand-200 p-12 text-center">
-              <p className="text-lg font-medium text-stone-500">
-                {t("episodesComingSoon")}
-              </p>
-              <p className="mt-2 text-sm text-stone-400">{t("setRssUrl")}</p>
+            <div className="editorial-panel border-dashed p-12 text-center">
+              <p className="text-lg font-semibold text-ink/70">{t("episodesComingSoon")}</p>
+              <p className="mt-2 text-sm text-ink/50">{t("setRssUrl")}</p>
             </div>
           )}
         </div>
       </section>
 
-      {/* ===== SUPPORT / COLLABORATE ===== */}
-      <section id="support" className="section-padding theme-page">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)]">
-          <FadeIn className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500 p-8 text-white shadow-[0_12px_40px_-15px_rgba(160,81,103,0.4)] lg:p-12">
+      {/* ===== WORK WITH LOVE MODE (BRANDS) ===== */}
+      <section className="section-padding theme-page">
+        <FadeIn className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border-2 border-ink bg-brand-600 p-8 text-cream shadow-pop-lg sm:p-10 lg:p-14">
+          <Sparkle className="absolute right-10 top-10 hidden h-10 w-10 text-butter motion-safe:animate-spin-slow lg:block" />
+          <Sparkle className="absolute bottom-10 left-[46%] hidden h-6 w-6 text-brand-300 lg:block" />
+
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
+            <div>
+              <span className="sticker">
+                <Sparkle className="h-3 w-3" />
+                {t("brandsLabel")}
+              </span>
+              <h2 className="mt-6 font-display text-4xl font-extrabold lowercase leading-[0.92] tracking-tight md:text-6xl">
+                {t("brandsTitle")}
+              </h2>
+              <p className="mt-6 max-w-lg text-lg leading-relaxed text-cream/85">
+                {t("brandsDescription")}
+              </p>
+
+              {stats.length > 0 && (
+                <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t-2 border-cream/25 pt-8">
+                  {stats.map(({ value, label }) => (
+                    <div key={label}>
+                      <dt className="sr-only">{label}</dt>
+                      <dd className="font-display text-4xl font-extrabold tracking-tight text-butter md:text-5xl">
+                        {value}
+                      </dd>
+                      <dd className="mt-1 text-sm font-semibold leading-snug text-cream/80">{label}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+
+              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+                <Link href="/collaborate" className="btn-secondary !px-7 !py-3.5 !text-base">
+                  {t("brandsCta")}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <p className="-rotate-3 font-hand text-2xl font-medium text-butter">
+                  {t("brandsReply")}
+                </p>
+              </div>
+            </div>
+
+            <ul className="grid content-center gap-5 sm:grid-cols-2">
+              {brandOffers.map((offer, index) => (
+                <li
+                  key={offer.title}
+                  className={`rounded-3xl border-2 border-ink p-6 text-ink shadow-pop transition-transform duration-200 hover:-translate-y-1 hover:rotate-0 ${offerStyles[index % offerStyles.length]}`}
+                >
+                  <span className="grid h-11 w-11 place-items-center rounded-full border-2 border-ink bg-white text-brand-600">
+                    <OutlineIcon d={offerIcons[index % offerIcons.length]} className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-4 font-display text-xl font-extrabold tracking-tight">{offer.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-ink/75">{offer.description}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* ===== MEET YOUR HOST ===== */}
+      <section className="section-padding theme-soft overflow-hidden">
+        <FadeIn className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
+          <div className="relative mx-auto w-full max-w-xs md:max-w-sm">
             <div
-              className="absolute -right-10 -top-10 h-56 w-56 rounded-full border-[1.5px] border-white/15"
+              className="absolute inset-0 rotate-3 rounded-[2.5rem] border-2 border-ink bg-brand-400"
               aria-hidden="true"
             />
-            <div
-              className="absolute -right-20 top-8 h-36 w-36 rounded-full border border-white/10"
-              aria-hidden="true"
-            />
-            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-white/70">
-              {t("guestLabel")}
+            <div className="relative aspect-[4/5] -rotate-2 overflow-hidden rounded-[2.5rem] border-2 border-ink bg-brand-200">
+              <Image
+                src={hostPhoto}
+                alt={hostName}
+                fill
+                sizes="(min-width: 768px) 24rem, 80vw"
+                className="object-cover"
+              />
+            </div>
+            <span className="sticker absolute -bottom-4 left-1/2 -translate-x-1/2 -rotate-3 whitespace-nowrap">
+              {t("meetYourHost")}
+            </span>
+          </div>
+
+          <div className="text-center md:text-left">
+            <p className="-rotate-2 font-hand text-3xl font-medium text-brand-500 md:text-4xl">
+              {t("hostHello")}
             </p>
-            <h2 className="mt-6 max-w-lg font-serif text-4xl font-bold leading-tight md:text-5xl">
+            <h2 className="mt-1 font-display text-5xl font-extrabold lowercase leading-[0.9] tracking-tight text-brand-700 md:text-7xl">
+              {hostName}
+            </h2>
+            {hostBio && (
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink/80 md:mx-0">
+                {hostBio}
+              </p>
+            )}
+            <Link href="/about" className="btn-primary mt-8">
+              {t("meetHostCta", { name: hostFirstName })}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* ===== BE A GUEST + SUPPORT ===== */}
+      <section id="support" className="section-padding theme-page">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)]">
+          <FadeIn className="relative overflow-hidden rounded-[2.5rem] border-2 border-ink bg-butter p-8 shadow-pop-lg sm:p-10 lg:p-12">
+            <Sparkle className="absolute right-8 top-8 h-10 w-10 text-brand-500 motion-safe:animate-spin-slow" />
+            <span className="sticker bg-white">{t("guestLabel")}</span>
+            <h2 className="mt-6 max-w-lg font-display text-4xl font-extrabold lowercase leading-[0.95] tracking-tight text-ink md:text-6xl">
               {t("wantToBeAGuest")}
             </h2>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-white/80">
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/80">
               {t("guestDescription")}
             </p>
-            <Link
-              href="/apply"
-              className="mt-8 inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-brand-700 transition-all active:scale-[0.98] hover:bg-brand-50"
-            >
+            <Link href="/apply" className="btn-primary mt-8">
               {t("applyNow")}
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </FadeIn>
 
-          <FadeIn className="grid gap-6" delay={0.12}>
-            <div className="relative overflow-hidden rounded-[2rem] bg-stone-950 p-8 text-white shadow-[0_12px_40px_-15px_rgba(0,0,0,0.3)]">
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-white/55">
-                {t("collaborateLabel")}
-              </p>
-              <h3 className="mt-4 font-serif text-3xl font-bold">
-                {t("letsCollaborate")}
+          <FadeIn
+            delay={0.12}
+            className="flex flex-col justify-between rounded-[2.5rem] border-2 border-ink bg-white p-8 shadow-pop-lg sm:p-10"
+          >
+            <div>
+              <span className="grid h-14 w-14 place-items-center rounded-full border-2 border-ink bg-blush text-brand-600">
+                <Heart className="h-6 w-6" />
+              </span>
+              <p className="section-label mt-6">{t("supportLabel")}</p>
+              <h3 className="mt-2 font-display text-3xl font-extrabold lowercase tracking-tight text-ink">
+                {t("supportTheShow")}
               </h3>
-              <p className="mt-4 text-sm leading-relaxed text-white/72">
-                {t("collaborateDescription")}
-              </p>
-              <Link
-                href="/collaborate"
-                className="mt-6 inline-flex items-center justify-center rounded-full bg-brand-500 px-5 py-3 text-sm font-semibold text-white transition-all active:scale-[0.98] hover:bg-brand-400"
-              >
-                {t("getInTouch")}
-              </Link>
+              <p className="mt-3 leading-relaxed text-ink/75">{t("supportDescription")}</p>
             </div>
-
-            <div className="editorial-panel p-8">
-              <div>
-                <p className="section-label">{t("supportLabel")}</p>
-                <h3 className="mt-2 font-serif text-2xl font-bold text-stone-950">
-                  {t("supportTheShow")}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-stone-600">
-                  {t("supportDescription")}
-                </p>
-              </div>
-              <a
-                href={buyMeCoffeeUrl}
-                target={supportTarget}
-                rel={supportRel}
-                className="btn-primary mt-6"
-              >
-                {t("buyMeCoffee")}
-              </a>
-            </div>
+            <a
+              href={buyMeCoffeeUrl}
+              target={supportTarget}
+              rel={supportRel}
+              className="btn-accent mt-8 self-start"
+            >
+              {t("buyMeCoffee")}
+            </a>
           </FadeIn>
         </div>
       </section>

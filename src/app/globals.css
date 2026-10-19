@@ -4,9 +4,9 @@
 
 :root {
   --theme-body-font: ui-sans-serif, system-ui, sans-serif;
-  --theme-heading-font: Georgia, Cambria, "Times New Roman", serif;
-  --theme-page-bg: #fafafa;
-  --theme-soft-bg: #f5f4f2;
+  --theme-heading-font: ui-sans-serif, system-ui, sans-serif;
+  --theme-page-bg: #fff7f0;
+  --theme-soft-bg: #ffe4ea;
   --theme-surface-bg: #ffffff;
 }
 
@@ -16,18 +16,19 @@
   }
 
   body {
-    @apply bg-white text-stone-900 antialiased;
+    @apply bg-cream text-ink antialiased;
   }
 
   .site-theme {
     min-height: 100vh;
     background-color: var(--theme-page-bg);
-    color: #1c1917;
+    color: #3a0a18;
     font-family: var(--theme-body-font);
   }
 
   .site-theme .font-serif {
     font-family: var(--theme-heading-font);
+    letter-spacing: -0.02em;
   }
 
   .site-theme .theme-page {
@@ -41,23 +42,32 @@
   .site-theme .theme-surface {
     background-color: var(--theme-surface-bg);
   }
+
+  ::selection {
+    @apply bg-butter text-ink;
+  }
 }
 
 @layer components {
   .section-label {
-    @apply text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-brand-500;
+    @apply text-[0.7rem] font-bold uppercase tracking-[0.24em] text-brand-600;
+  }
+
+  /* Small rounded tag, like a sticker on a notebook */
+  .sticker {
+    @apply inline-flex items-center gap-1.5 rounded-full border-2 border-ink bg-butter px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-ink shadow-pop-sm;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition-all active:scale-[0.98] hover:bg-brand-700 hover:shadow-md;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink bg-brand-600 px-6 py-3 text-sm font-bold text-white shadow-pop transition-all duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-brand-500 hover:shadow-[6px_6px_0_0_#3a0a18] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-full border-2 border-brand-600 px-6 py-3 text-sm font-semibold text-brand-600 transition-all active:scale-[0.98] hover:bg-brand-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink bg-white px-6 py-3 text-sm font-bold text-ink shadow-pop transition-all duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-butter hover:shadow-[6px_6px_0_0_#3a0a18] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none;
   }
 
   .btn-accent {
-    @apply inline-flex items-center justify-center rounded-full bg-stone-900 px-6 py-3 text-sm font-semibold text-white transition-all active:scale-[0.98] hover:bg-stone-800 hover:shadow-md;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink bg-ink px-6 py-3 text-sm font-bold text-cream shadow-pop transition-all duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-brand-800 hover:shadow-[6px_6px_0_0_#3a0a18] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none;
   }
 
   .section-padding {
@@ -65,17 +75,17 @@
   }
 
   .editorial-panel {
-    @apply rounded-[1.75rem] border border-stone-100 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.1)];
+    @apply rounded-[1.75rem] border-2 border-ink shadow-pop;
     background-color: var(--theme-surface-bg);
   }
 
   .card {
-    @apply rounded-2xl p-6 shadow-sm transition-all hover:shadow-md;
+    @apply rounded-2xl border-2 border-ink p-6 shadow-pop-sm transition-all hover:-translate-y-0.5 hover:shadow-pop;
     background-color: var(--theme-surface-bg);
   }
 
   .theme-field {
-    @apply w-full rounded-xl border border-stone-300 px-4 py-3 text-sm transition-colors focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20;
+    @apply w-full rounded-xl border-2 border-ink/20 px-4 py-3 text-sm transition-colors focus:border-ink focus:outline-none focus:ring-4 focus:ring-butter/60;
     background-color: var(--theme-surface-bg);
   }
 }

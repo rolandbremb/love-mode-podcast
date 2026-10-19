@@ -1,7 +1,8 @@
 import { draftMode } from "next/headers";
 import {
+  Bricolage_Grotesque,
+  Caveat,
   Cormorant_Garamond,
-  Dancing_Script,
   DM_Sans,
   Fraunces,
   Inter,
@@ -49,10 +50,14 @@ const fraunces = Fraunces({
   variable: "--font-fraunces",
   weight: ["400", "500", "600", "700"],
 });
-const dancingScript = Dancing_Script({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-dancing",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-bricolage",
+});
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-hand",
+  weight: ["500", "700"],
 });
 
 const fontVariables = [
@@ -62,7 +67,8 @@ const fontVariables = [
   playfair.variable,
   cormorant.variable,
   fraunces.variable,
-  dancingScript.variable,
+  bricolage.variable,
+  caveat.variable,
 ].join(" ");
 
 export default async function SiteLayout({

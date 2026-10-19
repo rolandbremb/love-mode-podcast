@@ -1,5 +1,6 @@
 const BODY_FONT_VALUES = ["inter", "manrope", "dmSans"] as const;
 const HEADING_FONT_VALUES = [
+  "bricolage",
   "playfair",
   "cormorant",
   "fraunces",
@@ -16,6 +17,7 @@ export const BODY_FONT_OPTIONS = [
 ] as const;
 
 export const HEADING_FONT_OPTIONS = [
+  { title: "Bricolage Grotesque", value: "bricolage" },
   { title: "Playfair Display", value: "playfair" },
   { title: "Cormorant Garamond", value: "cormorant" },
   { title: "Fraunces", value: "fraunces" },
@@ -24,9 +26,9 @@ export const HEADING_FONT_OPTIONS = [
 
 export const SITE_THEME_DEFAULTS = {
   bodyFont: "inter" as BodyFontValue,
-  headingFont: "playfair" as HeadingFontValue,
-  pageBackgroundColor: "#fafafa",
-  sectionBackgroundColor: "#f5f4f2",
+  headingFont: "bricolage" as HeadingFontValue,
+  pageBackgroundColor: "#fff7f0",
+  sectionBackgroundColor: "#ffe4ea",
   surfaceBackgroundColor: "#ffffff",
 };
 
@@ -45,6 +47,7 @@ const BODY_FONT_STACKS: Record<BodyFontValue, string> = {
 };
 
 const HEADING_FONT_STACKS: Record<Exclude<HeadingFontValue, "matchBody">, string> = {
+  bricolage: "var(--font-bricolage), ui-sans-serif, system-ui, sans-serif",
   playfair: "var(--font-playfair), Georgia, serif",
   cormorant: "var(--font-cormorant), Georgia, serif",
   fraunces: "var(--font-fraunces), Georgia, serif",

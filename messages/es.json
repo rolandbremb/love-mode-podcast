@@ -7,7 +7,9 @@
     "shop": "Tienda",
     "products": "Productos",
     "courses": "Cursos",
-    "support": "Apoya el Show"
+    "support": "Apoya el Show",
+    "workWithUs": "Colaboremos",
+    "menu": "Menú"
   },
   "home": {
     "listenToEpisodes": "Escuchar Episodios",
@@ -30,7 +32,49 @@
     "supportDescription": "¿Te encanta el podcast? ¡Ayúdanos a mantener Love Mode! Cada café impulsa otro episodio de conversaciones reales sobre el amor.",
     "buyMeCoffee": "Invítame un Café",
     "episodesComingSoon": "Los episodios aparecerán aquí automáticamente una vez que conectes tu feed.",
-    "setRssUrl": "Configura la URL del feed en los ajustes del sitio en Sanity."
+    "setRssUrl": "Configura la URL del feed en los ajustes del sitio en Sanity.",
+    "listenNow": "Escuchar ahora",
+    "workWithUs": "Colaboremos",
+    "hostedBy": "Con {name}",
+    "topics": [
+      "amor",
+      "citas",
+      "amor propio",
+      "relaciones",
+      "desamor",
+      "situationships",
+      "red flags",
+      "green flags"
+    ],
+    "aboutSpoiler": "spoiler: se trata de ti",
+    "brandsLabel": "Para marcas",
+    "brandsTitle": "Haz que tu marca sea parte de la conversación",
+    "brandsDescription": "Love Mode llega a personas que están pensando activamente en el amor, las citas y en cuidarse a sí mismas. Nuestras colaboraciones son honestas y leídas por la host, así que se sienten como el consejo de una amiga, nunca como una interrupción.",
+    "brandsCta": "Trabajemos juntos",
+    "brandsReply": "¡respondemos en 48 horas!",
+    "statEpisodes": "episodios",
+    "statViews": "vistas en YouTube",
+    "statPlatforms": "plataformas",
+    "brandOffers": [
+      {
+        "title": "Patrocinio del podcast",
+        "description": "Menciones leídas por la host dentro de cada episodio semanal."
+      },
+      {
+        "title": "Alianza de marca",
+        "description": "Campañas más largas pensadas para tus lanzamientos."
+      },
+      {
+        "title": "Contenido en colaboración",
+        "description": "Episodios, Reels y TikToks a la medida de tu marca."
+      },
+      {
+        "title": "Afiliados",
+        "description": "Productos que amamos, compartidos con códigos y enlaces."
+      }
+    ],
+    "mostViewedLabel": "Los favoritos",
+    "hostHello": "hola, soy"
   },
   "episodes": {
     "title": "Todos los Episodios",

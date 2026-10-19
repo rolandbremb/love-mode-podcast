@@ -7,7 +7,9 @@
     "shop": "Shop",
     "products": "Products",
     "courses": "Courses",
-    "support": "Support the Show"
+    "support": "Support the Show",
+    "workWithUs": "Work with us",
+    "menu": "Menu"
   },
   "home": {
     "listenToEpisodes": "Listen to Episodes",
@@ -30,7 +32,49 @@
     "supportDescription": "Love the podcast? Help keep Love Mode going! Every coffee fuels another episode of real talk about love and relationships.",
     "buyMeCoffee": "Buy Me a Coffee",
     "episodesComingSoon": "Episodes will appear here automatically once you connect your feed.",
-    "setRssUrl": "Set the Podcast RSS Feed URL in Sanity Site Settings to connect your feed."
+    "setRssUrl": "Set the Podcast RSS Feed URL in Sanity Site Settings to connect your feed.",
+    "listenNow": "Listen now",
+    "workWithUs": "Work with us",
+    "hostedBy": "Hosted by {name}",
+    "topics": [
+      "love",
+      "dating",
+      "self-love",
+      "relationships",
+      "heartbreak",
+      "situationships",
+      "red flags",
+      "green flags"
+    ],
+    "aboutSpoiler": "spoiler: it's about you",
+    "brandsLabel": "For brands",
+    "brandsTitle": "Make your brand part of the conversation",
+    "brandsDescription": "Love Mode reaches people who are actively thinking about love, dating, and taking care of themselves. Our partnerships are honest and host-read, so they feel like a tip from a friend, never an interruption.",
+    "brandsCta": "Let's work together",
+    "brandsReply": "we reply within 48 hours!",
+    "statEpisodes": "episodes",
+    "statViews": "views on YouTube",
+    "statPlatforms": "listening platforms",
+    "brandOffers": [
+      {
+        "title": "Podcast sponsorship",
+        "description": "Host-read mentions woven into our weekly episodes."
+      },
+      {
+        "title": "Brand partnership",
+        "description": "Longer campaigns built around your launches."
+      },
+      {
+        "title": "Content collabs",
+        "description": "Custom episodes, Reels, and TikToks with your brand."
+      },
+      {
+        "title": "Affiliate",
+        "description": "Products we love, shared with codes and links."
+      }
+    ],
+    "mostViewedLabel": "Fan favorites",
+    "hostHello": "hey, I'm"
   },
   "episodes": {
     "title": "All Episodes",
