@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { draftMode } from "next/headers";
 import { getTranslations } from "next-intl/server";
@@ -5,6 +6,7 @@ import EpisodeCard from "@/components/EpisodeCard";
 import FadeIn from "@/components/FadeIn";
 import { Link } from "@/i18n/navigation";
 import { formatStat } from "@/lib/format";
+import { localeAlternates } from "@/lib/metadata";
 import { getAllEpisodes } from "@/lib/rss";
 import { getAboutPage, getSiteSettings } from "@/sanity/client";
 
@@ -89,6 +91,15 @@ const platformLabels: Record<string, string> = {
   spotify: "Spotify",
   apple: "Apple Podcasts",
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return { alternates: localeAlternates(locale, "") };
+}
 
 export default async function Home({
   params,

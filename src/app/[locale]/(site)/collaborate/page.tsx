@@ -24,7 +24,7 @@ export async function generateMetadata(
   const t = await getTranslations({ locale, namespace: "meta" });
   const title = (await getTranslations({ locale, namespace: "collaborate" }))("title");
   const description = t("brandsDescription");
-  return pageMetadata(parent, title, description);
+  return pageMetadata(parent, { title, description, locale, path: "/collaborate" });
 }
 
 export default async function CollaboratePage({

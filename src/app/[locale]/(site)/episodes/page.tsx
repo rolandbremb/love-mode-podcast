@@ -33,7 +33,7 @@ export async function generateMetadata(
   const t = await getTranslations({ locale, namespace: "episodes" });
   const title = t("title");
   const description = t("subtitle");
-  return pageMetadata(parent, title, description);
+  return pageMetadata(parent, { title, description, locale, path: "/episodes" });
 }
 
 export default async function EpisodesPage({

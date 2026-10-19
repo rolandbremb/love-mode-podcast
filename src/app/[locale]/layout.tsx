@@ -4,16 +4,10 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { siteUrl } from "@/lib/siteUrl";
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
-
-// Used to build full links for share previews; set NEXT_PUBLIC_SITE_URL to the live domain at launch
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000");
 
 export async function generateMetadata({
   params,

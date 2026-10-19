@@ -42,7 +42,7 @@ export async function generateMetadata(
   const t = await getTranslations({ locale, namespace: "meta" });
   const title = t("aboutTitle");
   const description = t("description");
-  return pageMetadata(parent, title, description);
+  return pageMetadata(parent, { title, description, locale, path: "/about" });
 }
 
 export default async function AboutPage({
