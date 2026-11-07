@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { draftMode } from "next/headers";
 import { getTranslations } from "next-intl/server";
+import Doodle from "@/components/Doodles";
 import EpisodeCard from "@/components/EpisodeCard";
 import FadeIn from "@/components/FadeIn";
 import { Link } from "@/i18n/navigation";
@@ -157,9 +158,9 @@ export default async function Home({
     <>
       {/* ===== SOFT POP HERO ===== */}
       <section className="theme-soft relative overflow-hidden">
-        <Sparkle className="absolute left-[30%] top-28 hidden h-7 w-7 text-brand-400 motion-safe:animate-float md:block" />
-        <Sparkle className="absolute right-[46%] top-24 hidden h-5 w-5 text-butter lg:block" />
-        <Sparkle className="absolute bottom-16 left-[42%] hidden h-9 w-9 text-butter motion-safe:animate-float lg:block" />
+        <Doodle name="heart" className="absolute left-[32%] top-24 hidden h-16 w-16 rotate-12 text-brand-500 motion-safe:animate-float md:block" />
+        <Doodle name="cocktail" className="absolute right-[44%] top-14 hidden h-24 w-24 -rotate-6 text-cobalt lg:block" />
+        <Doodle name="coffeeDate" className="absolute bottom-8 left-[38%] hidden h-28 w-28 rotate-3 text-tangerine motion-safe:animate-float lg:block" />
 
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 pb-20 pt-10 sm:px-6 md:pt-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-10 lg:px-8 lg:pb-24">
           {/* Left — headline + CTAs */}
@@ -275,6 +276,8 @@ export default async function Home({
               <span className="sr-only">{episodeSchedule}</span>
             </div>
 
+            <Doodle name="loveLetter" className="absolute -left-6 top-10 h-16 w-16 -rotate-12 text-cobalt sm:-left-16 sm:h-24 sm:w-24" />
+
             {/* Note next to the photo */}
             <div className="absolute right-2 top-12 max-w-[14rem] rotate-6 sm:-right-3 motion-safe:animate-float">
               <span className="sticker bg-white normal-case tracking-normal">
@@ -296,7 +299,7 @@ export default async function Home({
                     <span className="px-6 font-display text-2xl font-extrabold lowercase tracking-tight md:text-3xl">
                       {topic}
                     </span>
-                    <Sparkle className="h-5 w-5 text-butter" />
+                    <Doodle name="heart" strokeWidth={7} className="h-6 w-6 text-butter" />
                   </li>
                 ))}
               </ul>
@@ -339,7 +342,8 @@ export default async function Home({
       </section>
 
       {/* ===== MOST VIEWED EPISODES ===== */}
-      <section className="section-padding theme-soft">
+      <section className="section-padding theme-soft relative">
+        <Doodle name="microphone" className="absolute right-[6%] top-10 hidden h-24 w-24 rotate-12 text-cobalt md:block" />
         <div className="mx-auto max-w-7xl">
           <FadeIn className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div>
@@ -364,8 +368,9 @@ export default async function Home({
                   </p>
                 ))}
               </div>
-              <p className="mt-5 -rotate-1 font-hand text-2xl font-medium text-brand-500 md:text-3xl">
+              <p className="mt-5 flex -rotate-1 items-center gap-3 font-hand text-2xl font-medium text-brand-500 md:text-3xl">
                 {t("episodesNote")}
+                <Doodle name="coffeeDate" className="h-14 w-14 shrink-0 rotate-6 text-tangerine" />
               </p>
             </div>
 
@@ -414,6 +419,8 @@ export default async function Home({
             <span className="sticker absolute -bottom-4 left-1/2 -translate-x-1/2 -rotate-3 whitespace-nowrap">
               {t("meetYourHost")}
             </span>
+            <Doodle name="frenchie" className="absolute -right-4 -top-14 h-20 w-20 rotate-12 text-cobalt sm:-right-20 sm:-top-10 sm:h-28 sm:w-28" />
+            <Doodle name="palm" className="absolute -left-10 bottom-16 hidden h-28 w-28 -rotate-6 text-leaf sm:block sm:-left-24" />
           </div>
 
           <div className="text-center md:text-left">
@@ -445,7 +452,7 @@ export default async function Home({
       {/* ===== SHARE YOUR STORY ===== */}
       <section className="section-padding theme-soft">
         <FadeIn className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border-2 border-ink bg-butter p-8 shadow-pop-lg sm:p-10 lg:p-14">
-          <Sparkle className="absolute right-8 top-8 h-10 w-10 text-brand-500 motion-safe:animate-spin-slow" />
+          <Doodle name="microphone" className="absolute right-6 top-6 h-16 w-16 rotate-12 text-brand-600 sm:right-10 sm:top-8 sm:h-24 sm:w-24" />
           <span className="sticker bg-white">{t("guestLabel")}</span>
           <h2 className="mt-6 max-w-2xl font-display text-4xl font-extrabold lowercase leading-[0.95] tracking-tight text-ink md:text-6xl">
             {t("wantToBeAGuest")}
@@ -540,10 +547,8 @@ export default async function Home({
       {/* ===== SUPPORT ===== */}
       <section id="support" className="section-padding theme-soft">
         <FadeIn className="mx-auto flex max-w-3xl flex-col items-center rounded-[2.5rem] border-2 border-ink bg-white p-8 text-center shadow-pop-lg sm:p-12">
-          <span className="grid h-14 w-14 place-items-center rounded-full border-2 border-ink bg-blush text-brand-600">
-            <Heart className="h-6 w-6" />
-          </span>
-          <p className="section-label mt-6">{t("supportLabel")}</p>
+          <Doodle name="coffeeDate" className="h-20 w-20 text-tangerine" />
+          <p className="section-label mt-4">{t("supportLabel")}</p>
           <h2 className="mt-2 font-display text-4xl font-extrabold lowercase tracking-tight text-ink md:text-5xl">
             {t("supportTheShow")}
           </h2>

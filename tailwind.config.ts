@@ -26,6 +26,10 @@ const config: Config = {
         cream: "#fff7f0",
         blush: "#ffe4ea",
         butter: "#ffd66b",
+        // Doodle accents
+        cobalt: "#2f4fd6",
+        tangerine: "#f08a24",
+        leaf: "#2f8f4e",
         ink: "#3a0a18",
       },
       fontFamily: {
