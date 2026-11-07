@@ -1,84 +1,108 @@
 {
   "nav": {
-    "about": "Acerca de",
+    "about": "Sobre mí",
     "episodes": "Episodios",
-    "beAGuest": "Sé Invitado",
+    "beAGuest": "Comparte tu historia",
     "collaborate": "Colaborar",
     "shop": "Tienda",
     "products": "Productos",
     "courses": "Cursos",
     "support": "Apoya el Show",
-    "workWithUs": "Colaboremos",
-    "menu": "Menú"
+    "workWithUs": "Para marcas",
+    "menu": "Menú",
+    "tagline": "Your Love and Dating Bestie"
   },
   "home": {
     "listenToEpisodes": "Escuchar Episodios",
-    "listenOn": "Escucha en",
-    "meetYourHost": "Conoce a tu Anfitriona",
-    "meetHostCta": "Más Sobre {name}",
+    "listenOn": "Escúchanos en",
+    "meetYourHost": "tu love & dating bestie",
+    "meetHostCta": "Te cuento más sobre mí",
     "beAGuest": "Sé Invitado",
-    "mostViewedEpisodes": "Episodios Más Vistos",
-    "viewAllEpisodes": "Ver Todos los Episodios",
-    "wantToBeAGuest": "¿Quieres ser Invitado?",
-    "guestLabel": "Únete a la Conversación",
-    "guestDescription": "¿Tienes una historia que compartir? ¿Una perspectiva única sobre el amor y las relaciones? Queremos escucharte. Aplica para ser invitado en Love Mode.",
-    "applyNow": "Aplicar Ahora",
+    "mostViewedEpisodes": "Encuentra tu próximo episodio",
+    "viewAllEpisodes": "Ver todos los episodios",
+    "wantToBeAGuest": "¿Quieres ser parte de Love Mode?",
+    "guestLabel": "Comparte tu historia",
+    "applyNow": "Quiero participar en el pódcast",
     "letsCollaborate": "Colaboremos",
     "collaborateLabel": "Trabaja Con Nosotros",
     "collaborateDescription": "Marcas, creadores y coaches — construyamos algo juntos. Patrocinios, alianzas y colaboraciones creativas.",
     "getInTouch": "Contáctanos",
-    "supportLabel": "Ayúdanos a Continuar",
-    "supportTheShow": "Apoya el Show",
-    "supportDescription": "¿Te encanta el podcast? ¡Ayúdanos a mantener Love Mode! Cada café impulsa otro episodio de conversaciones reales sobre el amor.",
-    "buyMeCoffee": "Invítame un Café",
+    "supportLabel": "Apoya Love Mode",
+    "supportTheShow": "¿Me invitas un café?",
+    "supportDescription": "Si alguna conversación te hizo compañía, te dejó pensando o terminaste enviándosela a tres amigas, puedes apoyar los próximos episodios con un café.",
+    "buyMeCoffee": "Invitarte un café",
     "episodesComingSoon": "Los episodios aparecerán aquí automáticamente una vez que conectes tu feed.",
     "setRssUrl": "Configura la URL del feed en los ajustes del sitio en Sanity.",
-    "listenNow": "Escuchar ahora",
+    "listenNow": "Encuentra tu próximo episodio",
     "workWithUs": "Colaboremos",
-    "hostedBy": "Con {name}",
     "topics": [
       "amor",
-      "citas",
-      "amor propio",
-      "relaciones",
       "desamor",
-      "situationships",
-      "red flags",
-      "green flags"
+      "dating",
+      "casi algos",
+      "deseo",
+      "tusas",
+      "relaciones",
+      "primeras citas",
+      "segundas oportunidades",
+      "divorcio",
+      "love journey"
     ],
     "aboutSpoiler": "spoiler: se trata de ti",
     "brandsLabel": "Para marcas",
-    "brandsTitle": "Haz que tu marca sea parte de la conversación",
-    "brandsDescription": "Love Mode llega a personas que están pensando activamente en el amor, las citas y en cuidarse a sí mismas. Nuestras colaboraciones son honestas y leídas por la host, así que se sienten como el consejo de una amiga, nunca como una interrupción.",
-    "brandsCta": "Trabajemos juntos",
+    "brandsTitle": "Hagamos algo increíble juntos",
+    "brandsDescription": "Love Mode reúne conversaciones sobre las relaciones y la vida que construimos alrededor de ellas: cómo nos cuidamos, qué disfrutamos y cómo empezamos nuevas etapas.",
+    "brandsCta": "Hablemos de tu marca",
     "brandsReply": "¡respondemos en 48 horas!",
     "statEpisodes": "episodios",
     "statViews": "vistas en YouTube",
     "statPlatforms": "plataformas",
     "brandOffers": [
       {
-        "title": "Patrocinio del podcast",
-        "description": "Menciones leídas por la host dentro de cada episodio semanal."
+        "title": "Integraciones en el pódcast",
+        "description": "Menciones leídas por Andrea, integradas de forma natural en los episodios."
       },
       {
-        "title": "Alianza de marca",
-        "description": "Campañas más largas pensadas para tus lanzamientos."
+        "title": "Contenido para redes",
+        "description": "Reels, TikToks y publicaciones creados a la medida de tu marca."
       },
       {
-        "title": "Contenido en colaboración",
-        "description": "Episodios, Reels y TikToks a la medida de tu marca."
+        "title": "Campañas con la comunidad",
+        "description": "Proyectos que le aportan algo real a quienes nos escuchan."
       },
       {
         "title": "Afiliados",
         "description": "Productos que amamos, compartidos con códigos y enlaces."
       }
     ],
-    "mostViewedLabel": "Los favoritos",
-    "hostHello": "hola, soy"
+    "mostViewedLabel": "Episodios destacados",
+    "hostHello": "hola, soy",
+    "byline": "Por Andrea Moreno",
+    "heroHome": "Love lovers, you're home.",
+    "photoNote": "Sírvete un drink. Let's talk love.",
+    "episodesIntro": [
+      "Welcome. ¡Qué rico que llegaste!",
+      "¿Cómo vuelves a salir con alguien después de años en pareja? ¿Qué haces cuando todavía quieres a alguien, pero ya no quieres esa relación? ¿Y cómo cuidas el amor cuando tienes mil cosas más que atender?",
+      "De eso hablamos en Love Mode. A veces desde mi experiencia, otras con invitados y especialistas. Y otras, tú y yo."
+    ],
+    "episodesNote": "Por aquí defendemos que un café sí es una cita.",
+    "hostNote": "Let's believe in love again",
+    "guestParagraphs": [
+      "Ahora quiero escucharte a ti.",
+      "¿Tienes una historia de amor que te gustaría contar en el pódcast? ¿Te enamoraste cuando menos lo esperabas? ¿Te tocó empezar de nuevo? ¿Viviste algo que cambió tu forma de ver las relaciones?",
+      "Cuéntame un poco de tu historia y por qué te gustaría compartirla.",
+      "Si eres especialista y quieres proponer un tema para un episodio, también me encantará conocer tu trabajo."
+    ],
+    "guestNote": "Revisamos todas las propuestas. Si la tuya encaja con un próximo episodio, te contactaremos para conversar.",
+    "brandsMore": [
+      "Si tu marca conecta con ese mundo, exploremos una colaboración.",
+      "Podemos crear integraciones en el pódcast, contenido para redes y campañas que aporten algo a nuestra comunidad."
+    ],
+    "supportThanks": "Gracias por estar del otro lado. 🤍"
   },
   "episodes": {
     "title": "Todos los Episodios",
-    "subtitle": "Ponte al día con cada conversación. Nuevos episodios cada semana.",
+    "subtitle": "Encuentra el episodio para este momento de tu love journey.",
     "listenNow": "Escuchar Ahora",
     "comingSoon": "Próximamente",
     "episodesComingSoon": "Los episodios aparecerán aquí automáticamente una vez que conectes tu feed.",
@@ -115,8 +139,8 @@
     "browseCollection": "Ver Colección →"
   },
   "apply": {
-    "title": "Sé Invitado",
-    "subtitle": "¿Tienes una historia que compartir? ¿Una perspectiva única sobre el amor o las relaciones? Nos encantaría escucharte.",
+    "title": "¿Quieres ser parte de Love Mode?",
+    "subtitle": "Ahora quiero escucharte a ti. Cuéntame un poco de tu historia y por qué te gustaría compartirla. Si eres especialista y quieres proponer un tema para un episodio, también me encantará conocer tu trabajo.",
     "fullName": "Nombre Completo",
     "email": "Correo Electrónico",
     "socialLinks": "Redes Sociales",
@@ -126,8 +150,8 @@
     "whyGuest": "¿Por qué serías un gran invitado?",
     "whyGuestPlaceholder": "Cuéntanos sobre ti y lo que aportarías a la conversación...",
     "submit": "Enviar Solicitud",
-    "note": "¡Revisamos cada solicitud y nos pondremos en contacto si encaja!",
-    "label": "Únete a la conversación",
+    "note": "Revisamos todas las propuestas. Si la tuya encaja con un próximo episodio, te contactaremos para conversar.",
+    "label": "Comparte tu historia",
     "perksTitle": "Lo que buscamos",
     "perks": [
       "Una historia real de amor, citas o desamor",
@@ -139,13 +163,13 @@
     "successBody": "Gracias por postularte. Leemos todas las solicitudes y te contactaremos si encajas."
   },
   "collaborate": {
-    "title": "Colaboremos",
-    "subtitle": "Marcas, creadores y coaches — creemos algo significativo juntos. Estamos abiertos a patrocinios, alianzas y colaboraciones creativas.",
+    "title": "Hagamos algo increíble juntos",
+    "subtitle": "Si tu marca conecta con el mundo de Love Mode, exploremos una colaboración. Podemos crear integraciones en el pódcast, contenido para redes y campañas que aporten algo a nuestra comunidad.",
     "nameCompany": "Nombre / Empresa",
     "email": "Correo Electrónico",
     "typeOfCollaboration": "Tipo de Colaboración",
     "selectOne": "Selecciona uno...",
-    "podcastSponsorship": "Patrocinio del Podcast",
+    "podcastSponsorship": "Integración en el pódcast",
     "brandPartnership": "Alianza de Marca",
     "contentCollab": "Colaboración de Contenido",
     "affiliatePartnership": "Alianza de Afiliados",
@@ -169,36 +193,36 @@
     "successBody": "¡Gracias! Te responderemos en un máximo de 48 horas."
   },
   "about": {
-    "meetYourHost": "Conoce a tu Anfitriona",
+    "meetYourHost": "tu love & dating bestie",
     "ourMission": "Nuestra Misión",
     "listenTitle": "Escuchar Episodios",
     "listenDesc": "Ponte al día con cada conversación — nuevos episodios cada semana.",
     "listenCta": "Ver Episodios",
-    "guestTitle": "Sé Invitado",
-    "guestDesc": "¿Tienes una historia sobre amor o relaciones? Aplica para aparecer en el show.",
-    "guestCta": "Aplicar Ahora",
-    "supportTitle": "Apoya el Show",
-    "supportDesc": "¿Te encanta el podcast? Ayúdanos a seguir con un café.",
-    "supportCta": "Invítame un Café",
+    "guestTitle": "Comparte tu historia",
+    "guestDesc": "¿Tienes una historia de amor que te gustaría contar en el pódcast? Cuéntamela.",
+    "guestCta": "Quiero participar",
+    "supportTitle": "¿Me invitas un café?",
+    "supportDesc": "Si alguna conversación te hizo compañía, puedes apoyar los próximos episodios con un café.",
+    "supportCta": "Invitarte un café",
     "hello": "hola, soy",
     "missionNote": "la razón de todo"
   },
   "footer": {
-    "tagline": "Conversaciones reales sobre amor, citas y construir relaciones significativas.",
-    "podcast": "Podcast",
+    "tagline": "Por Andrea Moreno.",
+    "podcast": "Pódcast",
     "resources": "Recursos",
     "connect": "Conectar",
-    "allEpisodes": "Todos los Episodios",
-    "about": "Acerca de",
-    "beAGuest": "Sé Invitado",
-    "collaborate": "Colaborar",
+    "allEpisodes": "Episodios",
+    "about": "Sobre mí",
+    "beAGuest": "Comparte tu historia",
+    "collaborate": "Para marcas",
     "shop": "Tienda",
     "digitalProducts": "Productos Digitales",
     "courses": "Cursos",
-    "copyright": "© {year} Love Mode Podcast. Todos los derechos reservados.",
+    "copyright": "© {year} Love Mode Podcast",
     "followUs": "Síguenos",
     "brandsTitle": "¿Tienes una marca en mente?",
-    "workWithUs": "Colaboremos"
+    "workWithUs": "Hablemos de tu marca"
   },
   "forms": {
     "sending": "Enviando…",
@@ -210,7 +234,7 @@
   "meta": {
     "title": "Love Mode Podcast",
     "description": "Conversaciones reales sobre amor, citas y cómo construir relaciones que sí duran. Nuevos episodios cada viernes, con Andrea Moreno.",
-    "aboutTitle": "Acerca de",
-    "brandsDescription": "Colabora con Love Mode: patrocinios del podcast, alianzas de marca y contenido con una audiencia apasionada por el amor y el autocuidado."
+    "aboutTitle": "Sobre mí",
+    "brandsDescription": "Colabora con Love Mode: integraciones en el pódcast, contenido para redes y campañas para una comunidad que habla de amor, dating y relaciones."
   }
 }

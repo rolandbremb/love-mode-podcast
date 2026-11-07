@@ -138,11 +138,13 @@ export default async function Home({
     buyMeCoffeeUrl !== "#" ? "noopener noreferrer" : undefined;
 
   const hostName = aboutData?.hostName ?? "Your Host";
-  const hostBio = aboutData?.hostBio?.[0] ?? "";
+  const hostBio = (aboutData?.hostBio ?? []).filter((p) => p.trim()).slice(0, 2);
   const hostPhoto = aboutData?.hostPhoto?.asset?.url ?? "/images/host.jpg";
-  const hostFirstName = hostName.split(" ")[0];
   const topics = t.raw("topics") as string[];
   const brandOffers = t.raw("brandOffers") as { title: string; description: string }[];
+  const brandsMore = t.raw("brandsMore") as string[];
+  const episodesIntro = t.raw("episodesIntro") as string[];
+  const guestParagraphs = t.raw("guestParagraphs") as string[];
 
   const totalViews = allEpisodes.reduce((sum, episode) => sum + (episode.views || 0), 0);
   const stats = [
@@ -186,11 +188,17 @@ export default async function Home({
                   strokeLinecap="round"
                 />
               </svg>
+              <p className="mt-4 text-sm font-bold uppercase tracking-[0.2em] text-ink/70">
+                {t("byline")}
+              </p>
             </div>
 
             <div className="motion-safe:animate-rise [animation-delay:160ms]">
               <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/80">
                 {heroDescription}
+              </p>
+              <p className="mt-4 -rotate-2 font-hand text-2xl font-medium text-brand-500 md:text-3xl">
+                {t("heroHome")}
               </p>
             </div>
 
@@ -200,12 +208,6 @@ export default async function Home({
                   <path d="M8 5.5v13a1 1 0 001.5.86l10.5-6.5a1 1 0 000-1.72L9.5 4.64A1 1 0 008 5.5z" />
                 </svg>
                 {t("listenNow")}
-              </Link>
-              <Link href="/collaborate" className="btn-secondary !px-7 !py-3.5 !text-base">
-                {t("workWithUs")}
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
               </Link>
             </div>
 
@@ -273,14 +275,12 @@ export default async function Home({
               <span className="sr-only">{episodeSchedule}</span>
             </div>
 
-            {/* Host tag */}
-            {aboutData?.hostName && (
-              <div className="absolute right-2 top-12 rotate-6 sm:-right-3 motion-safe:animate-float">
-                <span className="sticker bg-white normal-case tracking-normal">
-                  {t("hostedBy", { name: hostName })}
-                </span>
-              </div>
-            )}
+            {/* Note next to the photo */}
+            <div className="absolute right-2 top-12 max-w-[14rem] rotate-6 sm:-right-3 motion-safe:animate-float">
+              <span className="sticker bg-white normal-case tracking-normal">
+                {t("photoNote")}
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -350,6 +350,23 @@ export default async function Home({
               <h2 className="mt-5 font-display text-4xl font-extrabold lowercase leading-[0.95] tracking-tight text-ink md:text-6xl">
                 {t("mostViewedEpisodes")}
               </h2>
+              <div className="mt-6 max-w-2xl space-y-4">
+                {episodesIntro.map((paragraph, index) => (
+                  <p
+                    key={index}
+                    className={
+                      index === 0
+                        ? "font-display text-2xl font-semibold tracking-tight text-ink"
+                        : "text-lg leading-relaxed text-ink/75"
+                    }
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+              <p className="mt-5 -rotate-1 font-hand text-2xl font-medium text-brand-500 md:text-3xl">
+                {t("episodesNote")}
+              </p>
             </div>
 
             {topEpisodes.length > 0 && (
@@ -377,6 +394,84 @@ export default async function Home({
         </div>
       </section>
 
+      {/* ===== MEET YOUR HOST ===== */}
+      <section className="section-padding theme-page overflow-hidden">
+        <FadeIn className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
+          <div className="relative mx-auto w-full max-w-xs md:max-w-sm">
+            <div
+              className="absolute inset-0 rotate-3 rounded-[2.5rem] border-2 border-ink bg-brand-400"
+              aria-hidden="true"
+            />
+            <div className="relative aspect-[4/5] -rotate-2 overflow-hidden rounded-[2.5rem] border-2 border-ink bg-brand-200">
+              <Image
+                src={hostPhoto}
+                alt={hostName}
+                fill
+                sizes="(min-width: 768px) 24rem, 80vw"
+                className="object-cover"
+              />
+            </div>
+            <span className="sticker absolute -bottom-4 left-1/2 -translate-x-1/2 -rotate-3 whitespace-nowrap">
+              {t("meetYourHost")}
+            </span>
+          </div>
+
+          <div className="text-center md:text-left">
+            <p className="-rotate-2 font-hand text-3xl font-medium text-brand-500 md:text-4xl">
+              {t("hostHello")}
+            </p>
+            <h2 className="mt-1 font-display text-5xl font-extrabold lowercase leading-[0.9] tracking-tight text-brand-700 md:text-7xl">
+              {hostName}
+            </h2>
+            {hostBio.map((paragraph, index) => (
+              <p
+                key={index}
+                className={`max-w-xl text-lg leading-relaxed text-ink/80 md:mx-0 ${index === 0 ? "mt-6" : "mt-4"}`}
+              >
+                {paragraph}
+              </p>
+            ))}
+            <Link href="/about" className="btn-primary mt-8">
+              {t("meetHostCta")}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <p className="mt-6 -rotate-2 font-hand text-2xl font-medium text-brand-500 md:text-3xl">
+              {t("hostNote")}
+            </p>
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* ===== SHARE YOUR STORY ===== */}
+      <section className="section-padding theme-soft">
+        <FadeIn className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border-2 border-ink bg-butter p-8 shadow-pop-lg sm:p-10 lg:p-14">
+          <Sparkle className="absolute right-8 top-8 h-10 w-10 text-brand-500 motion-safe:animate-spin-slow" />
+          <span className="sticker bg-white">{t("guestLabel")}</span>
+          <h2 className="mt-6 max-w-2xl font-display text-4xl font-extrabold lowercase leading-[0.95] tracking-tight text-ink md:text-6xl">
+            {t("wantToBeAGuest")}
+          </h2>
+          <div className="mt-6 max-w-2xl space-y-4">
+            {guestParagraphs.map((paragraph, index) => (
+              <p
+                key={index}
+                className={
+                  index === 0
+                    ? "font-display text-2xl font-semibold tracking-tight text-ink"
+                    : "text-lg leading-relaxed text-ink/80"
+                }
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+          <Link href="/apply" className="btn-primary mt-8">
+            {t("applyNow")}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink/70">{t("guestNote")}</p>
+        </FadeIn>
+      </section>
+
       {/* ===== WORK WITH LOVE MODE (BRANDS) ===== */}
       <section className="section-padding theme-page">
         <FadeIn className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border-2 border-ink bg-brand-600 p-8 text-cream shadow-pop-lg sm:p-10 lg:p-14">
@@ -392,9 +487,12 @@ export default async function Home({
               <h2 className="mt-6 font-display text-4xl font-extrabold lowercase leading-[0.92] tracking-tight md:text-6xl">
                 {t("brandsTitle")}
               </h2>
-              <p className="mt-6 max-w-lg text-lg leading-relaxed text-cream/85">
-                {t("brandsDescription")}
-              </p>
+              <div className="mt-6 max-w-lg space-y-4 text-lg leading-relaxed text-cream/85">
+                <p>{t("brandsDescription")}</p>
+                {brandsMore.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
 
               {stats.length > 0 && (
                 <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t-2 border-cream/25 pt-8">
@@ -439,90 +537,27 @@ export default async function Home({
         </FadeIn>
       </section>
 
-      {/* ===== MEET YOUR HOST ===== */}
-      <section className="section-padding theme-soft overflow-hidden">
-        <FadeIn className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
-          <div className="relative mx-auto w-full max-w-xs md:max-w-sm">
-            <div
-              className="absolute inset-0 rotate-3 rounded-[2.5rem] border-2 border-ink bg-brand-400"
-              aria-hidden="true"
-            />
-            <div className="relative aspect-[4/5] -rotate-2 overflow-hidden rounded-[2.5rem] border-2 border-ink bg-brand-200">
-              <Image
-                src={hostPhoto}
-                alt={hostName}
-                fill
-                sizes="(min-width: 768px) 24rem, 80vw"
-                className="object-cover"
-              />
-            </div>
-            <span className="sticker absolute -bottom-4 left-1/2 -translate-x-1/2 -rotate-3 whitespace-nowrap">
-              {t("meetYourHost")}
-            </span>
-          </div>
-
-          <div className="text-center md:text-left">
-            <p className="-rotate-2 font-hand text-3xl font-medium text-brand-500 md:text-4xl">
-              {t("hostHello")}
-            </p>
-            <h2 className="mt-1 font-display text-5xl font-extrabold lowercase leading-[0.9] tracking-tight text-brand-700 md:text-7xl">
-              {hostName}
-            </h2>
-            {hostBio && (
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink/80 md:mx-0">
-                {hostBio}
-              </p>
-            )}
-            <Link href="/about" className="btn-primary mt-8">
-              {t("meetHostCta", { name: hostFirstName })}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </FadeIn>
-      </section>
-
-      {/* ===== BE A GUEST + SUPPORT ===== */}
-      <section id="support" className="section-padding theme-page">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)]">
-          <FadeIn className="relative overflow-hidden rounded-[2.5rem] border-2 border-ink bg-butter p-8 shadow-pop-lg sm:p-10 lg:p-12">
-            <Sparkle className="absolute right-8 top-8 h-10 w-10 text-brand-500 motion-safe:animate-spin-slow" />
-            <span className="sticker bg-white">{t("guestLabel")}</span>
-            <h2 className="mt-6 max-w-lg font-display text-4xl font-extrabold lowercase leading-[0.95] tracking-tight text-ink md:text-6xl">
-              {t("wantToBeAGuest")}
-            </h2>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/80">
-              {t("guestDescription")}
-            </p>
-            <Link href="/apply" className="btn-primary mt-8">
-              {t("applyNow")}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </FadeIn>
-
-          <FadeIn
-            delay={0.12}
-            className="flex flex-col justify-between rounded-[2.5rem] border-2 border-ink bg-white p-8 shadow-pop-lg sm:p-10"
+      {/* ===== SUPPORT ===== */}
+      <section id="support" className="section-padding theme-soft">
+        <FadeIn className="mx-auto flex max-w-3xl flex-col items-center rounded-[2.5rem] border-2 border-ink bg-white p-8 text-center shadow-pop-lg sm:p-12">
+          <span className="grid h-14 w-14 place-items-center rounded-full border-2 border-ink bg-blush text-brand-600">
+            <Heart className="h-6 w-6" />
+          </span>
+          <p className="section-label mt-6">{t("supportLabel")}</p>
+          <h2 className="mt-2 font-display text-4xl font-extrabold lowercase tracking-tight text-ink md:text-5xl">
+            {t("supportTheShow")}
+          </h2>
+          <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink/75">{t("supportDescription")}</p>
+          <p className="mt-4 font-hand text-2xl font-medium text-brand-500">{t("supportThanks")}</p>
+          <a
+            href={buyMeCoffeeUrl}
+            target={supportTarget}
+            rel={supportRel}
+            className="btn-accent mt-8"
           >
-            <div>
-              <span className="grid h-14 w-14 place-items-center rounded-full border-2 border-ink bg-blush text-brand-600">
-                <Heart className="h-6 w-6" />
-              </span>
-              <p className="section-label mt-6">{t("supportLabel")}</p>
-              <h3 className="mt-2 font-display text-3xl font-extrabold lowercase tracking-tight text-ink">
-                {t("supportTheShow")}
-              </h3>
-              <p className="mt-3 leading-relaxed text-ink/75">{t("supportDescription")}</p>
-            </div>
-            <a
-              href={buyMeCoffeeUrl}
-              target={supportTarget}
-              rel={supportRel}
-              className="btn-accent mt-8 self-start"
-            >
-              {t("buyMeCoffee")}
-            </a>
-          </FadeIn>
-        </div>
+            {t("buyMeCoffee")}
+          </a>
+        </FadeIn>
       </section>
     </>
   );

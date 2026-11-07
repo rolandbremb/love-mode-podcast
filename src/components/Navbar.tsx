@@ -7,8 +7,8 @@ import { Link, usePathname, useRouter } from "@/i18n/navigation";
 type NavKey = "about" | "episodes" | "beAGuest" | "shop" | "products" | "courses";
 
 const allNavItems: { key: NavKey; href: string }[] = [
-  { key: "about", href: "/about" },
   { key: "episodes", href: "/episodes" },
+  { key: "about", href: "/about" },
   { key: "beAGuest", href: "/apply" },
   { key: "shop", href: "/shop" },
   { key: "products", href: "/products" },
@@ -49,7 +49,7 @@ export default function Navbar({ showShop = true, showProducts = true, showCours
             Love Mode
           </span>
           <span className="hidden -rotate-2 font-hand text-xl font-medium leading-none text-brand-500 xl:inline">
-            Conversaciones de amor, dating y relaciones
+            {t("tagline")}
           </span>
         </Link>
 

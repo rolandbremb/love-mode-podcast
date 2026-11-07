@@ -30,8 +30,8 @@ export default async function Footer({
       : defaultSocialLinks;
 
   const podcastLinks = [
-    { href: "/about", label: t("about") },
     { href: "/episodes", label: t("allEpisodes") },
+    { href: "/about", label: t("about") },
     { href: "/apply", label: t("beAGuest") },
     { href: "/collaborate", label: t("collaborate") },
   ];

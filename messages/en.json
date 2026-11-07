@@ -1,84 +1,108 @@
 {
   "nav": {
-    "about": "About",
+    "about": "About me",
     "episodes": "Episodes",
-    "beAGuest": "Be a Guest",
+    "beAGuest": "Share your story",
     "collaborate": "Collaborate",
     "shop": "Shop",
     "products": "Products",
     "courses": "Courses",
     "support": "Support the Show",
-    "workWithUs": "Work with us",
-    "menu": "Menu"
+    "workWithUs": "For brands",
+    "menu": "Menu",
+    "tagline": "Your Love and Dating Bestie"
   },
   "home": {
     "listenToEpisodes": "Listen to Episodes",
     "listenOn": "Listen on",
-    "meetYourHost": "Meet Your Host",
-    "meetHostCta": "More About {name}",
+    "meetYourHost": "your love & dating bestie",
+    "meetHostCta": "More about me",
     "beAGuest": "Be a Guest",
-    "mostViewedEpisodes": "Most Viewed Episodes",
-    "viewAllEpisodes": "View All Episodes",
-    "wantToBeAGuest": "Want to Be a Guest?",
-    "guestLabel": "Join the Conversation",
-    "guestDescription": "Got a story to share? A unique perspective on love and relationships? We want to hear from you. Apply to be a guest on Love Mode.",
-    "applyNow": "Apply Now",
+    "mostViewedEpisodes": "Find your next episode",
+    "viewAllEpisodes": "View all episodes",
+    "wantToBeAGuest": "Want to be part of Love Mode?",
+    "guestLabel": "Share your story",
+    "applyNow": "I want to be on the podcast",
     "letsCollaborate": "Let's Collaborate",
     "collaborateLabel": "Work With Us",
     "collaborateDescription": "Brands, creators, and coaches — let's build something together. Sponsorships, partnerships, and creative collaborations.",
     "getInTouch": "Get in Touch",
-    "supportLabel": "Keep Us Going",
-    "supportTheShow": "Support the Show",
-    "supportDescription": "Love the podcast? Help keep Love Mode going! Every coffee fuels another episode of real talk about love and relationships.",
-    "buyMeCoffee": "Buy Me a Coffee",
+    "supportLabel": "Support Love Mode",
+    "supportTheShow": "Buy me a coffee?",
+    "supportDescription": "If a conversation kept you company, got you thinking, or ended up being sent to three of your friends, you can support upcoming episodes with a coffee.",
+    "buyMeCoffee": "Buy you a coffee",
     "episodesComingSoon": "Episodes will appear here automatically once you connect your feed.",
     "setRssUrl": "Set the Podcast RSS Feed URL in Sanity Site Settings to connect your feed.",
-    "listenNow": "Listen now",
+    "listenNow": "Find your next episode",
     "workWithUs": "Work with us",
-    "hostedBy": "Hosted by {name}",
     "topics": [
       "love",
-      "dating",
-      "self-love",
-      "relationships",
       "heartbreak",
+      "dating",
       "situationships",
-      "red flags",
-      "green flags"
+      "desire",
+      "getting over someone",
+      "relationships",
+      "first dates",
+      "second chances",
+      "divorce",
+      "love journey"
     ],
     "aboutSpoiler": "spoiler: it's about you",
     "brandsLabel": "For brands",
-    "brandsTitle": "Make your brand part of the conversation",
-    "brandsDescription": "Love Mode reaches people who are actively thinking about love, dating, and taking care of themselves. Our partnerships are honest and host-read, so they feel like a tip from a friend, never an interruption.",
-    "brandsCta": "Let's work together",
+    "brandsTitle": "Let's make something amazing together",
+    "brandsDescription": "Love Mode brings together conversations about relationships and the life we build around them: how we take care of ourselves, what we enjoy, and how we begin new chapters.",
+    "brandsCta": "Let's talk about your brand",
     "brandsReply": "we reply within 48 hours!",
     "statEpisodes": "episodes",
     "statViews": "views on YouTube",
     "statPlatforms": "listening platforms",
     "brandOffers": [
       {
-        "title": "Podcast sponsorship",
-        "description": "Host-read mentions woven into our weekly episodes."
+        "title": "Podcast integrations",
+        "description": "Host-read mentions by Andrea, woven naturally into the episodes."
       },
       {
-        "title": "Brand partnership",
-        "description": "Longer campaigns built around your launches."
+        "title": "Social content",
+        "description": "Reels, TikToks, and posts made to fit your brand."
       },
       {
-        "title": "Content collabs",
-        "description": "Custom episodes, Reels, and TikToks with your brand."
+        "title": "Community campaigns",
+        "description": "Projects that give something real to the people who listen."
       },
       {
         "title": "Affiliate",
         "description": "Products we love, shared with codes and links."
       }
     ],
-    "mostViewedLabel": "Fan favorites",
-    "hostHello": "hey, I'm"
+    "mostViewedLabel": "Featured episodes",
+    "hostHello": "hey, I'm",
+    "byline": "By Andrea Moreno",
+    "heroHome": "Love lovers, you're home.",
+    "photoNote": "Pour yourself a drink. Let's talk love.",
+    "episodesIntro": [
+      "Welcome. So glad you made it!",
+      "How do you start dating again after years in a relationship? What do you do when you still love someone, but you no longer want that relationship? And how do you take care of love when you have a thousand other things on your plate?",
+      "That's what we talk about on Love Mode. Sometimes from my own experience, sometimes with guests and experts. And sometimes, just you and me."
+    ],
+    "episodesNote": "Around here, coffee totally counts as a date.",
+    "hostNote": "Let's believe in love again",
+    "guestParagraphs": [
+      "Now I want to hear from you.",
+      "Do you have a love story you'd like to tell on the podcast? Did you fall in love when you least expected it? Did you have to start over? Did you live through something that changed the way you see relationships?",
+      "Tell me a little about your story and why you'd like to share it.",
+      "If you're an expert and want to pitch a topic for an episode, I'd love to learn about your work too."
+    ],
+    "guestNote": "We read every submission. If yours fits an upcoming episode, we'll reach out to chat.",
+    "brandsMore": [
+      "If your brand connects with that world, let's explore a collaboration.",
+      "We can create podcast integrations, social content, and campaigns that give something back to our community."
+    ],
+    "supportThanks": "Thank you for being on the other side. 🤍"
   },
   "episodes": {
     "title": "All Episodes",
-    "subtitle": "Catch up on every conversation. New episodes drop weekly.",
+    "subtitle": "Find the episode for this moment in your love journey.",
     "listenNow": "Listen Now",
     "comingSoon": "Coming Soon",
     "episodesComingSoon": "Episodes will appear here automatically once you connect your feed.",
@@ -115,8 +139,8 @@
     "browseCollection": "Browse Collection →"
   },
   "apply": {
-    "title": "Be a Guest",
-    "subtitle": "Have a story to share? A unique take on love, dating, or relationships? We'd love to hear from you.",
+    "title": "Want to be part of Love Mode?",
+    "subtitle": "Now I want to hear from you. Tell me a little about your story and why you'd like to share it. If you're an expert and want to pitch a topic for an episode, I'd love to learn about your work too.",
     "fullName": "Full Name",
     "email": "Email",
     "socialLinks": "Social Media Links",
@@ -126,8 +150,8 @@
     "whyGuest": "Why would you be a great guest?",
     "whyGuestPlaceholder": "Tell us about yourself and what you'd bring to the conversation...",
     "submit": "Submit Application",
-    "note": "We review every application and will reach out if it's a fit!",
-    "label": "Join the conversation",
+    "note": "We read every submission. If yours fits an upcoming episode, we'll reach out to chat.",
+    "label": "Share your story",
     "perksTitle": "What we look for",
     "perks": [
       "A real story about love, dating, or heartbreak",
@@ -139,13 +163,13 @@
     "successBody": "Thanks for applying. We read every application and will reach out if it's a fit."
   },
   "collaborate": {
-    "title": "Let's Collaborate",
-    "subtitle": "Brands, content creators, and coaches — let's create something meaningful together. We're open to sponsorships, partnerships, and creative collaborations.",
+    "title": "Let's make something amazing together",
+    "subtitle": "If your brand connects with the world of Love Mode, let's explore a collaboration. We can create podcast integrations, social content, and campaigns that give something back to our community.",
     "nameCompany": "Name / Company",
     "email": "Email",
     "typeOfCollaboration": "Type of Collaboration",
     "selectOne": "Select one...",
-    "podcastSponsorship": "Podcast Sponsorship",
+    "podcastSponsorship": "Podcast integration",
     "brandPartnership": "Brand Partnership",
     "contentCollab": "Content Collaboration",
     "affiliatePartnership": "Affiliate Partnership",
@@ -169,36 +193,36 @@
     "successBody": "Thank you! We'll get back to you within 48 hours."
   },
   "about": {
-    "meetYourHost": "Meet Your Host",
+    "meetYourHost": "your love & dating bestie",
     "ourMission": "Our Mission",
     "listenTitle": "Listen to Episodes",
     "listenDesc": "Catch up on every conversation — new episodes drop weekly.",
     "listenCta": "Browse Episodes",
-    "guestTitle": "Be a Guest",
-    "guestDesc": "Got a story about love or relationships? Apply to be on the show.",
-    "guestCta": "Apply Now",
-    "supportTitle": "Support the Show",
-    "supportDesc": "Love the podcast? Help keep Love Mode going with a coffee.",
-    "supportCta": "Buy Me a Coffee",
+    "guestTitle": "Share your story",
+    "guestDesc": "Do you have a love story you'd like to tell on the podcast? Tell me about it.",
+    "guestCta": "I want to take part",
+    "supportTitle": "Buy me a coffee?",
+    "supportDesc": "If a conversation kept you company, you can support upcoming episodes with a coffee.",
+    "supportCta": "Buy you a coffee",
     "hello": "hey, I'm",
     "missionNote": "the whole point"
   },
   "footer": {
-    "tagline": "Real conversations about love, dating, and building meaningful relationships.",
+    "tagline": "By Andrea Moreno.",
     "podcast": "Podcast",
     "resources": "Resources",
     "connect": "Connect",
-    "allEpisodes": "All Episodes",
-    "about": "About",
-    "beAGuest": "Be a Guest",
-    "collaborate": "Collaborate",
+    "allEpisodes": "Episodes",
+    "about": "About me",
+    "beAGuest": "Share your story",
+    "collaborate": "For brands",
     "shop": "Shop",
     "digitalProducts": "Digital Products",
     "courses": "Courses",
-    "copyright": "© {year} Love Mode Podcast. All rights reserved.",
+    "copyright": "© {year} Love Mode Podcast",
     "followUs": "Follow along",
     "brandsTitle": "Got a brand in mind?",
-    "workWithUs": "Work with us"
+    "workWithUs": "Let's talk about your brand"
   },
   "forms": {
     "sending": "Sending…",
@@ -210,7 +234,7 @@
   "meta": {
     "title": "Love Mode Podcast",
     "description": "Real conversations about love, dating, and building relationships that actually last. New episodes every Friday, hosted by Andrea Moreno.",
-    "aboutTitle": "About",
-    "brandsDescription": "Partner with Love Mode: podcast sponsorships, brand partnerships, and content collaborations with an audience that's all about love and self-care."
+    "aboutTitle": "About me",
+    "brandsDescription": "Partner with Love Mode: podcast integrations, social content, and campaigns for a community that talks about love, dating, and relationships."
   }
 }
