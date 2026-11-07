@@ -7,7 +7,7 @@ export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
 export default async function AppleIcon() {
-  const bricolage = await readFile(join(process.cwd(), "src/app/fonts/BricolageGrotesque-ExtraBold.ttf"));
+  const gloock = await readFile(join(process.cwd(), "src/app/fonts/Gloock-Regular.woff"));
 
   return new ImageResponse(
     (
@@ -19,18 +19,18 @@ export default async function AppleIcon() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#d41f55",
-          color: "#fff7f0",
-          fontFamily: "Bricolage",
-          fontSize: 56,
-          lineHeight: 0.86,
-          letterSpacing: -2.5,
+          background: "#2d1530",
+          color: "#ffcafd",
+          fontFamily: "Gloock",
+          fontSize: 60,
+          lineHeight: 0.88,
+          letterSpacing: -2,
         }}
       >
-        <span>love</span>
-        <span>mode</span>
+        <span>Love</span>
+        <span>Mode</span>
       </div>
     ),
-    { ...size, fonts: [{ name: "Bricolage", data: bricolage, weight: 800, style: "normal" }] }
+    { ...size, fonts: [{ name: "Gloock", data: gloock, weight: 400, style: "normal" }] }
   );
 }

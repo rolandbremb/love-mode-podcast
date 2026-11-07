@@ -1,5 +1,6 @@
 import { draftMode } from "next/headers";
 import { getTranslations } from "next-intl/server";
+import PageHeader from "@/components/postal/PageHeader";
 import { redirect } from "@/i18n/navigation";
 import { getCourses, getSiteSettings, type Course } from "@/sanity/client";
 
@@ -30,32 +31,26 @@ export default async function CoursesPage({
   const courses = cmsCourses.length > 0 ? cmsCourses : defaultCourses;
 
   return (
-    <div className="section-padding">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-12 text-center">
-          <h1 className="font-serif text-4xl font-bold text-stone-900 md:text-5xl">
-            {t("title")}
-          </h1>
-          <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-brand-500" />
-          <p className="mt-4 text-lg text-stone-600">{t("subtitle")}</p>
-        </div>
+    <div>
+      <PageHeader title={t("title")} subtitle={t("subtitle")} />
+      <div className="page-container pb-24 lg:pb-32">
 
         <div className="grid gap-8 md:grid-cols-2">
           {courses.map((course) => (
-            <div key={course._id} className="card flex flex-col">
+            <div key={course._id} className="flex flex-col rounded-md bg-white p-7 shadow-postal">
               {course.status === "coming-soon" && (
-                <span className="mb-3 inline-block w-fit rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-600">
+                <span className="mb-3 inline-block w-fit rounded-full bg-bubblegum px-3 py-1 text-sm font-semibold">
                   {t("comingSoon")}
                 </span>
               )}
-              <h3 className="font-serif text-xl font-bold text-stone-900">{course.title}</h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-stone-600">{course.description}</p>
-              <div className="mt-4 flex gap-4 text-xs text-stone-500">
+              <h3 className="font-display text-[1.75rem] leading-tight">{course.title}</h3>
+              <p className="mt-3 flex-1 text-base leading-relaxed text-mauve">{course.description}</p>
+              <div className="mt-4 flex gap-4 text-sm text-mauve">
                 <span>{course.duration}</span>
                 <span>{course.format}</span>
               </div>
               {course.status === "coming-soon" ? (
-                <button disabled className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-stone-200 px-6 py-3 text-sm font-semibold text-stone-500">
+                <button disabled className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-shell px-6 py-3.5 text-base font-semibold text-mauve">
                   {t("notifyMe")}
                 </button>
               ) : (
@@ -65,10 +60,10 @@ export default async function CoursesPage({
           ))}
         </div>
 
-        <div className="mt-16 rounded-2xl bg-gradient-to-br from-brand-600 to-brand-800 p-8 text-center text-white md:p-12">
-          <h2 className="font-serif text-3xl font-bold">{t("coachingTitle")}</h2>
-          <p className="mx-auto mt-4 max-w-xl text-brand-100">{t("coachingDescription")}</p>
-          <button disabled className="mt-8 inline-flex items-center justify-center rounded-full bg-white/20 px-6 py-3 text-sm font-semibold text-white backdrop-blur">
+        <div className="mt-16 rounded-[2.25rem] bg-plum p-8 text-center text-shell md:p-14">
+          <h2 className="font-display text-[2.5rem] leading-tight text-bubblegum">{t("coachingTitle")}</h2>
+          <p className="mx-auto mt-4 max-w-xl text-[1.0625rem] text-shell/85">{t("coachingDescription")}</p>
+          <button disabled className="mt-8 inline-flex items-center justify-center rounded-full border-[1.5px] border-shell/40 px-6 py-3.5 text-base font-semibold text-shell/80">
             {t("joinWaitlist")}
           </button>
         </div>

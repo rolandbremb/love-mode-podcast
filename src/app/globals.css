@@ -2,90 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --theme-body-font: ui-sans-serif, system-ui, sans-serif;
-  --theme-heading-font: ui-sans-serif, system-ui, sans-serif;
-  --theme-page-bg: #fff7f0;
-  --theme-soft-bg: #ffe4ea;
-  --theme-surface-bg: #ffffff;
-}
-
 @layer base {
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-cream text-ink antialiased;
-  }
-
-  .site-theme {
-    min-height: 100vh;
-    background-color: var(--theme-page-bg);
-    color: #3a0a18;
-    font-family: var(--theme-body-font);
-  }
-
-  .site-theme .font-serif {
-    font-family: var(--theme-heading-font);
-    letter-spacing: -0.02em;
-  }
-
-  .site-theme .theme-page {
-    background-color: var(--theme-page-bg);
-  }
-
-  .site-theme .theme-soft {
-    background-color: var(--theme-soft-bg);
-  }
-
-  .site-theme .theme-surface {
-    background-color: var(--theme-surface-bg);
+    @apply bg-shell font-sans text-plum antialiased;
+    /* Gloock ships one weight; never fake a bold version of it */
+    font-synthesis-weight: none;
   }
 
   ::selection {
-    @apply bg-butter text-ink;
+    @apply bg-bubblegum text-plum;
+  }
+
+  :focus-visible {
+    @apply outline outline-[3px] outline-offset-[3px] outline-tangerine;
   }
 }
 
 @layer components {
-  .section-label {
-    @apply text-[0.7rem] font-bold uppercase tracking-[0.24em] text-brand-600;
-  }
-
-  /* Small rounded tag, like a sticker on a notebook */
-  .sticker {
-    @apply inline-flex items-center gap-1.5 rounded-full border-2 border-ink bg-butter px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-ink shadow-pop-sm;
+  .page-container {
+    @apply mx-auto w-full max-w-[80rem] px-5 sm:px-8 lg:px-[4.5rem];
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink bg-brand-600 px-6 py-3 text-sm font-bold text-white shadow-pop transition-all duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-brand-500 hover:shadow-[6px_6px_0_0_#3a0a18] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none;
+    @apply inline-flex items-center justify-center gap-3 rounded-full bg-plum px-6 py-3.5 text-[1.0625rem] font-semibold text-shell transition-colors hover:bg-mauve;
   }
 
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink bg-white px-6 py-3 text-sm font-bold text-ink shadow-pop transition-all duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-butter hover:shadow-[6px_6px_0_0_#3a0a18] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none;
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-3 rounded-full border-[1.5px] border-plum px-6 py-3.5 text-base font-semibold text-plum transition-colors hover:bg-plum hover:text-shell;
   }
 
-  .btn-accent {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink bg-ink px-6 py-3 text-sm font-bold text-cream shadow-pop transition-all duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-brand-800 hover:shadow-[6px_6px_0_0_#3a0a18] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none;
+  .btn-tangerine {
+    @apply inline-flex items-center justify-center gap-3 rounded-full bg-tangerine px-6 py-3.5 text-base font-semibold text-plum transition-colors hover:bg-bubblegum;
   }
 
-  .section-padding {
-    @apply px-4 py-16 sm:px-6 md:py-24 lg:px-8;
+  /* A postage stamp: white paper whose edge is bitten into by the colour behind it */
+  .stamp {
+    @apply p-3 drop-shadow-stamp;
+    background-color: #ffffff;
+    background-image: radial-gradient(circle, var(--stamp-cut, #fff2ec) 5px, transparent 5.6px);
+    background-size: 14px 14px;
+    background-position: -7px -7px;
   }
 
-  .editorial-panel {
-    @apply rounded-[1.75rem] border-2 border-ink shadow-pop;
-    background-color: var(--theme-surface-bg);
+  .stamp-sm {
+    @apply p-2.5;
+    background-image: radial-gradient(circle, var(--stamp-cut, #fff2ec) 4.5px, transparent 5px);
+    background-size: 12px 12px;
+    background-position: -6px -6px;
   }
 
-  .card {
-    @apply rounded-2xl border-2 border-ink p-6 shadow-pop-sm transition-all hover:-translate-y-0.5 hover:shadow-pop;
-    background-color: var(--theme-surface-bg);
+  /* Love Mode airmail stripe */
+  .airmail {
+    height: 8px;
+    background: repeating-linear-gradient(
+      135deg,
+      #ff6339 0 16px,
+      var(--airmail-gap, #fff2ec) 16px 24px,
+      #ffcafd 24px 40px,
+      var(--airmail-gap, #fff2ec) 40px 48px
+    );
   }
 
-  .theme-field {
-    @apply w-full rounded-xl border-2 border-ink/20 px-4 py-3 text-sm transition-colors focus:border-ink focus:outline-none focus:ring-4 focus:ring-butter/60;
-    background-color: var(--theme-surface-bg);
+  .chip {
+    @apply inline-flex items-center rounded-full border-[1.5px] border-plum px-4 py-2 text-base font-medium;
+  }
+
+  .field {
+    @apply w-full rounded-2xl border-[1.5px] border-plum/25 bg-white px-4 py-3.5 text-[1.0625rem] text-plum transition-colors placeholder:text-mauve/60 focus:border-plum focus:outline-none;
   }
 }

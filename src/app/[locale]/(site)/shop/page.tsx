@@ -1,5 +1,6 @@
 import { draftMode } from "next/headers";
 import { getTranslations } from "next-intl/server";
+import PageHeader from "@/components/postal/PageHeader";
 import { redirect } from "@/i18n/navigation";
 import { getShopCollections, getSiteSettings } from "@/sanity/client";
 
@@ -32,16 +33,10 @@ export default async function ShopPage({
   const collections = cmsCollections.length > 0 ? cmsCollections : defaultCollections;
 
   return (
-    <div className="section-padding">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-12 text-center">
-          <h1 className="font-serif text-4xl font-bold text-stone-900 md:text-5xl">
-            {t("title")}
-          </h1>
-          <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-brand-500" />
-          <p className="mt-4 text-lg text-stone-600">{t("subtitle")}</p>
-          <p className="mt-2 text-xs text-stone-400">{t("affiliateNote")}</p>
-        </div>
+    <div>
+      <PageHeader title={t("title")} subtitle={t("subtitle")} />
+      <div className="page-container pb-24 lg:pb-32">
+        <p className="-mt-6 mb-10 text-[0.9375rem] text-mauve">{t("affiliateNote")}</p>
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {collections.map((item) => (
@@ -50,12 +45,12 @@ export default async function ShopPage({
               href={item.link || "#"}
               target={item.link && item.link !== "#" ? "_blank" : undefined}
               rel={item.link && item.link !== "#" ? "noopener noreferrer" : undefined}
-              className="card group text-center"
+              className="flex flex-col items-center rounded-md bg-white p-7 text-center shadow-postal"
             >
               <div className="text-4xl">{item.emoji}</div>
-              <h3 className="mt-4 font-serif text-lg font-bold text-stone-900 group-hover:text-brand-600">{item.title}</h3>
-              <p className="mt-2 text-sm text-stone-600">{item.description}</p>
-              <span className="mt-4 inline-block text-sm font-semibold text-brand-600">{t("browseCollection")}</span>
+              <h3 className="mt-4 font-display text-2xl leading-tight">{item.title}</h3>
+              <p className="mt-2 text-base text-mauve">{item.description}</p>
+              <span className="mt-4 inline-block text-base font-semibold underline underline-offset-4">{t("browseCollection")}</span>
             </a>
           ))}
         </div>

@@ -2,14 +2,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import { getTranslations } from "next-intl/server";
 import GuestApplicationForm from "@/components/forms/GuestApplicationForm";
-
-function Sparkle({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 0c.9 6.6 4.8 10.9 12 12-7.2 1.1-11.1 5.4-12 12-.9-6.6-4.8-10.9-12-12C7.2 10.9 11.1 6.6 12 0z" />
-    </svg>
-  );
-}
+import { Heart, Microphone } from "@/components/postal/Doodles";
+import PageHeader from "@/components/postal/PageHeader";
 
 export async function generateMetadata(
   { params }: { params: Promise<{ locale: string }> },
@@ -33,44 +27,24 @@ export default async function ApplyPage({
 
   return (
     <div>
-      {/* ===== HEADER ===== */}
-      <section className="theme-soft relative overflow-hidden border-b-2 border-ink">
-        <Sparkle className="absolute right-[10%] top-12 hidden h-10 w-10 text-butter motion-safe:animate-float md:block" />
-        <div className="mx-auto max-w-6xl px-4 pb-14 pt-12 sm:px-6 md:pb-16 md:pt-16 lg:px-8">
-          <span className="sticker motion-safe:animate-rise">
-            <Sparkle className="h-3 w-3" />
-            {t("label")}
-          </span>
-          <h1 className="mt-5 font-display text-[clamp(2.75rem,13vw,3.75rem)] font-extrabold lowercase leading-[0.85] tracking-[-0.04em] text-brand-700 motion-safe:animate-rise [animation-delay:80ms] md:text-8xl">
-            {t("title")}
-          </h1>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink/75 motion-safe:animate-rise [animation-delay:160ms]">
-            {t("subtitle")}
-          </p>
-        </div>
-      </section>
+      <PageHeader title={t("title")} subtitle={t("subtitle")} note={t("label")} />
 
-      <div className="section-padding">
-        <div className="mx-auto grid max-w-6xl items-start gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]">
-          {/* ===== FORM ===== */}
-          <GuestApplicationForm />
+      <div className="page-container grid items-start gap-10 pb-24 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.65fr)] lg:pb-32">
+        <GuestApplicationForm />
 
-          {/* ===== WHAT WE LOOK FOR ===== */}
-          <aside className="rounded-[2rem] border-2 border-ink bg-butter p-8 shadow-pop lg:sticky lg:top-28 lg:rotate-1">
-            <h2 className="font-display text-3xl font-extrabold lowercase tracking-tight text-ink">
-              {t("perksTitle")}
-            </h2>
-            <ul className="mt-6 space-y-4">
-              {perks.map((perk) => (
-                <li key={perk} className="flex gap-3 leading-relaxed text-ink/85">
-                  <Sparkle className="mt-1 h-4 w-4 shrink-0 text-brand-600" />
-                  {perk}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-8 -rotate-2 font-hand text-3xl font-medium text-brand-600">{t("handNote")}</p>
-          </aside>
-        </div>
+        <aside className="flex flex-col gap-6 rounded-[2.25rem] bg-bubblegum p-8 sm:p-10 lg:sticky lg:top-28">
+          <Microphone className="h-14 w-14" />
+          <h2 className="font-display text-[2rem] leading-tight">{t("perksTitle")}</h2>
+          <ul className="flex flex-col gap-4">
+            {perks.map((perk) => (
+              <li key={perk} className="flex gap-3 text-[1.0625rem] leading-relaxed">
+                <Heart className="mt-1 h-4 w-5 shrink-0" />
+                {perk}
+              </li>
+            ))}
+          </ul>
+          <p className="font-hand text-[1.375rem]">{t("handNote")}</p>
+        </aside>
       </div>
     </div>
   );

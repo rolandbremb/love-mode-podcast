@@ -66,7 +66,7 @@ async function sendEmail(heading: string, subject: string, replyTo: string, rows
 
   const filled = rows.filter(([, value]) => value);
   const html = `
-    <div style="font-family:Arial,Helvetica,sans-serif;color:#3a0a18;max-width:600px">
+    <div style="font-family:Arial,Helvetica,sans-serif;color:#2d1530;max-width:600px">
       <h2 style="color:#b01444;margin:0 0 16px">${escapeHtml(heading)}</h2>
       <table cellpadding="8" style="border-collapse:collapse;width:100%">
         ${filled

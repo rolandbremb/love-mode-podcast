@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Inter } from "next/font/google";
+import { Figtree, Gloock, Nothing_You_Could_Do } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -9,7 +9,9 @@ import { routing } from "@/i18n/routing";
 import { siteUrl } from "@/lib/siteUrl";
 import "../globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const display = Gloock({ subsets: ["latin"], weight: "400", variable: "--font-display" });
+const sans = Figtree({ subsets: ["latin"], variable: "--font-sans" });
+const hand = Nothing_You_Could_Do({ subsets: ["latin"], weight: "400", variable: "--font-hand" });
 
 export async function generateMetadata({
   params,
@@ -54,8 +56,8 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale}>
-      <body className={inter.className}>
+    <html lang={locale} className={`${display.variable} ${sans.variable} ${hand.variable}`}>
+      <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
         </NextIntlClientProvider>

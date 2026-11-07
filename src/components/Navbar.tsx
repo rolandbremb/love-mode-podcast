@@ -36,73 +36,71 @@ export default function Navbar({ showShop = true, showProducts = true, showCours
   });
 
   const otherLocale = locale === "en" ? "es" : "en";
+  const switchLabel = otherLocale === "en" ? "Switch to English" : "Cambiar a español";
 
   function switchLocale() {
     router.replace(pathname, { locale: otherLocale });
   }
 
   return (
-    <nav className="sticky top-0 z-50 border-b-2 border-ink bg-cream/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/" className="group flex shrink-0 items-center gap-3">
-          <span className="whitespace-nowrap font-display text-2xl font-extrabold lowercase leading-none tracking-tight text-brand-700 transition-colors group-hover:text-brand-500">
-            Love Mode
-          </span>
-          <span className="hidden -rotate-2 font-hand text-xl font-medium leading-none text-brand-500 xl:inline">
-            {t("tagline")}
-          </span>
+    <nav className="sticky top-0 z-50 bg-shell/90 backdrop-blur-md">
+      <div className="page-container flex h-[5.5rem] items-center justify-between">
+        <Link href="/" className="font-display text-[1.75rem] leading-none tracking-[-0.01em] sm:text-3xl">
+          Love Mode
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-9 md:flex">
           {navItems.map(({ key, href }) => {
             const active = pathname === href;
             return (
               <Link
                 key={key}
                 href={href}
-                className={`whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${
-                  active
-                    ? "bg-brand-100 text-brand-700"
-                    : "text-ink/75 hover:bg-brand-100 hover:text-brand-700"
+                aria-current={active ? "page" : undefined}
+                className={`whitespace-nowrap text-base font-medium underline-offset-[6px] hover:underline ${
+                  active ? "underline decoration-tangerine decoration-2" : ""
                 }`}
               >
                 {t(key)}
               </Link>
             );
           })}
-          <Link href="/collaborate" className="btn-primary ml-3 whitespace-nowrap !px-5 !py-2 !text-sm">
+          <Link href="/collaborate" className="btn-outline !px-5 !py-2.5 whitespace-nowrap">
             {t("workWithUs")}
           </Link>
           <button
+            type="button"
             onClick={switchLocale}
-            className="ml-2 rounded-full border-2 border-ink bg-white px-3 py-1.5 text-xs font-bold text-ink transition-colors hover:bg-butter"
-            aria-label={`Switch to ${otherLocale === "en" ? "English" : "Spanish"}`}
+            aria-label={switchLabel}
+            className="-ml-3 rounded-full px-2 py-1 text-sm font-semibold text-mauve hover:text-plum"
           >
             {otherLocale.toUpperCase()}
           </button>
         </div>
 
-        {/* Mobile: locale toggle + hamburger */}
+        {/* Mobile: locale toggle + menu */}
         <div className="flex items-center gap-2 md:hidden">
           <button
+            type="button"
             onClick={switchLocale}
-            className="rounded-full border-2 border-ink bg-white px-3 py-1 text-xs font-bold text-ink"
-            aria-label={`Switch to ${otherLocale === "en" ? "English" : "Spanish"}`}
+            aria-label={switchLabel}
+            className="h-12 rounded-full px-3 text-sm font-semibold text-mauve"
           >
             {otherLocale.toUpperCase()}
           </button>
           <button
+            type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={t("menu")}
             aria-expanded={mobileOpen}
-            className="rounded-full border-2 border-ink bg-butter p-1.5 text-ink"
+            className="grid h-12 w-12 place-items-center rounded-full border-[1.5px] border-plum"
           >
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 20 20" aria-hidden="true">
               {mobileOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+                <path d="M3 7h14M3 13h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
               )}
             </svg>
           </button>
@@ -111,26 +109,22 @@ export default function Navbar({ showShop = true, showProducts = true, showCours
 
       {/* Mobile nav */}
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
-          mobileOpen ? "max-h-[32rem] border-t-2 border-ink opacity-100" : "max-h-0 opacity-0"
+        className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-out md:hidden ${
+          mobileOpen ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="space-y-1 bg-cream px-4 py-4">
+        <div className="page-container flex flex-col gap-1 pb-6">
           {navItems.map(({ key, href }) => (
             <Link
               key={key}
               href={href}
               onClick={() => setMobileOpen(false)}
-              className="block rounded-2xl px-4 py-3 font-display text-xl font-bold text-ink hover:bg-brand-100 hover:text-brand-700"
+              className="rounded-2xl py-3 font-display text-3xl"
             >
               {t(key)}
             </Link>
           ))}
-          <Link
-            href="/collaborate"
-            onClick={() => setMobileOpen(false)}
-            className="btn-primary mt-3 w-full"
-          >
+          <Link href="/collaborate" onClick={() => setMobileOpen(false)} className="btn-primary mt-4">
             {t("workWithUs")}
           </Link>
         </div>

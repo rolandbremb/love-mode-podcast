@@ -2,95 +2,51 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { draftMode } from "next/headers";
 import { getTranslations } from "next-intl/server";
-import EpisodeCard from "@/components/EpisodeCard";
-import FadeIn from "@/components/FadeIn";
 import { Link } from "@/i18n/navigation";
-import { formatStat } from "@/lib/format";
+import ArrowLink from "@/components/postal/ArrowLink";
+import {
+  BrokenHeart,
+  CoffeeCup,
+  CoffeeDate,
+  Envelope,
+  Heart,
+  LetterAndPlane,
+  Microphone,
+  PaperPlane,
+  Rings,
+  Sailboat,
+  Telephone,
+} from "@/components/postal/Doodles";
+import Postmark, { CancelWaves } from "@/components/postal/Postmark";
 import { localeAlternates } from "@/lib/metadata";
-import { getAllEpisodes } from "@/lib/rss";
+import { getAllEpisodes, type Episode } from "@/lib/rss";
 import { getAboutPage, getSiteSettings } from "@/sanity/client";
 
 export const revalidate = 3600;
 
-/* ---- Platform icon SVGs ---- */
+// Sections for services that aren't connected yet (paid sessions, newsletter)
+// show on preview deployments only, so Andrea can review them before launch.
+const showUpcoming = process.env.VERCEL_ENV !== "production";
 
-function YouTubeIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-    </svg>
-  );
-}
+const stopDoodles = [CoffeeDate, Rings, BrokenHeart, Sailboat];
+const episodeDoodles = [CoffeeDate, PaperPlane, Heart];
+const stampFields = ["bg-peach", "bg-bubblegum", "bg-tangerine"];
 
-function SpotifyIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
-    </svg>
-  );
-}
-
-function ApplePodcastsIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M5.34 0A5.328 5.328 0 000 5.34v13.32A5.328 5.328 0 005.34 24h13.32A5.328 5.328 0 0024 18.66V5.34A5.328 5.328 0 0018.66 0H5.34zm6.525 2.568c4.988 0 8.94 3.756 9.168 8.676a8.737 8.737 0 01-1.878 5.988c-.36.48-.756.912-1.176 1.308-.12.12-.24.228-.372.348-.12.108-.252.228-.384.336l-.072.06-.036.036c-.012 0-.024.012-.036.024-.024.012-.06.036-.096.06a.444.444 0 01-.252.084.39.39 0 01-.18-.048.354.354 0 01-.18-.312c0-.084.024-.156.048-.228.024-.084.06-.156.084-.228.024-.06.036-.132.06-.192l.012-.06c.024-.108.036-.204.06-.312.012-.096.024-.192.024-.288 0-.156-.012-.312-.048-.456a1.404 1.404 0 00-.396-.684 1.57 1.57 0 00-.552-.348 1.608 1.608 0 00-.636-.132c-.072 0-.132 0-.2.012a8.394 8.394 0 00-2.088-.552v-.036c.012-.06.036-.108.06-.168.108-.24.288-.468.504-.66.204-.18.432-.3.648-.42.144-.084.288-.168.42-.264.552-.384.996-.912 1.272-1.536.3-.648.42-1.38.312-2.124-.108-.624-.396-1.2-.828-1.668a3.652 3.652 0 00-1.596-1.008 3.65 3.65 0 00-1.884-.084c-.624.132-1.188.444-1.644.888-.456.456-.768 1.02-.888 1.644a3.628 3.628 0 00.084 1.884c.216.612.588 1.152 1.08 1.56.096.084.204.156.312.228.132.084.264.168.396.264a3.2 3.2 0 01.648.492c.192.204.36.432.468.696.024.06.048.12.06.18v.024a8.352 8.352 0 00-2.016.564l-.048-.012a1.62 1.62 0 00-.636.132 1.584 1.584 0 00-.552.348 1.404 1.404 0 00-.396.684c-.036.144-.048.3-.048.456 0 .096.012.192.024.288.024.108.036.204.06.312l.012.06c.024.06.036.12.06.192.024.072.06.144.084.228.024.072.048.144.048.228a.354.354 0 01-.18.312.39.39 0 01-.18.048.444.444 0 01-.252-.084.813.813 0 01-.096-.06c-.012-.012-.024-.024-.036-.024l-.036-.036-.072-.06c-.132-.108-.264-.228-.384-.336a10.017 10.017 0 01-.372-.348 9.45 9.45 0 01-1.176-1.308 8.737 8.737 0 01-1.878-5.988c.228-4.92 4.18-8.676 9.168-8.676z" />
-    </svg>
-  );
-}
-
-function Sparkle({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 0c.9 6.6 4.8 10.9 12 12-7.2 1.1-11.1 5.4-12 12-.9-6.6-4.8-10.9-12-12C7.2 10.9 11.1 6.6 12 0z" />
-    </svg>
-  );
-}
-
-function Heart({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.1 4 6.3 4c2.4 0 4 1.4 5.7 3.4C13.7 5.4 15.3 4 17.7 4 21.9 4 23.7 8.4 22 11.7 19.5 16.4 12 21 12 21z" />
-    </svg>
-  );
-}
-
-function ArrowRight({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-    </svg>
-  );
-}
-
-function OutlineIcon({ d, className }: { d: string; className?: string }) {
-  return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d={d} />
-    </svg>
-  );
-}
-
-// Microphone, sparkles, video camera, tag — one per brand offer
-const offerIcons = [
-  "M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z",
-  "M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z",
-  "M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z",
-  "M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3zM6 6h.008v.008H6V6z",
+// Desktop positions for the four journey stamps along the winding route
+const stopPlacement = [
+  "lg:left-0 lg:top-0 lg:-rotate-2",
+  "lg:left-[318px] lg:top-[70px] lg:rotate-[1.5deg]",
+  "lg:left-0 lg:top-[270px] lg:rotate-1",
+  "lg:left-[318px] lg:top-[340px] lg:-rotate-[1.5deg]",
 ];
+const postmarkTilt = ["rotate-[10deg]", "-rotate-[8deg]", "rotate-6", "-rotate-[10deg]"];
 
-const offerStyles = ["bg-cream -rotate-2", "bg-butter rotate-1", "bg-blush rotate-1", "bg-white -rotate-1"];
-
-const platformIcons: Record<string, React.ComponentType<{ className?: string }>> = {
-  youtube: YouTubeIcon,
-  spotify: SpotifyIcon,
-  apple: ApplePodcastsIcon,
-};
-
-const platformLabels: Record<string, string> = {
-  youtube: "YouTube",
-  spotify: "Spotify",
-  apple: "Apple Podcasts",
-};
+/* "41. Volver al dating | Gabriela Zuluaga" -> number, title and guest */
+function splitEpisodeTitle(episode: Episode) {
+  const match = episode.title.match(/^(\d+)\.?\s*(.*)$/);
+  const [rest, guest] = (match ? match[2] : episode.title).split(/\s+\|\s+/);
+  return { number: match?.[1], title: rest.trim(), guest: guest?.trim() };
+}
 
 export async function generateMetadata({
   params,
@@ -117,447 +73,398 @@ export default async function Home({
   const allEpisodes = await getAllEpisodes(settings?.podcastRssUrl);
   const topEpisodes = [...allEpisodes].sort((a, b) => b.views - a.views).slice(0, 3);
 
-  const heroTagline = settings?.heroTagline ?? "The Podcast";
   const heroTitle = settings?.heroTitle ?? "Love Mode";
-  const heroDescription =
-    settings?.heroDescription ??
-    "Real conversations about love, dating, and building relationships that actually last. No sugarcoating, no games — just honest talk and real advice.";
-  const episodeSchedule = settings?.episodeSchedule ?? "New episodes every Friday";
-  const platforms = settings?.platformLinks ?? [];
-  const aboutTitle = settings?.aboutTitle ?? "What is Love Mode?";
-  const savedParagraphs = (settings?.aboutParagraphs ?? []).filter((p) => p.trim());
-  const aboutParagraphs = savedParagraphs.length
-    ? savedParagraphs
-    : [
-        "Love Mode is more than a podcast — it's a movement. We dive deep into the messy, beautiful, complicated world of modern love and relationships.",
-        "Every episode brings raw, unfiltered conversations with real people and experts who get it.",
-      ];
-  const buyMeCoffeeUrl = settings?.buyMeCoffeeUrl ?? "#";
-  const supportTarget = buyMeCoffeeUrl !== "#" ? "_blank" : undefined;
-  const supportRel =
-    buyMeCoffeeUrl !== "#" ? "noopener noreferrer" : undefined;
+  const heroTagline = settings?.heroTagline ?? "Your Love and Dating Bestie";
+  const heroDescription = settings?.heroDescription ?? "";
+  const aboutTitle = settings?.aboutTitle ?? "";
+  const aboutParagraphs = (settings?.aboutParagraphs ?? []).filter((p) => p.trim());
+  const buyMeCoffeeUrl = settings?.buyMeCoffeeUrl;
 
-  const hostName = aboutData?.hostName ?? "Your Host";
+  const hostName = aboutData?.hostName ?? "Andrea Moreno";
+  const hostFirstName = hostName.split(" ")[0];
   const hostBio = (aboutData?.hostBio ?? []).filter((p) => p.trim()).slice(0, 2);
   const hostPhoto = aboutData?.hostPhoto?.asset?.url ?? "/images/host.jpg";
+
   const topics = t.raw("topics") as string[];
-  const brandOffers = t.raw("brandOffers") as { title: string; description: string }[];
-  const brandsMore = t.raw("brandsMore") as string[];
+  const stops = t.raw("journeyStops") as { title: string; description: string; search: string }[];
   const episodesIntro = t.raw("episodesIntro") as string[];
   const guestParagraphs = t.raw("guestParagraphs") as string[];
+  const newsOptions = t.raw("newsOptions") as string[];
 
-  const totalViews = allEpisodes.reduce((sum, episode) => sum + (episode.views || 0), 0);
-  const stats = [
-    allEpisodes.length > 0 && { value: String(allEpisodes.length), label: t("statEpisodes") },
-    totalViews > 0 && { value: formatStat(totalViews), label: t("statViews") },
-    platforms.length > 0 && { value: String(platforms.length), label: t("statPlatforms") },
-  ].filter(Boolean) as { value: string; label: string }[];
+  // The welcome reads like a letter: questions first, then the reply
+  const [welcomeQuestions, ...welcomeReply] = aboutParagraphs;
+  const welcomeClosing = welcomeReply.length > 1 ? welcomeReply.pop() : undefined;
 
   return (
     <>
-      {/* ===== SOFT POP HERO ===== */}
-      <section className="theme-soft relative overflow-hidden">
-        <Sparkle className="absolute left-[30%] top-28 hidden h-7 w-7 text-brand-400 motion-safe:animate-float md:block" />
-        <Sparkle className="absolute right-[46%] top-24 hidden h-5 w-5 text-butter lg:block" />
-        <Sparkle className="absolute bottom-16 left-[42%] hidden h-9 w-9 text-butter motion-safe:animate-float lg:block" />
-
-        <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 pb-20 pt-10 sm:px-6 md:pt-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-10 lg:px-8 lg:pb-24">
-          {/* Left — headline + CTAs */}
-          <div>
-            <div className="motion-safe:animate-rise">
-              <span className="sticker">
-                <Sparkle className="h-3 w-3" />
-                {heroTagline}
-              </span>
+      {/* ===== HERO: a stamp, its postmark and the cancel waves ===== */}
+      <section className="relative overflow-hidden">
+        <div className="page-container grid items-center gap-12 pb-16 pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-8 lg:pb-24 lg:pt-14">
+          <div className="relative z-10 flex flex-col gap-6 motion-safe:animate-rise">
+            <p className="font-hand text-[1.75rem] leading-tight sm:text-[2.125rem]">{t("dearYou")}</p>
+            <h1 className="max-w-[9ch] font-display text-[clamp(5.5rem,22vw,10.5rem)] font-normal leading-[0.86] tracking-[-0.035em]">
+              {heroTitle}
+            </h1>
+            <p className="mt-1 text-lg font-semibold sm:text-[1.3125rem]">
+              {t("heroBy", { tagline: heroTagline, name: hostName })}
+            </p>
+            {heroDescription && (
+              <p className="max-w-[30rem] text-lg leading-relaxed text-mauve sm:text-[1.1875rem]">{heroDescription}</p>
+            )}
+            <div className="mt-1 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6">
+              <ArrowLink href="/episodes">{t("listenNow")}</ArrowLink>
+              <span className="whitespace-nowrap font-hand text-[1.1875rem]">{t("heroHome")}</span>
             </div>
+          </div>
 
-            <div className="motion-safe:animate-rise [animation-delay:80ms]">
-              <h1 className="mt-6 font-display text-[clamp(4.25rem,14vw,9.5rem)] font-extrabold lowercase leading-[0.82] tracking-[-0.045em] text-brand-700">
-                {heroTitle}
-              </h1>
-              <svg
-                className="mt-3 h-4 w-56 text-brand-400 md:w-72"
-                viewBox="0 0 280 16"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M3 9c20-8 40 8 60 0s40-8 60 0 40 8 60 0 40-8 54 0"
-                  stroke="currentColor"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                />
-              </svg>
-              <p className="mt-4 text-sm font-bold uppercase tracking-[0.2em] text-ink/70">
-                {t("byline")}
-              </p>
-            </div>
-
-            <div className="motion-safe:animate-rise [animation-delay:160ms]">
-              <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/80">
-                {heroDescription}
-              </p>
-              <p className="mt-4 -rotate-2 font-hand text-2xl font-medium text-brand-500 md:text-3xl">
-                {t("heroHome")}
-              </p>
-            </div>
-
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row motion-safe:animate-rise [animation-delay:240ms]">
-              <Link href="/episodes" className="btn-primary !px-7 !py-3.5 !text-base">
-                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M8 5.5v13a1 1 0 001.5.86l10.5-6.5a1 1 0 000-1.72L9.5 4.64A1 1 0 008 5.5z" />
-                </svg>
-                {t("listenNow")}
-              </Link>
-            </div>
-
-            {platforms.length > 0 && (
-              <div className="mt-10 flex items-center gap-4 motion-safe:animate-rise [animation-delay:320ms]">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-ink/60">
-                  {t("listenOn")}
-                </p>
-                <div className="flex items-center gap-2.5">
-                  {platforms.map(({ platform, url }) => {
-                    const Icon = platformIcons[platform];
-                    if (!Icon) return null;
-                    return (
-                      <a
-                        key={platform}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={platformLabels[platform] ?? platform}
-                        className="grid h-11 w-11 place-items-center rounded-full border-2 border-ink bg-white text-ink shadow-pop-sm transition-all hover:-translate-y-0.5 hover:bg-butter"
-                      >
-                        <Icon className="h-5 w-5" />
-                      </a>
-                    );
-                  })}
+          <div className="relative mx-auto w-full max-w-[25.5rem] pb-10 lg:mr-10 lg:max-w-[26rem]">
+            <CancelWaves className="absolute -left-48 top-24 hidden h-40 w-64 lg:block" />
+            <div className="stamp relative rotate-[3deg]">
+              <div className="flex flex-col gap-3 bg-bubblegum p-3.5">
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <Image
+                    src="/images/hero.jpg"
+                    alt={t("heroPhotoAlt")}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 26rem, 90vw"
+                    className="object-cover object-[58%_center]"
+                  />
+                </div>
+                <div className="flex items-baseline justify-between">
+                  <span className="font-display text-2xl leading-none">Love Mode</span>
+                  <span className="text-sm font-semibold">{t("stampFrom")}</span>
                 </div>
               </div>
-            )}
-          </div>
-
-          {/* Right — arch photo with stickers */}
-          <div className="relative mx-auto w-full max-w-sm sm:max-w-md lg:mr-4 motion-safe:animate-rise [animation-delay:120ms]">
-            <div
-              className="absolute inset-0 translate-x-4 translate-y-4 rounded-b-[2.5rem] rounded-t-full border-2 border-ink bg-butter"
-              aria-hidden="true"
+            </div>
+            <Postmark
+              id="hero-postmark"
+              text={t("postmark")}
+              className="absolute -left-6 -top-10 h-32 w-32 -rotate-12 sm:-left-14 sm:h-[10.5rem] sm:w-[10.5rem]"
             />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-b-[2.5rem] rounded-t-full border-2 border-ink bg-brand-200">
-              <Image
-                src="/images/hero.jpg"
-                alt="Love Mode Podcast studio"
-                fill
-                priority
-                sizes="(min-width: 1024px) 28rem, 90vw"
-                className="object-cover object-[52%_center]"
-              />
-            </div>
-
-            {/* Spinning schedule sticker */}
-            <div className="absolute -bottom-6 -left-2 grid h-32 w-32 place-items-center rounded-full border-2 border-ink bg-brand-600 shadow-pop sm:-left-10 sm:h-36 sm:w-36">
-              <svg
-                className="absolute inset-0 h-full w-full motion-safe:animate-spin-slow"
-                viewBox="0 0 120 120"
-                aria-hidden="true"
-              >
-                <defs>
-                  <path id="schedule-circle" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0" />
-                </defs>
-                <text className="fill-cream text-[10px] font-bold uppercase tracking-[0.18em]">
-                  <textPath href="#schedule-circle" textLength="272" lengthAdjust="spacing">
-                    {`${episodeSchedule} ✶`}
-                  </textPath>
-                </text>
-              </svg>
-              <Heart className="h-9 w-9 text-butter" />
-              <span className="sr-only">{episodeSchedule}</span>
-            </div>
-
-            {/* Note next to the photo */}
-            <div className="absolute right-2 top-12 max-w-[14rem] rotate-6 sm:-right-3 motion-safe:animate-float">
-              <span className="sticker bg-white normal-case tracking-normal">
-                {t("photoNote")}
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== TOPIC MARQUEE ===== */}
-      <div className="overflow-hidden bg-[linear-gradient(to_bottom,var(--theme-soft-bg)_50%,var(--theme-page-bg)_50%)] py-6">
-        <div className="-mx-4 -rotate-1 border-y-2 border-ink bg-brand-600 py-3 text-cream">
-          <div className="flex w-max motion-safe:animate-marquee">
-            {[0, 1].map((copy) => (
-              <ul key={copy} className="flex shrink-0 items-center" aria-hidden={copy === 1}>
-                {topics.map((topic) => (
-                  <li key={topic} className="flex items-center">
-                    <span className="px-6 font-display text-2xl font-extrabold lowercase tracking-tight md:text-3xl">
-                      {topic}
-                    </span>
-                    <Sparkle className="h-5 w-5 text-butter" />
-                  </li>
-                ))}
-              </ul>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ===== ABOUT ===== */}
-      <section className="section-padding theme-page">
-        <FadeIn className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
-          <div>
-            <h2 className="font-display text-5xl font-extrabold lowercase leading-[0.9] tracking-tight text-brand-700 md:text-7xl">
-              {aboutTitle}
-            </h2>
-            <p className="mt-6 inline-flex -rotate-2 items-center gap-2 font-hand text-2xl font-medium text-brand-500 md:text-3xl">
-              {t("aboutSpoiler")}
-              <svg className="h-6 w-12 shrink-0" viewBox="0 0 60 30" fill="none" aria-hidden="true">
-                <path d="M2 22c14-14 32-18 52-8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                <path d="M45 6l9 8-11 4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+            <p className="absolute -right-2 bottom-0 -rotate-[4deg] rounded-full bg-plum px-6 py-3 font-hand text-[1.0625rem] text-bubblegum sm:-right-12 sm:text-[1.3125rem]">
+              {t("photoNote")}
             </p>
           </div>
-
-          <div className="space-y-6 lg:pt-3">
-            {aboutParagraphs.map((paragraph, index) => (
-              <p
-                key={index}
-                className={
-                  index === 0
-                    ? "font-display text-2xl font-semibold leading-snug tracking-tight text-ink md:text-3xl"
-                    : "text-lg leading-relaxed text-ink/75"
-                }
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </FadeIn>
+        </div>
       </section>
 
-      {/* ===== MOST VIEWED EPISODES ===== */}
-      <section className="section-padding theme-soft">
-        <div className="mx-auto max-w-7xl">
-          <FadeIn className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-            <div>
-              <span className="sticker">
-                <Sparkle className="h-3 w-3" />
-                {t("mostViewedLabel")}
-              </span>
-              <h2 className="mt-5 font-display text-4xl font-extrabold lowercase leading-[0.95] tracking-tight text-ink md:text-6xl">
+      {/* ===== TOPICS ===== */}
+      <ul className="page-container flex flex-wrap gap-2.5" aria-label={t("topicsLabel")}>
+        {topics.map((topic, index) => (
+          <li
+            key={topic}
+            className={index === topics.length - 1 ? "chip border-tangerine bg-tangerine font-semibold" : "chip"}
+          >
+            {topic}
+          </li>
+        ))}
+      </ul>
+
+      {/* ===== WELCOME, written like a letter ===== */}
+      {aboutTitle && (
+        <section className="page-container grid gap-12 py-24 lg:grid-cols-[5fr_7fr] lg:gap-[5.5rem] lg:py-32">
+          <div className="flex flex-col gap-10">
+            <h2 className="font-display text-[clamp(2.75rem,6vw,4rem)] leading-none tracking-[-0.02em]">{aboutTitle}</h2>
+            <LetterAndPlane className="hidden h-[12.5rem] w-80 lg:block" />
+          </div>
+          <div className="flex max-w-[40rem] flex-col gap-6">
+            {welcomeQuestions && (
+              <p className="font-display text-[1.5rem] leading-[1.4] sm:text-[1.6875rem]">{welcomeQuestions}</p>
+            )}
+            {welcomeReply.map((paragraph) => {
+              const gotYou = paragraph.match(/^(I got ya!)\s*(.*)$/);
+              return (
+                <p key={paragraph} className="text-lg leading-relaxed text-mauve sm:text-[1.1875rem]">
+                  {gotYou ? (
+                    <>
+                      <span className="font-hand text-2xl text-plum">{gotYou[1]}</span> {gotYou[2]}
+                    </>
+                  ) : (
+                    paragraph
+                  )}
+                </p>
+              );
+            })}
+            {welcomeClosing && <p className="text-lg font-semibold leading-relaxed sm:text-[1.1875rem]">{welcomeClosing}</p>}
+          </div>
+        </section>
+      )}
+
+      {/* ===== THE LOVE JOURNEY: four stops along a route ===== */}
+      <section className="page-container pb-24 lg:pb-32">
+        <div className="grid items-center gap-12 rounded-[2.25rem] bg-bubblegum px-6 py-12 [--stamp-cut:#ffcafd] sm:px-10 lg:grid-cols-[23.75rem_minmax(0,1fr)] lg:gap-14 lg:py-[4.5rem] lg:pl-[4.5rem] lg:pr-16">
+          <div className="flex flex-col gap-5">
+            <h2 className="font-display text-[clamp(2.5rem,5vw,3.5rem)] leading-[1.02] tracking-[-0.02em]">{t("journeyTitle")}</h2>
+            <p className="text-lg leading-relaxed">{t("journeyIntro")}</p>
+            <p className="mt-2 font-hand text-[1.1875rem] leading-normal">{t("journeyNote")}</p>
+          </div>
+
+          <div className="relative lg:h-[35rem]">
+            <svg className="absolute inset-0 hidden h-full w-[36.25rem] lg:block" viewBox="0 0 580 560" aria-hidden="true">
+              <path
+                d="M130 120C270 30 360 110 450 190S270 280 130 380 340 540 450 450"
+                fill="none"
+                stroke="#2d1530"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeDasharray="2 9"
+              />
+            </svg>
+            <ol className="flex flex-col gap-8 sm:grid sm:grid-cols-2 lg:block">
+              {stops.map((stop, index) => {
+                const Doodle = stopDoodles[index];
+                return (
+                  <li key={stop.title} className={`relative lg:absolute lg:w-[16.375rem] ${stopPlacement[index]}`}>
+                    <Link href={`/episodes?q=${encodeURIComponent(stop.search)}`} className="stamp stamp-sm block">
+                      <span className="flex flex-col gap-2 bg-shell px-[1.375rem] pb-6 pt-[1.375rem]">
+                        <Doodle className="h-10 w-14" />
+                        <span className="mt-1.5 whitespace-nowrap font-display text-[1.4375rem] leading-tight">{stop.title}</span>
+                        <span className="text-base leading-normal text-mauve">{stop.description}</span>
+                      </span>
+                    </Link>
+                    <span
+                      className={`absolute -right-3.5 -top-4 grid h-[2.875rem] w-[2.875rem] place-items-center rounded-full border-2 border-tangerine bg-shell font-display text-[1.375rem] text-plum ${postmarkTilt[index]}`}
+                    >
+                      <span className="sr-only">{t("stopLabel")} </span>
+                      {index + 1}
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== FEATURED EPISODES AS STAMPS ===== */}
+      {topEpisodes.length > 0 && (
+        <section className="page-container flex flex-col gap-12 pb-24 lg:pb-32">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="flex max-w-[42.5rem] flex-col gap-4">
+              <h2 className="font-display text-[clamp(2.5rem,5vw,3.75rem)] leading-[1.02] tracking-[-0.02em]">
                 {t("mostViewedEpisodes")}
               </h2>
-              <div className="mt-6 max-w-2xl space-y-4">
-                {episodesIntro.map((paragraph, index) => (
-                  <p
-                    key={index}
-                    className={
-                      index === 0
-                        ? "font-display text-2xl font-semibold tracking-tight text-ink"
-                        : "text-lg leading-relaxed text-ink/75"
-                    }
-                  >
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-              <p className="mt-5 -rotate-1 font-hand text-2xl font-medium text-brand-500 md:text-3xl">
-                {t("episodesNote")}
+              <p className="text-lg leading-relaxed text-mauve sm:text-[1.1875rem]">
+                {[episodesIntro[0], episodesIntro[episodesIntro.length - 1]].join(" ")}
               </p>
             </div>
+            <Link href="/episodes" className="shrink-0 text-[1.0625rem] font-semibold underline underline-offset-[5px]">
+              {t("viewAllEpisodes")}
+            </Link>
+          </div>
 
-            {topEpisodes.length > 0 && (
-              <Link href="/episodes" className="btn-secondary self-start md:self-auto">
-                {t("viewAllEpisodes")}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            )}
-          </FadeIn>
+          <div className="grid items-start gap-9 md:grid-cols-3">
+            {topEpisodes.map((episode, index) => {
+              const { number, title, guest } = splitEpisodeTitle(episode);
+              const Doodle = episodeDoodles[index % episodeDoodles.length];
+              const tilt = ["-rotate-[1.5deg]", "rotate-1 md:translate-y-5", "-rotate-[0.5deg]"][index % 3];
+              return (
+                <a
+                  key={episode.link}
+                  href={episode.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`stamp block ${tilt}`}
+                >
+                  <span className={`flex min-h-[22rem] flex-col gap-3.5 p-7 ${stampFields[index % stampFields.length]}`}>
+                    <span className="flex items-start justify-between">
+                      {number && <span className="font-display text-7xl leading-[0.8]">{number}</span>}
+                      <Doodle className="h-12 w-16" />
+                    </span>
+                    <span className="mt-auto font-display text-[1.75rem] leading-[1.15]">{title}</span>
+                    {guest && (
+                      <span className={index % 3 === 2 ? "text-base" : "text-base text-mauve"}>
+                        {t("withGuest", { guest })}
+                      </span>
+                    )}
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+          <p className="mt-4 flex items-center gap-3.5 font-hand text-2xl">
+            <CoffeeCup className="h-9 w-12 shrink-0" />
+            {t("episodesNote")}
+          </p>
+        </section>
+      )}
 
-          {topEpisodes.length > 0 ? (
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {topEpisodes.map((episode, index) => (
-                <FadeIn key={episode.link} delay={index * 0.12}>
-                  <EpisodeCard episode={episode} rank={index + 1} />
-                </FadeIn>
-              ))}
+      {/* ===== ¿LO HABLAMOS? (preview only until booking and payments are connected) ===== */}
+      {showUpcoming && (
+        <section className="bg-plum py-24 text-shell lg:py-32">
+          <div className="page-container flex flex-col gap-14">
+            <div className="grid gap-8 lg:grid-cols-[5fr_7fr] lg:items-end lg:gap-[5.5rem]">
+              <h2 className="font-display text-[clamp(3.5rem,8vw,6rem)] leading-[0.92] tracking-[-0.03em] text-bubblegum">
+                {t("talkTitle")}
+              </h2>
+              <p className="max-w-[37.5rem] text-lg leading-relaxed text-shell/85 sm:text-[1.1875rem]">{t("talkIntro")}</p>
             </div>
-          ) : (
-            <div className="editorial-panel border-dashed p-12 text-center">
-              <p className="text-lg font-semibold text-ink/70">{t("episodesComingSoon")}</p>
-              <p className="mt-2 text-sm text-ink/50">{t("setRssUrl")}</p>
+            <div className="grid gap-8 md:grid-cols-2">
+              <div className="grid gap-8 rounded-md bg-shell p-8 text-plum sm:grid-cols-[1fr_7.5rem] sm:p-11">
+                <div className="flex flex-col gap-4">
+                  <Telephone className="h-14 w-14" />
+                  <h3 className="font-display text-[2.25rem] leading-[1.08]">{t("callTitle")}</h3>
+                  <p className="text-[1.0625rem] leading-relaxed text-mauve">{t("callBody")}</p>
+                  <a href="#" className="btn-primary mt-auto self-start !text-base">{t("callCta")}</a>
+                </div>
+                <div className="flex items-center justify-between gap-4 sm:flex-col sm:items-end sm:justify-start sm:border-l-[1.5px] sm:border-plum/15 sm:pl-6">
+                  <span className="stamp stamp-sm block w-24 rotate-[4deg] [--stamp-cut:#fff2ec]">
+                    <span className="flex h-[6.25rem] flex-col items-center justify-center bg-tangerine">
+                      <span className="font-display text-[2.125rem] leading-none">30</span>
+                      <span className="text-xs font-bold">min</span>
+                    </span>
+                  </span>
+                  <span className="font-display text-4xl">{t("callPrice")}</span>
+                </div>
+              </div>
+              <div className="relative grid gap-8 overflow-hidden rounded-md bg-bubblegum p-8 text-plum sm:grid-cols-[1fr_7.5rem] sm:p-11">
+                <svg className="absolute inset-x-0 top-0 h-[4.75rem] w-full" viewBox="0 0 600 76" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M0 0L300 72 600 0" fill="none" stroke="rgba(45,21,48,0.28)" strokeWidth="1.5" />
+                </svg>
+                <div className="relative flex flex-col gap-4 pt-5">
+                  <h3 className="font-display text-[2.25rem] leading-[1.08]">{t("emailTitle")}</h3>
+                  <p className="text-[1.0625rem] leading-relaxed">{t("emailBody")}</p>
+                  <a href="#" className="btn-primary mt-auto self-start !text-base">{t("emailCta")}</a>
+                </div>
+                <div className="relative flex items-center justify-between gap-4 sm:flex-col sm:items-end sm:justify-end">
+                  <svg className="h-20 w-20" viewBox="0 0 104 104" aria-hidden="true">
+                    <path d="M52 4c6 0 8 5 12 6s9-2 12 2-2 9 0 13 7 6 4 11-8 4-10 8-1 10-6 12-9-2-13-1-7 6-12 3-2-8-6-10-10-2-12-7 4-8 3-12-7-6-4-11 9-3 12-5 3-9 8-12 7 4 10 3z" fill="#ff6339" />
+                    <path d="M52 70C40 61 32 55 32 46c0-6 4-10 10-10 4 0 8 2 10 6 2-4 6-6 10-6 6 0 10 4 10 10 0 9-8 15-20 24z" fill="none" stroke="#2d1530" strokeWidth="3" strokeLinejoin="round" />
+                  </svg>
+                  <span className="font-display text-4xl">{t("emailPrice")}</span>
+                </div>
+              </div>
             </div>
-          )}
+            <p className="max-w-[51rem] text-[0.9375rem] leading-relaxed text-shell/70">{t("talkDisclaimer")}</p>
+          </div>
+        </section>
+      )}
+
+      {/* ===== HOST ===== */}
+      <section className="page-container grid items-center gap-14 py-24 lg:grid-cols-[5fr_7fr] lg:gap-24 lg:py-32">
+        <div className="relative mx-auto w-full max-w-[24.5rem] lg:mx-0">
+          <div className="relative aspect-[39/51] overflow-hidden rounded-b-lg rounded-t-full bg-bubblegum">
+            <Image src={hostPhoto} alt={hostName} fill sizes="(min-width: 1024px) 24.5rem, 90vw" className="object-cover" />
+          </div>
+          <Postmark
+            id="host-postmark"
+            text={t("hostPostmark")}
+            color="#2d1530"
+            textColor="#2d1530"
+            className="absolute -bottom-6 right-0 h-32 w-32 rotate-[10deg] sm:-right-10 sm:h-36 sm:w-36"
+          >
+            <g transform="translate(50 46) scale(0.5)" fill="none" stroke="#2d1530" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M26 50c-2 22 10 34 24 34s26-12 24-34c-4-10-44-10-48 0z" />
+              <path d="M30 46c-8-5-13-14-10-23 9 0 17 7 20 16M70 46c8-5 13-14 10-23-9 0-17 7-20 16" />
+              <circle cx="40" cy="57" r="3.5" />
+              <circle cx="60" cy="57" r="3.5" />
+              <path d="M44 66c3-3 9-3 12 0-3 4-9 4-12 0z" />
+            </g>
+          </Postmark>
+        </div>
+        <div className="flex flex-col gap-5">
+          <h2 className="font-display text-[clamp(3.25rem,7vw,5.25rem)] leading-[0.95] tracking-[-0.03em]">
+            {t("hostTitle", { name: hostFirstName })}
+          </h2>
+          {hostBio[0] && <p className="text-[1.3125rem] font-semibold">{hostBio[0]}</p>}
+          {hostBio[1] && <p className="max-w-[36rem] text-lg leading-relaxed text-mauve sm:text-[1.1875rem]">{hostBio[1]}</p>}
+          <div className="mt-2 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7">
+            <Link href="/about" className="btn-outline">{t("meetHostCta")}</Link>
+            <span className="font-hand text-[1.375rem]">{t("hostNote")}</span>
+          </div>
         </div>
       </section>
 
-      {/* ===== MEET YOUR HOST ===== */}
-      <section className="section-padding theme-page overflow-hidden">
-        <FadeIn className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
-          <div className="relative mx-auto w-full max-w-xs md:max-w-sm">
-            <div
-              className="absolute inset-0 rotate-3 rounded-[2.5rem] border-2 border-ink bg-brand-400"
-              aria-hidden="true"
-            />
-            <div className="relative aspect-[4/5] -rotate-2 overflow-hidden rounded-[2.5rem] border-2 border-ink bg-brand-200">
-              <Image
-                src={hostPhoto}
-                alt={hostName}
-                fill
-                sizes="(min-width: 768px) 24rem, 80vw"
-                className="object-cover"
-              />
-            </div>
-            <span className="sticker absolute -bottom-4 left-1/2 -translate-x-1/2 -rotate-3 whitespace-nowrap">
-              {t("meetYourHost")}
-            </span>
+      {/* ===== SHARE YOUR STORY: a postcard ===== */}
+      <section className="page-container pb-24 lg:pb-32">
+        <div className="relative grid gap-12 overflow-hidden rounded-md bg-white px-6 pb-12 pt-14 shadow-postal [--stamp-cut:#ffffff] sm:px-12 lg:grid-cols-[1fr_1.5px_1fr] lg:gap-14 lg:px-14 lg:pb-14 lg:pt-16">
+          <div className="airmail absolute inset-x-0 top-0 [--airmail-gap:#ffffff]" aria-hidden="true" />
+          <div className="flex flex-col gap-5">
+            <h2 className="font-display text-[clamp(2.5rem,5vw,3.375rem)] leading-[1.02] tracking-[-0.02em]">{t("wantToBeAGuest")}</h2>
+            <p className="text-lg leading-relaxed text-mauve">{guestParagraphs.join(" ")}</p>
+            <ArrowLink href="/apply" className="mt-2 self-start">{t("applyNow")}</ArrowLink>
           </div>
-
-          <div className="text-center md:text-left">
-            <p className="-rotate-2 font-hand text-3xl font-medium text-brand-500 md:text-4xl">
-              {t("hostHello")}
-            </p>
-            <h2 className="mt-1 font-display text-5xl font-extrabold lowercase leading-[0.9] tracking-tight text-brand-700 md:text-7xl">
-              {hostName}
-            </h2>
-            {hostBio.map((paragraph, index) => (
-              <p
-                key={index}
-                className={`max-w-xl text-lg leading-relaxed text-ink/80 md:mx-0 ${index === 0 ? "mt-6" : "mt-4"}`}
-              >
-                {paragraph}
-              </p>
-            ))}
-            <Link href="/about" className="btn-primary mt-8">
-              {t("meetHostCta")}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <p className="mt-6 -rotate-2 font-hand text-2xl font-medium text-brand-500 md:text-3xl">
-              {t("hostNote")}
-            </p>
-          </div>
-        </FadeIn>
-      </section>
-
-      {/* ===== SHARE YOUR STORY ===== */}
-      <section className="section-padding theme-soft">
-        <FadeIn className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border-2 border-ink bg-butter p-8 shadow-pop-lg sm:p-10 lg:p-14">
-          <Sparkle className="absolute right-8 top-8 h-10 w-10 text-brand-500 motion-safe:animate-spin-slow" />
-          <span className="sticker bg-white">{t("guestLabel")}</span>
-          <h2 className="mt-6 max-w-2xl font-display text-4xl font-extrabold lowercase leading-[0.95] tracking-tight text-ink md:text-6xl">
-            {t("wantToBeAGuest")}
-          </h2>
-          <div className="mt-6 max-w-2xl space-y-4">
-            {guestParagraphs.map((paragraph, index) => (
-              <p
-                key={index}
-                className={
-                  index === 0
-                    ? "font-display text-2xl font-semibold tracking-tight text-ink"
-                    : "text-lg leading-relaxed text-ink/80"
-                }
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-          <Link href="/apply" className="btn-primary mt-8">
-            {t("applyNow")}
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink/70">{t("guestNote")}</p>
-        </FadeIn>
-      </section>
-
-      {/* ===== WORK WITH LOVE MODE (BRANDS) ===== */}
-      <section className="section-padding theme-page">
-        <FadeIn className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border-2 border-ink bg-brand-600 p-8 text-cream shadow-pop-lg sm:p-10 lg:p-14">
-          <Sparkle className="absolute right-10 top-10 hidden h-10 w-10 text-butter motion-safe:animate-spin-slow lg:block" />
-          <Sparkle className="absolute bottom-10 left-[46%] hidden h-6 w-6 text-brand-300 lg:block" />
-
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
-            <div>
-              <span className="sticker">
-                <Sparkle className="h-3 w-3" />
-                {t("brandsLabel")}
+          <div className="hidden bg-plum/15 lg:block" />
+          <div className="relative flex flex-col justify-end pt-40">
+            <span className="stamp stamp-sm absolute right-0 top-0 block w-[6.875rem] rotate-[4deg] [--stamp-cut:#ffffff]">
+              <span className="grid h-[6.75rem] place-items-center bg-plum">
+                <Microphone className="h-14 w-14" stroke="#ffcafd" />
               </span>
-              <h2 className="mt-6 font-display text-4xl font-extrabold lowercase leading-[0.92] tracking-tight md:text-6xl">
-                {t("brandsTitle")}
-              </h2>
-              <div className="mt-6 max-w-lg space-y-4 text-lg leading-relaxed text-cream/85">
-                <p>{t("brandsDescription")}</p>
-                {brandsMore.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
-              </div>
-
-              {stats.length > 0 && (
-                <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t-2 border-cream/25 pt-8">
-                  {stats.map(({ value, label }) => (
-                    <div key={label}>
-                      <dt className="sr-only">{label}</dt>
-                      <dd className="font-display text-4xl font-extrabold tracking-tight text-butter md:text-5xl">
-                        {value}
-                      </dd>
-                      <dd className="mt-1 text-sm font-semibold leading-snug text-cream/80">{label}</dd>
-                    </div>
-                  ))}
-                </dl>
-              )}
-
-              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
-                <Link href="/collaborate" className="btn-secondary !px-7 !py-3.5 !text-base">
-                  {t("brandsCta")}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <p className="-rotate-3 font-hand text-2xl font-medium text-butter">
-                  {t("brandsReply")}
-                </p>
-              </div>
-            </div>
-
-            <ul className="grid content-center gap-5 sm:grid-cols-2">
-              {brandOffers.map((offer, index) => (
-                <li
-                  key={offer.title}
-                  className={`rounded-3xl border-2 border-ink p-6 text-ink shadow-pop transition-transform duration-200 hover:-translate-y-1 hover:rotate-0 ${offerStyles[index % offerStyles.length]}`}
-                >
-                  <span className="grid h-11 w-11 place-items-center rounded-full border-2 border-ink bg-white text-brand-600">
-                    <OutlineIcon d={offerIcons[index % offerIcons.length]} className="h-5 w-5" />
-                  </span>
-                  <h3 className="mt-4 font-display text-xl font-extrabold tracking-tight">{offer.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-ink/75">{offer.description}</p>
-                </li>
-              ))}
-            </ul>
+            </span>
+            <svg className="absolute right-[4.5rem] top-6 h-[7.5rem] w-48 opacity-80" viewBox="0 0 190 120" aria-hidden="true">
+              <g fill="none" stroke="#ff6339" strokeWidth="2.5" strokeLinecap="round">
+                <circle cx="60" cy="60" r="44" />
+                <path d="M112 36c13-9 26 9 39 0s26 9 39 0M112 60c13-9 26 9 39 0s26 9 39 0M112 84c13-9 26 9 39 0s26 9 39 0" />
+              </g>
+            </svg>
+            <p className="border-b-[1.5px] border-plum/20 py-3 font-hand text-[1.375rem]">{t("postcardTo", { name: hostFirstName })}</p>
+            <p className="border-b-[1.5px] border-plum/20 py-3 font-hand text-[1.375rem] text-mauve">{t("postcardLine")}</p>
+            <div className="h-12 border-b-[1.5px] border-plum/20" />
+            <p className="mt-5 text-[0.9375rem] leading-relaxed text-mauve">{t("guestNote")}</p>
           </div>
-        </FadeIn>
+        </div>
       </section>
 
-      {/* ===== SUPPORT ===== */}
-      <section id="support" className="section-padding theme-soft">
-        <FadeIn className="mx-auto flex max-w-3xl flex-col items-center rounded-[2.5rem] border-2 border-ink bg-white p-8 text-center shadow-pop-lg sm:p-12">
-          <span className="grid h-14 w-14 place-items-center rounded-full border-2 border-ink bg-blush text-brand-600">
-            <Heart className="h-6 w-6" />
-          </span>
-          <p className="section-label mt-6">{t("supportLabel")}</p>
-          <h2 className="mt-2 font-display text-4xl font-extrabold lowercase tracking-tight text-ink md:text-5xl">
-            {t("supportTheShow")}
-          </h2>
-          <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink/75">{t("supportDescription")}</p>
-          <p className="mt-4 font-hand text-2xl font-medium text-brand-500">{t("supportThanks")}</p>
-          <a
-            href={buyMeCoffeeUrl}
-            target={supportTarget}
-            rel={supportRel}
-            className="btn-accent mt-8"
-          >
-            {t("buyMeCoffee")}
-          </a>
-        </FadeIn>
+      {/* ===== NEWSLETTER (preview only until the email list is connected) ===== */}
+      {showUpcoming && (
+        <section className="page-container pb-24 lg:pb-32">
+          <div className="grid items-center gap-12 rounded-[2.25rem] bg-tangerine px-6 py-12 sm:px-12 lg:grid-cols-[6fr_5fr] lg:gap-[4.5rem] lg:p-[4.5rem]">
+            <div className="flex flex-col gap-4">
+              <h2 className="font-display text-[clamp(2.5rem,5vw,3.75rem)] leading-[1.02] tracking-[-0.02em]">{t("newsTitle")}</h2>
+              <p className="max-w-[32.5rem] text-lg leading-relaxed sm:text-[1.1875rem]">{t("newsBody")}</p>
+            </div>
+            <form className="flex flex-col gap-4">
+              <label className="flex flex-col gap-1.5 text-[0.9375rem] font-semibold">
+                {t("newsName")}
+                <input type="text" name="name" autoComplete="given-name" className="field border-plum bg-shell" />
+              </label>
+              <label className="flex flex-col gap-1.5 text-[0.9375rem] font-semibold">
+                {t("newsEmail")}
+                <input type="email" name="email" autoComplete="email" className="field border-plum bg-shell" />
+              </label>
+              <fieldset className="mt-1 flex flex-wrap gap-2">
+                <legend className="mb-2 text-[0.9375rem] font-semibold">{t("newsInterests")}</legend>
+                {newsOptions.map((option, index) => (
+                  <label
+                    key={option}
+                    className={`flex items-center gap-2 rounded-full px-3.5 py-2 text-[0.9375rem] font-medium ${
+                      index === 0 ? "bg-bubblegum" : "border-[1.5px] border-plum"
+                    }`}
+                  >
+                    <input type="checkbox" name="interests" value={option} defaultChecked={index === 0} className="h-4 w-4 accent-plum" />
+                    {option}
+                  </label>
+                ))}
+              </fieldset>
+              <button type="button" className="btn-primary mt-1.5 self-start">{t("newsCta")}</button>
+            </form>
+          </div>
+        </section>
+      )}
+
+      {/* ===== COFFEE + BRANDS: one tear-off ticket ===== */}
+      <section className="page-container pb-24 lg:pb-32">
+        <div className="grid rounded-md bg-white shadow-postal md:grid-cols-[1fr_2px_1fr]">
+          <div className="flex flex-col gap-4 p-8 sm:p-[3.25rem]">
+            <CoffeeCup className="h-11 w-[3.75rem]" />
+            <h3 className="font-display text-[2.5rem] leading-[1.05]">{t("supportTheShow")}</h3>
+            <p className="text-[1.0625rem] leading-relaxed text-mauve">{t("supportDescription")}</p>
+            <p className="font-hand text-xl">{t("supportThanks")}</p>
+            {buyMeCoffeeUrl && (
+              <a href={buyMeCoffeeUrl} target="_blank" rel="noopener noreferrer" className="btn-tangerine mt-1.5 self-start">
+                {t("buyMeCoffee")}
+              </a>
+            )}
+          </div>
+          <div className="mx-8 h-0.5 bg-[repeating-linear-gradient(to_right,rgba(45,21,48,0.3)_0_8px,transparent_8px_16px)] md:mx-0 md:my-8 md:h-auto md:bg-[repeating-linear-gradient(to_bottom,rgba(45,21,48,0.3)_0_8px,transparent_8px_16px)]" aria-hidden="true" />
+          <div className="flex flex-col gap-4 p-8 sm:p-[3.25rem]">
+            <Envelope className="h-11 w-[3.75rem]" />
+            <h3 className="font-display text-[2.5rem] leading-[1.05]">{t("brandsTitle")}</h3>
+            <p className="text-[1.0625rem] leading-relaxed text-mauve">{t("brandsShort")}</p>
+            <Link href="/collaborate" className="btn-outline mt-auto self-start">{t("brandsCta")}</Link>
+          </div>
+        </div>
       </section>
     </>
   );

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, useTransition, type FormEvent } from "reac
 import { useTranslations } from "next-intl";
 import type { FormState } from "@/lib/formActions";
 
-export const labelClass = "mb-2 block text-sm font-bold text-ink";
+export const labelClass = "mb-2 block text-[0.9375rem] font-semibold text-plum";
 
 // Submits without a page reload and keeps what was typed if sending fails
 export function useFormSubmit(action: (formData: FormData) => Promise<FormState>) {
@@ -56,14 +56,14 @@ export function SubmitArea({
   return (
     <div className="space-y-4">
       {error && (
-        <p role="alert" className="rounded-2xl border-2 border-brand-600 bg-brand-50 px-4 py-3 text-sm font-semibold text-brand-800">
+        <p role="alert" className="rounded-2xl border-[1.5px] border-tangerine bg-peach px-4 py-3 text-[0.9375rem] font-semibold text-plum">
           {error === "invalid" ? t("errorInvalid") : t("errorFailed")}
         </p>
       )}
       <button
         type="submit"
         disabled={pending}
-        className="btn-primary w-full !py-4 !text-base disabled:cursor-wait disabled:opacity-70"
+        className="btn-primary w-full !py-4 disabled:cursor-wait disabled:opacity-70"
       >
         {pending && (
           <svg className="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -73,7 +73,7 @@ export function SubmitArea({
         )}
         {pending ? t("sending") : label}
       </button>
-      <p className="text-center text-sm text-ink/60">{note}</p>
+      <p className="text-center text-[0.9375rem] text-mauve">{note}</p>
     </div>
   );
 }
@@ -95,8 +95,8 @@ export function SuccessCard({
   }, []);
 
   return (
-    <div className="rounded-[2rem] border-2 border-ink bg-white p-8 text-center shadow-pop-lg motion-safe:animate-rise sm:p-12">
-      <span className="mx-auto grid h-20 w-20 -rotate-6 place-items-center rounded-full border-2 border-ink bg-butter text-brand-600 shadow-pop">
+    <div className="rounded-md bg-white p-8 text-center shadow-postal motion-safe:animate-rise sm:p-12">
+      <span className="mx-auto grid h-20 w-20 -rotate-6 place-items-center rounded-full bg-bubblegum text-tangerine">
         <svg className="h-9 w-9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M12 21s-7.5-4.6-10-9.3C.3 8.4 2.1 4 6.3 4c2.4 0 4 1.4 5.7 3.4C13.7 5.4 15.3 4 17.7 4 21.9 4 23.7 8.4 22 11.7 19.5 16.4 12 21 12 21z" />
         </svg>
@@ -104,12 +104,12 @@ export function SuccessCard({
       <h2
         ref={headingRef}
         tabIndex={-1}
-        className="mt-8 font-display text-4xl font-extrabold lowercase tracking-tight text-brand-700 focus:outline-none md:text-5xl"
+        className="mt-8 font-display text-4xl leading-tight focus:outline-none md:text-5xl"
       >
         {title}
       </h2>
-      <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-ink/75">{body}</p>
-      <button type="button" onClick={onReset} className="btn-secondary mt-8">
+      <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-mauve">{body}</p>
+      <button type="button" onClick={onReset} className="btn-outline mt-8">
         {t("sendAnother")}
       </button>
     </div>

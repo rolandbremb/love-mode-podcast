@@ -5,7 +5,7 @@ import { submitBrandInquiry } from "@/lib/formActions";
 import { Honeypot, SubmitArea, SuccessCard, labelClass, useFormSubmit } from "./FormParts";
 
 const pillClass =
-  "inline-block rounded-full border-2 border-ink bg-white px-4 py-2 text-sm font-semibold text-ink transition-all hover:bg-blush peer-checked:bg-brand-600 peer-checked:text-white peer-checked:shadow-pop-sm peer-focus-visible:ring-4 peer-focus-visible:ring-butter";
+  "inline-block rounded-full border-[1.5px] border-plum bg-white px-4 py-2 text-[0.9375rem] font-medium text-plum transition-colors hover:bg-shell peer-checked:bg-plum peer-checked:text-shell peer-focus-visible:outline peer-focus-visible:outline-[3px] peer-focus-visible:outline-offset-2 peer-focus-visible:outline-tangerine";
 
 export default function BrandInquiryForm() {
   const t = useTranslations("collaborate");
@@ -34,7 +34,7 @@ export default function BrandInquiryForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="relative space-y-7 rounded-[2rem] border-2 border-ink bg-white p-6 shadow-pop-lg sm:p-8 md:p-10"
+      className="relative space-y-7 rounded-md bg-white p-6 shadow-postal sm:p-8 md:p-10"
     >
       <Honeypot />
       <input type="hidden" name="locale" value={locale} />
@@ -42,7 +42,7 @@ export default function BrandInquiryForm() {
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className={labelClass}>
-            {t("nameCompany")} <span className="text-brand-600">*</span>
+            {t("nameCompany")} <span className="text-mauve">*</span>
           </label>
           <input
             type="text"
@@ -51,12 +51,12 @@ export default function BrandInquiryForm() {
             required
             maxLength={120}
             autoComplete="organization"
-            className="theme-field"
+            className="field"
           />
         </div>
         <div>
           <label htmlFor="email" className={labelClass}>
-            {t("email")} <span className="text-brand-600">*</span>
+            {t("email")} <span className="text-mauve">*</span>
           </label>
           <input
             type="email"
@@ -64,17 +64,17 @@ export default function BrandInquiryForm() {
             name="email"
             required
             autoComplete="email"
-            className="theme-field"
+            className="field"
             placeholder="you@company.com"
           />
         </div>
       </div>
 
       <fieldset>
-        <legend className="text-sm font-bold text-ink">
-          {t("typeOfCollaboration")} <span className="text-brand-600">*</span>
+        <legend className="text-[0.9375rem] font-semibold text-plum">
+          {t("typeOfCollaboration")} <span className="text-mauve">*</span>
         </legend>
-        <p className="mb-3 mt-1 text-xs text-ink/60">{t("typeHint")}</p>
+        <p className="mb-3 mt-1 text-sm text-mauve">{t("typeHint")}</p>
         <div className="flex flex-wrap gap-2.5">
           {collabTypes.map(({ value, label }) => (
             <label key={value} className="cursor-pointer">
@@ -89,12 +89,12 @@ export default function BrandInquiryForm() {
         <label htmlFor="website" className={labelClass}>
           {t("websiteSocial")}
         </label>
-        <input type="text" id="website" name="website" maxLength={300} className="theme-field" placeholder="https://..." />
+        <input type="text" id="website" name="website" maxLength={300} className="field" placeholder="https://..." />
       </div>
 
       <fieldset>
-        <legend className="text-sm font-bold text-ink">{t("budgetRange")}</legend>
-        <p className="mb-3 mt-1 text-xs text-ink/60">{t("budgetHint")}</p>
+        <legend className="text-[0.9375rem] font-semibold text-plum">{t("budgetRange")}</legend>
+        <p className="mb-3 mt-1 text-sm text-mauve">{t("budgetHint")}</p>
         <div className="flex flex-wrap gap-2.5">
           {budgets.map(({ value, label }) => (
             <label key={value || "none"} className="cursor-pointer">
@@ -113,7 +113,7 @@ export default function BrandInquiryForm() {
 
       <div>
         <label htmlFor="proposal" className={labelClass}>
-          {t("tellUsIdea")} <span className="text-brand-600">*</span>
+          {t("tellUsIdea")} <span className="text-mauve">*</span>
         </label>
         <textarea
           id="proposal"
@@ -121,7 +121,7 @@ export default function BrandInquiryForm() {
           required
           rows={5}
           maxLength={5000}
-          className="theme-field"
+          className="field"
           placeholder={t("tellUsPlaceholder")}
         />
       </div>
