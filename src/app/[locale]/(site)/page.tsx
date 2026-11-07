@@ -25,9 +25,10 @@ import { getAboutPage, getSiteSettings } from "@/sanity/client";
 export const revalidate = 3600;
 
 // Sections for services that aren't connected yet (paid sessions, newsletter)
-// show on preview deployments and in development only, so Andrea can review
-// them before launch. Anything else, including production, hides them.
-const showUpcoming = process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV === "development";
+// stay hidden until they work. Set SHOW_UPCOMING_SECTIONS=true on a deployment
+// to review them; they always show in local development.
+const showUpcoming =
+  process.env.SHOW_UPCOMING_SECTIONS === "true" || process.env.NODE_ENV === "development";
 
 const stopDoodles = [CoffeeDate, Rings, BrokenHeart, Sailboat];
 const episodeDoodles = [CoffeeDate, PaperPlane, Heart];
