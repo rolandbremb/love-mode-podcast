@@ -25,8 +25,9 @@ import { getAboutPage, getSiteSettings } from "@/sanity/client";
 export const revalidate = 3600;
 
 // Sections for services that aren't connected yet (paid sessions, newsletter)
-// show on preview deployments only, so Andrea can review them before launch.
-const showUpcoming = process.env.VERCEL_ENV !== "production";
+// show on preview deployments and in development only, so Andrea can review
+// them before launch. Anything else, including production, hides them.
+const showUpcoming = process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV === "development";
 
 const stopDoodles = [CoffeeDate, Rings, BrokenHeart, Sailboat];
 const episodeDoodles = [CoffeeDate, PaperPlane, Heart];
