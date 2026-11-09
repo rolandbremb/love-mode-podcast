@@ -7,10 +7,8 @@
     "shop": "Shop",
     "products": "Products",
     "courses": "Courses",
-    "support": "Support the Show",
     "workWithUs": "For brands",
-    "menu": "Menu",
-    "tagline": "Your Love and Dating Bestie"
+    "menu": "Menu"
   },
   "home": {
     "meetHostCta": "More about me",
@@ -115,7 +113,18 @@
       "Getting back out there after divorce"
     ],
     "newsCta": "Keep me posted",
-    "brandsShort": "For brands that connect with this world: podcast integrations, social content and campaigns that give something back to our community."
+    "brandsShort": "For brands that connect with this world: podcast integrations, social content and campaigns that give something back to our community.",
+    "heroTitle": "Love Mode",
+    "heroTagline": "Your Love and Dating Bestie",
+    "heroDescription": "First dates, relationships, situationships, goodbyes, and getting your hopes up again just when you thought you couldn't be bothered anymore.",
+    "welcomeTitle": "Your little corner of love on the internet",
+    "welcomeParagraphs": [
+      "Into someone, but modern dating feels like it needs a manual? Haven't been on a first date in years and don't even know where to start? The relationship is over and you're struggling to let go? Love your life and also want someone to share a Sunday with? In a relationship and discovering that loving each other is only one part of it?",
+      "I got ya! That's what we talk about on Love Mode. Meeting someone, saying goodbye, trying again, and taking care of what we want to last.",
+      "I'm Andrea Moreno, journalist, podcast host, and your love & dating bestie. I've fallen in love, I've gotten divorced, and I've bet on love again.",
+      "Ever since I was little, I've been the go-to for heart advice, the matchmaker. And here I am, years later, talking about love, trying to figure it out, and asking questions that end up becoming Love Mode episodes.",
+      "Wherever you are on your love journey, you've got company here."
+    ]
   },
   "episodes": {
     "title": "All episodes",
@@ -185,7 +194,6 @@
     "nameCompany": "Name or company",
     "email": "Email",
     "typeOfCollaboration": "Type of collaboration",
-    "selectOne": "Select one...",
     "podcastSponsorship": "Podcast integration",
     "brandPartnership": "Brand partnership",
     "contentCollab": "Content collab",
@@ -220,15 +228,10 @@
     "guestCta": "Apply now",
     "supportTitle": "Buy me a coffee?",
     "supportDesc": "If a conversation kept you company, you can support upcoming episodes with a coffee.",
-    "supportCta": "Buy you a coffee",
-    "hello": "hey, I'm",
-    "missionNote": "the whole point"
+    "supportCta": "Buy you a coffee"
   },
   "footer": {
     "tagline": "By Andrea Moreno.",
-    "podcast": "Podcast",
-    "resources": "Resources",
-    "connect": "Connect",
     "allEpisodes": "Episodes",
     "about": "About me",
     "beAGuest": "Share your story",
@@ -236,10 +239,7 @@
     "shop": "Shop",
     "digitalProducts": "Digital Products",
     "courses": "Courses",
-    "copyright": "© {year} Love Mode Podcast",
-    "followUs": "Follow along",
-    "brandsTitle": "Got a brand in mind?",
-    "workWithUs": "Let's talk about your brand"
+    "copyright": "© {year} Love Mode Podcast"
   },
   "forms": {
     "sending": "Sending…",

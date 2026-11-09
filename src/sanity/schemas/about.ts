@@ -1,7 +1,10 @@
+import { aboutTextDocument, websiteTextFields } from "./websiteText";
+
 const about = {
   name: "about",
   title: "About Page",
   type: "document" as const,
+  fieldsets: [{ name: "pageText", title: "Page text", options: { collapsible: true, collapsed: true } }],
   fields: [
     { name: "hostName", title: "Host Name", type: "string" },
     {
@@ -44,6 +47,7 @@ const about = {
       ],
     },
     { name: "seo", title: "SEO", type: "seo" },
+    ...websiteTextFields(aboutTextDocument, "pageText"),
   ],
   preview: {
     prepare: () => ({ title: "About Page" }),

@@ -5,6 +5,10 @@ import { visionTool } from "@sanity/vision";
 import { media } from "sanity-plugin-media";
 import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
 import { schemaTypes } from "./src/sanity/schemas";
+import { copyDocuments } from "./src/sanity/copy/definition";
+
+// One document each: pick them from the list, never create new ones
+const singletonTypes = new Set(["siteSettings", ...copyDocuments.map((doc) => doc.id)]);
 
 export default defineConfig({
   name: "love-mode-podcast",
@@ -55,13 +59,20 @@ export default defineConfig({
                   .documentId("siteSettings")
               ),
 
-            // Singleton: About Page
+            // Website text: every page's words, in Spanish and English
             S.listItem()
-              .title("About Page")
+              .title("Website text")
               .child(
-                S.document()
-                  .schemaType("about")
-                  .documentId("about")
+                S.list()
+                  .title("Website text")
+                  .items(
+                    copyDocuments.map((doc) =>
+                      S.listItem()
+                        .title(doc.id === "about" ? "About page (Andrea and page text)" : doc.title)
+                        .id(doc.id)
+                        .child(S.document().schemaType(doc.id).documentId(doc.id).title(doc.title))
+                    )
+                  )
               ),
 
             S.divider(),
@@ -118,5 +129,14 @@ export default defineConfig({
     visionTool(),
     media(),
   ],
-  schema: { types: schemaTypes },
+  schema: {
+    types: schemaTypes,
+    templates: (templates) => templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
+  },
+  document: {
+    actions: (actions, { schemaType }) =>
+      singletonTypes.has(schemaType)
+        ? actions.filter(({ action }) => action !== "duplicate" && action !== "delete")
+        : actions,
+  },
 });

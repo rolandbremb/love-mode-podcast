@@ -75,11 +75,11 @@ export default async function Home({
   const allEpisodes = await getAllEpisodes(settings?.podcastRssUrl);
   const topEpisodes = [...allEpisodes].sort((a, b) => b.views - a.views).slice(0, 3);
 
-  const heroTitle = settings?.heroTitle ?? "Love Mode";
-  const heroTagline = settings?.heroTagline ?? "Your Love and Dating Bestie";
-  const heroDescription = settings?.heroDescription ?? "";
-  const aboutTitle = settings?.aboutTitle ?? "";
-  const aboutParagraphs = (settings?.aboutParagraphs ?? []).filter((p) => p.trim());
+  const heroTitle = t("heroTitle");
+  const heroTagline = t("heroTagline");
+  const heroDescription = t("heroDescription");
+  const aboutTitle = t("welcomeTitle");
+  const aboutParagraphs = (t.raw("welcomeParagraphs") as string[]).filter((p) => p.trim());
   const buyMeCoffeeUrl = settings?.buyMeCoffeeUrl;
 
   const hostName = aboutData?.hostName ?? "Andrea Moreno";

@@ -1,5 +1,4 @@
 import { createClient, type SanityClient } from "@sanity/client";
-import { SITE_THEME_DEFAULTS } from "@/lib/siteTheme";
 
 // ---------- Client ----------
 
@@ -37,17 +36,6 @@ function getClient(preview = false): SanityClient | null {
 // ---------- Types ----------
 
 export interface SiteSettings {
-  heroTagline: string;
-  heroTitle: string;
-  heroDescription: string;
-  episodeSchedule: string;
-  aboutTitle: string;
-  aboutParagraphs: string[];
-  bodyFont: string;
-  headingFont: string;
-  pageBackgroundColor: string;
-  sectionBackgroundColor: string;
-  surfaceBackgroundColor: string;
   showShop: boolean;
   showProducts: boolean;
   showCourses: boolean;
@@ -100,17 +88,6 @@ export async function getSiteSettings(opts?: { preview?: boolean; locale?: strin
   try {
     return await client.fetch(
       `*[_type == "siteSettings"][0]{
-        "heroTagline": select($locale == "es" && defined(es.heroTagline) => es.heroTagline, heroTagline),
-        "heroTitle": select($locale == "es" && defined(es.heroTitle) => es.heroTitle, heroTitle),
-        "heroDescription": select($locale == "es" && defined(es.heroDescription) => es.heroDescription, heroDescription),
-        "aboutTitle": select($locale == "es" && defined(es.aboutTitle) => es.aboutTitle, aboutTitle),
-        "aboutParagraphs": select($locale == "es" && defined(es.aboutParagraphs) => es.aboutParagraphs, aboutParagraphs),
-        "episodeSchedule": select($locale == "es" && defined(es.episodeSchedule) => es.episodeSchedule, episodeSchedule),
-        "bodyFont": coalesce(bodyFont, "${SITE_THEME_DEFAULTS.bodyFont}"),
-        "headingFont": coalesce(headingFont, "${SITE_THEME_DEFAULTS.headingFont}"),
-        "pageBackgroundColor": coalesce(pageBackgroundColor, "${SITE_THEME_DEFAULTS.pageBackgroundColor}"),
-        "sectionBackgroundColor": coalesce(sectionBackgroundColor, "${SITE_THEME_DEFAULTS.sectionBackgroundColor}"),
-        "surfaceBackgroundColor": coalesce(surfaceBackgroundColor, "${SITE_THEME_DEFAULTS.surfaceBackgroundColor}"),
         "showShop": coalesce(showShop, true),
         "showProducts": coalesce(showProducts, true),
         "showCourses": coalesce(showCourses, true),
@@ -203,6 +180,17 @@ export async function getCourses(opts?: { preview?: boolean; locale?: string }):
       }`,
       { locale }
     );
+  } catch {
+    return [];
+  }
+}
+
+// Website text documents edited in the Studio (one per page); see src/sanity/copy/definition.ts
+export async function getWebsiteText(types: string[], opts?: { preview?: boolean }): Promise<Record<string, unknown>[]> {
+  const client = getClient(opts?.preview);
+  if (!client) return [];
+  try {
+    return await client.fetch(`*[_type in $types && !(_id in path("drafts.**"))]`, { types });
   } catch {
     return [];
   }

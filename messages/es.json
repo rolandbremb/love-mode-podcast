@@ -7,10 +7,8 @@
     "shop": "Tienda",
     "products": "Productos",
     "courses": "Cursos",
-    "support": "Apoya el Show",
     "workWithUs": "Para marcas",
-    "menu": "Menú",
-    "tagline": "Your Love and Dating Bestie"
+    "menu": "Menú"
   },
   "home": {
     "meetHostCta": "Te cuento más sobre mí",
@@ -115,7 +113,18 @@
       "Volver al ruedo después del divorcio"
     ],
     "newsCta": "Quiero enterarme",
-    "brandsShort": "Para marcas que conectan con este mundo: integraciones en el pódcast, contenido para redes y campañas que aporten algo a nuestra comunidad."
+    "brandsShort": "Para marcas que conectan con este mundo: integraciones en el pódcast, contenido para redes y campañas que aporten algo a nuestra comunidad.",
+    "heroTitle": "Love Mode",
+    "heroTagline": "Your Love and Dating Bestie",
+    "heroDescription": "De primeras citas, relaciones, casi algos, despedidas y de volver a ilusionarte cuando pensabas que ya qué pereza.",
+    "welcomeTitle": "Tu rinconcito del amor en internet",
+    "welcomeParagraphs": [
+      "¿Te gusta alguien, pero entender el dating moderno necesita un manual? ¿Llevas años sin una primera cita y no sabes ni por dónde empezar? ¿La relación se acabó y te cuesta soltarlo? ¿Tienes una vida que te encanta y también quieres con quién compartir un domingo? ¿Estás en una relación y descubriendo que quererse es solo una parte?",
+      "I got ya! De todo eso hablamos en Love Mode. De conocer a alguien, de despedirse, de volver a intentarlo y de cuidar lo que queremos que dure.",
+      "Soy Andrea Moreno, periodista, podcast host y tu love & dating bestie. Me he enamorado, me he divorciado y he vuelto a apostar por el amor.",
+      "Desde chiquita he sido la doctora corazón, la matchmaker. Y aquí estoy, años después, hablando de amor, tratando de descifrarlo y haciendo preguntas que terminan convirtiéndose en episodios de Love Mode.",
+      "Estés en el punto que estés de tu love journey, aquí tienes compañía."
+    ]
   },
   "episodes": {
     "title": "Todos los episodios",
@@ -185,7 +194,6 @@
     "nameCompany": "Nombre o empresa",
     "email": "Correo electrónico",
     "typeOfCollaboration": "Tipo de colaboración",
-    "selectOne": "Selecciona uno...",
     "podcastSponsorship": "Integración en el pódcast",
     "brandPartnership": "Alianza de marca",
     "contentCollab": "Colaboración de contenido",
@@ -220,15 +228,10 @@
     "guestCta": "Quiero participar",
     "supportTitle": "¿Me invitas un café?",
     "supportDesc": "Si alguna conversación te hizo compañía, puedes apoyar los próximos episodios con un café.",
-    "supportCta": "Invitarte un café",
-    "hello": "hola, soy",
-    "missionNote": "la razón de todo"
+    "supportCta": "Invitarte un café"
   },
   "footer": {
     "tagline": "Por Andrea Moreno.",
-    "podcast": "Pódcast",
-    "resources": "Recursos",
-    "connect": "Conectar",
     "allEpisodes": "Episodios",
     "about": "Sobre mí",
     "beAGuest": "Comparte tu historia",
@@ -236,10 +239,7 @@
     "shop": "Tienda",
     "digitalProducts": "Productos Digitales",
     "courses": "Cursos",
-    "copyright": "© {year} Love Mode Podcast",
-    "followUs": "Síguenos",
-    "brandsTitle": "¿Tienes una marca en mente?",
-    "workWithUs": "Hablemos de tu marca"
+    "copyright": "© {year} Love Mode Podcast"
   },
   "forms": {
     "sending": "Enviando…",

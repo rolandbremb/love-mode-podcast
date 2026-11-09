@@ -6,6 +6,7 @@ import course from "./course";
 import seo from "./seo";
 import brandInquiry from "./brandInquiry";
 import guestApplication from "./guestApplication";
+import { bilingualTypes, websiteTextDocuments } from "./websiteText";
 
 export const schemaTypes = [
   siteSettings,
@@ -16,4 +17,6 @@ export const schemaTypes = [
   seo,
   brandInquiry,
   guestApplication,
+  ...bilingualTypes,
+  ...websiteTextDocuments,
 ];
