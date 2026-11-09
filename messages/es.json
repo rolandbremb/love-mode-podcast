@@ -328,7 +328,7 @@
     "name": "Tu nombre",
     "email": "Tu correo electrónico",
     "phone": "Tu teléfono (WhatsApp)",
-    "phoneHint": "Opcional. Incluye el código de tu país, por ejemplo +57.",
+    "phoneHint": "Opcional. Elige tu país y escribe tu número.",
     "consent": "Acepto recibir mensajes de Love Mode por WhatsApp.",
     "cta": "Me apunto",
     "finePrint": "Puedes darte de baja cuando quieras.",
@@ -337,6 +337,9 @@
     "successBody": "Qué rico tenerte por aquí. Revisa tu correo para confirmar tu suscripción y pronto tendrás noticias mías.",
     "listen": "Mientras tanto, escucha Love Mode",
     "metaDescription": "Únete a la lista de Love Mode para recibir recursos, cursos y novedades sobre amor, dating y relaciones.",
-    "postmark": "COMUNIDAD ★ LOVE MODE ★"
+    "postmark": "COMUNIDAD ★ LOVE MODE ★",
+    "country": "País",
+    "phoneInvalid": "Este número no parece un celular válido de {country}. Revisa los dígitos o el país.",
+    "phoneConfirm": "Te escribiré al {number}"
   }
 }

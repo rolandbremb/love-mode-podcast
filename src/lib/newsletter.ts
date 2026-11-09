@@ -1,5 +1,6 @@
 "use server";
 
+import { parsePhoneNumberFromString } from "libphonenumber-js/mobile";
 import type { FormState } from "@/lib/formActions";
 
 // Kit (kit.com): the "Web Love Mode" form collects every website signup and sends
@@ -18,8 +19,6 @@ const SOURCE_TAGS: Record<string, number> = {
   lista: 25644054, // Fuente: Esto apenas empieza
 };
 const WHATSAPP_CONSENT_TAG = 25644055; // WhatsApp: acepta mensajes
-
-const PHONE_PATTERN = /^\+?[0-9][0-9\s().-]{6,19}$/;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -93,10 +92,12 @@ export async function subscribeToNewsletter(formData: FormData): Promise<FormSta
   if (!EMAIL_PATTERN.test(email)) return { status: "error", reason: "invalid" };
 
   // WhatsApp is optional, but a number only counts with the consent box ticked
+  // The form sends it with its country code (+573001234567); it must be a real mobile number
   const phone = field(formData, "whatsapp", 40);
   const whatsappConsent = formData.get("whatsapp_consent") === "yes";
-  if (phone && (!PHONE_PATTERN.test(phone) || !whatsappConsent)) return { status: "error", reason: "invalid" };
-  const whatsapp = phone && whatsappConsent ? phone : undefined;
+  const parsedPhone = phone ? parsePhoneNumberFromString(phone) : undefined;
+  if (phone && (!parsedPhone?.isValid() || !whatsappConsent)) return { status: "error", reason: "invalid" };
+  const whatsapp = parsedPhone && whatsappConsent ? parsedPhone.number : undefined;
 
   const interests = formData
     .getAll("interests")

@@ -1,10 +1,14 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { subscribeToNewsletter } from "@/lib/newsletter";
 import { Honeypot, useFormSubmit } from "./FormParts";
+
+// Only the /lista page asks for a phone, so the numbering rules load only there
+const PhoneField = dynamic(() => import("./PhoneField"));
 
 // Remembered so the pop-up never asks someone who already signed up
 export const SIGNED_UP_KEY = "lm_signed_up";
@@ -39,9 +43,7 @@ export default function QuickSignupForm({
   const t = useTranslations(namespace);
   const tForms = useTranslations("forms");
   const { state, pending, onSubmit } = useFormSubmit(subscribeToNewsletter);
-  const [phone, setPhone] = useState("");
   const successRef = useRef<HTMLParagraphElement>(null);
-  const id = useId();
   const error = state?.status === "error" ? state.reason : null;
   const fieldClass = compact ? "field max-sm:py-2.5" : "field";
 
@@ -77,34 +79,7 @@ export default function QuickSignupForm({
         {t("email")}
         <input type="email" name="email" autoComplete="email" required maxLength={254} className={fieldClass} />
       </label>
-      {withPhone && (
-        <>
-          <label className="flex flex-col gap-1.5 text-[0.9375rem] font-semibold">
-            {t("phone")}
-            <input
-              type="tel"
-              name="whatsapp"
-              autoComplete="tel"
-              inputMode="tel"
-              maxLength={40}
-              pattern="\+?[0-9][0-9\s().\-]{6,19}"
-              value={phone}
-              onChange={(event) => setPhone(event.target.value)}
-              aria-describedby={`${id}-phone-hint`}
-              className="field"
-            />
-            <span id={`${id}-phone-hint`} className="text-sm font-normal text-mauve">
-              {t("phoneHint")}
-            </span>
-          </label>
-          {phone.trim() && (
-            <label className="flex items-start gap-2.5 text-[0.9375rem]">
-              <input type="checkbox" name="whatsapp_consent" value="yes" required className="mt-1 h-4 w-4 shrink-0 accent-plum" />
-              {t("consent")}
-            </label>
-          )}
-        </>
-      )}
+      {withPhone && <PhoneField labelClass="text-[0.9375rem] font-semibold" />}
       {error && (
         <p role="alert" className="rounded-2xl bg-peach px-4 py-3 text-[0.9375rem] font-semibold">
           {error === "invalid" ? tForms("errorInvalid") : tForms("errorFailed")}
