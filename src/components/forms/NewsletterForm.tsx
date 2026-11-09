@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { subscribeToNewsletter } from "@/lib/newsletter";
 import { Honeypot, useFormSubmit } from "./FormParts";
 
@@ -69,7 +70,12 @@ export default function NewsletterForm() {
       <button type="submit" disabled={pending} className="btn-primary mt-1.5 self-start disabled:cursor-wait disabled:opacity-70">
         {pending ? tForms("sending") : t("newsCta")}
       </button>
-      <p className="text-sm leading-relaxed">{t("newsFinePrint")}</p>
+      <p className="text-sm leading-relaxed">
+        {t("newsFinePrint")}{" "}
+        <Link href="/privacy" className="font-semibold underline underline-offset-2">
+          {t("newsPrivacy")}
+        </Link>
+      </p>
     </form>
   );
 }

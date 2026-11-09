@@ -5,7 +5,7 @@
    Each field points at a translation key ("namespace.key"); the text in
    messages/<locale>.json is the fallback whenever a Studio field is empty. */
 
-export type CopyFieldType = "string" | "text" | "stringList" | "textList" | "stops";
+export type CopyFieldType = "string" | "text" | "stringList" | "textList" | "stops" | "sections";
 
 export interface CopyField {
   /** Translation key the field fills, e.g. "home.listenNow" */
@@ -116,6 +116,7 @@ const home: CopyDocument = {
     { key: "home.newsFinePrint", title: "Small print under the button", type: "text", section: "news" },
     { key: "home.newsSuccessTitle", title: "After signing up: title", section: "news" },
     { key: "home.newsSuccessBody", title: "After signing up: text", type: "text", section: "news" },
+    { key: "home.newsPrivacy", title: "Privacy policy link", section: "news" },
 
     { key: "home.supportTheShow", title: "Coffee: title", section: "coffee" },
     { key: "home.supportDescription", title: "Coffee: text", type: "text", section: "coffee" },
@@ -260,6 +261,7 @@ const menu: CopyDocument = {
     { key: "footer.shop", title: "Shop", section: "footer" },
     { key: "footer.digitalProducts", title: "Products", section: "footer" },
     { key: "footer.courses", title: "Courses", section: "footer" },
+    { key: "footer.privacy", title: "Privacy policy link", section: "footer" },
     { key: "footer.copyright", title: "Copyright", section: "footer" },
   ],
 };
@@ -311,10 +313,27 @@ const seo: CopyDocument = {
     { key: "meta.description", title: "Site description in search results", type: "text" },
     { key: "meta.aboutTitle", title: "About page: title in search results" },
     { key: "meta.brandsDescription", title: "For brands page: description in search results", type: "text" },
+    { key: "meta.privacyDescription", title: "Privacy page: description in search results", type: "text" },
   ],
 };
 
-export const copyDocuments: CopyDocument[] = [home, episodes, about, guest, brands, menu, forms, resources, seo];
+const privacy: CopyDocument = {
+  id: "privacyPage",
+  title: "Privacy page",
+  fields: [
+    { key: "privacy.title", title: "Title" },
+    { key: "privacy.updated", title: "Last updated line", description: "Change the date whenever the policy changes." },
+    { key: "privacy.intro", title: "Intro", type: "text" },
+    {
+      key: "privacy.sections",
+      title: "Sections",
+      type: "sections",
+      description: 'Each section has a heading and text. Leave an empty line between paragraphs; lines starting with "- " become a list.',
+    },
+  ],
+};
+
+export const copyDocuments: CopyDocument[] = [home, episodes, about, guest, brands, menu, forms, resources, privacy, seo];
 
 /* Sanity field name for a translation key: "home.listenNow" -> "listenNow" on the
    home page document; keys from another namespace keep it as a prefix. */

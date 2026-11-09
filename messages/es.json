@@ -127,7 +127,8 @@
     ],
     "newsFinePrint": "Al suscribirte, recibirás los correos que hayas elegido. Puedes darte de baja cuando quieras.",
     "newsSuccessTitle": "¡Ya casi estás dentro!",
-    "newsSuccessBody": "Te envié un correo para confirmar tu suscripción. Qué rico seguir en contacto."
+    "newsSuccessBody": "Te envié un correo para confirmar tu suscripción. Qué rico seguir en contacto.",
+    "newsPrivacy": "Política de privacidad"
   },
   "episodes": {
     "title": "Todos los episodios",
@@ -242,7 +243,8 @@
     "shop": "Tienda",
     "digitalProducts": "Productos Digitales",
     "courses": "Cursos",
-    "copyright": "© {year} Love Mode Podcast"
+    "copyright": "© {year} Love Mode Podcast",
+    "privacy": "Política de privacidad"
   },
   "forms": {
     "sending": "Enviando…",
@@ -255,6 +257,46 @@
     "title": "Love Mode Podcast",
     "description": "Conversaciones reales sobre amor, citas y cómo construir relaciones que sí duran. Nuevos episodios cada viernes, con Andrea Moreno.",
     "aboutTitle": "Sobre mí",
-    "brandsDescription": "Colabora con Love Mode: integraciones en el pódcast, contenido para redes y campañas para una comunidad que habla de amor, dating y relaciones."
+    "brandsDescription": "Colabora con Love Mode: integraciones en el pódcast, contenido para redes y campañas para una comunidad que habla de amor, dating y relaciones.",
+    "privacyDescription": "Tu confianza es lo más importante para Love Mode. Aquí te explico qué datos recojo cuando visitas lovemodepod.com, para qué los uso, con quién los comparto y qué derechos tienes."
+  },
+  "privacy": {
+    "title": "Política de privacidad",
+    "updated": "Última actualización: 9 de noviembre de 2026",
+    "intro": "Tu confianza es lo más importante para Love Mode. Aquí te explico qué datos recojo cuando visitas lovemodepod.com, para qué los uso, con quién los comparto y qué derechos tienes.",
+    "sections": [
+      {
+        "heading": "Quién es responsable de tus datos",
+        "body": "Love Mode es el pódcast de Andrea Moreno, con base en Miami, Florida (Estados Unidos). Para cualquier pregunta sobre tus datos, escríbeme a andrea@lovemodepod.com."
+      },
+      {
+        "heading": "Qué datos recojo y para qué",
+        "body": "- Newsletter: tu nombre (si lo das), tu correo y los temas que elijas, para enviarte los correos que pediste. Solo te escribo después de que confirmes tu suscripción.\n- Formulario «Comparte tu historia»: tu nombre, tu correo, tus redes sociales y lo que me cuentes, para valorar tu propuesta y contactarte si encaja con un episodio.\n- Formulario «Para marcas»: tu nombre o empresa, tu correo, tu sitio web, el tipo de colaboración, el presupuesto y tu idea, para responder a tu propuesta.\n- Visitas a la web: estadísticas anónimas y agregadas (páginas vistas, país, tipo de dispositivo y velocidad de carga) para entender qué funciona y mejorar el sitio. No usan cookies ni te identifican."
+      },
+      {
+        "heading": "Por qué puedo usarlos",
+        "body": "Uso tus datos porque me das tu consentimiento (newsletter), porque me los envías para que te responda (formularios) o por mi interés legítimo en mantener el sitio seguro y entender cómo se usa (estadísticas). Puedes retirar tu consentimiento cuando quieras."
+      },
+      {
+        "heading": "Con quién los comparto",
+        "body": "No vendo ni alquilo tus datos. Solo los usan los servicios que hacen funcionar este sitio, cada uno para su tarea:\n\n- Kit (kit.com): envía la newsletter.\n- Sanity (sanity.io): guarda los mensajes de los formularios.\n- Resend (resend.com): me avisa por correo cuando llega un formulario.\n- Vercel (vercel.com): aloja la web y genera las estadísticas anónimas.\n- YouTube: las imágenes de los episodios se cargan desde YouTube, que puede recibir tu dirección IP.\n\nEstos servicios están en Estados Unidos, así que tus datos pueden tratarse fuera de tu país, con las garantías que ofrece cada proveedor."
+      },
+      {
+        "heading": "Cuánto tiempo los guardo",
+        "body": "Los datos de la newsletter, hasta que te des de baja. Los mensajes de los formularios, el tiempo necesario para responderte y, como máximo, 24 meses."
+      },
+      {
+        "heading": "Tus derechos",
+        "body": "Puedes pedirme en cualquier momento ver, corregir o borrar tus datos, oponerte a que los use, limitar su uso o recibir una copia. Escríbeme a andrea@lovemodepod.com y te respondo en un máximo de 30 días.\n\nPara darte de baja de la newsletter, usa el enlace que aparece al final de cada correo.\n\nSi vives en la Unión Europea y crees que no he tratado bien tus datos, puedes reclamar ante la autoridad de protección de datos de tu país (en España, la Agencia Española de Protección de Datos)."
+      },
+      {
+        "heading": "Menores de edad",
+        "body": "Este sitio no está dirigido a menores de 16 años y no recojo a sabiendas datos de menores."
+      },
+      {
+        "heading": "Cambios en esta política",
+        "body": "Si cambio esta política, actualizaré la fecha de arriba. Si el cambio es importante y estás en la newsletter, te avisaré por correo."
+      }
+    ]
   }
 }

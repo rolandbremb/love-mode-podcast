@@ -31,13 +31,26 @@ const journeyStop = {
   preview: { select: { title: "title", subtitle: "description" } },
 };
 
+const privacySection = {
+  name: "privacySection",
+  title: "Section",
+  type: "object" as const,
+  fields: [
+    { name: "heading", title: "Heading", type: "string" },
+    { name: "body", title: "Text", type: "text", rows: 8 },
+  ],
+  preview: { select: { title: "heading" } },
+};
+
 export const bilingualTypes = [
   bilingual("localeString", "Text", { type: "string" }),
   bilingual("localeText", "Text", { type: "text", rows: 3 }),
   bilingual("localeStringList", "List", { type: "array", of: [{ type: "string" }] }),
   bilingual("localeTextList", "Paragraphs", { type: "array", of: [{ type: "text", rows: 3 }] }),
   bilingual("localeStops", "Stops", { type: "array", of: [{ type: "journeyStop" }] }),
+  bilingual("localeSections", "Sections", { type: "array", of: [{ type: "privacySection" }] }),
   journeyStop,
+  privacySection,
 ];
 
 const fieldType = {
@@ -46,6 +59,7 @@ const fieldType = {
   stringList: "localeStringList",
   textList: "localeTextList",
   stops: "localeStops",
+  sections: "localeSections",
 };
 
 /* Placeholders like {name} are filled in by the site, so editors are told to keep them */

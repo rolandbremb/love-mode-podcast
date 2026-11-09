@@ -68,7 +68,10 @@ export default async function Footer({
               ))}
             </ul>
           )}
-          <p>{t("copyright", { year: new Date().getFullYear() })}</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link href="/privacy" className="hover:text-shell">{t("privacy")}</Link>
+            <p>{t("copyright", { year: new Date().getFullYear() })}</p>
+          </div>
         </div>
       </div>
       <div className="airmail [--airmail-gap:#2d1530]" aria-hidden="true" />

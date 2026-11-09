@@ -127,7 +127,8 @@
     ],
     "newsFinePrint": "By subscribing, you'll get the emails you chose. You can unsubscribe anytime.",
     "newsSuccessTitle": "You're almost in!",
-    "newsSuccessBody": "I've sent you an email to confirm your subscription. So glad we're staying in touch."
+    "newsSuccessBody": "I've sent you an email to confirm your subscription. So glad we're staying in touch.",
+    "newsPrivacy": "Privacy policy"
   },
   "episodes": {
     "title": "All episodes",
@@ -242,7 +243,8 @@
     "shop": "Shop",
     "digitalProducts": "Digital Products",
     "courses": "Courses",
-    "copyright": "© {year} Love Mode Podcast"
+    "copyright": "© {year} Love Mode Podcast",
+    "privacy": "Privacy policy"
   },
   "forms": {
     "sending": "Sending…",
@@ -255,6 +257,46 @@
     "title": "Love Mode Podcast",
     "description": "Real conversations about love, dating, and building relationships that actually last. New episodes every Friday, hosted by Andrea Moreno.",
     "aboutTitle": "About me",
-    "brandsDescription": "Partner with Love Mode: podcast integrations, social content, and campaigns for a community that talks about love, dating, and relationships."
+    "brandsDescription": "Partner with Love Mode: podcast integrations, social content, and campaigns for a community that talks about love, dating, and relationships.",
+    "privacyDescription": "Your trust matters most to Love Mode. Here's what data I collect when you visit lovemodepod.com, what I use it for, who I share it with and what rights you have."
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "updated": "Last updated: November 9, 2026",
+    "intro": "Your trust matters most to Love Mode. Here's what data I collect when you visit lovemodepod.com, what I use it for, who I share it with and what rights you have.",
+    "sections": [
+      {
+        "heading": "Who is responsible for your data",
+        "body": "Love Mode is Andrea Moreno's podcast, based in Miami, Florida (United States). For any question about your data, write to me at andrea@lovemodepod.com."
+      },
+      {
+        "heading": "What I collect and why",
+        "body": "- Newsletter: your name (if you give it), your email and the topics you choose, to send you the emails you asked for. I only write to you after you confirm your subscription.\n- \"Share your story\" form: your name, email, social media and what you tell me, to consider your story and contact you if it fits an episode.\n- \"For brands\" form: your name or company, email, website, type of collaboration, budget and idea, to reply to your proposal.\n- Visits to the site: anonymous, aggregated statistics (pages viewed, country, device type and loading speed) to understand what works and improve the site. They use no cookies and don't identify you."
+      },
+      {
+        "heading": "Why I'm allowed to use it",
+        "body": "I use your data because you give me your consent (newsletter), because you send it to me so I can reply (forms), or because of my legitimate interest in keeping the site secure and understanding how it's used (statistics). You can withdraw your consent at any time."
+      },
+      {
+        "heading": "Who I share it with",
+        "body": "I don't sell or rent your data. It's only used by the services that run this site, each for its own job:\n\n- Kit (kit.com): sends the newsletter.\n- Sanity (sanity.io): stores the messages from the forms.\n- Resend (resend.com): emails me when a form comes in.\n- Vercel (vercel.com): hosts the site and produces the anonymous statistics.\n- YouTube: episode images load from YouTube, which may receive your IP address.\n\nThese services are based in the United States, so your data may be processed outside your country, with the safeguards each provider offers."
+      },
+      {
+        "heading": "How long I keep it",
+        "body": "Newsletter data, until you unsubscribe. Form messages, as long as needed to reply to you and for 24 months at most."
+      },
+      {
+        "heading": "Your rights",
+        "body": "At any time you can ask me to show, correct or delete your data, object to or limit how I use it, or get a copy. Write to me at andrea@lovemodepod.com and I'll reply within 30 days.\n\nTo leave the newsletter, use the link at the bottom of every email.\n\nIf you live in the European Union and think I haven't handled your data properly, you can complain to your country's data protection authority."
+      },
+      {
+        "heading": "Children",
+        "body": "This site isn't aimed at children under 16, and I don't knowingly collect children's data."
+      },
+      {
+        "heading": "Changes to this policy",
+        "body": "If I change this policy, I'll update the date above. If the change is important and you're on the newsletter, I'll let you know by email."
+      }
+    ]
   }
 }

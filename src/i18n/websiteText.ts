@@ -17,6 +17,12 @@ function cleanValue(value: unknown, type: CopyFieldType, original: unknown) {
     return keepsPlaceholders(original, value.trim()) ? value.trim() : undefined;
   }
   if (!Array.isArray(value)) return undefined;
+  if (type === "sections") {
+    const sections = value
+      .filter((section) => section && typeof section.heading === "string" && section.heading.trim())
+      .map((section) => ({ heading: String(section.heading).trim(), body: String(section.body ?? "").trim() }));
+    return sections.length > 0 ? sections : undefined;
+  }
   if (type === "stops") {
     const stops = value
       .filter((stop) => stop && typeof stop.title === "string" && stop.title.trim())
