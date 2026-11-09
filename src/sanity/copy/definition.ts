@@ -333,7 +333,20 @@ const privacy: CopyDocument = {
   ],
 };
 
-export const copyDocuments: CopyDocument[] = [home, episodes, about, guest, brands, menu, forms, resources, privacy, seo];
+const confirmed: CopyDocument = {
+  id: "confirmedPage",
+  title: "Newsletter confirmed page",
+  fields: [
+    { key: "confirmed.title", title: "Title" },
+    { key: "confirmed.body", title: "Text", type: "text" },
+    { key: "confirmed.note", title: "Handwritten note" },
+    { key: "confirmed.cta", title: "Button" },
+    { key: "confirmed.home", title: "Link to the home page" },
+    { key: "confirmed.postmark", title: "Text around the postmark" },
+  ],
+};
+
+export const copyDocuments: CopyDocument[] = [home, episodes, about, guest, brands, menu, forms, resources, privacy, confirmed, seo];
 
 /* Sanity field name for a translation key: "home.listenNow" -> "listenNow" on the
    home page document; keys from another namespace keep it as a prefix. */

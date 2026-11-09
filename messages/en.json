@@ -298,5 +298,13 @@
         "body": "If I change this policy, I'll update the date above. If the change is important and you're on the newsletter, I'll let you know by email."
       }
     ]
+  },
+  "confirmed": {
+    "title": "You're in!",
+    "body": "So glad we're staying in touch. I'll write to you when I have news to share.",
+    "note": "In the meantime, pour yourself a drink and pick an episode.",
+    "cta": "Find your next episode",
+    "home": "Back to the home page",
+    "postmark": "CONFIRMED ★ LOVE MODE ★"
   }
 }

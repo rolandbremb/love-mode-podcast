@@ -298,5 +298,13 @@
         "body": "Si cambio esta política, actualizaré la fecha de arriba. Si el cambio es importante y estás en la newsletter, te avisaré por correo."
       }
     ]
+  },
+  "confirmed": {
+    "title": "¡Ya estás dentro!",
+    "body": "Qué rico seguir en contacto. Te escribiré cuando tenga novedades para compartir.",
+    "note": "Mientras tanto, sírvete un drink y elige un episodio.",
+    "cta": "Encuentra tu próximo episodio",
+    "home": "Volver al inicio",
+    "postmark": "CONFIRMADO ★ LOVE MODE ★"
   }
 }
