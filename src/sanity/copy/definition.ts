@@ -113,6 +113,9 @@ const home: CopyDocument = {
     { key: "home.newsInterests", title: "Question above the options", section: "news" },
     { key: "home.newsOptions", title: "Options", type: "stringList", section: "news" },
     { key: "home.newsCta", title: "Button", section: "news" },
+    { key: "home.newsFinePrint", title: "Small print under the button", type: "text", section: "news" },
+    { key: "home.newsSuccessTitle", title: "After signing up: title", section: "news" },
+    { key: "home.newsSuccessBody", title: "After signing up: text", type: "text", section: "news" },
 
     { key: "home.supportTheShow", title: "Coffee: title", section: "coffee" },
     { key: "home.supportDescription", title: "Coffee: text", type: "text", section: "coffee" },

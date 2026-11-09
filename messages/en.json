@@ -124,7 +124,10 @@
       "I'm Andrea Moreno, journalist, podcast host, and your love & dating bestie. I've fallen in love, I've gotten divorced, and I've bet on love again.",
       "Ever since I was little, I've been the go-to for heart advice, the matchmaker. And here I am, years later, talking about love, trying to figure it out, and asking questions that end up becoming Love Mode episodes.",
       "Wherever you are on your love journey, you've got company here."
-    ]
+    ],
+    "newsFinePrint": "By subscribing, you'll get the emails you chose. You can unsubscribe anytime.",
+    "newsSuccessTitle": "You're almost in!",
+    "newsSuccessBody": "I've sent you an email to confirm your subscription. So glad we're staying in touch."
   },
   "episodes": {
     "title": "All episodes",

@@ -124,7 +124,10 @@
       "Soy Andrea Moreno, periodista, podcast host y tu love & dating bestie. Me he enamorado, me he divorciado y he vuelto a apostar por el amor.",
       "Desde chiquita he sido la doctora corazón, la matchmaker. Y aquí estoy, años después, hablando de amor, tratando de descifrarlo y haciendo preguntas que terminan convirtiéndose en episodios de Love Mode.",
       "Estés en el punto que estés de tu love journey, aquí tienes compañía."
-    ]
+    ],
+    "newsFinePrint": "Al suscribirte, recibirás los correos que hayas elegido. Puedes darte de baja cuando quieras.",
+    "newsSuccessTitle": "¡Ya casi estás dentro!",
+    "newsSuccessBody": "Te envié un correo para confirmar tu suscripción. Qué rico seguir en contacto."
   },
   "episodes": {
     "title": "Todos los episodios",

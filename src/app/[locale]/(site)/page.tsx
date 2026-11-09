@@ -3,6 +3,7 @@ import Image from "next/image";
 import { draftMode } from "next/headers";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import NewsletterForm from "@/components/forms/NewsletterForm";
 import ArrowLink from "@/components/postal/ArrowLink";
 import {
   BrokenHeart,
@@ -24,7 +25,7 @@ import { getAboutPage, getSiteSettings } from "@/sanity/client";
 
 export const revalidate = 3600;
 
-// Sections for services that aren't connected yet (paid sessions, newsletter)
+// Sections for services that aren't connected yet (the paid sessions)
 // stay hidden until they work. Set SHOW_UPCOMING_SECTIONS=true on a deployment
 // to review them; they always show in local development.
 const showUpcoming =
@@ -91,7 +92,6 @@ export default async function Home({
   const stops = t.raw("journeyStops") as { title: string; description: string; search: string }[];
   const episodesIntro = t.raw("episodesIntro") as string[];
   const guestParagraphs = t.raw("guestParagraphs") as string[];
-  const newsOptions = t.raw("newsOptions") as string[];
 
   // The welcome reads like a letter: questions first, then the reply
   const [welcomeQuestions, ...welcomeReply] = aboutParagraphs;
@@ -408,42 +408,16 @@ export default async function Home({
         </div>
       </section>
 
-      {/* ===== NEWSLETTER (preview only until the email list is connected) ===== */}
-      {showUpcoming && (
-        <section className="page-container pb-24 lg:pb-32">
-          <div className="grid items-center gap-12 rounded-[2.25rem] bg-tangerine px-6 py-12 sm:px-12 lg:grid-cols-[6fr_5fr] lg:gap-[4.5rem] lg:p-[4.5rem]">
-            <div className="flex flex-col gap-4">
-              <h2 className="font-display text-[clamp(2.5rem,5vw,3.75rem)] leading-[1.02] tracking-[-0.02em]">{t("newsTitle")}</h2>
-              <p className="max-w-[32.5rem] text-lg leading-relaxed sm:text-[1.1875rem]">{t("newsBody")}</p>
-            </div>
-            <form className="flex flex-col gap-4">
-              <label className="flex flex-col gap-1.5 text-[0.9375rem] font-semibold">
-                {t("newsName")}
-                <input type="text" name="name" autoComplete="given-name" className="field border-plum bg-shell" />
-              </label>
-              <label className="flex flex-col gap-1.5 text-[0.9375rem] font-semibold">
-                {t("newsEmail")}
-                <input type="email" name="email" autoComplete="email" className="field border-plum bg-shell" />
-              </label>
-              <fieldset className="mt-1 flex flex-wrap gap-2">
-                <legend className="mb-2 text-[0.9375rem] font-semibold">{t("newsInterests")}</legend>
-                {newsOptions.map((option, index) => (
-                  <label
-                    key={option}
-                    className={`flex items-center gap-2 rounded-full px-3.5 py-2 text-[0.9375rem] font-medium ${
-                      index === 0 ? "bg-bubblegum" : "border-[1.5px] border-plum"
-                    }`}
-                  >
-                    <input type="checkbox" name="interests" value={option} defaultChecked={index === 0} className="h-4 w-4 accent-plum" />
-                    {option}
-                  </label>
-                ))}
-              </fieldset>
-              <button type="button" className="btn-primary mt-1.5 self-start">{t("newsCta")}</button>
-            </form>
+      {/* ===== NEWSLETTER (signups go to Kit) ===== */}
+      <section className="page-container pb-24 lg:pb-32">
+        <div className="grid items-center gap-12 rounded-[2.25rem] bg-tangerine px-6 py-12 sm:px-12 lg:grid-cols-[6fr_5fr] lg:gap-[4.5rem] lg:p-[4.5rem]">
+          <div className="flex flex-col gap-4">
+            <h2 className="font-display text-[clamp(2.5rem,5vw,3.75rem)] leading-[1.02] tracking-[-0.02em]">{t("newsTitle")}</h2>
+            <p className="max-w-[32.5rem] text-lg leading-relaxed sm:text-[1.1875rem]">{t("newsBody")}</p>
           </div>
-        </section>
-      )}
+          <NewsletterForm />
+        </div>
+      </section>
 
       {/* ===== COFFEE + BRANDS: one tear-off ticket ===== */}
       <section className="page-container pb-24 lg:pb-32">
