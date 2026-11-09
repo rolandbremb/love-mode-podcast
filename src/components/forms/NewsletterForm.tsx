@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { subscribeToNewsletter } from "@/lib/newsletter";
 import { Honeypot, useFormSubmit } from "./FormParts";
+import { rememberSignup } from "./QuickSignupForm";
 
 // One value per interest tag in Kit, in the same order as the "newsOptions" text
 const INTEREST_VALUES = ["news", "community", "divorce"];
@@ -18,7 +19,9 @@ export default function NewsletterForm() {
   const error = state?.status === "error" ? state.reason : null;
 
   useEffect(() => {
-    if (state?.status === "success") successRef.current?.focus();
+    if (state?.status !== "success") return;
+    rememberSignup();
+    successRef.current?.focus();
   }, [state]);
 
   if (state?.status === "success") {

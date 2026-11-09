@@ -346,7 +346,60 @@ const confirmed: CopyDocument = {
   ],
 };
 
-export const copyDocuments: CopyDocument[] = [home, episodes, about, guest, brands, menu, forms, resources, privacy, confirmed, seo];
+const popup: CopyDocument = {
+  id: "newsletterPopup",
+  title: "Newsletter pop-up",
+  fields: [
+    { key: "popup.title", title: "Title" },
+    { key: "popup.body", title: "Text", type: "text" },
+    { key: "popup.name", title: "Name field label" },
+    { key: "popup.email", title: "Email field label" },
+    { key: "popup.cta", title: "Button" },
+    { key: "popup.finePrint", title: "Fine print" },
+    { key: "popup.privacy", title: "Link to the privacy page" },
+    { key: "popup.successTitle", title: "After signing up: title" },
+    { key: "popup.successBody", title: "After signing up: text", type: "text" },
+    { key: "popup.close", title: "Close button (read out by screen readers)" },
+  ],
+};
+
+const lista: CopyDocument = {
+  id: "listaPage",
+  title: "\"Esto apenas empieza\" page (/lista)",
+  fields: [
+    { key: "lista.title", title: "Title" },
+    { key: "lista.intro", title: "Intro paragraphs", type: "textList" },
+    { key: "lista.name", title: "Name field label" },
+    { key: "lista.email", title: "Email field label" },
+    { key: "lista.phone", title: "WhatsApp field label" },
+    { key: "lista.phoneHint", title: "WhatsApp field hint" },
+    { key: "lista.consent", title: "WhatsApp consent checkbox", description: "Appears once someone types a phone number." },
+    { key: "lista.cta", title: "Button" },
+    { key: "lista.finePrint", title: "Fine print" },
+    { key: "lista.privacy", title: "Link to the privacy page" },
+    { key: "lista.successTitle", title: "After signing up: title" },
+    { key: "lista.successBody", title: "After signing up: text", type: "text" },
+    { key: "lista.listen", title: "Link to the episodes" },
+    { key: "lista.postmark", title: "Text around the postmark" },
+    { key: "lista.metaDescription", title: "Description in search results and link previews", type: "text" },
+  ],
+};
+
+export const copyDocuments: CopyDocument[] = [
+  home,
+  episodes,
+  about,
+  guest,
+  brands,
+  menu,
+  forms,
+  resources,
+  privacy,
+  confirmed,
+  popup,
+  lista,
+  seo,
+];
 
 /* Sanity field name for a translation key: "home.listenNow" -> "listenNow" on the
    home page document; keys from another namespace keep it as a prefix. */

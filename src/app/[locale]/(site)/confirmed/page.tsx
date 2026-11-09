@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import ArrowLink from "@/components/postal/ArrowLink";
 import Postmark, { CancelWaves } from "@/components/postal/Postmark";
+import RememberSignup from "@/components/forms/RememberSignup";
 
 // Kit sends people here after they click the button in the confirmation email
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -18,6 +19,7 @@ export default async function ConfirmedPage({ params }: { params: Promise<{ loca
   return (
     <section className="page-container flex justify-center pb-24 pt-10 md:pb-32 md:pt-16">
       <div className="relative w-full max-w-[40rem]">
+        <RememberSignup />
         <Postmark
           id="confirmed-postmark"
           text={t("postmark")}

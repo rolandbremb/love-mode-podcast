@@ -12,6 +12,15 @@ const NEWSLETTER_INTERESTS = {
   divorce: 25642837, // Volver al ruedo
 } as const;
 
+// Which signup form someone used ("source"), recorded as a tag
+const SOURCE_TAGS: Record<string, number> = {
+  popup: 25644053, // Fuente: pop-up
+  lista: 25644054, // Fuente: Esto apenas empieza
+};
+const WHATSAPP_CONSENT_TAG = 25644055; // WhatsApp: acepta mensajes
+
+const PHONE_PATTERN = /^\+?[0-9][0-9\s().-]{6,19}$/;
+
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function field(formData: FormData, name: string, max = 200) {
@@ -30,8 +39,24 @@ async function kit(path: string, body: Record<string, unknown>, apiKey: string) 
 
 /* With an API key: create the subscriber as unconfirmed, add them to the form
    (Kit then emails them to confirm) and tag their interests. */
-async function subscribeWithApi(email: string, firstName: string, interests: number[], referrer: string, apiKey: string) {
-  const created = await kit("subscribers", { email_address: email, first_name: firstName || undefined, state: "inactive" }, apiKey);
+async function subscribeWithApi(
+  email: string,
+  firstName: string,
+  tags: number[],
+  referrer: string,
+  apiKey: string,
+  whatsapp?: string
+) {
+  const created = await kit(
+    "subscribers",
+    {
+      email_address: email,
+      first_name: firstName || undefined,
+      state: "inactive",
+      fields: whatsapp ? { whatsapp } : undefined,
+    },
+    apiKey
+  );
   if (!created.ok) return created.status;
 
   const added = await kit(`forms/${KIT_FORM_ID}/subscribers`, { email_address: email, referrer }, apiKey);
@@ -39,7 +64,7 @@ async function subscribeWithApi(email: string, firstName: string, interests: num
 
   // A missing tag shouldn't undo the signup, so tag failures are only logged
   await Promise.all(
-    interests.map(async (tagId) => {
+    tags.map(async (tagId) => {
       const tagged = await kit(`tags/${tagId}/subscribers`, { email_address: email }, apiKey);
       if (!tagged.ok) console.error(`Kit: tagging ${tagId} failed with ${tagged.status}`);
     })
@@ -67,16 +92,24 @@ export async function subscribeToNewsletter(formData: FormData): Promise<FormSta
   const firstName = field(formData, "name", 80);
   if (!EMAIL_PATTERN.test(email)) return { status: "error", reason: "invalid" };
 
+  // WhatsApp is optional, but a number only counts with the consent box ticked
+  const phone = field(formData, "whatsapp", 40);
+  const whatsappConsent = formData.get("whatsapp_consent") === "yes";
+  if (phone && (!PHONE_PATTERN.test(phone) || !whatsappConsent)) return { status: "error", reason: "invalid" };
+  const whatsapp = phone && whatsappConsent ? phone : undefined;
+
   const interests = formData
     .getAll("interests")
     .map((value) => NEWSLETTER_INTERESTS[value as keyof typeof NEWSLETTER_INTERESTS])
     .filter(Boolean);
+  const sourceTag = SOURCE_TAGS[field(formData, "source", 20)];
+  const tags = [...interests, ...(sourceTag ? [sourceTag] : []), ...(whatsapp ? [WHATSAPP_CONSENT_TAG] : [])];
   const referrer = field(formData, "page", 300) || "https://lovemodepod.com";
 
   try {
     const apiKey = process.env.KIT_API_KEY;
     if (apiKey) {
-      const status = await subscribeWithApi(email, firstName, interests, referrer, apiKey);
+      const status = await subscribeWithApi(email, firstName, tags, referrer, apiKey, whatsapp);
       if (status === 200) return { status: "success" };
       console.error(`Kit API signup failed with ${status}; trying the public form`);
     }

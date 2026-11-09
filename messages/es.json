@@ -271,11 +271,11 @@
       },
       {
         "heading": "Qué datos recojo y para qué",
-        "body": "- Newsletter: tu nombre (si lo das), tu correo y los temas que elijas, para enviarte los correos que pediste. Solo te escribo después de que confirmes tu suscripción.\n- Formulario «Comparte tu historia»: tu nombre, tu correo, tus redes sociales y lo que me cuentes, para valorar tu propuesta y contactarte si encaja con un episodio.\n- Formulario «Para marcas»: tu nombre o empresa, tu correo, tu sitio web, el tipo de colaboración, el presupuesto y tu idea, para responder a tu propuesta.\n- Visitas a la web: estadísticas anónimas y agregadas (páginas vistas, país, tipo de dispositivo y velocidad de carga) para entender qué funciona y mejorar el sitio. No usan cookies ni te identifican."
+        "body": "- Newsletter: tu nombre (si lo das), tu correo y los temas que elijas, para enviarte los correos que pediste. Solo te escribo después de que confirmes tu suscripción.\n- WhatsApp (opcional, en la página «Esto apenas empieza»): tu número de teléfono, solo si lo das y marcas la casilla de consentimiento, para enviarte mensajes de Love Mode por WhatsApp. Puedes pedirme que deje de escribirte cuando quieras.\n- Formulario «Comparte tu historia»: tu nombre, tu correo, tus redes sociales y lo que me cuentes, para valorar tu propuesta y contactarte si encaja con un episodio.\n- Formulario «Para marcas»: tu nombre o empresa, tu correo, tu sitio web, el tipo de colaboración, el presupuesto y tu idea, para responder a tu propuesta.\n- Visitas a la web: estadísticas anónimas y agregadas (páginas vistas, país, tipo de dispositivo y velocidad de carga) para entender qué funciona y mejorar el sitio. No usan cookies ni te identifican."
       },
       {
         "heading": "Por qué puedo usarlos",
-        "body": "Uso tus datos porque me das tu consentimiento (newsletter), porque me los envías para que te responda (formularios) o por mi interés legítimo en mantener el sitio seguro y entender cómo se usa (estadísticas). Puedes retirar tu consentimiento cuando quieras."
+        "body": "Uso tus datos porque me das tu consentimiento (newsletter y WhatsApp), porque me los envías para que te responda (formularios) o por mi interés legítimo en mantener el sitio seguro y entender cómo se usa (estadísticas). Puedes retirar tu consentimiento cuando quieras."
       },
       {
         "heading": "Con quién los comparto",
@@ -283,7 +283,7 @@
       },
       {
         "heading": "Cuánto tiempo los guardo",
-        "body": "Los datos de la newsletter, hasta que te des de baja. Los mensajes de los formularios, el tiempo necesario para responderte y, como máximo, 24 meses."
+        "body": "Los datos de la newsletter y tu número de WhatsApp, hasta que te des de baja o me pidas que los borre. Los mensajes de los formularios, el tiempo necesario para responderte y, como máximo, 24 meses."
       },
       {
         "heading": "Tus derechos",
@@ -306,5 +306,37 @@
     "cta": "Encuentra tu próximo episodio",
     "home": "Volver al inicio",
     "postmark": "CONFIRMADO ★ LOVE MODE ★"
+  },
+  "popup": {
+    "title": "¿Seguimos en contacto? 💌",
+    "body": "Déjame tu correo y te comparto recursos, ideas y lo nuevo de Love Mode para acompañarte en tu love journey.",
+    "name": "Tu nombre",
+    "email": "Tu correo electrónico",
+    "cta": "Sí, escríbeme.",
+    "finePrint": "Puedes darte de baja cuando quieras.",
+    "privacy": "Política de privacidad",
+    "successTitle": "¡Ya casi!",
+    "successBody": "Te envié un correo para confirmar tu suscripción. Qué rico seguir en contacto.",
+    "close": "Cerrar"
+  },
+  "lista": {
+    "title": "Esto apenas empieza. 💌",
+    "intro": [
+      "Estoy preparando cosas lindas para esta comunidad y me encantaría compartirlas contigo.",
+      "Déjame tu correo para recibir recursos, cursos y novedades de Love Mode sobre amor, dating y relaciones."
+    ],
+    "name": "Tu nombre",
+    "email": "Tu correo electrónico",
+    "phone": "Tu teléfono (WhatsApp)",
+    "phoneHint": "Opcional. Incluye el código de tu país, por ejemplo +57.",
+    "consent": "Acepto recibir mensajes de Love Mode por WhatsApp.",
+    "cta": "Me apunto",
+    "finePrint": "Puedes darte de baja cuando quieras.",
+    "privacy": "Política de privacidad",
+    "successTitle": "¡Ya estás en la lista! 🤍",
+    "successBody": "Qué rico tenerte por aquí. Revisa tu correo para confirmar tu suscripción y pronto tendrás noticias mías.",
+    "listen": "Mientras tanto, escucha Love Mode",
+    "metaDescription": "Únete a la lista de Love Mode para recibir recursos, cursos y novedades sobre amor, dating y relaciones.",
+    "postmark": "COMUNIDAD ★ LOVE MODE ★"
   }
 }

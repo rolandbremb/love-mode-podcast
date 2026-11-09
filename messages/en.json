@@ -271,11 +271,11 @@
       },
       {
         "heading": "What I collect and why",
-        "body": "- Newsletter: your name (if you give it), your email and the topics you choose, to send you the emails you asked for. I only write to you after you confirm your subscription.\n- \"Share your story\" form: your name, email, social media and what you tell me, to consider your story and contact you if it fits an episode.\n- \"For brands\" form: your name or company, email, website, type of collaboration, budget and idea, to reply to your proposal.\n- Visits to the site: anonymous, aggregated statistics (pages viewed, country, device type and loading speed) to understand what works and improve the site. They use no cookies and don't identify you."
+        "body": "- Newsletter: your name (if you give it), your email and the topics you choose, to send you the emails you asked for. I only write to you after you confirm your subscription.\n- WhatsApp (optional, on the \"This is just the beginning\" page): your phone number, only if you give it and tick the consent box, to send you Love Mode messages on WhatsApp. You can ask me to stop at any time.\n- \"Share your story\" form: your name, email, social media and what you tell me, to consider your story and contact you if it fits an episode.\n- \"For brands\" form: your name or company, email, website, type of collaboration, budget and idea, to reply to your proposal.\n- Visits to the site: anonymous, aggregated statistics (pages viewed, country, device type and loading speed) to understand what works and improve the site. They use no cookies and don't identify you."
       },
       {
         "heading": "Why I'm allowed to use it",
-        "body": "I use your data because you give me your consent (newsletter), because you send it to me so I can reply (forms), or because of my legitimate interest in keeping the site secure and understanding how it's used (statistics). You can withdraw your consent at any time."
+        "body": "I use your data because you give me your consent (newsletter and WhatsApp), because you send it to me so I can reply (forms), or because of my legitimate interest in keeping the site secure and understanding how it's used (statistics). You can withdraw your consent at any time."
       },
       {
         "heading": "Who I share it with",
@@ -283,7 +283,7 @@
       },
       {
         "heading": "How long I keep it",
-        "body": "Newsletter data, until you unsubscribe. Form messages, as long as needed to reply to you and for 24 months at most."
+        "body": "Newsletter data and your WhatsApp number, until you unsubscribe or ask me to delete them. Form messages, as long as needed to reply to you and for 24 months at most."
       },
       {
         "heading": "Your rights",
@@ -306,5 +306,37 @@
     "cta": "Find your next episode",
     "home": "Back to the home page",
     "postmark": "CONFIRMED ★ LOVE MODE ★"
+  },
+  "popup": {
+    "title": "Shall we stay in touch? 💌",
+    "body": "Leave your email and I'll share resources, ideas and what's new at Love Mode to keep you company on your love journey.",
+    "name": "Your name",
+    "email": "Your email",
+    "cta": "Yes, write to me.",
+    "finePrint": "You can unsubscribe anytime.",
+    "privacy": "Privacy policy",
+    "successTitle": "Almost there!",
+    "successBody": "I've sent you an email to confirm your subscription. So glad we're staying in touch.",
+    "close": "Close"
+  },
+  "lista": {
+    "title": "This is just the beginning. 💌",
+    "intro": [
+      "I'm preparing lovely things for this community and I'd love to share them with you.",
+      "Leave your email to get Love Mode resources, courses and news about love, dating and relationships."
+    ],
+    "name": "Your name",
+    "email": "Your email",
+    "phone": "Your phone (WhatsApp)",
+    "phoneHint": "Optional. Include your country code, for example +1.",
+    "consent": "I agree to receive messages from Love Mode on WhatsApp.",
+    "cta": "Count me in",
+    "finePrint": "You can unsubscribe anytime.",
+    "privacy": "Privacy policy",
+    "successTitle": "You're on the list! 🤍",
+    "successBody": "So glad to have you here. Check your email to confirm your subscription, and you'll hear from me soon.",
+    "listen": "In the meantime, listen to Love Mode",
+    "metaDescription": "Join the Love Mode list for resources, courses and news about love, dating and relationships.",
+    "postmark": "COMMUNITY ★ LOVE MODE ★"
   }
 }

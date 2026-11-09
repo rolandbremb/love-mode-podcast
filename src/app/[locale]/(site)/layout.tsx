@@ -2,6 +2,7 @@ import { draftMode } from "next/headers";
 import { VisualEditing } from "@/components/VisualEditingClient";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import NewsletterPopup from "@/components/NewsletterPopup";
 import { getSiteSettings } from "@/sanity/client";
 
 export default async function SiteLayout({
@@ -27,7 +28,7 @@ export default async function SiteLayout({
       <Navbar {...navVisibility} />
       <main className="min-h-screen">{children}</main>
       <Footer locale={locale} {...navVisibility} />
-      {preview && <VisualEditing zIndex={1000} />}
+      {preview ? <VisualEditing zIndex={1000} /> : <NewsletterPopup />}
     </div>
   );
 }

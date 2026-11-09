@@ -25,6 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/collaborate", priority: 0.8, changeFrequency: "monthly" },
     { path: "/about", priority: 0.7, changeFrequency: "monthly" },
     { path: "/apply", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/lista", priority: 0.5, changeFrequency: "monthly" },
     { path: "/privacy", priority: 0.2, changeFrequency: "monthly" },
   ];
   // Optional pages only appear once they're switched on in the Studio
