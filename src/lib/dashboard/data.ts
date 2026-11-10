@@ -299,31 +299,11 @@ export async function getStripePayments(): Promise<Source<Payment[]>> {
   }
 }
 
-type CoffeeSupporter = { support_coffees: number; support_coffee_price: string; support_created_on: string };
-
-// Buy Me a Coffee supporters, when BMC_ACCESS_TOKEN is set; otherwise coffee is entered by hand
-export async function getCoffeePayments(): Promise<Source<Payment[]>> {
-  const token = process.env.BMC_ACCESS_TOKEN;
-  if (!token) return { status: "missing", data: [], note: "BMC_ACCESS_TOKEN" };
-  try {
-    const payments: Payment[] = [];
-    let url: string | null = "https://developers.buymeacoffee.com/api/v1/supporters";
-    for (let page = 0; url && page < 20; page++) {
-      const res: Response = await fetch(url, { headers: { Authorization: `Bearer ${token}` }, next: { revalidate: 1800 } });
-      if (!res.ok) throw new Error(`Buy Me a Coffee: ${res.status}`);
-      const body: { data?: CoffeeSupporter[]; next_page_url?: string | null } = await res.json();
-      for (const supporter of body.data ?? []) {
-        payments.push({
-          date: new Date(supporter.support_created_on).toISOString(),
-          amount: supporter.support_coffees * Number(supporter.support_coffee_price),
-          stream: "coffee",
-        });
-      }
-      url = body.next_page_url ?? null;
-    }
-    return { status: "ok", data: payments };
-  } catch (error) {
-    console.error("[dashboard] Buy Me a Coffee:", error);
-    return { status: "error", data: [], note: errorNote(error) };
-  }
+/* Buy Me a Coffee sends each payment to /api/buymeacoffee/webhook, which saves it as an
+   income entry, so coffee revenue arrives with the rest of the income. This only says
+   whether that's set up (BMC_WEBHOOK_SECRET); it has no payments of its own. */
+export function getCoffeeConnection(): Source<Payment[]> {
+  return process.env.BMC_WEBHOOK_SECRET
+    ? { status: "ok", data: [] }
+    : { status: "missing", data: [], note: "BMC_WEBHOOK_SECRET" };
 }

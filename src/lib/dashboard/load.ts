@@ -2,7 +2,7 @@ import { unstable_cache } from "next/cache";
 import { cache } from "react";
 import {
   getCalls,
-  getCoffeePayments,
+  getCoffeeConnection,
   getInbox,
   getNewsletter,
   getStripePayments,
@@ -71,12 +71,15 @@ const loadStripe = cache(async (): Promise<Source<Payment[]>> => {
 });
 
 export const loadRevenue = cache(async () => {
-  const [stripe, coffee, inbox] = await Promise.all([loadStripe(), getCoffeePayments(), loadInbox()]);
-  const manual: Payment[] = inbox.data.income
-    // Once Buy Me a Coffee is connected, its supporters come from there instead
-    .filter((entry) => !(coffee.status === "ok" && entry.stream === "coffee"))
-    .map((entry) => ({ date: `${entry.date}T12:00:00Z`, amount: entry.amount, stream: entry.stream }));
-  const real = [...stripe.data, ...coffee.data, ...manual];
+  const [stripe, inbox] = await Promise.all([loadStripe(), loadInbox()]);
+  const coffee = getCoffeeConnection();
+  // Income entries: added by hand, plus Buy Me a Coffee payments saved by its webhook
+  const income: Payment[] = inbox.data.income.map((entry) => ({
+    date: `${entry.date}T12:00:00Z`,
+    amount: entry.amount,
+    stream: entry.stream,
+  }));
+  const real = [...stripe.data, ...income];
   const sample = showUpcoming && real.length === 0;
   const payments = sample ? samplePayments() : real;
   return { stripe, coffee, sample, months: revenueByMonth(payments), totals: revenueTotals(payments) };

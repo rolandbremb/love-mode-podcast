@@ -562,7 +562,7 @@ export async function ConnectionsFooter() {
     { label: "Kit newsletter", source: newsletter.source, env: "KIT_API_KEY" },
     { label: "Cal.com calls", source: calls.source, env: "CAL_API_KEY" },
     { label: "Stripe revenue", source: revenue.stripe, env: "STRIPE_REPORTING_KEY" },
-    { label: "Buy Me a Coffee", source: revenue.coffee, env: "BMC_ACCESS_TOKEN" },
+    { label: "Buy Me a Coffee", source: revenue.coffee, env: "BMC_WEBHOOK_SECRET" },
   ];
   return (
     <footer className="flex flex-col gap-3 border-t-[1.5px] border-plum/10 pt-6 text-sm">
