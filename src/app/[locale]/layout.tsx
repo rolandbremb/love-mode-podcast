@@ -28,7 +28,8 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       siteName: t("title"),
-      locale: locale === "es" ? "es_ES" : "en_US",
+      // Spanish for Latin America, where most listeners are, rather than Spain
+      locale: locale === "es" ? "es_LA" : "en_US",
       title: t("title"),
       description: t("description"),
     },

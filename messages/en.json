@@ -255,8 +255,13 @@
   },
   "meta": {
     "title": "Love Mode Podcast",
-    "description": "Real conversations about love, dating, and building relationships that actually last. New episodes every Friday, hosted by Andrea Moreno.",
-    "aboutTitle": "About me",
+    "homeTitle": "Love Mode Podcast | Love, dating & relationships, in Spanish",
+    "description": "A Spanish-language podcast on love, dating, heartbreak and relationships, hosted by Colombian journalist Andrea Moreno. Real stories, new episodes every Friday.",
+    "aboutTitle": "About Andrea Moreno",
+    "aboutDescription": "Andrea Moreno is a Colombian journalist and the host of Love Mode. She got divorced, dated again, and now talks from Miami about how we choose and care for love.",
+    "episodesTitle": "Episodes: dating, heartbreak, divorce and starting over",
+    "episodesDescription": "Every Love Mode episode, in Spanish: first dates, dating apps, long distance, infidelity, divorce and starting over. On YouTube, Spotify and Apple Podcasts.",
+    "brandsTitle": "Sponsorships and brand partnerships",
     "brandsDescription": "Partner with Love Mode: podcast integrations, social content, and campaigns for a community that talks about love, dating, and relationships.",
     "privacyDescription": "Your trust matters most to Love Mode. Here's what data I collect when you visit lovemodepod.com, what I use it for, who I share it with and what rights you have."
   },

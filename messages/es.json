@@ -255,8 +255,13 @@
   },
   "meta": {
     "title": "Love Mode Podcast",
-    "description": "Conversaciones reales sobre amor, citas y cómo construir relaciones que sí duran. Nuevos episodios cada viernes, con Andrea Moreno.",
-    "aboutTitle": "Sobre mí",
+    "homeTitle": "Love Mode Podcast | Amor, citas y relaciones en español",
+    "description": "Podcast en español sobre amor, dating, desamor y relaciones, con la periodista colombiana Andrea Moreno. Historias reales y un episodio nuevo cada viernes.",
+    "aboutTitle": "Sobre Andrea Moreno",
+    "aboutDescription": "Andrea Moreno es periodista colombiana y host de Love Mode. Se divorció, volvió al dating y hoy, desde Miami, habla de cómo elegimos pareja y cuidamos el amor.",
+    "episodesTitle": "Episodios: citas, desamor, divorcio y volver a empezar",
+    "episodesDescription": "Todos los episodios de Love Mode: primeras citas, apps, relaciones a distancia, infidelidad, divorcio y volver a empezar. En YouTube, Spotify y Apple Podcasts.",
+    "brandsTitle": "Patrocinios y colaboraciones con marcas",
     "brandsDescription": "Colabora con Love Mode: integraciones en el pódcast, contenido para redes y campañas para una comunidad que habla de amor, dating y relaciones.",
     "privacyDescription": "Tu confianza es lo más importante para Love Mode. Aquí te explico qué datos recojo cuando visitas lovemodepod.com, para qué los uso, con quién los comparto y qué derechos tienes."
   },

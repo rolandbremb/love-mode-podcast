@@ -3,8 +3,10 @@ import { pageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import EpisodesBrowser from "@/components/EpisodesBrowser";
+import JsonLd from "@/components/JsonLd";
 import PageHeader from "@/components/postal/PageHeader";
 import { getAllEpisodes } from "@/lib/rss";
+import { podcastEpisode, podcastSeries } from "@/lib/structuredData";
 import { getSiteSettings } from "@/sanity/client";
 
 export const revalidate = 3600;
@@ -23,9 +25,9 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "episodes" });
-  const title = t("title");
-  const description = t("subtitle");
+  const t = await getTranslations({ locale, namespace: "meta" });
+  const title = t("episodesTitle");
+  const description = t("episodesDescription");
   return pageMetadata(parent, { title, description, locale, path: "/episodes" });
 }
 
@@ -36,6 +38,7 @@ export default async function EpisodesPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "episodes" });
+  const tMeta = await getTranslations({ locale, namespace: "meta" });
 
   const settings = await getSiteSettings({ locale });
   const episodes = await getAllEpisodes(settings?.podcastRssUrl);
@@ -45,6 +48,12 @@ export default async function EpisodesPage({
 
   return (
     <div>
+      <JsonLd
+        data={{
+          ...podcastSeries({ name: tMeta("title"), description: tMeta("description"), locale, settings }),
+          episode: episodes.map(podcastEpisode),
+        }}
+      />
       <PageHeader
         title={t("title")}
         subtitle={t("subtitle")}

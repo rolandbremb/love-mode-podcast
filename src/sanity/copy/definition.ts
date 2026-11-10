@@ -310,8 +310,22 @@ const seo: CopyDocument = {
   title: "Search and sharing",
   fields: [
     { key: "meta.title", title: "Site name in search results" },
-    { key: "meta.description", title: "Site description in search results", type: "text" },
+    {
+      key: "meta.homeTitle",
+      title: "Home page: title in search results",
+      description: "Around 60 characters at most, or Google cuts it off.",
+    },
+    {
+      key: "meta.description",
+      title: "Site description in search results",
+      type: "text",
+      description: "Around 155 characters at most, or Google cuts it off.",
+    },
     { key: "meta.aboutTitle", title: "About page: title in search results" },
+    { key: "meta.aboutDescription", title: "About page: description in search results", type: "text" },
+    { key: "meta.episodesTitle", title: "Episodes page: title in search results" },
+    { key: "meta.episodesDescription", title: "Episodes page: description in search results", type: "text" },
+    { key: "meta.brandsTitle", title: "For brands page: title in search results" },
     { key: "meta.brandsDescription", title: "For brands page: description in search results", type: "text" },
     { key: "meta.privacyDescription", title: "Privacy page: description in search results", type: "text" },
   ],

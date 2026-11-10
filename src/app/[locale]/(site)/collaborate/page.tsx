@@ -13,7 +13,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  const title = (await getTranslations({ locale, namespace: "collaborate" }))("title");
+  const title = t("brandsTitle");
   const description = t("brandsDescription");
   return pageMetadata(parent, { title, description, locale, path: "/collaborate" });
 }

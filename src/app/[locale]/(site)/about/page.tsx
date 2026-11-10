@@ -3,8 +3,10 @@ import { pageMetadata } from "@/lib/metadata";
 import Image from "next/image";
 import { draftMode } from "next/headers";
 import { getTranslations } from "next-intl/server";
+import JsonLd from "@/components/JsonLd";
 import { CoffeeCup, Microphone, PaperPlane } from "@/components/postal/Doodles";
 import { Link } from "@/i18n/navigation";
+import { host } from "@/lib/structuredData";
 import { getAboutPage, getSiteSettings } from "@/sanity/client";
 
 export const revalidate = 3600;
@@ -23,7 +25,7 @@ export async function generateMetadata(
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
   const title = t("aboutTitle");
-  const description = t("description");
+  const description = t("aboutDescription");
   return pageMetadata(parent, { title, description, locale, path: "/about" });
 }
 
@@ -35,6 +37,7 @@ export default async function AboutPage({
   const { locale } = await params;
   const { isEnabled: preview } = await draftMode();
   const t = await getTranslations({ locale, namespace: "about" });
+  const tMeta = await getTranslations({ locale, namespace: "meta" });
 
   const [data, settings] = await Promise.all([
     getAboutPage({ preview, locale }),
@@ -75,6 +78,12 @@ export default async function AboutPage({
 
   return (
     <div>
+      <JsonLd
+        data={{
+          "@type": "ProfilePage",
+          mainEntity: host({ name: hostName, photo: photoUrl, description: tMeta("aboutDescription"), locale }),
+        }}
+      />
       {/* ===== HOST ===== */}
       <section className="page-container grid items-center gap-14 pb-24 pt-8 md:pt-14 lg:grid-cols-[5fr_7fr] lg:gap-24 lg:pb-32">
         <div className="relative mx-auto aspect-[39/51] w-full max-w-[24.5rem] overflow-hidden rounded-b-lg rounded-t-full bg-bubblegum lg:mx-0">

@@ -19,8 +19,10 @@ import {
   Telephone,
 } from "@/components/postal/Doodles";
 import Postmark, { CancelWaves } from "@/components/postal/Postmark";
+import JsonLd from "@/components/JsonLd";
 import { localeAlternates } from "@/lib/metadata";
 import { getAllEpisodes, type Episode } from "@/lib/rss";
+import { host, podcastSeries, website } from "@/lib/structuredData";
 import { getAboutPage, getSiteSettings } from "@/sanity/client";
 
 export const revalidate = 3600;
@@ -57,7 +59,9 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return { alternates: localeAlternates(locale, "") };
+  const t = await getTranslations({ locale, namespace: "meta" });
+  // The full title skips the " · Love Mode Podcast" suffix the other pages get
+  return { title: { absolute: t("homeTitle") }, alternates: localeAlternates(locale, "") };
 }
 
 export default async function Home({
@@ -68,6 +72,7 @@ export default async function Home({
   const { locale } = await params;
   const { isEnabled: preview } = await draftMode();
   const t = await getTranslations({ locale, namespace: "home" });
+  const tMeta = await getTranslations({ locale, namespace: "meta" });
 
   const [settings, aboutData] = await Promise.all([
     getSiteSettings({ preview, locale }),
@@ -99,6 +104,15 @@ export default async function Home({
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@graph": [
+            website({ name: tMeta("title"), locale }),
+            podcastSeries({ name: tMeta("title"), description: tMeta("description"), locale, settings }),
+            host({ name: hostName, photo: hostPhoto, description: tMeta("aboutDescription"), locale }),
+          ],
+        }}
+      />
       {/* ===== HERO: a stamp, its postmark and the cancel waves ===== */}
       <section className="relative overflow-hidden">
         <div className="page-container grid items-center gap-12 pb-16 pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-8 lg:pb-24 lg:pt-14">
