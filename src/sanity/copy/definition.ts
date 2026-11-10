@@ -86,6 +86,25 @@ const home: CopyDocument = {
     { key: "home.journeyIntro", title: "Intro", type: "text", section: "journey" },
     { key: "home.journeyNote", title: "Handwritten note", section: "journey" },
     { key: "home.journeyStops", title: "Stops", type: "stops", section: "journey", description: "Four stops, in order." },
+    {
+      key: "home.journeyIntros",
+      title: "Stop pages: intros",
+      type: "textList",
+      section: "journey",
+      description: "One per stop, in the same order. The opening text of each stop's page.",
+    },
+    {
+      key: "home.journeyKeywords",
+      title: "Stop pages: keywords",
+      type: "stringList",
+      section: "journey",
+      description:
+        "One line per stop, in the same order, with words separated by commas. An episode joins a stop when one of its words is in the episode's title or first paragraph. Episodes are in Spanish, so use Spanish words.",
+    },
+    { key: "home.journeyPageNote", title: "Stop pages: line above the title", section: "journey" },
+    { key: "home.journeyEpisodes", title: "Stop pages: episode count", section: "journey", description: "{count} is filled in automatically." },
+    { key: "home.journeyOther", title: "Stop pages: other stops title", section: "journey" },
+    { key: "home.journeyEpisodeStops", title: "Episode pages: stops label", section: "journey" },
     { key: "home.stopLabel", title: "Word before the stop number (for screen readers)", section: "journey" },
 
     { key: "home.mostViewedEpisodes", title: "Title", section: "episodes" },

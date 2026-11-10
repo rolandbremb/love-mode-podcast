@@ -21,6 +21,7 @@ import ListenerReviews from "@/components/ListenerReviews";
 import LatestEpisodePostcard from "@/components/LatestEpisodePostcard";
 import { localeAlternates } from "@/lib/metadata";
 import { episodePath, guestLine, splitEpisodeTitle } from "@/lib/episodes";
+import { stopPath } from "@/lib/journey";
 import { platformLabel } from "@/lib/format";
 import { withPreviewSample } from "@/lib/socialProof";
 import { paidEmailReady } from "@/lib/stripe";
@@ -108,6 +109,10 @@ export default async function Home({
   // Episodes are in Spanish, so each pill searches for its Spanish word (same order as the topics)
   const topicSearches = t.raw("topicSearches") as string[];
   const stops = t.raw("journeyStops") as { title: string; description: string; search: string }[];
+  // Each stop has its own page, addressed by its Spanish name in both languages
+  const stopPaths = (
+    (await getTranslations({ locale: "es", namespace: "home" })).raw("journeyStops") as { title: string }[]
+  ).map((stop) => stopPath(stop.title));
   const episodesIntro = t.raw("episodesIntro") as string[];
   const guestParagraphs = t.raw("guestParagraphs") as string[];
 
@@ -232,7 +237,7 @@ export default async function Home({
               const Doodle = stopDoodles[index % stopDoodles.length];
               return (
                 <li key={stop.title} className={`relative lg:absolute lg:w-[16.375rem] ${stopPlacement[index] ?? ""}`}>
-                  <Link href={`/episodes?q=${encodeURIComponent(stop.search)}`} className="stamp stamp-sm block transition-transform hover:-translate-y-1">
+                  <Link href={stopPaths[index] ?? `/episodes?q=${encodeURIComponent(stop.search)}`} className="stamp stamp-sm block transition-transform hover:-translate-y-1">
                     <span className={`flex flex-col gap-2 px-[1.375rem] pb-6 pt-[1.375rem] ${stopFields[index % stopFields.length]}`}>
                       <Doodle className="h-10 w-14" />
                       <span className="mt-1.5 whitespace-nowrap font-display text-[1.4375rem] leading-tight">{stop.title}</span>

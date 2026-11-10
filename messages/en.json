@@ -104,6 +104,22 @@
         "search": "divorci"
       }
     ],
+    "journeyIntros": [
+      "The apps, the first date, the \"what do I text now?\" and those butterflies you can't tell are a good sign. These are the conversations for when you're getting to know someone, or want to start.",
+      "Loving each other is only one part. Here we talk about what comes after: living together, desire, kids, distance, jealousy and how to care for what you want to last.",
+      "When a relationship ends, or when you know it has to. Episodes about breakups, no contact, situationships that hurt and how to move on without giving up on love.",
+      "After a separation or divorce, dating again can feel so strange. Here are stories from people who lived it and advice for starting over, more calmly and more clearly."
+    ],
+    "journeyKeywords": [
+      "primera cita, citas, dating, app, match, solteria, encontrar pareja, casi algo, quimica, no negociables, personas perfectas, pidiendo demasiado, tarde en el amor, escoger mal",
+      "relacion sana, relaciones sanas, matrimonio, hijos, deseo sexual, el deseo, a distancia, infiel, apego, multicultural, monogamia, rutina, ciclo femenino, mismo tipo de relacion",
+      "ruptura, soltar, contacto cero, tusa, irte de una relacion, ahi no es, corazones rotos, terminar una relacion",
+      "divorci, separacion, volver al dating, volver a empezar, volver a creer, volver a encontrar, volvio a encontrar"
+    ],
+    "journeyPageNote": "Your love journey",
+    "journeyEpisodes": "{count} episodes for this stop",
+    "journeyOther": "Other stops",
+    "journeyEpisodeStops": "On your love journey",
     "stopLabel": "Stop",
     "withGuest": "with {guest}",
     "talkTitle": "Shall we talk?",

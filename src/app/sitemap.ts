@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
+import { getTranslations } from "next-intl/server";
 import { episodePath } from "@/lib/episodes";
+import { stopPath, type JourneyStop } from "@/lib/journey";
 import { getAllEpisodes } from "@/lib/rss";
 import { siteUrl } from "@/lib/siteUrl";
 import { getSiteSettings } from "@/sanity/client";
@@ -34,6 +36,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (settings?.showShop) pages.push({ path: "/shop", priority: 0.5, changeFrequency: "monthly" });
   if (settings?.showProducts) pages.push({ path: "/products", priority: 0.5, changeFrequency: "monthly" });
   if (settings?.showCourses) pages.push({ path: "/courses", priority: 0.5, changeFrequency: "monthly" });
+  const tHome = await getTranslations({ locale: routing.defaultLocale, namespace: "home" });
+  for (const stop of tHome.raw("journeyStops") as JourneyStop[]) {
+    pages.push({ path: stopPath(stop.title), priority: 0.8, changeFrequency: "weekly", lastModified: latestEpisode });
+  }
   for (const episode of episodes) {
     const published = new Date(episode.pubDate);
     pages.push({

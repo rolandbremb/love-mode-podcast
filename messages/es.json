@@ -104,6 +104,22 @@
         "search": "divorci"
       }
     ],
+    "journeyIntros": [
+      "Las apps, la primera cita, el «¿y ahora qué le escribo?» y esas mariposas que no sabes si son buena señal. Aquí están las conversaciones para cuando estás conociendo a alguien o quieres empezar a hacerlo.",
+      "Quererse es solo una parte. Aquí hablamos de lo que viene después: la convivencia, el deseo, los hijos, la distancia, los celos y cómo cuidar lo que quieres que dure.",
+      "Cuando una relación se acaba, o cuando sabes que tiene que acabarse. Episodios sobre rupturas, contacto cero, casi algos que duelen y cómo seguir adelante sin dejar de creer en el amor.",
+      "Después de una separación o un divorcio, volver a salir puede sentirse rarísimo. Aquí hay historias de quienes lo vivieron y consejos para empezar otra vez, con más calma y más claridad."
+    ],
+    "journeyKeywords": [
+      "primera cita, citas, dating, app, match, solteria, encontrar pareja, casi algo, quimica, no negociables, personas perfectas, pidiendo demasiado, tarde en el amor, escoger mal",
+      "relacion sana, relaciones sanas, matrimonio, hijos, deseo sexual, el deseo, a distancia, infiel, apego, multicultural, monogamia, rutina, ciclo femenino, mismo tipo de relacion",
+      "ruptura, soltar, contacto cero, tusa, irte de una relacion, ahi no es, corazones rotos, terminar una relacion",
+      "divorci, separacion, volver al dating, volver a empezar, volver a creer, volver a encontrar, volvio a encontrar"
+    ],
+    "journeyPageNote": "Tu love journey",
+    "journeyEpisodes": "{count} episodios para esta parada",
+    "journeyOther": "Otras paradas",
+    "journeyEpisodeStops": "En tu love journey",
     "stopLabel": "Parada",
     "withGuest": "con {guest}",
     "talkTitle": "¿Lo hablamos?",

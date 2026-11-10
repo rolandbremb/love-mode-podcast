@@ -9,6 +9,7 @@ import { ArrowIcon } from "@/components/postal/ArrowLink";
 import { Link } from "@/i18n/navigation";
 import { episodePath, findEpisode, guestLine, isPersonName, relatedEpisodes, splitEpisodeTitle, summarize } from "@/lib/episodes";
 import { platformLabel } from "@/lib/format";
+import { stopEpisodes, stopPath, type JourneyStop } from "@/lib/journey";
 import { pageMetadata } from "@/lib/metadata";
 import { getAllEpisodes } from "@/lib/rss";
 import { breadcrumbs, podcastEpisode } from "@/lib/structuredData";
@@ -48,6 +49,16 @@ export default async function EpisodePage({ params }: { params: Params }) {
   const t = await getTranslations({ locale, namespace: "episode" });
   const { number, title, guest } = splitEpisodeTitle(episode);
   const related = relatedEpisodes(episodes, episode);
+
+  // The love journey stops this episode belongs to, each linking to its page
+  const tHome = await getTranslations({ locale, namespace: "home" });
+  const spanishStops = (await getTranslations({ locale: "es", namespace: "home" })).raw("journeyStops") as JourneyStop[];
+  const stops = tHome.raw("journeyStops") as JourneyStop[];
+  const stopKeywords = tHome.raw("journeyKeywords") as string[];
+  const episodeStops = spanishStops
+    .map((spanish, index) => ({ spanish, stop: stops[index] ?? spanish, keywords: stopKeywords[index] }))
+    .filter(({ spanish, keywords }) => stopEpisodes([episode], keywords, spanish.search).length > 0)
+    .map(({ spanish, stop }) => ({ title: stop.title, path: stopPath(spanish.title) }));
   const date = episode.pubDate
     ? new Intl.DateTimeFormat(locale, { year: "numeric", month: "long", day: "numeric" }).format(new Date(episode.pubDate))
     : "";
@@ -123,6 +134,20 @@ export default async function EpisodePage({ params }: { params: Params }) {
               </li>
             ))}
           </ul>
+          {episodeStops.length > 0 && (
+            <div className="mt-8 flex flex-col gap-3">
+              <p className="text-[0.9375rem] font-semibold">{tHome("journeyEpisodeStops")}</p>
+              <ul className="flex flex-wrap gap-2">
+                {episodeStops.map((stop) => (
+                  <li key={stop.path}>
+                    <Link href={stop.path} className="chip !text-[0.9375rem] transition-colors hover:bg-plum hover:text-shell">
+                      {stop.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </aside>
 
         {episode.description && (
