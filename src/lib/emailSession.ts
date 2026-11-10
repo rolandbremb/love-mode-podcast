@@ -14,13 +14,20 @@ export function countWords(text: string) {
 // How long Andrea has to answer a paid email, as promised on the page
 export const EMAIL_SESSION_REPLY_BUSINESS_DAYS = 3;
 
-// The reply deadline: three business days (Monday to Friday) after payment
+// The reply deadline: three business days (Monday to Friday) after payment, counted on
+// Miami's calendar (the server runs on UTC, where a Friday evening is already Saturday).
+// The result is midday in Miami, so it reads as the same date wherever it's shown.
 export function replyDeadline(paidAt: Date | string) {
-  const date = new Date(paidAt);
+  const [year, month, day] = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York" })
+    .format(new Date(paidAt))
+    .split("-")
+    .map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day, 12));
   let left = EMAIL_SESSION_REPLY_BUSINESS_DAYS;
   while (left > 0) {
-    date.setDate(date.getDate() + 1);
-    if (date.getDay() !== 0 && date.getDay() !== 6) left--;
+    date.setUTCDate(date.getUTCDate() + 1);
+    if (date.getUTCDay() !== 0 && date.getUTCDay() !== 6) left--;
   }
+  date.setUTCHours(17);
   return date;
 }

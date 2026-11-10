@@ -3,8 +3,9 @@
 import { useActionState, useEffect, useRef } from "react";
 import { addIncome } from "@/lib/dashboard/actions";
 import { INCOME_STREAMS } from "@/lib/dashboard/shared";
+import { pressable } from "./ui";
 
-const fieldClass = "rounded-xl border-[1.5px] border-plum/25 bg-white px-3 py-2 text-[0.9375rem] text-plum";
+const fieldClass = "min-h-10 rounded-xl border-[1.5px] border-plum/25 bg-white px-3 py-2 text-[0.9375rem] text-plum";
 
 // Income paid outside Stripe: brand deals, affiliates, payouts and (until connected) coffee
 export default function AddIncomeForm({ today, disabled }: { today: string; disabled?: boolean }) {
@@ -46,7 +47,7 @@ export default function AddIncomeForm({ today, disabled }: { today: string; disa
         <input name="note" maxLength={200} placeholder="Per'la, October commission" className={fieldClass} />
       </label>
       <div className="flex flex-wrap items-center gap-3">
-        <button type="submit" disabled={pending || disabled} className="btn-primary !py-2.5 !text-[0.9375rem] disabled:opacity-60">
+        <button type="submit" disabled={pending || disabled} className={`btn-primary min-h-10 !py-2.5 !text-[0.9375rem] disabled:opacity-60 ${pressable}`}>
           {pending ? "Adding…" : "Add income"}
         </button>
         {state?.ok && (
@@ -55,7 +56,7 @@ export default function AddIncomeForm({ today, disabled }: { today: string; disa
           </span>
         )}
         {state?.error && (
-          <span role="alert" className="text-sm font-semibold text-tangerine-ink">
+          <span role="alert" className="text-pretty text-sm font-semibold text-tangerine-ink">
             {state.error}
           </span>
         )}
