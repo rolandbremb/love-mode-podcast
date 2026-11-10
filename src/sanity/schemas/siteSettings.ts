@@ -52,6 +52,12 @@ const siteSettings = {
       type: "url",
     },
     {
+      name: "callBookingUrl",
+      title: "Call booking URL (Cal.com)",
+      type: "url",
+      description: "The public link of the paid call event, e.g. https://cal.com/…/una-llamada-con-tu-love-bestie",
+    },
+    {
       name: "podcastRssUrl",
       title: "Podcast RSS Feed URL",
       type: "url",
@@ -76,6 +82,13 @@ const siteSettings = {
       title: "Show Courses page",
       type: "boolean",
       initialValue: true,
+    },
+    {
+      name: "showSessions",
+      title: "Show paid sessions on the home page",
+      type: "boolean",
+      initialValue: false,
+      description: "The ¿Lo hablamos? section with the paid call and email. Turn on once booking and payments are ready.",
     },
     { name: "seo", title: "SEO", type: "seo" },
   ],

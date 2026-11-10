@@ -92,6 +92,11 @@ export default async function Home({
   const aboutTitle = t("welcomeTitle");
   const aboutParagraphs = (t.raw("welcomeParagraphs") as string[]).filter((p) => p.trim());
   const buyMeCoffeeUrl = settings?.buyMeCoffeeUrl;
+  // ¿Lo hablamos? goes live when it's switched on in the Studio and the Cal.com link is set.
+  // The paid email isn't built yet, so its card only shows where unfinished sections do.
+  const callBookingUrl = settings?.callBookingUrl;
+  const showSessions = showUpcoming || Boolean(settings?.showSessions && callBookingUrl);
+  const emailReady = showUpcoming;
 
   const hostName = aboutData?.hostName ?? "Andrea Moreno";
   const hostFirstName = hostName.split(" ")[0];
@@ -373,8 +378,8 @@ export default async function Home({
         </div>
       </section>
 
-      {/* ===== ¿LO HABLAMOS? (preview only until booking and payments are connected) ===== */}
-      {showUpcoming && (
+      {/* ===== ¿LO HABLAMOS? Paid sessions: the call books and charges on Cal.com ===== */}
+      {showSessions && (
         <section className="mb-24 bg-plum py-24 text-shell lg:mb-32 lg:py-32">
           <div className="page-container flex flex-col gap-14">
             <div className="grid gap-8 lg:grid-cols-[5fr_7fr] lg:items-end lg:gap-[5.5rem]">
@@ -383,13 +388,20 @@ export default async function Home({
               </h2>
               <p className="max-w-[37.5rem] text-lg leading-relaxed text-shell/85 sm:text-[1.1875rem]">{t("talkIntro")}</p>
             </div>
-            <div className="grid gap-8 md:grid-cols-2">
+            <div className={`grid gap-8 ${emailReady ? "md:grid-cols-2" : "max-w-[40rem]"}`}>
               <div className="grid gap-8 rounded-md bg-shell p-8 text-plum sm:grid-cols-[1fr_7.5rem] sm:p-11">
                 <div className="flex flex-col gap-4">
                   <Telephone className="h-14 w-14" />
                   <h3 className="font-display text-[2.25rem] leading-[1.08]">{t("callTitle")}</h3>
                   <p className="text-[1.0625rem] leading-relaxed text-mauve">{t("callBody")}</p>
-                  <a href="#" className="btn-primary mt-auto self-start !text-base">{t("callCta")}</a>
+                  <a
+                    href={callBookingUrl || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary mt-auto self-start !text-base"
+                  >
+                    {t("callCta")}
+                  </a>
                 </div>
                 <div className="flex items-center justify-between gap-4 sm:flex-col sm:items-end sm:justify-start sm:border-l-[1.5px] sm:border-plum/15 sm:pl-6">
                   <span className="stamp stamp-sm block w-24 rotate-[4deg] [--stamp-cut:#fff2ec]">
@@ -401,23 +413,25 @@ export default async function Home({
                   <span className="font-display text-4xl">{t("callPrice")}</span>
                 </div>
               </div>
-              <div className="relative grid gap-8 overflow-hidden rounded-md bg-bubblegum p-8 text-plum sm:grid-cols-[1fr_7.5rem] sm:p-11">
-                <svg className="absolute inset-x-0 top-0 h-[4.75rem] w-full" viewBox="0 0 600 76" preserveAspectRatio="none" aria-hidden="true">
-                  <path d="M0 0L300 72 600 0" fill="none" stroke="rgba(45,21,48,0.28)" strokeWidth="1.5" />
-                </svg>
-                <div className="relative flex flex-col gap-4 pt-5">
-                  <h3 className="font-display text-[2.25rem] leading-[1.08]">{t("emailTitle")}</h3>
-                  <p className="text-[1.0625rem] leading-relaxed">{t("emailBody")}</p>
-                  <a href="#" className="btn-primary mt-auto self-start !text-base">{t("emailCta")}</a>
-                </div>
-                <div className="relative flex items-center justify-between gap-4 sm:flex-col sm:items-end sm:justify-end">
-                  <svg className="h-20 w-20" viewBox="0 0 104 104" aria-hidden="true">
-                    <path d="M52 4c6 0 8 5 12 6s9-2 12 2-2 9 0 13 7 6 4 11-8 4-10 8-1 10-6 12-9-2-13-1-7 6-12 3-2-8-6-10-10-2-12-7 4-8 3-12-7-6-4-11 9-3 12-5 3-9 8-12 7 4 10 3z" fill="#ff6339" />
-                    <path d="M52 70C40 61 32 55 32 46c0-6 4-10 10-10 4 0 8 2 10 6 2-4 6-6 10-6 6 0 10 4 10 10 0 9-8 15-20 24z" fill="none" stroke="#2d1530" strokeWidth="3" strokeLinejoin="round" />
+              {emailReady && (
+                <div className="relative grid gap-8 overflow-hidden rounded-md bg-bubblegum p-8 text-plum sm:grid-cols-[1fr_7.5rem] sm:p-11">
+                  <svg className="absolute inset-x-0 top-0 h-[4.75rem] w-full" viewBox="0 0 600 76" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M0 0L300 72 600 0" fill="none" stroke="rgba(45,21,48,0.28)" strokeWidth="1.5" />
                   </svg>
-                  <span className="font-display text-4xl">{t("emailPrice")}</span>
+                  <div className="relative flex flex-col gap-4 pt-5">
+                    <h3 className="font-display text-[2.25rem] leading-[1.08]">{t("emailTitle")}</h3>
+                    <p className="text-[1.0625rem] leading-relaxed">{t("emailBody")}</p>
+                    <a href="#" className="btn-primary mt-auto self-start !text-base">{t("emailCta")}</a>
+                  </div>
+                  <div className="relative flex items-center justify-between gap-4 sm:flex-col sm:items-end sm:justify-end">
+                    <svg className="h-20 w-20" viewBox="0 0 104 104" aria-hidden="true">
+                      <path d="M52 4c6 0 8 5 12 6s9-2 12 2-2 9 0 13 7 6 4 11-8 4-10 8-1 10-6 12-9-2-13-1-7 6-12 3-2-8-6-10-10-2-12-7 4-8 3-12-7-6-4-11 9-3 12-5 3-9 8-12 7 4 10 3z" fill="#ff6339" />
+                      <path d="M52 70C40 61 32 55 32 46c0-6 4-10 10-10 4 0 8 2 10 6 2-4 6-6 10-6 6 0 10 4 10 10 0 9-8 15-20 24z" fill="none" stroke="#2d1530" strokeWidth="3" strokeLinejoin="round" />
+                    </svg>
+                    <span className="font-display text-4xl">{t("emailPrice")}</span>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
             <p className="max-w-[51rem] text-[0.9375rem] leading-relaxed text-shell/70">{t("talkDisclaimer")}</p>
           </div>
