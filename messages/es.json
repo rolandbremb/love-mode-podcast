@@ -34,8 +34,7 @@
       "deseo",
       "tusas",
       "segundas oportunidades",
-      "divorcio",
-      "love journey"
+      "divorcio"
     ],
     "topicSearches": [
       "amor",
@@ -45,8 +44,7 @@
       "deseo",
       "tusa",
       "segundas oportunidades",
-      "divorcio",
-      "love journey"
+      "divorcio"
     ],
     "brandsTitle": "Hagamos algo increíble juntos",
     "brandsDescription": "Love Mode reúne conversaciones sobre las relaciones y la vida que construimos alrededor de ellas: cómo nos cuidamos, qué disfrutamos y cómo empezamos nuevas etapas.",
@@ -57,13 +55,8 @@
     "statPlatforms": "plataformas",
     "heroHome": "Love lovers, you're home.",
     "photoNote": "Sírvete un drink. Let's talk love.",
-    "episodesIntro": [
-      "Welcome. ¡Qué rico que llegaste!",
-      "¿Cómo vuelves a salir con alguien después de años en pareja? ¿Qué haces cuando todavía quieres a alguien, pero ya no quieres esa relación? ¿Y cómo cuidas el amor cuando tienes mil cosas más que atender?",
-      "De eso hablamos en Love Mode. A veces desde mi experiencia, otras con invitados y especialistas. Y otras, tú y yo."
-    ],
     "episodesNote": "Por aquí defendemos que un café sí es una cita.",
-    "hostNote": "Let's believe in love again",
+    "hostNote": "PS: Let's believe in love again.",
     "guestParagraphs": [
       "Ahora quiero escucharte a ti.",
       "¿Tienes una historia de amor que te gustaría contar en el podcast? ¿Te enamoraste cuando menos lo esperabas? ¿Te tocó empezar de nuevo? ¿Viviste algo que cambió tu forma de ver las relaciones?",
@@ -72,40 +65,39 @@
     ],
     "guestNote": "Revisamos todas las propuestas. Si la tuya encaja con un próximo episodio, te contactaremos para conversar.",
     "supportThanks": "Gracias por estar del otro lado. 🤍",
-    "dearYou": "Querida tú,",
     "heroBy": "{tagline}, por {name}",
     "heroPhotoAlt": "Andrea en el estudio de Love Mode",
-    "stampFrom": "desde Miami",
-    "postmark": "NUEVO EPISODIO ★ CADA VIERNES ★",
+    "stampFrom": "Miami, FL",
+    "postmark": "NUEVO EPISODIO ★ CADA DOS VIERNES ★",
     "topicsLabel": "Temas",
     "topicsIntro": "O busca por tema",
-    "journeyTitle": "¿En qué parada de tu love journey estás?",
-    "journeyIntro": "Elige la tuya y te llevo a los episodios para ese momento.",
+    "journeyTitle": "¿En qué temporada de tu love journey estás?",
+    "journeyIntro": "Sea cual sea tu mood en el amor, aquí hay algo para ti.",
     "journeyNote": "No hay orden correcto. A veces se vuelve a empezar.",
     "journeyStops": [
       {
-        "title": "Empezando a salir",
-        "description": "Primeras citas, apps y mariposas.",
+        "title": "En mi dating era",
+        "description": "Primeras citas, dating apps, coqueteo.",
         "search": "cita"
       },
       {
         "title": "En una relación",
-        "description": "Cuidar lo que quieres que dure.",
+        "description": "Construir juntos, intimidad, matrimonio.",
         "search": "relación"
       },
       {
         "title": "Soltando",
-        "description": "Cuando toca despedirse.",
+        "description": "Rupturas, despedidas, contacto cero.",
         "search": "soltar"
       },
       {
         "title": "Volviendo al ruedo",
-        "description": "Empezar otra vez, con más calma.",
+        "description": "Volver a salir, navegar la soltería, empezar en el amor.",
         "search": "divorci"
       }
     ],
     "journeyIntros": [
-      "Las apps, la primera cita, el «¿y ahora qué le escribo?» y esas mariposas que no sabes si son buena señal. Aquí están las conversaciones para cuando estás conociendo a alguien o quieres empezar a hacerlo.",
+      "Te acompaño a navegar las apps, los primeros mensajes, las primeras citas y las nuevas reglas del dating moderno.",
       "Quererse es solo una parte. Aquí hablamos de lo que viene después: la convivencia, el deseo, los hijos, la distancia, los celos y cómo cuidar lo que quieres que dure.",
       "Cuando una relación se acaba, o cuando sabes que tiene que acabarse. Episodios sobre rupturas, contacto cero, casi algos que duelen y cómo seguir adelante sin dejar de creer en el amor.",
       "Después de una separación o un divorcio, volver a salir puede sentirse rarísimo. Aquí hay historias de quienes lo vivieron y consejos para empezar otra vez, con más calma y más claridad."
@@ -122,8 +114,8 @@
     "journeyEpisodeStops": "En tu love journey",
     "stopLabel": "Parada",
     "withGuest": "con {guest}",
-    "talkTitle": "¿Lo hablamos?",
-    "talkIntro": "A veces quieres contar la historia completa. Qué pasó, qué te dijo, qué sientes y por qué no sabes qué hacer. Te voy a escuchar, hacer preguntas y decirte lo que pienso, con cariño y sinceridad.",
+    "talkTitle": "¿Quieres hablar conmigo?",
+    "talkIntro": "¿Quieres un consejo de amor? Si necesitas desahogarte, contar la historia completa o hablar de eso que te tiene dándole vueltas a la cabeza, aquí está tu love bestie. Cuéntame qué pasó, qué sientes y qué no sabes cómo resolver. Te escucho y te comparto mi opinión de amiga, con cariño y sinceridad.",
     "callTitle": "Una llamada con tu love bestie",
     "callBody": "Tú y yo, hablando de lo que no te deja dormir. Antes de la llamada completarás un formulario breve para contarme qué está pasando y aprovechar nuestro tiempo juntxs.",
     "callCta": "Quiero que hablemos",
@@ -132,7 +124,7 @@
     "emailBody": "¿Te resulta más fácil escribirlo? Cuéntame tu dilema en hasta 600 palabras y te respondo con mi opinión en un máximo de 3 días hábiles.",
     "emailCta": "Quiero escribirte",
     "emailPrice": "US$35",
-    "talkDisclaimer": "Te comparto mi opinión desde mi experiencia personal y como periodista que habla de amor y relaciones. No soy psicóloga y este espacio no es terapia ni reemplaza el acompañamiento profesional. Tu historia no se compartirá en Love Mode ni en mis redes sin tu autorización explícita.",
+    "talkDisclaimer": "Te comparto mi perspectiva desde mi experiencia personal y mi trabajo como periodista enfocada en amor y relaciones. No soy psicóloga: este espacio no es terapia ni sustituye la atención de un profesional de la salud mental. Tu historia no se compartirá en Love Mode ni en mis redes sin tu autorización explícita. Si buscas acompañamiento profesional, puedes contactar a Alejandra Moreno, psicóloga y psicoanalista, para conocer su enfoque y consultar su disponibilidad.",
     "hostTitle": "Hola, soy {name}.",
     "hostPostmark": "MIAMI ★ CON AMOR ★ LOVE MODE ★",
     "postcardTo": "Para: {name}, Love Mode",
@@ -152,19 +144,21 @@
     "brandsShort": "Para marcas que conectan con este mundo: integraciones en el podcast, contenido para redes y campañas que aporten algo a nuestra comunidad.",
     "heroTitle": "Love Mode",
     "heroTagline": "Your Love and Dating Bestie",
-    "heroDescription": "De primeras citas, relaciones, casi algos, despedidas y de volver a ilusionarte cuando pensabas que ya qué pereza.",
+    "heroDescription": "Tu podcast de amor, dating y relaciones. Desde la emoción de la primera cita, hasta las preguntas que llegan cuando llevas años en una relación.",
     "welcomeTitle": "Tu rinconcito del amor en internet",
     "welcomeParagraphs": [
-      "¿Te gusta alguien, pero entender el dating moderno necesita un manual? ¿Llevas años sin una primera cita y no sabes ni por dónde empezar? ¿La relación se acabó y te cuesta soltarlo? ¿Tienes una vida que te encanta y también quieres con quién compartir un domingo? ¿Estás en una relación y descubriendo que quererse es solo una parte?",
+      "¿Te gusta alguien, pero entender el dating moderno necesita un manual? ¿Llevas años sin una primera cita y no sabes ni por dónde empezar? ¿La relación se acabó y te cuesta soltarlo? ¿Tienes una vida que te encanta y también quieres con quién arruncharte a ver una peli un domingo? ¿Estás en una relación y descubriendo que quererse es solo una parte?",
       "I got ya! De todo eso hablamos en Love Mode. De conocer a alguien, de despedirse, de volver a intentarlo y de cuidar lo que queremos que dure.",
-      "Soy Andrea Moreno, periodista, podcast host y tu love & dating bestie. Me he enamorado, me he divorciado y he vuelto a apostar por el amor.",
+      "Soy Andrea Moreno, periodista, podcast host y tu love & dating bestie.",
       "Desde chiquita he sido la doctora corazón, la matchmaker. Y aquí estoy, años después, hablando de amor, tratando de descifrarlo y haciendo preguntas que terminan convirtiéndose en episodios de Love Mode.",
-      "Estés en el punto que estés de tu love journey, aquí tienes compañía."
+      "Estés en la temporada que estés de tu love journey, aquí estoy para ti."
     ],
     "newsFinePrint": "Al suscribirte, recibirás los correos que hayas elegido. Puedes darte de baja cuando quieras.",
     "newsSuccessTitle": "¡Ya casi estás dentro!",
     "newsSuccessBody": "Te envié un correo para confirmar tu suscripción. Qué rico seguir en contacto.",
-    "newsPrivacy": "Política de privacidad"
+    "newsPrivacy": "Política de privacidad",
+    "topEpisodesIntro": "Los favoritos de la comunidad de Love Mode.",
+    "hostSignOff": "Con amor,"
   },
   "episodes": {
     "title": "Todos los episodios",
@@ -234,7 +228,7 @@
     "perks": [
       "Una historia real de amor, citas o desamor",
       "Experiencia en relaciones, psicología o amor propio",
-      "Ganas de hablar con honestidad, humor y corazón"
+      "Ganas de hablar con honestidad y vulnerabilidad"
     ],
     "handNote": "¡leemos todas!",
     "successTitle": "¡Ya estás en nuestra lista!",
@@ -281,7 +275,7 @@
     "signOff": "Con cariño,",
     "ourMission": "Nuestra misión",
     "listenTitle": "Escuchar episodios",
-    "listenDesc": "Ponte al día con cada conversación — nuevos episodios cada semana.",
+    "listenDesc": "Ponte al día con cada conversación — episodios nuevos cada dos viernes.",
     "listenCta": "Ver episodios",
     "guestTitle": "Comparte tu historia",
     "guestDesc": "¿Tienes una historia de amor que te gustaría contar en el podcast? Cuéntamela.",
@@ -313,7 +307,7 @@
   "meta": {
     "title": "Love Mode Podcast",
     "homeTitle": "Love Mode Podcast | Amor, citas y relaciones en español",
-    "description": "Podcast en español sobre amor, dating, desamor y relaciones, con la periodista colombiana Andrea Moreno. Historias reales y un episodio nuevo cada viernes.",
+    "description": "Podcast en español sobre amor, dating, desamor y relaciones, con la periodista colombiana Andrea Moreno. Historias reales y un episodio nuevo cada dos viernes.",
     "aboutTitle": "Sobre Andrea Moreno",
     "aboutDescription": "Andrea Moreno es periodista colombiana y host de Love Mode. Se divorció, volvió al dating y hoy, desde Miami, habla de cómo elegimos pareja y cuidamos el amor.",
     "episodesTitle": "Episodios: citas, desamor, divorcio y volver a empezar",

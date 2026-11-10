@@ -11,12 +11,12 @@ const copy = {
   en: {
     dear: "Dear you,",
     tagline: "Your love & dating bestie, by Andrea Moreno",
-    note: "New episode every Friday",
+    note: "New episode every other Friday",
   },
   es: {
     dear: "Querida tú,",
     tagline: "Your love & dating bestie, por Andrea Moreno",
-    note: "Nuevo episodio cada viernes",
+    note: "Nuevo episodio cada dos viernes",
   },
 };
 

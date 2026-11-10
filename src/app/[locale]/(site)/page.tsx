@@ -113,7 +113,6 @@ export default async function Home({
   const stopPaths = (
     (await getTranslations({ locale: "es", namespace: "home" })).raw("journeyStops") as { title: string }[]
   ).map((stop) => stopPath(stop.title));
-  const episodesIntro = t.raw("episodesIntro") as string[];
   const guestParagraphs = t.raw("guestParagraphs") as string[];
 
   // The welcome reads like a letter: questions first, then the reply (its first two
@@ -137,7 +136,6 @@ export default async function Home({
       <section className="relative overflow-hidden">
         <div className="page-container grid items-center gap-x-8 gap-y-10 pb-16 pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:pb-24 lg:pt-14">
           <div className="relative z-10 flex flex-col gap-6 motion-safe:animate-rise lg:col-start-1 lg:row-start-1 lg:self-end">
-            <p className="font-hand text-[1.75rem] leading-tight sm:text-[2.125rem]">{t("dearYou")}</p>
             <h1 className="max-w-[9ch] font-display text-[clamp(5.5rem,22vw,10.5rem)] font-normal leading-[0.86] tracking-[-0.035em]">
               {heroTitle}
             </h1>
@@ -152,12 +150,12 @@ export default async function Home({
               <div className="flex flex-col gap-3 bg-bubblegum p-3.5">
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <Image
-                    src="/images/hero.jpg"
-                    alt={t("heroPhotoAlt")}
+                    src={hostPhoto}
+                    alt={hostName}
                     fill
                     priority
                     sizes="(min-width: 1024px) 26rem, (min-width: 640px) 22rem, 17rem"
-                    className="object-cover object-[58%_center]"
+                    className="object-cover"
                   />
                 </div>
                 <div className="flex items-baseline justify-between">
@@ -275,9 +273,7 @@ export default async function Home({
               <h2 className="font-display text-[clamp(2.5rem,5vw,3.75rem)] leading-[1.02] tracking-[-0.02em]">
                 {t("topEpisodesTitle")}
               </h2>
-              {episodesIntro.length > 0 && (
-                <p className="text-lg leading-relaxed text-mauve sm:text-[1.1875rem]">{episodesIntro[episodesIntro.length - 1]}</p>
-              )}
+              <p className="text-lg leading-relaxed text-mauve sm:text-[1.1875rem]">{t("topEpisodesIntro")}</p>
             </div>
             <Link href="/episodes" className="shrink-0 text-[1.0625rem] font-semibold underline underline-offset-[5px]">
               {t("viewAllEpisodes")}
@@ -319,7 +315,7 @@ export default async function Home({
           <div className="airmail absolute inset-x-0 top-0 [--airmail-gap:#ffffff]" aria-hidden="true" />
           <div className="relative mx-auto w-full max-w-[16rem] sm:max-w-[22rem] lg:mx-0 lg:self-start">
             <div className="relative aspect-[39/51] overflow-hidden rounded-b-lg rounded-t-full bg-bubblegum">
-              <Image src={hostPhoto} alt={hostName} fill sizes="(min-width: 1024px) 22rem, 90vw" className="object-cover" />
+              <Image src="/images/hero.jpg" alt={t("heroPhotoAlt")} fill sizes="(min-width: 1024px) 22rem, 90vw" className="object-cover object-[58%_center]" />
             </div>
             <HostPostmark
               id="host-postmark"
@@ -350,7 +346,7 @@ export default async function Home({
             <p className="font-hand text-[1.625rem] leading-snug">
               {t("hostNote")}
               <br />
-              {hostFirstName}
+              {t("hostSignOff")} {hostFirstName}
             </p>
             <Link href="/about" className="btn-outline self-start">{t("meetHostCta")}</Link>
           </div>

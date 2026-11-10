@@ -12,8 +12,8 @@ export const alt = "Love Mode Podcast";
 export const revalidate = 3600;
 
 const copy = {
-  en: { episode: "Episode", with: "with", note: "New episode every Friday" },
-  es: { episode: "Episodio", with: "con", note: "Nuevo episodio cada viernes" },
+  en: { episode: "Episode", with: "with", note: "New episode every other Friday" },
+  es: { episode: "Episodio", with: "con", note: "Nuevo episodio cada dos viernes" },
 };
 
 const PLUM = "#2d1530";

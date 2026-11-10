@@ -40,7 +40,6 @@ const home: CopyDocument = {
     { name: "coffee", title: "Coffee and brands" },
   ],
   fields: [
-    { key: "home.dearYou", title: "Greeting above the title", section: "hero" },
     { key: "home.heroTitle", title: "Title", section: "hero" },
     { key: "home.heroTagline", title: "Tagline", section: "hero" },
     { key: "home.heroBy", title: "Tagline line", section: "hero" },
@@ -110,13 +109,7 @@ const home: CopyDocument = {
     { key: "home.mostViewedEpisodes", title: "Title", section: "episodes" },
     { key: "home.topEpisodesTitle", title: "Most listened: title", section: "episodes" },
     { key: "home.reviewsTitle", title: "Listener reviews: title", section: "episodes", description: "The reviews themselves are in Brands & Reviews." },
-    {
-      key: "home.episodesIntro",
-      title: "Intro",
-      type: "textList",
-      section: "episodes",
-      description: "The first and the last paragraph are shown, one after the other.",
-    },
+    { key: "home.topEpisodesIntro", title: "Most listened: line under the title", section: "episodes" },
     { key: "home.viewAllEpisodes", title: "Link to all episodes", section: "episodes" },
     { key: "home.withGuest", title: "Guest line on each stamp", section: "episodes" },
     { key: "home.episodesNote", title: "Handwritten note", section: "episodes" },
@@ -136,6 +129,7 @@ const home: CopyDocument = {
     { key: "home.hostTitle", title: "Title", section: "host" },
     { key: "home.meetHostCta", title: "Button", section: "host" },
     { key: "home.hostNote", title: "Handwritten note", section: "host" },
+    { key: "home.hostSignOff", title: "Sign-off before her name", section: "host" },
     { key: "home.hostPostmark", title: "Text around the postmark", section: "host" },
 
     { key: "home.wantToBeAGuest", title: "Title", section: "guest" },
