@@ -159,6 +159,7 @@
     "count": "{count} episodes",
     "searchLabel": "Search episodes",
     "searchPlaceholder": "Search by topic, guest, or title",
+    "filtersLabel": "Topics",
     "noResults": "No episodes match “{query}”"
   },
   "episodeCard": {
@@ -253,6 +254,9 @@
   },
   "about": {
     "meetYourHost": "your love & dating bestie",
+    "findMe": "Find me on",
+    "storyTitle": "My story",
+    "signOff": "With love,",
     "ourMission": "Our mission",
     "listenTitle": "Listen to episodes",
     "listenDesc": "Catch up on every conversation — new episodes drop weekly.",

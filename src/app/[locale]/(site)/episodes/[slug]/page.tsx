@@ -7,7 +7,7 @@ import ShowNotes from "@/components/ShowNotes";
 import YouTubePlayer from "@/components/YouTubePlayer";
 import { ArrowIcon } from "@/components/postal/ArrowLink";
 import { Link } from "@/i18n/navigation";
-import { episodePath, findEpisode, relatedEpisodes, splitEpisodeTitle, summarize } from "@/lib/episodes";
+import { episodePath, findEpisode, guestLine, isPersonName, relatedEpisodes, splitEpisodeTitle, summarize } from "@/lib/episodes";
 import { platformLabel } from "@/lib/format";
 import { pageMetadata } from "@/lib/metadata";
 import { getAllEpisodes } from "@/lib/rss";
@@ -32,7 +32,8 @@ export async function generateMetadata({ params }: { params: Params }, parent: R
   const t = await getTranslations({ locale, namespace: "episode" });
   const { title, guest } = splitEpisodeTitle(episode);
   return pageMetadata(parent, {
-    title: guest ? `${title}, ${t("withGuest", { guest })}` : title,
+    // "Title, con Guest" for a guest; a subtitle follows the title on its own
+    title: !guest ? title : isPersonName(guest) ? `${title}, ${t("withGuest", { guest })}` : `${title} ${guest}`,
     description: summarize(episode.description, 155),
     locale,
     path: episodePath(episode),
@@ -91,7 +92,7 @@ export default async function EpisodePage({ params }: { params: Params }) {
           {title}
         </h1>
         <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-[1.0625rem] text-mauve">
-          {guest && <span className="font-semibold text-plum">{t("withGuest", { guest })}</span>}
+          {guest && <span className="font-semibold text-plum">{guestLine(guest, (name) => t("withGuest", { guest: name }))}</span>}
           {date && <time dateTime={episode.pubDate}>{date}</time>}
           {episode.duration && <span>{episode.duration}</span>}
         </div>
@@ -139,8 +140,8 @@ export default async function EpisodePage({ params }: { params: Params }) {
             {t("related")}
           </h2>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {related.map((other) => (
-              <EpisodeCard key={other.link} episode={other} />
+            {related.map((other, index) => (
+              <EpisodeCard key={other.link} episode={other} index={index} />
             ))}
           </div>
         </section>

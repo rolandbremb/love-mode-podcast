@@ -12,6 +12,22 @@ export function splitEpisodeTitle(episode: Pick<Episode, "title">) {
   return { number: match?.[1], title: rest.trim(), guest: guest?.trim() };
 }
 
+const NAME_JOINERS = new Set(["y", "e", "de", "del", "la", "las", "los", "el", "&"]);
+
+/* What follows the "|" is usually the guest ("Gabriela Zuluaga", "Dra. Betsy Reuss")
+   but sometimes a subtitle ("La neurociencia del amor"). Names capitalise every word. */
+export function isPersonName(text: string) {
+  return text
+    .split(/\s+/)
+    .filter((word) => !NAME_JOINERS.has(word.toLowerCase()) || word === word.toUpperCase())
+    .every((word) => /^\p{Lu}/u.test(word));
+}
+
+// "con Gabriela Zuluaga" for a guest, or the subtitle as it is
+export function guestLine(guest: string, withGuest: (guest: string) => string) {
+  return isPersonName(guest) ? withGuest(guest) : guest;
+}
+
 /* The episode's address on the site, built from its YouTube title without the number:
    "41. Volver al dating | Gabriela Zuluaga" -> "volver-al-dating-gabriela-zuluaga".
    Renaming the video on YouTube changes the address too. */

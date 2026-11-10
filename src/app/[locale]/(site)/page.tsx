@@ -15,10 +15,11 @@ import {
   Sailboat,
   Telephone,
 } from "@/components/postal/Doodles";
-import Postmark, { CancelWaves } from "@/components/postal/Postmark";
+import Postmark, { CancelWaves, HostPostmark } from "@/components/postal/Postmark";
 import JsonLd from "@/components/JsonLd";
+import LatestEpisodePostcard from "@/components/LatestEpisodePostcard";
 import { localeAlternates } from "@/lib/metadata";
-import { episodePath, splitEpisodeTitle } from "@/lib/episodes";
+import { episodePath, guestLine, splitEpisodeTitle } from "@/lib/episodes";
 import { platformLabel } from "@/lib/format";
 import { paidEmailReady } from "@/lib/stripe";
 import { getAllEpisodes } from "@/lib/rss";
@@ -74,10 +75,6 @@ export default async function Home({
   ]);
   const allEpisodes = await getAllEpisodes(settings?.podcastRssUrl);
   const latest = allEpisodes[0];
-  const latestParts = latest ? splitEpisodeTitle(latest) : { title: "", guest: undefined };
-  const latestDate = latest?.pubDate
-    ? new Intl.DateTimeFormat(locale, { day: "numeric", month: "long" }).format(new Date(latest.pubDate))
-    : "";
   // The most listened, leaving out the latest so it isn't shown twice
   const topEpisodes = allEpisodes
     .filter((episode) => episode !== latest)
@@ -197,35 +194,13 @@ export default async function Home({
       {/* ===== LATEST EPISODE: a postcard, so it's clear the show is alive ===== */}
       {latest && (
         <section className="page-container pb-24 lg:pb-32">
-          <Link
-            href={episodePath(latest)}
-            className="group relative grid items-center gap-6 overflow-hidden rounded-md bg-white p-5 pt-8 shadow-postal [--stamp-cut:#ffffff] sm:grid-cols-[minmax(0,17rem)_minmax(0,1fr)_auto] sm:gap-10 sm:p-8 sm:pt-10"
-          >
-            <span className="airmail absolute inset-x-0 top-0 [--airmail-gap:#ffffff]" aria-hidden="true" />
-            <span className="stamp stamp-sm block -rotate-2">
-              <span className="relative block aspect-video overflow-hidden bg-bubblegum">
-                {latest.image && (
-                  <Image src={latest.image} alt="" fill sizes="(min-width: 640px) 17rem, 90vw" className="object-cover" />
-                )}
-              </span>
-            </span>
-            <span className="flex flex-col gap-2">
-              <span className="text-[0.9375rem] font-semibold text-mauve">
-                {t("latestLabel")}
-                {latestDate && <span className="font-normal">, {latestDate}</span>}
-              </span>
-              <span className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[1.08]">{latestParts.title}</span>
-              {latestParts.guest && <span className="text-[1.0625rem] text-mauve">{t("withGuest", { guest: latestParts.guest })}</span>}
-            </span>
-            <span className="btn-primary self-start !py-2 !pl-6 !pr-2 sm:self-center">
-              {t("latestCta")}
-              <span className="grid h-11 w-11 place-items-center rounded-full bg-tangerine text-plum transition-transform group-hover:translate-x-0.5">
-                <svg className="ml-0.5 h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M8 5.5v13a1 1 0 001.5.86l10.5-6.5a1 1 0 000-1.72L9.5 4.64A1 1 0 008 5.5z" />
-                </svg>
-              </span>
-            </span>
-          </Link>
+          <LatestEpisodePostcard
+            episode={latest}
+            locale={locale}
+            label={t("latestLabel")}
+            cta={t("latestCta")}
+            withGuest={(guest) => t("withGuest", { guest })}
+          />
         </section>
       )}
 
@@ -315,7 +290,9 @@ export default async function Home({
                     <span className="flex min-h-[12.5rem] flex-col gap-3 p-6">
                       {number && <span className="text-[0.9375rem] font-semibold text-plum/70">{tEpisode("number", { number })}</span>}
                       <span className="font-display text-[1.625rem] leading-[1.15]">{title}</span>
-                      {guest && <span className="mt-auto text-base text-plum/80">{t("withGuest", { guest })}</span>}
+                      {guest && (
+                        <span className="mt-auto text-base text-plum/80">{guestLine(guest, (name) => t("withGuest", { guest: name }))}</span>
+                      )}
                     </span>
                   </span>
                 </Link>
@@ -333,21 +310,11 @@ export default async function Home({
             <div className="relative aspect-[39/51] overflow-hidden rounded-b-lg rounded-t-full bg-bubblegum">
               <Image src={hostPhoto} alt={hostName} fill sizes="(min-width: 1024px) 22rem, 90vw" className="object-cover" />
             </div>
-            <Postmark
+            <HostPostmark
               id="host-postmark"
               text={t("hostPostmark")}
-              color="#2d1530"
-              textColor="#2d1530"
               className="absolute -bottom-6 right-0 h-32 w-32 rotate-[10deg] sm:-right-10 sm:h-36 sm:w-36"
-            >
-              <g transform="translate(50 46) scale(0.5)" fill="none" stroke="#2d1530" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M26 50c-2 22 10 34 24 34s26-12 24-34c-4-10-44-10-48 0z" />
-                <path d="M30 46c-8-5-13-14-10-23 9 0 17 7 20 16M70 46c8-5 13-14 10-23-9 0-17 7-20 16" />
-                <circle cx="40" cy="57" r="3.5" />
-                <circle cx="60" cy="57" r="3.5" />
-                <path d="M44 66c3-3 9-3 12 0-3 4-9 4-12 0z" />
-              </g>
-            </Postmark>
+            />
           </div>
           <div className="flex max-w-[38rem] flex-col gap-6">
             {aboutTitle && (

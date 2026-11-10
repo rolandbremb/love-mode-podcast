@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { findEpisode, splitEpisodeTitle } from "@/lib/episodes";
+import { findEpisode, isPersonName, splitEpisodeTitle } from "@/lib/episodes";
 import { getAllEpisodes } from "@/lib/rss";
 import { getSiteSettings } from "@/sanity/client";
 
@@ -95,7 +95,7 @@ export default async function EpisodeImage({ params }: { params: Promise<{ local
             </div>
             {guest && (
               <span style={{ marginTop: "auto", fontSize: 30 }}>
-                {text.with} {guest}
+                {isPersonName(guest) ? `${text.with} ${guest}` : guest}
               </span>
             )}
           </div>

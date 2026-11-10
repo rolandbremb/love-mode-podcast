@@ -159,6 +159,7 @@ const episodes: CopyDocument = {
     { key: "episodes.listenNow", title: "Latest episode: button" },
     { key: "episodes.searchLabel", title: "Search: label (for screen readers)" },
     { key: "episodes.searchPlaceholder", title: "Search: placeholder" },
+    { key: "episodes.filtersLabel", title: "Topic buttons: label (for screen readers)" },
     { key: "episodes.noResults", title: "Search: no results" },
     { key: "episodeCard.listenNow", title: "Episode card: button" },
     { key: "episodeCard.views", title: "Episode card: views" },
@@ -185,6 +186,9 @@ const about: CopyDocument = {
   title: "About page",
   fields: [
     { key: "about.meetYourHost", title: "Handwritten line above the name" },
+    { key: "about.findMe", title: "Label before her social links" },
+    { key: "about.storyTitle", title: "Her story: title" },
+    { key: "about.signOff", title: "Her story: sign-off above her name" },
     { key: "about.ourMission", title: "Mission: label" },
     { key: "about.listenTitle", title: "Episodes card: title" },
     { key: "about.listenDesc", title: "Episodes card: text", type: "text" },

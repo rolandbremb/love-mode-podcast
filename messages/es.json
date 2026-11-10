@@ -159,6 +159,7 @@
     "count": "{count} episodios",
     "searchLabel": "Buscar episodios",
     "searchPlaceholder": "Busca por tema, invitado o título",
+    "filtersLabel": "Temas",
     "noResults": "Ningún episodio coincide con “{query}”"
   },
   "episodeCard": {
@@ -253,6 +254,9 @@
   },
   "about": {
     "meetYourHost": "tu love & dating bestie",
+    "findMe": "Encuéntrame en",
+    "storyTitle": "Mi historia",
+    "signOff": "Con cariño,",
     "ourMission": "Nuestra misión",
     "listenTitle": "Escuchar episodios",
     "listenDesc": "Ponte al día con cada conversación — nuevos episodios cada semana.",

@@ -51,3 +51,18 @@ export function CancelWaves({ className, lines = 4 }: { className?: string; line
     </svg>
   );
 }
+
+/* Andrea's postmark: plum, with the Frenchie in the middle. */
+export function HostPostmark({ id, text, className }: { id: string; text: string; className?: string }) {
+  return (
+    <Postmark id={id} text={text} color="#2d1530" textColor="#2d1530" className={className}>
+      <g transform="translate(50 46) scale(0.5)" fill="none" stroke="#2d1530" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M26 50c-2 22 10 34 24 34s26-12 24-34c-4-10-44-10-48 0z" />
+        <path d="M30 46c-8-5-13-14-10-23 9 0 17 7 20 16M70 46c8-5 13-14 10-23-9 0-17 7-20 16" />
+        <circle cx="40" cy="57" r="3.5" />
+        <circle cx="60" cy="57" r="3.5" />
+        <path d="M44 66c3-3 9-3 12 0-3 4-9 4-12 0z" />
+      </g>
+    </Postmark>
+  );
+}
