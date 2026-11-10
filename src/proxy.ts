@@ -8,7 +8,7 @@ import { routing } from "./i18n/routing";
 export default createMiddleware({ ...routing, localeDetection: false, localeCookie: false });
 
 export const config = {
-  // Everything except the Studio, API routes, Next/Vercel internals, the generated
-  // icons and files with an extension (images, sitemap.xml, robots.txt)
-  matcher: ["/((?!api|studio|_next|_vercel|apple-icon|icon|.*\\..*).*)"],
+  // Everything except the Studio, the dashboard, API routes, Next/Vercel internals,
+  // the generated icons and files with an extension (images, sitemap.xml, robots.txt)
+  matcher: ["/((?!api|studio|dashboard|_next|_vercel|apple-icon|icon|.*\\..*).*)"],
 };

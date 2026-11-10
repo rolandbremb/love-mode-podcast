@@ -1,5 +1,6 @@
 import type Stripe from "stripe";
 import { getTranslations } from "next-intl/server";
+import { replyDeadline } from "@/lib/emailSession";
 import { escapeHtml, inboxClient, sendMail, teamAddresses, teamEmail } from "@/lib/inbox";
 import { getStripe } from "@/lib/stripe";
 
@@ -83,7 +84,15 @@ async function markEmailSessionPaid(session: Stripe.Checkout.Session) {
         ["Email", doc.email],
         ["Their story", doc.story],
         ["Site language", doc.locale.toUpperCase()],
-        ["Reply by", replyBy(3)],
+        [
+          "Reply by",
+          replyDeadline(new Date()).toLocaleDateString("en-US", {
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+            timeZone: "America/New_York",
+          }),
+        ],
       ]),
     }),
     // From Andrea (CONTACT_FROM_EMAIL), so a reply to the confirmation reaches her
@@ -99,15 +108,4 @@ async function markEmailSessionPaid(session: Stripe.Checkout.Session) {
       console.error(`[stripe webhook] Sending the ${i === 0 ? "team" : "confirmation"} email failed:`, result.reason);
     }
   });
-}
-
-// The date three business days from now, so the team sees the deadline at a glance
-function replyBy(businessDays: number) {
-  const date = new Date();
-  let left = businessDays;
-  while (left > 0) {
-    date.setDate(date.getDate() + 1);
-    if (date.getDay() !== 0 && date.getDay() !== 6) left--;
-  }
-  return date.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", timeZone: "America/New_York" });
 }

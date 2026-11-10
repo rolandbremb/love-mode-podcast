@@ -30,6 +30,14 @@ export default defineConfig({
                   .title("Inbox")
                   .items([
                     S.listItem()
+                      .title("Income (added from the dashboard)")
+                      .schemaType("incomeEntry")
+                      .child(
+                        S.documentTypeList("incomeEntry")
+                          .title("Income")
+                          .defaultOrdering([{ field: "date", direction: "desc" }])
+                      ),
+                    S.listItem()
                       .title("Paid Emails")
                       .schemaType("emailSession")
                       .child(
@@ -144,7 +152,9 @@ export default defineConfig({
   ],
   schema: {
     types: schemaTypes,
-    templates: (templates) => templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
+    // Singletons exist once; income is only created from the dashboard (under a private id)
+    templates: (templates) =>
+      templates.filter(({ schemaType }) => !singletonTypes.has(schemaType) && schemaType !== "incomeEntry"),
   },
   document: {
     actions: (actions, { schemaType }) =>

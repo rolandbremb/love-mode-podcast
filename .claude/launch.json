@@ -12,6 +12,13 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["next", "start", "-p", "3001"],
       "port": 3001
+    },
+    {
+      "name": "love-mode-review",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["next", "start", "-p", "3002"],
+      "env": { "SHOW_UPCOMING_SECTIONS": "true" },
+      "port": 3002
     }
   ]
 }
