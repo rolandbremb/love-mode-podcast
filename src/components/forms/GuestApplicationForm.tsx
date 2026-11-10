@@ -39,7 +39,7 @@ export default function GuestApplicationForm() {
             required
             autoComplete="email"
             className="field"
-            placeholder="you@example.com"
+            placeholder={t("emailPlaceholder")}
           />
         </div>
       </div>

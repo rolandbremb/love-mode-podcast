@@ -66,14 +66,19 @@ export default async function AboutPage({
       cta: t("guestCta"),
       Doodle: Microphone,
     },
-    {
-      href: buyMeCoffeeUrl || "/#support",
-      external: Boolean(buyMeCoffeeUrl),
-      title: t("supportTitle"),
-      description: t("supportDesc"),
-      cta: t("supportCta"),
-      Doodle: CoffeeCup,
-    },
+    // The coffee card only shows once a Buy Me a Coffee link is set in the Studio
+    ...(buyMeCoffeeUrl
+      ? [
+          {
+            href: buyMeCoffeeUrl,
+            external: true,
+            title: t("supportTitle"),
+            description: t("supportDesc"),
+            cta: t("supportCta"),
+            Doodle: CoffeeCup,
+          },
+        ]
+      : []),
   ];
 
   return (
@@ -120,7 +125,7 @@ export default async function AboutPage({
       )}
 
       {/* ===== NEXT STEPS ===== */}
-      <section className="page-container grid gap-8 py-24 md:grid-cols-3 lg:py-32">
+      <section className={`page-container grid gap-8 py-24 lg:py-32 ${cards.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
         {cards.map(({ Doodle, ...card }) => (
           <div key={card.title} className="relative flex flex-col gap-4 rounded-md bg-white p-8 shadow-postal">
             <Doodle className="h-12 w-14" />

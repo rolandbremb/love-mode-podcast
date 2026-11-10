@@ -65,7 +65,7 @@ export default function BrandInquiryForm() {
             required
             autoComplete="email"
             className="field"
-            placeholder="you@company.com"
+            placeholder={t("emailPlaceholder")}
           />
         </div>
       </div>

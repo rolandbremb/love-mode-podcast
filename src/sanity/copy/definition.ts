@@ -52,7 +52,20 @@ const home: CopyDocument = {
     { key: "home.postmark", title: "Text around the postmark", section: "hero" },
     { key: "home.heroPhotoAlt", title: "Photo description (for screen readers)", section: "hero" },
 
-    { key: "home.topics", title: "Topics", type: "stringList", section: "topics", description: "The last topic is highlighted in tangerine." },
+    {
+      key: "home.topics",
+      title: "Topics",
+      type: "stringList",
+      section: "topics",
+      description: "Each topic opens the episodes page searched for it. The last topic is highlighted in tangerine.",
+    },
+    {
+      key: "home.topicSearches",
+      title: "Topics: episode search words",
+      type: "stringList",
+      section: "topics",
+      description: "One per topic, in the same order. Episodes are in Spanish, so use a Spanish word that appears in their titles or descriptions.",
+    },
     { key: "home.topicsLabel", title: "Topics label (for screen readers)", section: "topics" },
 
     { key: "home.welcomeTitle", title: "Title", section: "welcome" },
@@ -104,6 +117,7 @@ const home: CopyDocument = {
     { key: "home.applyNow", title: "Button", section: "guest" },
     { key: "home.postcardTo", title: "Postcard: address line", section: "guest" },
     { key: "home.postcardLine", title: "Postcard: first line", section: "guest" },
+    { key: "home.postcardPostmark", title: "Postcard: text around the postmark", section: "guest" },
     { key: "home.guestNote", title: "Small print", type: "text", section: "guest" },
 
     { key: "home.newsTitle", title: "Title", section: "news" },
@@ -195,6 +209,7 @@ const guest: CopyDocument = {
     { key: "apply.fullName", title: "Name", section: "form" },
     { key: "apply.email", title: "Email", section: "form" },
     { key: "apply.socialLinks", title: "Social media", section: "form" },
+    { key: "apply.emailPlaceholder", title: "Email: placeholder", section: "form" },
     { key: "apply.socialPlaceholder", title: "Social media: placeholder", section: "form" },
     { key: "apply.expertise", title: "Topic", section: "form" },
     { key: "apply.expertisePlaceholder", title: "Topic: placeholder", section: "form" },
@@ -241,6 +256,7 @@ const brands: CopyDocument = {
     { key: "collaborate.2000to5000", title: "Budget: $2,000 to $5,000", section: "form" },
     { key: "collaborate.5000plus", title: "Budget: over $5,000", section: "form" },
     { key: "collaborate.tellUsIdea", title: "Idea", section: "form" },
+    { key: "collaborate.emailPlaceholder", title: "Email: placeholder", section: "form" },
     { key: "collaborate.tellUsPlaceholder", title: "Idea: placeholder", section: "form" },
     { key: "collaborate.submit", title: "Send button", section: "form" },
     { key: "collaborate.note", title: "Note under the button", type: "text", section: "form" },

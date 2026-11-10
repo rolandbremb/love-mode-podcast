@@ -4,7 +4,7 @@ import { draftMode } from "next/headers";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import NewsletterForm from "@/components/forms/NewsletterForm";
-import ArrowLink from "@/components/postal/ArrowLink";
+import ArrowLink, { ArrowIcon } from "@/components/postal/ArrowLink";
 import {
   BrokenHeart,
   CoffeeCup,
@@ -88,6 +88,8 @@ export default async function Home({
   const hostPhoto = aboutData?.hostPhoto?.asset?.url ?? "/images/host.jpg";
 
   const topics = t.raw("topics") as string[];
+  // Episodes are in Spanish, so each pill searches for its Spanish word (same order as the topics)
+  const topicSearches = t.raw("topicSearches") as string[];
   const stops = t.raw("journeyStops") as { title: string; description: string; search: string }[];
   const episodesIntro = t.raw("episodesIntro") as string[];
   const guestParagraphs = t.raw("guestParagraphs") as string[];
@@ -162,11 +164,15 @@ export default async function Home({
       {/* ===== TOPICS ===== */}
       <ul className="page-container flex flex-wrap gap-2.5" aria-label={t("topicsLabel")}>
         {topics.map((topic, index) => (
-          <li
-            key={topic}
-            className={index === topics.length - 1 ? "chip border-tangerine bg-tangerine font-semibold" : "chip"}
-          >
-            {topic}
+          <li key={topic}>
+            <Link
+              href={`/episodes?q=${encodeURIComponent(topicSearches[index] || topic)}`}
+              className={`chip transition-colors hover:bg-plum hover:text-shell ${
+                index === topics.length - 1 ? "border-tangerine bg-tangerine font-semibold hover:border-plum" : ""
+              }`}
+            >
+              {topic}
+            </Link>
           </li>
         ))}
       </ul>
@@ -390,29 +396,34 @@ export default async function Home({
             <ArrowLink href="/apply" className="mt-2 self-start">{t("applyNow")}</ArrowLink>
           </div>
           <div className="hidden bg-plum/15 lg:block" />
-          <div className="relative flex flex-col justify-end pt-40">
+          {/* The postcard itself opens the form too (the button beside it is the keyboard route) */}
+          <Link
+            href="/apply"
+            tabIndex={-1}
+            aria-hidden="true"
+            className="group relative flex flex-col justify-end pt-40"
+          >
             <span className="stamp stamp-sm absolute right-0 top-0 block w-[6.875rem] rotate-[4deg] [--stamp-cut:#ffffff]">
               <span className="grid h-[6.75rem] place-items-center bg-plum">
                 <Microphone className="h-14 w-14" stroke="#ffcafd" />
               </span>
             </span>
-            <svg className="absolute right-[4.5rem] top-6 h-[7.5rem] w-48 opacity-80" viewBox="0 0 190 120" aria-hidden="true">
-              <g fill="none" stroke="#ff6339" strokeWidth="2.5" strokeLinecap="round">
-                <circle cx="60" cy="60" r="44" />
-                <path d="M112 36c13-9 26 9 39 0s26 9 39 0M112 60c13-9 26 9 39 0s26 9 39 0M112 84c13-9 26 9 39 0s26 9 39 0" />
-              </g>
-            </svg>
+            <Postmark id="postcard-postmark" text={t("postcardPostmark")} className="absolute right-[9.5rem] top-2 h-32 w-32 -rotate-12" />
+            <CancelWaves lines={3} className="absolute right-[4.5rem] top-10 h-16 w-28" />
             <p className="border-b-[1.5px] border-plum/20 py-3 font-hand text-[1.375rem]">{t("postcardTo", { name: hostFirstName })}</p>
-            <p className="border-b-[1.5px] border-plum/20 py-3 font-hand text-[1.375rem] text-mauve">{t("postcardLine")}</p>
+            <p className="flex items-center justify-between border-b-[1.5px] border-plum/20 py-3 font-hand text-[1.375rem] text-mauve transition-colors group-hover:text-plum">
+              {t("postcardLine")}
+              <ArrowIcon className="h-[18px] w-[18px] text-tangerine opacity-0 transition-opacity group-hover:opacity-100" />
+            </p>
             <div className="h-12 border-b-[1.5px] border-plum/20" />
             <p className="mt-5 text-[0.9375rem] leading-relaxed text-mauve">{t("guestNote")}</p>
-          </div>
+          </Link>
         </div>
       </section>
 
       {/* ===== NEWSLETTER (signups go to Kit) ===== */}
       <section className="page-container pb-24 lg:pb-32">
-        <div className="grid items-center gap-12 rounded-[2.25rem] bg-tangerine px-6 py-12 sm:px-12 lg:grid-cols-[6fr_5fr] lg:gap-[4.5rem] lg:p-[4.5rem]">
+        <div className="grid items-center gap-12 rounded-[2.25rem] bg-tangerine px-6 py-12 [&_:focus-visible]:outline-plum sm:px-12 lg:grid-cols-[6fr_5fr] lg:gap-[4.5rem] lg:p-[4.5rem]">
           <div className="flex flex-col gap-4">
             <h2 className="font-display text-[clamp(2.5rem,5vw,3.75rem)] leading-[1.02] tracking-[-0.02em]">{t("newsTitle")}</h2>
             <p className="max-w-[32.5rem] text-lg leading-relaxed sm:text-[1.1875rem]">{t("newsBody")}</p>
@@ -421,22 +432,25 @@ export default async function Home({
         </div>
       </section>
 
-      {/* ===== COFFEE + BRANDS: one tear-off ticket ===== */}
+      {/* ===== COFFEE + BRANDS: one tear-off ticket =====
+          The coffee half only shows once a Buy Me a Coffee link is set in the Studio */}
       <section className="page-container pb-24 lg:pb-32">
-        <div className="grid rounded-md bg-white shadow-postal md:grid-cols-[1fr_2px_1fr]">
-          <div className="flex flex-col gap-4 p-8 sm:p-[3.25rem]">
-            <CoffeeCup className="h-11 w-[3.75rem]" />
-            <h3 className="font-display text-[2.5rem] leading-[1.05]">{t("supportTheShow")}</h3>
-            <p className="text-[1.0625rem] leading-relaxed text-mauve">{t("supportDescription")}</p>
-            <p className="font-hand text-xl">{t("supportThanks")}</p>
-            {buyMeCoffeeUrl && (
-              <a href={buyMeCoffeeUrl} target="_blank" rel="noopener noreferrer" className="btn-tangerine mt-1.5 self-start">
-                {t("buyMeCoffee")}
-              </a>
-            )}
-          </div>
-          <div className="mx-8 h-0.5 bg-[repeating-linear-gradient(to_right,rgba(45,21,48,0.3)_0_8px,transparent_8px_16px)] md:mx-0 md:my-8 md:h-auto md:bg-[repeating-linear-gradient(to_bottom,rgba(45,21,48,0.3)_0_8px,transparent_8px_16px)]" aria-hidden="true" />
-          <div className="flex flex-col gap-4 p-8 sm:p-[3.25rem]">
+        <div className={`grid rounded-md bg-white shadow-postal ${buyMeCoffeeUrl ? "md:grid-cols-[1fr_2px_1fr]" : ""}`}>
+          {buyMeCoffeeUrl && (
+            <>
+              <div className="flex flex-col gap-4 p-8 sm:p-[3.25rem]">
+                <CoffeeCup className="h-11 w-[3.75rem]" />
+                <h3 className="font-display text-[2.5rem] leading-[1.05]">{t("supportTheShow")}</h3>
+                <p className="text-[1.0625rem] leading-relaxed text-mauve">{t("supportDescription")}</p>
+                <p className="font-hand text-xl">{t("supportThanks")}</p>
+                <a href={buyMeCoffeeUrl} target="_blank" rel="noopener noreferrer" className="btn-tangerine mt-1.5 self-start">
+                  {t("buyMeCoffee")}
+                </a>
+              </div>
+              <div className="mx-8 h-0.5 bg-[repeating-linear-gradient(to_right,rgba(45,21,48,0.3)_0_8px,transparent_8px_16px)] md:mx-0 md:my-8 md:h-auto md:bg-[repeating-linear-gradient(to_bottom,rgba(45,21,48,0.3)_0_8px,transparent_8px_16px)]" aria-hidden="true" />
+            </>
+          )}
+          <div className={`flex flex-col gap-4 p-8 sm:p-[3.25rem] ${buyMeCoffeeUrl ? "" : "max-w-[44rem]"}`}>
             <Envelope className="h-11 w-[3.75rem]" />
             <h3 className="font-display text-[2.5rem] leading-[1.05]">{t("brandsTitle")}</h3>
             <p className="text-[1.0625rem] leading-relaxed text-mauve">{t("brandsShort")}</p>
