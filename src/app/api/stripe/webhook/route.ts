@@ -86,9 +86,9 @@ async function markEmailSessionPaid(session: Stripe.Checkout.Session) {
         ["Reply by", replyBy(3)],
       ]),
     }),
+    // From Andrea (CONTACT_FROM_EMAIL), so a reply to the confirmation reaches her
     sendMail({
       to: [doc.email],
-      replyTo: teamAddresses()[0],
       subject: t("confirmSubject"),
       text: body,
       html: `<div style="font-family:Arial,Helvetica,sans-serif;color:#2d1530;max-width:560px;font-size:16px;line-height:1.6;white-space:pre-wrap">${escapeHtml(body)}</div>`,
