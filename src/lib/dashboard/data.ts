@@ -8,6 +8,11 @@ import Stripe from "stripe";
 
 export type Source<T> = { status: "ok" | "missing" | "error"; data: T; note?: string };
 
+// A short reason to show on the dashboard (never a key: Stripe masks them)
+function errorNote(error: unknown) {
+  return (error instanceof Error ? error.message : String(error)).slice(0, 140);
+}
+
 const KIT_INTEREST_TAGS = [
   { id: 25642835, label: "Episodes & news" },
   { id: 25642836, label: "Meetups & community" },
@@ -97,12 +102,22 @@ function isoDate(date: Date) {
   return date.toISOString().slice(0, 10);
 }
 
-async function kitGet<T>(path: string, apiKey: string): Promise<T> {
+// Throws "growth stats: 403 Forbidden"-style messages, so the dashboard can say what failed
+async function kitGet<T>(path: string, apiKey: string, what: string): Promise<T> {
   const res = await fetch(`https://api.kit.com/v4/${path}`, {
     headers: { "X-Kit-Api-Key": apiKey, Accept: "application/json" },
     next: { revalidate: 1800 },
   });
-  if (!res.ok) throw new Error(`Kit ${path}: ${res.status}`);
+  if (!res.ok) {
+    let detail = "";
+    try {
+      const body = await res.json();
+      detail = Array.isArray(body?.errors) ? String(body.errors[0]).slice(0, 80) : "";
+    } catch {
+      // No JSON body
+    }
+    throw new Error(`${what}: ${res.status}${detail ? ` ${detail}` : ""}`);
+  }
   return res.json();
 }
 
@@ -111,57 +126,68 @@ type KitGrowth = { stats: { new_subscribers: number; cancellations: number } };
 export async function getNewsletter(): Promise<Source<Newsletter>> {
   const apiKey = process.env.KIT_API_KEY;
   if (!apiKey) return { status: "missing", data: emptyNewsletter, note: "KIT_API_KEY" };
-  try {
-    const today = new Date();
-    // Twelve whole weeks, Monday to Sunday, ending with the current one
-    const monday = new Date(today);
-    monday.setUTCDate(today.getUTCDate() - ((today.getUTCDay() + 6) % 7));
-    const weekStarts = Array.from({ length: 12 }, (_, i) => {
-      const start = new Date(monday);
-      start.setUTCDate(monday.getUTCDate() - (11 - i) * 7);
-      return start;
-    });
-    const thirtyDaysAgo = new Date(today);
-    thirtyDaysAgo.setUTCDate(today.getUTCDate() - 30);
 
-    const [active, last30, weeks, interests] = await Promise.all([
-      kitGet<{ pagination: { total_count: number } }>("subscribers?status=active&include_total_count=true&per_page=1", apiKey),
-      kitGet<KitGrowth>(`account/growth_stats?starting=${isoDate(thirtyDaysAgo)}&ending=${isoDate(today)}`, apiKey),
-      Promise.all(
-        weekStarts.map(async (start) => {
-          const end = new Date(start);
-          end.setUTCDate(start.getUTCDate() + 6);
-          const { stats } = await kitGet<KitGrowth>(
-            `account/growth_stats?starting=${isoDate(start)}&ending=${isoDate(end)}`,
-            apiKey
-          );
-          return { start: isoDate(start), added: stats.new_subscribers, left: stats.cancellations };
-        })
-      ),
-      Promise.all(
-        KIT_INTEREST_TAGS.map(async ({ id, label }) => {
-          const res = await kitGet<{ pagination: { total_count: number } }>(
-            `tags/${id}/subscribers?include_total_count=true&per_page=1`,
-            apiKey
-          );
-          return { label, count: res.pagination.total_count };
-        })
-      ),
-    ]);
+  const today = new Date();
+  // Twelve whole weeks, Monday to Sunday, ending with the current one
+  const monday = new Date(today);
+  monday.setUTCDate(today.getUTCDate() - ((today.getUTCDay() + 6) % 7));
+  const weekStarts = Array.from({ length: 12 }, (_, i) => {
+    const start = new Date(monday);
+    start.setUTCDate(monday.getUTCDate() - (11 - i) * 7);
+    return start;
+  });
+  const thirtyDaysAgo = new Date(today);
+  thirtyDaysAgo.setUTCDate(today.getUTCDate() - 30);
 
-    return {
-      status: "ok",
-      data: {
-        total: active.pagination.total_count,
-        last30: { added: last30.stats.new_subscribers, left: last30.stats.cancellations },
-        weeks,
-        interests,
-      },
-    };
-  } catch (error) {
-    console.error("[dashboard] Kit:", error);
-    return { status: "error", data: emptyNewsletter };
-  }
+  // Each part loads on its own, so one failing request doesn't hide the rest
+  const [active, last30, weeks, interests] = await Promise.allSettled([
+    kitGet<{ pagination: { total_count: number } }>(
+      "subscribers?status=active&include_total_count=true&per_page=1",
+      apiKey,
+      "subscriber count"
+    ),
+    kitGet<KitGrowth>(`account/growth_stats?starting=${isoDate(thirtyDaysAgo)}&ending=${isoDate(today)}`, apiKey, "growth stats"),
+    Promise.all(
+      weekStarts.map(async (start) => {
+        const end = new Date(start);
+        end.setUTCDate(start.getUTCDate() + 6);
+        const { stats } = await kitGet<KitGrowth>(
+          `account/growth_stats?starting=${isoDate(start)}&ending=${isoDate(end)}`,
+          apiKey,
+          "weekly growth"
+        );
+        return { start: isoDate(start), added: stats.new_subscribers, left: stats.cancellations };
+      })
+    ),
+    Promise.all(
+      KIT_INTEREST_TAGS.map(async ({ id, label }) => {
+        const res = await kitGet<{ pagination: { total_count: number } }>(
+          `tags/${id}/subscribers?include_total_count=true&per_page=1`,
+          apiKey,
+          "interest tags"
+        );
+        return { label, count: res.pagination.total_count };
+      })
+    ),
+  ]);
+
+  const failures = [active, last30, weeks, interests]
+    .filter((result): result is PromiseRejectedResult => result.status === "rejected")
+    .map((result) => (result.reason instanceof Error ? result.reason.message : String(result.reason)));
+  if (failures.length) console.error("[dashboard] Kit:", failures);
+
+  const data: Newsletter = {
+    total: active.status === "fulfilled" ? active.value.pagination.total_count : 0,
+    last30:
+      last30.status === "fulfilled"
+        ? { added: last30.value.stats.new_subscribers, left: last30.value.stats.cancellations }
+        : { added: 0, left: 0 },
+    weeks: weeks.status === "fulfilled" ? weeks.value : [],
+    interests: interests.status === "fulfilled" ? interests.value : [],
+  };
+  // Everything failed: an error. Some parts failed: show the rest and say what's missing.
+  if (failures.length === 4) return { status: "error", data, note: failures.join("; ") };
+  return { status: "ok", data, note: failures.length ? failures.join("; ") : undefined };
 }
 
 // ---------- Calls (Cal.com) ----------
@@ -236,7 +262,7 @@ export async function getCalls(): Promise<Source<{ upcoming: Call[]; past: Call[
     };
   } catch (error) {
     console.error("[dashboard] Cal.com:", error);
-    return { status: "error", data: empty };
+    return { status: "error", data: empty, note: errorNote(error) };
   }
 }
 
@@ -269,7 +295,7 @@ export async function getStripePayments(): Promise<Source<Payment[]>> {
     return { status: "ok", data: payments };
   } catch (error) {
     console.error("[dashboard] Stripe:", error);
-    return { status: "error", data: [] };
+    return { status: "error", data: [], note: errorNote(error) };
   }
 }
 
@@ -298,6 +324,6 @@ export async function getCoffeePayments(): Promise<Source<Payment[]>> {
     return { status: "ok", data: payments };
   } catch (error) {
     console.error("[dashboard] Buy Me a Coffee:", error);
-    return { status: "error", data: [] };
+    return { status: "error", data: [], note: errorNote(error) };
   }
 }

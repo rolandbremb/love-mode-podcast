@@ -50,7 +50,7 @@ function Card({ children, className = "" }: { children: React.ReactNode; classNa
   return <div className={`rounded-md bg-white p-6 shadow-postal ${className}`}>{children}</div>;
 }
 
-function SourceNote({ status, envName, sample }: { status: string; envName?: string; sample: boolean }) {
+function SourceNote({ status, envName, sample, detail }: { status: string; envName?: string; sample: boolean; detail?: string }) {
   if (sample) {
     return <span className="rounded-full bg-plum px-3 py-1 text-xs font-semibold text-shell">Sample data until {envName} is set</span>;
   }
@@ -58,7 +58,11 @@ function SourceNote({ status, envName, sample }: { status: string; envName?: str
     return <span className="rounded-full bg-peach px-3 py-1 text-xs font-semibold">Not connected: add {envName} in Vercel</span>;
   }
   if (status === "error") {
-    return <span className="rounded-full bg-peach px-3 py-1 text-xs font-semibold">Couldn't load right now</span>;
+    return <span className="rounded-full bg-peach px-3 py-1 text-xs font-semibold">Couldn&apos;t load{detail ? `: ${detail}` : " right now"}</span>;
+  }
+  // Loaded, but some parts failed
+  if (detail) {
+    return <span className="rounded-full bg-peach px-3 py-1 text-xs font-semibold">Partly loaded: {detail}</span>;
   }
   return null;
 }
@@ -341,7 +345,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: Pr
       </Section>
 
       {/* ===== CALENDAR AND WHAT'S COMING UP ===== */}
-      <Section id="calendar" title="Calendar" note={<SourceNote status={callsSource.status} envName="CAL_API_KEY" sample={callsSample} />}>
+      <Section id="calendar" title="Calendar" note={<SourceNote status={callsSource.status} envName="CAL_API_KEY" sample={callsSample} detail={callsSource.status === "error" ? callsSource.note : undefined} />}>
         <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
           <MonthCalendar month={month} events={events} today={today} />
           <Card className="flex flex-col gap-4">
@@ -451,7 +455,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: Pr
       </Section>
 
       {/* ===== NEWSLETTER ===== */}
-      <Section id="newsletter" title="Newsletter" note={<SourceNote status={newsletterSource.status} envName="KIT_API_KEY" sample={newsletterSample} />}>
+      <Section id="newsletter" title="Newsletter" note={<SourceNote status={newsletterSource.status} envName="KIT_API_KEY" sample={newsletterSample} detail={newsletterSource.note} />}>
         <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
           <Card className="flex flex-col gap-6">
             <div>
@@ -494,7 +498,14 @@ export default async function DashboardPage({ searchParams }: { searchParams: Pr
         note={
           <span className="flex flex-wrap gap-2">
             {revenueSample && <SourceNote status="ok" envName="STRIPE_REPORTING_KEY" sample />}
-            {!revenueSample && <SourceNote status={stripeSource.status} envName="STRIPE_REPORTING_KEY" sample={false} />}
+            {!revenueSample && (
+              <SourceNote
+                status={stripeSource.status}
+                envName="STRIPE_REPORTING_KEY"
+                sample={false}
+                detail={stripeSource.status === "error" ? stripeSource.note : undefined}
+              />
+            )}
             {!revenueSample && coffeeSource.status !== "ok" && (
               <span className="rounded-full bg-shell px-3 py-1 text-xs font-semibold text-plum/80">Coffee entered by hand</span>
             )}
@@ -639,14 +650,18 @@ export default async function DashboardPage({ searchParams }: { searchParams: Pr
         <p className="font-semibold">Connections</p>
         <ul className="flex flex-wrap gap-x-6 gap-y-2 text-mauve">
           {[
-            ["Studio inbox", inboxSource.status],
-            ["Kit newsletter", newsletterSource.status],
-            ["Cal.com calls", callsSource.status],
-            ["Stripe revenue", stripeSource.status],
-            ["Buy Me a Coffee", coffeeSource.status],
-          ].map(([label, status]) => (
+            { label: "Studio inbox", source: inboxSource, env: "SANITY_WRITE_TOKEN" },
+            { label: "Kit newsletter", source: newsletterSource, env: "KIT_API_KEY" },
+            { label: "Cal.com calls", source: callsSource, env: "CAL_API_KEY" },
+            { label: "Stripe revenue", source: stripeSource, env: "STRIPE_REPORTING_KEY" },
+            { label: "Buy Me a Coffee", source: coffeeSource, env: "BMC_ACCESS_TOKEN" },
+          ].map(({ label, source, env }) => (
             <li key={label}>
-              {label}: <span className="font-semibold text-plum">{status === "ok" ? "connected" : status === "missing" ? "not connected" : "error"}</span>
+              {label}:{" "}
+              <span className="font-semibold text-plum">
+                {source.status === "ok" ? (source.note ? "partly connected" : "connected") : source.status === "missing" ? `not connected (${env})` : "error"}
+              </span>
+              {source.note && source.status !== "missing" && <span> ({source.note})</span>}
             </li>
           ))}
         </ul>
