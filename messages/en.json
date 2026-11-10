@@ -13,6 +13,7 @@
   "home": {
     "meetHostCta": "More about me",
     "mostViewedEpisodes": "Find your next episode",
+    "topEpisodesTitle": "Most listened",
     "viewAllEpisodes": "View all episodes",
     "wantToBeAGuest": "Want to be part of Love Mode?",
     "applyNow": "I want to be on the podcast",
@@ -20,6 +21,10 @@
     "supportDescription": "If a conversation kept you company, got you thinking, or ended up being sent to three of your friends, you can support upcoming episodes with a coffee.",
     "buyMeCoffee": "Buy you a coffee",
     "listenNow": "Find your next episode",
+    "listenLatest": "Play the latest episode",
+    "followOn": "Follow on",
+    "latestLabel": "Latest episode",
+    "latestCta": "Listen",
     "topics": [
       "love",
       "heartbreak",
@@ -71,6 +76,7 @@
     "stampFrom": "from Miami",
     "postmark": "NEW EPISODE ★ EVERY FRIDAY ★",
     "topicsLabel": "Topics",
+    "topicsIntro": "Or browse by topic",
     "journeyTitle": "Which stop of your love journey are you at?",
     "journeyIntro": "Pick yours and I'll take you to the episodes for that moment.",
     "journeyNote": "There's no right order. Sometimes you start again.",

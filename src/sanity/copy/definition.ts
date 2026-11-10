@@ -46,6 +46,10 @@ const home: CopyDocument = {
     { key: "home.heroBy", title: "Tagline line", section: "hero" },
     { key: "home.heroDescription", title: "Description", type: "text", section: "hero" },
     { key: "home.listenNow", title: "Button", section: "hero" },
+    { key: "home.listenLatest", title: "Button to the latest episode", section: "hero" },
+    { key: "home.followOn", title: "Label before the listening apps", section: "hero" },
+    { key: "home.latestLabel", title: "Latest episode: label", section: "hero" },
+    { key: "home.latestCta", title: "Latest episode: button", section: "hero" },
     { key: "home.heroHome", title: "Handwritten note next to the button", section: "hero" },
     { key: "home.photoNote", title: "Note under the photo", section: "hero" },
     { key: "home.stampFrom", title: "Small text on the stamp", section: "hero" },
@@ -57,7 +61,7 @@ const home: CopyDocument = {
       title: "Topics",
       type: "stringList",
       section: "topics",
-      description: "Each topic opens the episodes page searched for it. The last topic is highlighted in tangerine.",
+      description: "Each topic opens the episodes page searched for it.",
     },
     {
       key: "home.topicSearches",
@@ -67,6 +71,7 @@ const home: CopyDocument = {
       description: "One per topic, in the same order. Episodes are in Spanish, so use a Spanish word that appears in their titles or descriptions.",
     },
     { key: "home.topicsLabel", title: "Topics label (for screen readers)", section: "topics" },
+    { key: "home.topicsIntro", title: "Line above the topics", section: "topics" },
 
     { key: "home.welcomeTitle", title: "Title", section: "welcome" },
     {
@@ -84,6 +89,7 @@ const home: CopyDocument = {
     { key: "home.stopLabel", title: "Word before the stop number (for screen readers)", section: "journey" },
 
     { key: "home.mostViewedEpisodes", title: "Title", section: "episodes" },
+    { key: "home.topEpisodesTitle", title: "Most listened: title", section: "episodes" },
     {
       key: "home.episodesIntro",
       title: "Intro",

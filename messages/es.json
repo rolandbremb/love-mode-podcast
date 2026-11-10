@@ -13,6 +13,7 @@
   "home": {
     "meetHostCta": "Te cuento más sobre mí",
     "mostViewedEpisodes": "Encuentra tu próximo episodio",
+    "topEpisodesTitle": "Los más escuchados",
     "viewAllEpisodes": "Ver todos los episodios",
     "wantToBeAGuest": "¿Quieres ser parte de Love Mode?",
     "applyNow": "Quiero participar en el pódcast",
@@ -20,6 +21,10 @@
     "supportDescription": "Si alguna conversación te hizo compañía, te dejó pensando o terminaste enviándosela a tres amigas, puedes apoyar los próximos episodios con un café.",
     "buyMeCoffee": "Invitarte un café",
     "listenNow": "Encuentra tu próximo episodio",
+    "listenLatest": "Escucha el último episodio",
+    "followOn": "Síguelo en",
+    "latestLabel": "Último episodio",
+    "latestCta": "Escúchalo",
     "topics": [
       "amor",
       "desamor",
@@ -71,6 +76,7 @@
     "stampFrom": "desde Miami",
     "postmark": "NUEVO EPISODIO ★ CADA VIERNES ★",
     "topicsLabel": "Temas",
+    "topicsIntro": "O busca por tema",
     "journeyTitle": "¿En qué parada de tu love journey estás?",
     "journeyIntro": "Elige la tuya y te llevo a los episodios para ese momento.",
     "journeyNote": "No hay orden correcto. A veces se vuelve a empezar.",

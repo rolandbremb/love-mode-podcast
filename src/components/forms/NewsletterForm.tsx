@@ -52,14 +52,14 @@ export default function NewsletterForm() {
         {options.map((option, index) => (
           <label
             key={option}
-            className="flex cursor-pointer items-center gap-2 rounded-full border-[1.5px] border-plum px-3.5 py-2 text-[0.9375rem] font-medium has-[:checked]:border-bubblegum has-[:checked]:bg-bubblegum"
+            className="flex cursor-pointer items-center gap-2 rounded-full border-[1.5px] border-plum px-3.5 py-2 text-[0.9375rem] font-medium has-[:checked]:bg-plum has-[:checked]:text-shell"
           >
             <input
               type="checkbox"
               name="interests"
               value={INTEREST_VALUES[index] ?? ""}
               defaultChecked={index === 0}
-              className="h-4 w-4 accent-plum"
+              className="h-4 w-4 accent-tangerine"
             />
             {option}
           </label>
