@@ -30,6 +30,14 @@ export default defineConfig({
                   .title("Inbox")
                   .items([
                     S.listItem()
+                      .title("Paid Emails")
+                      .schemaType("emailSession")
+                      .child(
+                        S.documentTypeList("emailSession")
+                          .title("Paid Emails")
+                          .defaultOrdering([{ field: "submittedAt", direction: "desc" }])
+                      ),
+                    S.listItem()
                       .title("Brand Inquiries")
                       .schemaType("brandInquiry")
                       .child(

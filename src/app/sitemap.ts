@@ -28,6 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/apply", priority: 0.6, changeFrequency: "monthly" },
     { path: "/lista", priority: 0.5, changeFrequency: "monthly" },
     { path: "/privacy", priority: 0.2, changeFrequency: "monthly" },
+    { path: "/terms", priority: 0.2, changeFrequency: "monthly" },
   ];
   // Optional pages only appear once they're switched on in the Studio
   if (settings?.showShop) pages.push({ path: "/shop", priority: 0.5, changeFrequency: "monthly" });

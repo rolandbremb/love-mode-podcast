@@ -1,7 +1,6 @@
 "use server";
 
-import { createClient } from "@sanity/client";
-import { Resend } from "resend";
+import { inboxClient, newInboxId, sendMail, teamAddresses, teamEmail } from "@/lib/inbox";
 
 export type FormState =
   | { status: "success" }
@@ -33,64 +32,15 @@ function field(formData: FormData, name: string, max = 200) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
 }
 
-function escapeHtml(text: string) {
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
 async function saveToStudio(doc: Record<string, unknown>) {
-  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-  const token = process.env.SANITY_WRITE_TOKEN;
-  if (!projectId || !token) return false;
-
-  const client = createClient({
-    projectId,
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
-    apiVersion: "2024-01-01",
-    token,
-    useCdn: false,
-  });
-  // The dataset is public, but IDs with a "." prefix are only readable with a token,
-  // so submitters' details stay private while still showing in the Studio
-  await client.create({ _id: `inbox.${crypto.randomUUID()}`, ...(doc as { _type: string }) });
+  const client = inboxClient();
+  if (!client) return false;
+  await client.create({ _id: newInboxId(), ...(doc as { _type: string }) });
   return true;
 }
 
 async function sendEmail(heading: string, subject: string, replyTo: string, rows: [string, string][]) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
-  if (!apiKey || !to) return false;
-
-  const filled = rows.filter(([, value]) => value);
-  const html = `
-    <div style="font-family:Arial,Helvetica,sans-serif;color:#2d1530;max-width:600px">
-      <h2 style="color:#b01444;margin:0 0 16px">${escapeHtml(heading)}</h2>
-      <table cellpadding="8" style="border-collapse:collapse;width:100%">
-        ${filled
-          .map(
-            ([label, value]) =>
-              `<tr><td style="font-weight:bold;vertical-align:top;width:35%;border-bottom:1px solid #ffe0e8">${escapeHtml(label)}</td><td style="white-space:pre-wrap;border-bottom:1px solid #ffe0e8">${escapeHtml(value)}</td></tr>`
-          )
-          .join("")}
-      </table>
-      <p style="color:#8e1330;font-size:12px;margin-top:20px">Reply to this email to answer them directly. A copy is saved in the Studio inbox.</p>
-    </div>`;
-  const text = `${heading}\n\n${filled.map(([label, value]) => `${label}: ${value}`).join("\n")}`;
-
-  const resend = new Resend(apiKey);
-  const { error } = await resend.emails.send({
-    from: process.env.CONTACT_FROM_EMAIL || "Love Mode Website <onboarding@resend.dev>",
-    to: to.split(",").map((address) => address.trim()),
-    replyTo,
-    subject,
-    html,
-    text,
-  });
-  if (error) throw new Error(`${error.name}: ${error.message}`);
-  return true;
+  return sendMail({ to: teamAddresses(), replyTo, subject, ...teamEmail(heading, rows) });
 }
 
 // Saves and emails in parallel; the visitor sees success if at least one worked

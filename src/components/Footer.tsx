@@ -71,6 +71,7 @@ export default async function Footer({
           )}
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link href="/privacy" className="hover:text-shell">{t("privacy")}</Link>
+            <Link href="/terms" className="hover:text-shell">{t("terms")}</Link>
             <p>{t("copyright", { year: new Date().getFullYear() })}</p>
           </div>
         </div>

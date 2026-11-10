@@ -1,6 +1,7 @@
 import type { Metadata, ResolvingMetadata } from "next";
 import { getTranslations } from "next-intl/server";
 import PageHeader from "@/components/postal/PageHeader";
+import SectionBody from "@/components/SectionBody";
 import { pageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata(
@@ -11,23 +12,6 @@ export async function generateMetadata(
   const t = await getTranslations({ locale, namespace: "privacy" });
   const description = (await getTranslations({ locale, namespace: "meta" }))("privacyDescription");
   return pageMetadata(parent, { title: t("title"), description, locale, path: "/privacy" });
-}
-
-/* Section text from the Studio: blank lines separate paragraphs, "- " lines form a list */
-function SectionBody({ body }: { body: string }) {
-  return body.split(/\n\s*\n/).map((block, index) => {
-    const lines = block.split("\n").map((line) => line.trim()).filter(Boolean);
-    if (lines.length > 0 && lines.every((line) => line.startsWith("- "))) {
-      return (
-        <ul key={index} className="flex list-disc flex-col gap-2 pl-6 marker:text-tangerine">
-          {lines.map((line) => (
-            <li key={line}>{line.slice(2)}</li>
-          ))}
-        </ul>
-      );
-    }
-    return <p key={index}>{lines.join(" ")}</p>;
-  });
 }
 
 export default async function PrivacyPage({

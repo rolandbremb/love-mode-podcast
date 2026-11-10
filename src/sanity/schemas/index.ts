@@ -6,6 +6,7 @@ import course from "./course";
 import seo from "./seo";
 import brandInquiry from "./brandInquiry";
 import guestApplication from "./guestApplication";
+import emailSession from "./emailSession";
 import { bilingualTypes, websiteTextDocuments } from "./websiteText";
 
 export const schemaTypes = [
@@ -17,6 +18,7 @@ export const schemaTypes = [
   seo,
   brandInquiry,
   guestApplication,
+  emailSession,
   ...bilingualTypes,
   ...websiteTextDocuments,
 ];

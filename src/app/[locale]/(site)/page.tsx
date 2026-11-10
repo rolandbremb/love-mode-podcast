@@ -20,6 +20,7 @@ import JsonLd from "@/components/JsonLd";
 import { localeAlternates } from "@/lib/metadata";
 import { episodePath, splitEpisodeTitle } from "@/lib/episodes";
 import { platformLabel } from "@/lib/format";
+import { paidEmailReady } from "@/lib/stripe";
 import { getAllEpisodes } from "@/lib/rss";
 import { host, podcastSeries, website } from "@/lib/structuredData";
 import { getAboutPage, getSiteSettings } from "@/sanity/client";
@@ -93,10 +94,10 @@ export default async function Home({
   const aboutParagraphs = (t.raw("welcomeParagraphs") as string[]).filter((p) => p.trim());
   const buyMeCoffeeUrl = settings?.buyMeCoffeeUrl;
   // ¿Lo hablamos? goes live when it's switched on in the Studio and the Cal.com link is set.
-  // The paid email isn't built yet, so its card only shows where unfinished sections do.
+  // The email card needs Stripe (STRIPE_SECRET_KEY); without it only the call shows.
   const callBookingUrl = settings?.callBookingUrl;
   const showSessions = showUpcoming || Boolean(settings?.showSessions && callBookingUrl);
-  const emailReady = showUpcoming;
+  const emailReady = showUpcoming || paidEmailReady();
 
   const hostName = aboutData?.hostName ?? "Andrea Moreno";
   const hostFirstName = hostName.split(" ")[0];
@@ -421,7 +422,7 @@ export default async function Home({
                   <div className="relative flex flex-col gap-4 pt-5">
                     <h3 className="font-display text-[2.25rem] leading-[1.08]">{t("emailTitle")}</h3>
                     <p className="text-[1.0625rem] leading-relaxed">{t("emailBody")}</p>
-                    <a href="#" className="btn-primary mt-auto self-start !text-base">{t("emailCta")}</a>
+                    <Link href="/cuentamelo" className="btn-primary mt-auto self-start !text-base">{t("emailCta")}</Link>
                   </div>
                   <div className="relative flex items-center justify-between gap-4 sm:flex-col sm:items-end sm:justify-end">
                     <svg className="h-20 w-20" viewBox="0 0 104 104" aria-hidden="true">

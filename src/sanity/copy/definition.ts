@@ -296,6 +296,7 @@ const menu: CopyDocument = {
     { key: "footer.digitalProducts", title: "Products", section: "footer" },
     { key: "footer.courses", title: "Courses", section: "footer" },
     { key: "footer.privacy", title: "Privacy policy link", section: "footer" },
+    { key: "footer.terms", title: "Terms link", section: "footer" },
     { key: "footer.copyright", title: "Copyright", section: "footer" },
   ],
 };
@@ -362,6 +363,65 @@ const seo: CopyDocument = {
     { key: "meta.brandsTitle", title: "For brands page: title in search results" },
     { key: "meta.brandsDescription", title: "For brands page: description in search results", type: "text" },
     { key: "meta.privacyDescription", title: "Privacy page: description in search results", type: "text" },
+    { key: "meta.termsDescription", title: "Terms page: description in search results", type: "text" },
+  ],
+};
+
+const terms: CopyDocument = {
+  id: "termsPage",
+  title: "Terms page",
+  fields: [
+    { key: "terms.title", title: "Title" },
+    { key: "terms.updated", title: "Last updated line", description: "Change the date whenever the terms change." },
+    { key: "terms.intro", title: "Intro", type: "text" },
+    {
+      key: "terms.sections",
+      title: "Sections",
+      type: "sections",
+      description:
+        'Keep prices and the refund rules in step with Cal.com and the home page. Leave an empty line between paragraphs; lines starting with "- " become a list.',
+    },
+  ],
+};
+
+const emailSession: CopyDocument = {
+  id: "emailSessionPage",
+  title: "Paid email page",
+  sections: [
+    { name: "page", title: "Page" },
+    { name: "form", title: "Form" },
+    { name: "after", title: "After paying" },
+  ],
+  fields: [
+    { key: "emailSession.label", title: "Line above the title", section: "page" },
+    { key: "emailSession.title", title: "Title", section: "page" },
+    { key: "emailSession.intro", title: "Intro", type: "text", section: "page" },
+    { key: "emailSession.metaDescription", title: "Description in search results", type: "text", section: "page" },
+    { key: "emailSession.asideTitle", title: "How it works: title", section: "page" },
+    { key: "emailSession.price", title: "How it works: price", section: "page", description: "The charge itself is set in the code (US$35)." },
+    { key: "emailSession.steps", title: "How it works: steps", type: "stringList", section: "page" },
+    { key: "emailSession.privacyNote", title: "Privacy note", type: "text", section: "page" },
+    { key: "emailSession.name", title: "Name: label", section: "form" },
+    { key: "emailSession.email", title: "Email: label", section: "form" },
+    { key: "emailSession.emailPlaceholder", title: "Email: placeholder", section: "form" },
+    { key: "emailSession.emailHint", title: "Email: hint", section: "form" },
+    { key: "emailSession.story", title: "Story: label", section: "form" },
+    { key: "emailSession.storyPlaceholder", title: "Story: placeholder", section: "form" },
+    { key: "emailSession.wordCount", title: "Story: word count", section: "form", description: "{count} and {max} are filled in automatically." },
+    { key: "emailSession.tooLong", title: "Story: too long", section: "form" },
+    { key: "emailSession.consent", title: "Disclaimer checkbox", type: "text", section: "form" },
+    { key: "emailSession.submit", title: "Button", section: "form" },
+    { key: "emailSession.redirecting", title: "Button while opening payment", section: "form" },
+    { key: "emailSession.termsNote", title: "Terms line", type: "text", section: "form", description: "Keep the <terms>…</terms> and <privacy>…</privacy> tags around the link words." },
+    { key: "emailSession.cancelled", title: "Payment cancelled message", type: "text", section: "form" },
+    { key: "emailSession.productName", title: "Name on the Stripe payment page", section: "form" },
+    { key: "emailSession.thanksTitle", title: "Thank-you page: title", section: "after" },
+    { key: "emailSession.thanksBody", title: "Thank-you page: text", type: "text", section: "after", description: "{email} is filled in automatically." },
+    { key: "emailSession.processingTitle", title: "Payment still confirming: title", section: "after" },
+    { key: "emailSession.processingBody", title: "Payment still confirming: text", type: "text", section: "after" },
+    { key: "emailSession.thanksCta", title: "Thank-you page: button", section: "after" },
+    { key: "emailSession.confirmSubject", title: "Confirmation email: subject", section: "after" },
+    { key: "emailSession.confirmBody", title: "Confirmation email: text", type: "text", section: "after", description: "{name} is filled in automatically." },
   ],
 };
 
@@ -446,6 +506,8 @@ export const copyDocuments: CopyDocument[] = [
   forms,
   resources,
   privacy,
+  terms,
+  emailSession,
   confirmed,
   popup,
   lista,

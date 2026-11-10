@@ -274,7 +274,8 @@
     "digitalProducts": "Productos Digitales",
     "courses": "Cursos",
     "copyright": "© {year} Love Mode Podcast",
-    "privacy": "Política de privacidad"
+    "privacy": "Política de privacidad",
+    "terms": "Términos"
   },
   "forms": {
     "sending": "Enviando…",
@@ -293,11 +294,12 @@
     "episodesDescription": "Todos los episodios de Love Mode: primeras citas, apps, relaciones a distancia, infidelidad, divorcio y volver a empezar. En YouTube, Spotify y Apple Podcasts.",
     "brandsTitle": "Patrocinios y colaboraciones con marcas",
     "brandsDescription": "Colabora con Love Mode: integraciones en el pódcast, contenido para redes y campañas para una comunidad que habla de amor, dating y relaciones.",
-    "privacyDescription": "Tu confianza es lo más importante para Love Mode. Aquí te explico qué datos recojo cuando visitas lovemodepod.com, para qué los uso, con quién los comparto y qué derechos tienes."
+    "privacyDescription": "Tu confianza es lo más importante para Love Mode. Aquí te explico qué datos recojo cuando visitas lovemodepod.com, para qué los uso, con quién los comparto y qué derechos tienes.",
+    "termsDescription": "Términos de las llamadas y respuestas por email de pago de Love Mode: qué incluyen, pagos, cancelaciones y reembolsos."
   },
   "privacy": {
     "title": "Política de privacidad",
-    "updated": "Última actualización: 9 de noviembre de 2026",
+    "updated": "Última actualización: 10 de noviembre de 2026",
     "intro": "Tu confianza es lo más importante para Love Mode. Aquí te explico qué datos recojo cuando visitas lovemodepod.com, para qué los uso, con quién los comparto y qué derechos tienes.",
     "sections": [
       {
@@ -306,19 +308,19 @@
       },
       {
         "heading": "Qué datos recojo y para qué",
-        "body": "- Newsletter: tu nombre (si lo das), tu correo y los temas que elijas, para enviarte los correos que pediste. Solo te escribo después de que confirmes tu suscripción.\n- WhatsApp (opcional, en la página «Esto apenas empieza»): tu número de teléfono, solo si lo das y marcas la casilla de consentimiento, para enviarte mensajes de Love Mode por WhatsApp. Puedes pedirme que deje de escribirte cuando quieras.\n- Formulario «Comparte tu historia»: tu nombre, tu correo, tus redes sociales y lo que me cuentes, para valorar tu propuesta y contactarte si encaja con un episodio.\n- Formulario «Para marcas»: tu nombre o empresa, tu correo, tu sitio web, el tipo de colaboración, el presupuesto y tu idea, para responder a tu propuesta.\n- Visitas a la web: estadísticas anónimas y agregadas (páginas vistas, país, tipo de dispositivo y velocidad de carga) para entender qué funciona y mejorar el sitio. No usan cookies ni te identifican."
+        "body": "- Newsletter: tu nombre (si lo das), tu correo y los temas que elijas, para enviarte los correos que pediste. Solo te escribo después de que confirmes tu suscripción.\n- WhatsApp (opcional, en la página «Esto apenas empieza»): tu número de teléfono, solo si lo das y marcas la casilla de consentimiento, para enviarte mensajes de Love Mode por WhatsApp. Puedes pedirme que deje de escribirte cuando quieras.\n- Formulario «Comparte tu historia»: tu nombre, tu correo, tus redes sociales y lo que me cuentes, para valorar tu propuesta y contactarte si encaja con un episodio.\n- Formulario «Para marcas»: tu nombre o empresa, tu correo, tu sitio web, el tipo de colaboración, el presupuesto y tu idea, para responder a tu propuesta.\n- Llamadas y respuestas por email de pago: tu nombre, tu correo, lo que me cuentes y los datos del pago, para darte el servicio. Las llamadas se reservan en Cal.com; los pagos los procesa Stripe y yo nunca veo los datos de tu tarjeta.\n- Visitas a la web: estadísticas anónimas y agregadas (páginas vistas, país, tipo de dispositivo y velocidad de carga) para entender qué funciona y mejorar el sitio. No usan cookies ni te identifican."
       },
       {
         "heading": "Por qué puedo usarlos",
-        "body": "Uso tus datos porque me das tu consentimiento (newsletter y WhatsApp), porque me los envías para que te responda (formularios) o por mi interés legítimo en mantener el sitio seguro y entender cómo se usa (estadísticas). Puedes retirar tu consentimiento cuando quieras."
+        "body": "Uso tus datos porque me das tu consentimiento (newsletter y WhatsApp), porque me los envías para que te responda (formularios), porque son necesarios para darte un servicio que pagaste (llamadas y emails) o por mi interés legítimo en mantener el sitio seguro y entender cómo se usa (estadísticas). Puedes retirar tu consentimiento cuando quieras."
       },
       {
         "heading": "Con quién los comparto",
-        "body": "No vendo ni alquilo tus datos. Solo los usan los servicios que hacen funcionar este sitio, cada uno para su tarea:\n\n- Kit (kit.com): envía la newsletter.\n- Sanity (sanity.io): guarda los mensajes de los formularios.\n- Resend (resend.com): me avisa por correo cuando llega un formulario.\n- Vercel (vercel.com): aloja la web y genera las estadísticas anónimas.\n- YouTube: las imágenes de los episodios se cargan desde YouTube, que puede recibir tu dirección IP.\n\nEstos servicios están en Estados Unidos, así que tus datos pueden tratarse fuera de tu país, con las garantías que ofrece cada proveedor."
+        "body": "No vendo ni alquilo tus datos. Solo los usan los servicios que hacen funcionar este sitio, cada uno para su tarea:\n\n- Kit (kit.com): envía la newsletter.\n- Sanity (sanity.io): guarda los mensajes de los formularios.\n- Resend (resend.com): me avisa por correo cuando llega un formulario.\n- Stripe (stripe.com): procesa los pagos.\n- Cal.com (cal.com): gestiona las reservas y las videollamadas.\n- Vercel (vercel.com): aloja la web y genera las estadísticas anónimas.\n- YouTube: las imágenes de los episodios se cargan desde YouTube, que puede recibir tu dirección IP.\n\nEstos servicios están en Estados Unidos, así que tus datos pueden tratarse fuera de tu país, con las garantías que ofrece cada proveedor."
       },
       {
         "heading": "Cuánto tiempo los guardo",
-        "body": "Los datos de la newsletter y tu número de WhatsApp, hasta que te des de baja o me pidas que los borre. Los mensajes de los formularios, el tiempo necesario para responderte y, como máximo, 24 meses."
+        "body": "Los datos de la newsletter y tu número de WhatsApp, hasta que te des de baja o me pidas que los borre. Los mensajes de los formularios, el tiempo necesario para responderte y, como máximo, 24 meses. Las historias de las llamadas y emails de pago, como máximo 12 meses después de responderte; los registros de pago, el tiempo que exija la ley fiscal."
       },
       {
         "heading": "Tus derechos",
@@ -333,6 +335,76 @@
         "body": "Si cambio esta política, actualizaré la fecha de arriba. Si el cambio es importante y estás en la newsletter, te avisaré por correo."
       }
     ]
+  },
+  "terms": {
+    "title": "Términos y condiciones",
+    "updated": "Última actualización: 10 de noviembre de 2026",
+    "intro": "Estos términos aplican a las llamadas y a las respuestas por email de pago que ofrece Love Mode. Al reservar o pagar, los aceptas.",
+    "sections": [
+      {
+        "heading": "Quién ofrece el servicio",
+        "body": "Love Mode es el pódcast de Andrea Moreno, con base en Miami, Florida (Estados Unidos). Para cualquier pregunta, escríbeme a andrea@lovemodepod.com."
+      },
+      {
+        "heading": "Qué incluye cada servicio",
+        "body": "- Una llamada con tu love bestie: 30 minutos por videollamada, US$65. Se reserva y se paga en Cal.com.\n- Cuéntamelo por email: me envías tu historia, de hasta 600 palabras, y te respondo por email en un máximo de 3 días hábiles, US$35. Se paga con Stripe."
+      },
+      {
+        "heading": "Lo que no es",
+        "body": "Comparto mi opinión desde mi experiencia personal y como periodista que habla de amor y relaciones. No soy psicóloga ni terapeuta, y estos servicios no son terapia ni reemplazan el acompañamiento de un profesional de la salud mental, médico o legal.\n\nSi estás en peligro o en una crisis, llama al 911 en Estados Unidos o al número de emergencias de tu país."
+      },
+      {
+        "heading": "Pagos",
+        "body": "Los pagos se procesan con Stripe, directamente o a través de Cal.com. Love Mode no ve ni guarda los datos de tu tarjeta. Los precios están en dólares estadounidenses; tu banco puede cobrar una comisión por cambio de moneda."
+      },
+      {
+        "heading": "Cancelaciones y reembolsos",
+        "body": "- Llamada: si cancelas con al menos 24 horas de anticipación, te devuelvo el dinero completo. Si cancelas con menos tiempo o no te conectas, no hay reembolso. Puedes cambiar la fecha desde tu correo de confirmación.\n- Email: si cambias de opinión antes de que te responda, escríbeme y te devuelvo el dinero. Una vez enviada mi respuesta, no hay reembolso.\n- Si por algún motivo no puedo darte el servicio, te devuelvo el dinero completo."
+      },
+      {
+        "heading": "Privacidad",
+        "body": "Tu historia es privada. No la comparto en Love Mode ni en mis redes sin tu autorización explícita. En la política de privacidad te explico qué datos guardo y por cuánto tiempo."
+      },
+      {
+        "heading": "Cambios",
+        "body": "Puedo actualizar estos términos. La fecha de arriba indica la última versión; las reservas y pagos ya hechos siguen con los términos que aceptaste."
+      }
+    ]
+  },
+  "emailSession": {
+    "label": "Cuéntamelo por email",
+    "title": "Cuéntame qué está pasando",
+    "intro": "Escríbeme tu historia con calma: qué pasó, qué sientes y qué te gustaría resolver. La leo con atención y te respondo con mi opinión, con cariño y sinceridad.",
+    "metaDescription": "Cuéntale a Andrea Moreno lo que estás viviendo en el amor y recibe su opinión por email en un máximo de 3 días hábiles.",
+    "name": "Tu nombre",
+    "email": "Tu correo electrónico",
+    "emailPlaceholder": "tu@correo.com",
+    "emailHint": "Aquí te llegará mi respuesta.",
+    "story": "Tu historia",
+    "storyPlaceholder": "Cuéntame desde el principio…",
+    "wordCount": "{count} de {max} palabras",
+    "tooLong": "Tu historia tiene más de 600 palabras. Acórtala un poco para poder enviarla.",
+    "consent": "Entiendo que Andrea comparte su opinión desde su experiencia personal y como periodista. No es psicóloga y esta respuesta no es terapia ni reemplaza el acompañamiento profesional.",
+    "submit": "Continuar al pago (US$35)",
+    "redirecting": "Abriendo el pago…",
+    "termsNote": "Al continuar aceptas los <terms>términos</terms> y la <privacy>política de privacidad</privacy>.",
+    "cancelled": "El pago no se completó y tu historia no se envió. Puedes intentarlo de nuevo cuando quieras.",
+    "asideTitle": "Así funciona",
+    "price": "US$35",
+    "steps": [
+      "Me escribes tu historia, de hasta 600 palabras.",
+      "Pagas de forma segura con Stripe.",
+      "Te respondo a tu correo en un máximo de 3 días hábiles."
+    ],
+    "privacyNote": "Tu historia es privada. Solo la leo yo y nunca la comparto en Love Mode ni en mis redes sin tu autorización.",
+    "productName": "Cuéntamelo por email: la respuesta de Andrea",
+    "thanksTitle": "¡Recibí tu historia!",
+    "thanksBody": "Gracias por confiar en mí. Te responderé a {email} en un máximo de 3 días hábiles. Si no ves mi correo, revisa también la carpeta de spam.",
+    "processingTitle": "Estamos confirmando tu pago",
+    "processingBody": "Puede tardar un minuto. Te llegará un correo de confirmación; si no lo recibes, escríbeme a andrea@lovemodepod.com.",
+    "thanksCta": "Mientras tanto, escucha un episodio",
+    "confirmSubject": "Recibí tu historia 💌",
+    "confirmBody": "Hola, {name}:\n\nGracias por confiar en mí. Ya tengo tu historia y te responderé a este mismo correo en un máximo de 3 días hábiles.\n\nCon cariño,\nAndrea\nLove Mode"
   },
   "confirmed": {
     "title": "¡Ya estás dentro!",

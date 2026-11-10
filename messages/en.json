@@ -274,7 +274,8 @@
     "digitalProducts": "Digital Products",
     "courses": "Courses",
     "copyright": "© {year} Love Mode Podcast",
-    "privacy": "Privacy policy"
+    "privacy": "Privacy policy",
+    "terms": "Terms"
   },
   "forms": {
     "sending": "Sending…",
@@ -293,11 +294,12 @@
     "episodesDescription": "Every Love Mode episode, in Spanish: first dates, dating apps, long distance, infidelity, divorce and starting over. On YouTube, Spotify and Apple Podcasts.",
     "brandsTitle": "Sponsorships and brand partnerships",
     "brandsDescription": "Partner with Love Mode: podcast integrations, social content, and campaigns for a community that talks about love, dating, and relationships.",
-    "privacyDescription": "Your trust matters most to Love Mode. Here's what data I collect when you visit lovemodepod.com, what I use it for, who I share it with and what rights you have."
+    "privacyDescription": "Your trust matters most to Love Mode. Here's what data I collect when you visit lovemodepod.com, what I use it for, who I share it with and what rights you have.",
+    "termsDescription": "Terms for Love Mode's paid calls and email replies: what they include, payments, cancellations and refunds."
   },
   "privacy": {
     "title": "Privacy policy",
-    "updated": "Last updated: November 9, 2026",
+    "updated": "Last updated: November 10, 2026",
     "intro": "Your trust matters most to Love Mode. Here's what data I collect when you visit lovemodepod.com, what I use it for, who I share it with and what rights you have.",
     "sections": [
       {
@@ -306,19 +308,19 @@
       },
       {
         "heading": "What I collect and why",
-        "body": "- Newsletter: your name (if you give it), your email and the topics you choose, to send you the emails you asked for. I only write to you after you confirm your subscription.\n- WhatsApp (optional, on the \"This is just the beginning\" page): your phone number, only if you give it and tick the consent box, to send you Love Mode messages on WhatsApp. You can ask me to stop at any time.\n- \"Share your story\" form: your name, email, social media and what you tell me, to consider your story and contact you if it fits an episode.\n- \"For brands\" form: your name or company, email, website, type of collaboration, budget and idea, to reply to your proposal.\n- Visits to the site: anonymous, aggregated statistics (pages viewed, country, device type and loading speed) to understand what works and improve the site. They use no cookies and don't identify you."
+        "body": "- Newsletter: your name (if you give it), your email and the topics you choose, to send you the emails you asked for. I only write to you after you confirm your subscription.\n- WhatsApp (optional, on the \"This is just the beginning\" page): your phone number, only if you give it and tick the consent box, to send you Love Mode messages on WhatsApp. You can ask me to stop at any time.\n- \"Share your story\" form: your name, email, social media and what you tell me, to consider your story and contact you if it fits an episode.\n- \"For brands\" form: your name or company, email, website, type of collaboration, budget and idea, to reply to your proposal.\n- Paid calls and email replies: your name, email, what you tell me and the payment details, to provide the service. Calls are booked on Cal.com; payments are processed by Stripe, and I never see your card details.\n- Visits to the site: anonymous, aggregated statistics (pages viewed, country, device type and loading speed) to understand what works and improve the site. They use no cookies and don't identify you."
       },
       {
         "heading": "Why I'm allowed to use it",
-        "body": "I use your data because you give me your consent (newsletter and WhatsApp), because you send it to me so I can reply (forms), or because of my legitimate interest in keeping the site secure and understanding how it's used (statistics). You can withdraw your consent at any time."
+        "body": "I use your data because you give me your consent (newsletter and WhatsApp), because you send it to me so I can reply (forms), because it's needed to provide a service you paid for (calls and emails), or because of my legitimate interest in keeping the site secure and understanding how it's used (statistics). You can withdraw your consent at any time."
       },
       {
         "heading": "Who I share it with",
-        "body": "I don't sell or rent your data. It's only used by the services that run this site, each for its own job:\n\n- Kit (kit.com): sends the newsletter.\n- Sanity (sanity.io): stores the messages from the forms.\n- Resend (resend.com): emails me when a form comes in.\n- Vercel (vercel.com): hosts the site and produces the anonymous statistics.\n- YouTube: episode images load from YouTube, which may receive your IP address.\n\nThese services are based in the United States, so your data may be processed outside your country, with the safeguards each provider offers."
+        "body": "I don't sell or rent your data. It's only used by the services that run this site, each for its own job:\n\n- Kit (kit.com): sends the newsletter.\n- Sanity (sanity.io): stores the messages from the forms.\n- Resend (resend.com): emails me when a form comes in.\n- Stripe (stripe.com): processes payments.\n- Cal.com (cal.com): handles bookings and video calls.\n- Vercel (vercel.com): hosts the site and produces the anonymous statistics.\n- YouTube: episode images load from YouTube, which may receive your IP address.\n\nThese services are based in the United States, so your data may be processed outside your country, with the safeguards each provider offers."
       },
       {
         "heading": "How long I keep it",
-        "body": "Newsletter data and your WhatsApp number, until you unsubscribe or ask me to delete them. Form messages, as long as needed to reply to you and for 24 months at most."
+        "body": "Newsletter data and your WhatsApp number, until you unsubscribe or ask me to delete them. Form messages, as long as needed to reply to you and for 24 months at most. Stories from paid calls and emails, for 12 months at most after I reply; payment records, as long as tax law requires."
       },
       {
         "heading": "Your rights",
@@ -333,6 +335,76 @@
         "body": "If I change this policy, I'll update the date above. If the change is important and you're on the newsletter, I'll let you know by email."
       }
     ]
+  },
+  "terms": {
+    "title": "Terms and conditions",
+    "updated": "Last updated: November 10, 2026",
+    "intro": "These terms apply to the paid calls and email replies offered by Love Mode. By booking or paying, you accept them.",
+    "sections": [
+      {
+        "heading": "Who offers the service",
+        "body": "Love Mode is Andrea Moreno's podcast, based in Miami, Florida (United States). For any question, write to andrea@lovemodepod.com."
+      },
+      {
+        "heading": "What each service includes",
+        "body": "- A call with your love bestie: 30 minutes by video call, US$65. Booked and paid on Cal.com.\n- Tell me by email: you send me your story, up to 600 words, and I reply by email within 3 business days, US$35. Paid with Stripe."
+      },
+      {
+        "heading": "What it isn't",
+        "body": "I share my opinion from my personal experience and as a journalist who talks about love and relationships. I'm not a psychologist or therapist, and these services aren't therapy or a substitute for a mental health, medical or legal professional.\n\nIf you're in danger or in crisis, call 911 in the United States or your country's emergency number."
+      },
+      {
+        "heading": "Payments",
+        "body": "Payments are processed by Stripe, directly or through Cal.com. Love Mode never sees or stores your card details. Prices are in US dollars; your bank may charge a currency conversion fee."
+      },
+      {
+        "heading": "Cancellations and refunds",
+        "body": "- Call: if you cancel at least 24 hours before, you get a full refund. If you cancel later or don't show up, there's no refund. You can reschedule from your confirmation email.\n- Email: if you change your mind before I reply, write to me and I'll refund you. Once my reply is sent, there's no refund.\n- If for any reason I can't provide the service, you get a full refund."
+      },
+      {
+        "heading": "Privacy",
+        "body": "Your story is private. I don't share it on Love Mode or my social media without your explicit permission. The privacy policy explains what data I keep and for how long."
+      },
+      {
+        "heading": "Changes",
+        "body": "I may update these terms. The date above shows the latest version; bookings and payments already made keep the terms you accepted."
+      }
+    ]
+  },
+  "emailSession": {
+    "label": "Tell me by email",
+    "title": "Tell me what's going on",
+    "intro": "Write me your story, in your own time: what happened, how you feel and what you'd like to figure out. I'll read it carefully and reply with my honest, caring opinion.",
+    "metaDescription": "Tell Andrea Moreno what you're going through in love and get her opinion by email within 3 business days.",
+    "name": "Your name",
+    "email": "Your email",
+    "emailPlaceholder": "you@example.com",
+    "emailHint": "This is where my reply will arrive.",
+    "story": "Your story",
+    "storyPlaceholder": "Start from the beginning…",
+    "wordCount": "{count} of {max} words",
+    "tooLong": "Your story is over 600 words. Shorten it a little to send it.",
+    "consent": "I understand Andrea shares her opinion from her personal experience and as a journalist. She isn't a psychologist, and this reply isn't therapy or a substitute for professional support.",
+    "submit": "Continue to payment (US$35)",
+    "redirecting": "Opening payment…",
+    "termsNote": "By continuing you accept the <terms>terms</terms> and the <privacy>privacy policy</privacy>.",
+    "cancelled": "The payment wasn't completed, so your story wasn't sent. You can try again whenever you like.",
+    "asideTitle": "How it works",
+    "price": "US$35",
+    "steps": [
+      "You write me your story, up to 600 words.",
+      "You pay securely with Stripe.",
+      "I reply to your email within 3 business days."
+    ],
+    "privacyNote": "Your story is private. Only I read it, and I never share it on Love Mode or my social media without your permission.",
+    "productName": "Tell me by email: Andrea's reply",
+    "thanksTitle": "I got your story!",
+    "thanksBody": "Thank you for trusting me. I'll reply to {email} within 3 business days. If you don't see my email, check your spam folder too.",
+    "processingTitle": "We're confirming your payment",
+    "processingBody": "It can take a minute. You'll get a confirmation email; if it doesn't arrive, write to andrea@lovemodepod.com.",
+    "thanksCta": "Meanwhile, listen to an episode",
+    "confirmSubject": "I got your story 💌",
+    "confirmBody": "Hi {name},\n\nThank you for trusting me. I have your story and I'll reply to this same email within 3 business days.\n\nWith love,\nAndrea\nLove Mode"
   },
   "confirmed": {
     "title": "You're in!",
