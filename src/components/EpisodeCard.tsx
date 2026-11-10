@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { episodePath } from "@/lib/episodes";
 import type { Episode } from "@/lib/rss";
 
 function formatViews(views: number, locale: string): string {
@@ -69,10 +71,8 @@ export default function EpisodeCard({ episode, rank }: EpisodeCardProps) {
         {episode.description}
       </p>
 
-      <a
-        href={episode.link}
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link
+        href={episodePath(episode)}
         className="btn-outline mt-5 self-start !py-2 !pl-2 !pr-5 after:absolute after:inset-0 after:content-['']"
       >
         <span className="grid h-8 w-8 place-items-center rounded-full bg-tangerine text-plum">
@@ -81,7 +81,7 @@ export default function EpisodeCard({ episode, rank }: EpisodeCardProps) {
           </svg>
         </span>
         {t("listenNow")}
-      </a>
+      </Link>
     </article>
   );
 }

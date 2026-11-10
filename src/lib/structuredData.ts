@@ -1,3 +1,4 @@
+import { episodePath, splitEpisodeTitle, summarize } from "@/lib/episodes";
 import type { Episode } from "@/lib/rss";
 import { siteUrl } from "@/lib/siteUrl";
 import type { SiteSettings } from "@/sanity/client";
@@ -74,22 +75,54 @@ export function host({
   };
 }
 
-// Search results show a short summary, so keep the first couple of sentences
-function summary(text: string, max = 200) {
-  const clean = text.replace(/\s+/g, " ").trim();
-  if (clean.length <= max) return clean;
-  return `${clean.slice(0, clean.lastIndexOf(" ", max))}…`;
+// The video embedded on the episode page, so Google can show it as a video result
+function video(episode: Episode) {
+  if (!episode.videoId) return {};
+  return {
+    associatedMedia: {
+      "@type": "VideoObject",
+      name: episode.title,
+      description: summarize(episode.description, 300) || episode.title,
+      ...(episode.image ? { thumbnailUrl: episode.image } : {}),
+      ...(isoDate(episode.pubDate) ? { uploadDate: isoDate(episode.pubDate) } : {}),
+      ...(episode.durationSeconds ? { duration: `PT${episode.durationSeconds}S` } : {}),
+      embedUrl: `https://www.youtube-nocookie.com/embed/${episode.videoId}`,
+      contentUrl: episode.link,
+    },
+  };
 }
 
-export function podcastEpisode(episode: Episode) {
-  const published = new Date(episode.pubDate);
+function isoDate(date: string) {
+  const parsed = new Date(date);
+  return Number.isNaN(parsed.getTime()) ? undefined : parsed.toISOString();
+}
+
+export function podcastEpisode(episode: Episode, locale: string, { withVideo = false } = {}) {
+  const { number } = splitEpisodeTitle(episode);
   return {
     "@type": "PodcastEpisode",
+    "@id": `${siteUrl}${episodePath(episode)}#episode`,
     name: episode.title,
-    url: episode.link,
-    description: summary(episode.description),
-    ...(Number.isNaN(published.getTime()) ? {} : { datePublished: published.toISOString() }),
+    url: `${siteUrl}/${locale}${episodePath(episode)}`,
+    description: summarize(episode.description),
+    ...(number ? { episodeNumber: Number(number) } : {}),
+    ...(isoDate(episode.pubDate) ? { datePublished: isoDate(episode.pubDate) } : {}),
     ...(episode.image ? { image: episode.image } : {}),
+    inLanguage: "es",
+    sameAs: episode.link,
     partOfSeries: { "@id": podcastId },
+    ...(withVideo ? video(episode) : {}),
+  };
+}
+
+export function breadcrumbs(items: { name: string; path: string }[], locale: string) {
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: `${siteUrl}/${locale}${item.path}`,
+    })),
   };
 }

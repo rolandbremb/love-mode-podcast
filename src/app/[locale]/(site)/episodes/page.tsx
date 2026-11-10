@@ -5,6 +5,8 @@ import { getTranslations } from "next-intl/server";
 import EpisodesBrowser from "@/components/EpisodesBrowser";
 import JsonLd from "@/components/JsonLd";
 import PageHeader from "@/components/postal/PageHeader";
+import { Link } from "@/i18n/navigation";
+import { episodePath } from "@/lib/episodes";
 import { getAllEpisodes } from "@/lib/rss";
 import { podcastEpisode, podcastSeries } from "@/lib/structuredData";
 import { getSiteSettings } from "@/sanity/client";
@@ -51,7 +53,7 @@ export default async function EpisodesPage({
       <JsonLd
         data={{
           ...podcastSeries({ name: tMeta("title"), description: tMeta("description"), locale, settings }),
-          episode: episodes.map(podcastEpisode),
+          episode: episodes.map((episode) => podcastEpisode(episode, locale)),
         }}
       />
       <PageHeader
@@ -91,10 +93,8 @@ export default async function EpisodesPage({
                 </div>
                 <h2 className="font-display text-[2rem] leading-[1.1] md:text-[2.5rem]">{latest.title}</h2>
                 <p className="line-clamp-3 text-[1.0625rem] leading-relaxed text-mauve">{latest.description}</p>
-                <a
-                  href={latest.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href={episodePath(latest)}
                   className="btn-primary mt-3 self-start !py-2 !pl-2 !pr-6 after:absolute after:inset-0 after:content-['']"
                 >
                   <span className="grid h-10 w-10 place-items-center rounded-full bg-tangerine text-plum">
@@ -103,7 +103,7 @@ export default async function EpisodesPage({
                     </svg>
                   </span>
                   {t("listenNow")}
-                </a>
+                </Link>
               </div>
             </article>
 

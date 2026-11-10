@@ -4,3 +4,8 @@ export function formatStat(n: number) {
   if (n >= 1_000) return `${Math.floor(n / 1_000)}K+`;
   return String(n);
 }
+
+// Listening apps as saved in the Studio's site settings -> their display names
+export function platformLabel(platform: string) {
+  return ({ youtube: "YouTube", spotify: "Spotify", apple: "Apple Podcasts" } as Record<string, string>)[platform] ?? platform;
+}

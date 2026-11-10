@@ -21,7 +21,8 @@ import {
 import Postmark, { CancelWaves } from "@/components/postal/Postmark";
 import JsonLd from "@/components/JsonLd";
 import { localeAlternates } from "@/lib/metadata";
-import { getAllEpisodes, type Episode } from "@/lib/rss";
+import { episodePath, splitEpisodeTitle } from "@/lib/episodes";
+import { getAllEpisodes } from "@/lib/rss";
 import { host, podcastSeries, website } from "@/lib/structuredData";
 import { getAboutPage, getSiteSettings } from "@/sanity/client";
 
@@ -45,13 +46,6 @@ const stopPlacement = [
   "lg:left-[318px] lg:top-[340px] lg:-rotate-[1.5deg]",
 ];
 const postmarkTilt = ["rotate-[10deg]", "-rotate-[8deg]", "rotate-6", "-rotate-[10deg]"];
-
-/* "41. Volver al dating | Gabriela Zuluaga" -> number, title and guest */
-function splitEpisodeTitle(episode: Episode) {
-  const match = episode.title.match(/^(\d+)\.?\s*(.*)$/);
-  const [rest, guest] = (match ? match[2] : episode.title).split(/\s+\|\s+/);
-  return { number: match?.[1], title: rest.trim(), guest: guest?.trim() };
-}
 
 export async function generateMetadata({
   params,
@@ -276,13 +270,7 @@ export default async function Home({
               const Doodle = episodeDoodles[index % episodeDoodles.length];
               const tilt = ["-rotate-[1.5deg]", "rotate-1 md:translate-y-5", "-rotate-[0.5deg]"][index % 3];
               return (
-                <a
-                  key={episode.link}
-                  href={episode.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`stamp block ${tilt}`}
-                >
+                <Link key={episode.link} href={episodePath(episode)} className={`stamp block ${tilt}`}>
                   <span className={`flex min-h-[22rem] flex-col gap-3.5 p-7 ${stampFields[index % stampFields.length]}`}>
                     <span className="flex items-start justify-between">
                       {number && <span className="font-display text-7xl leading-[0.8]">{number}</span>}
@@ -295,7 +283,7 @@ export default async function Home({
                       </span>
                     )}
                   </span>
-                </a>
+                </Link>
               );
             })}
           </div>

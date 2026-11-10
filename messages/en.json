@@ -147,6 +147,16 @@
     "listenNow": "Watch now",
     "views": "{count} views"
   },
+  "episode": {
+    "backToAll": "All episodes",
+    "number": "Episode {number}",
+    "withGuest": "with {guest}",
+    "play": "Play the episode",
+    "listenOn": "Also listen on",
+    "showNotes": "Show notes",
+    "related": "Keep listening",
+    "languageNote": "This episode is in Spanish."
+  },
   "products": {
     "title": "Digital products",
     "subtitle": "Tools and resources to help you level up your love life — created with love by the Love Mode team.",

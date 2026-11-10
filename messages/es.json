@@ -147,6 +147,16 @@
     "listenNow": "Ver ahora",
     "views": "{count} vistas"
   },
+  "episode": {
+    "backToAll": "Todos los episodios",
+    "number": "Episodio {number}",
+    "withGuest": "con {guest}",
+    "play": "Reproducir el episodio",
+    "listenOn": "Escúchalo también en",
+    "showNotes": "De qué hablamos",
+    "related": "Sigue escuchando",
+    "languageNote": "Este episodio está en español."
+  },
   "products": {
     "title": "Productos digitales",
     "subtitle": "Herramientas y recursos para mejorar tu vida amorosa — creados con amor por el equipo de Love Mode.",

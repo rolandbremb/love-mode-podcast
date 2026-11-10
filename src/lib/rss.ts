@@ -6,6 +6,8 @@ export interface Episode {
   pubDate: string;
   link: string;
   duration: string;
+  /** Length in seconds, when YouTube reports it (used for structured data) */
+  durationSeconds?: number;
   image?: string;
   views: number;
   videoId?: string;
@@ -123,6 +125,7 @@ async function getAllChannelEpisodes(
         pubDate: item.snippet?.publishedAt || "",
         link: `https://www.youtube.com/watch?v=${videoId}`,
         duration: formatDuration(durationSecs),
+        durationSeconds: durationSecs,
         image: thumbnail,
         views,
         videoId,
@@ -248,6 +251,7 @@ export async function getEpisodes(rssUrl?: string | null): Promise<Episode[]> {
         duration: e.videoId && durations[e.videoId]
           ? formatDuration(durations[e.videoId])
           : e.duration,
+        durationSeconds: e.videoId ? durations[e.videoId] : undefined,
       }));
   } catch {
     return [];

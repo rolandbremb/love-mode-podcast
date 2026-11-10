@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { platformLabel } from "@/lib/format";
 import { getSiteSettings } from "@/sanity/client";
 
 interface FooterProps {
@@ -19,7 +20,7 @@ export default async function Footer({
   const settings = await getSiteSettings({ locale });
 
   const listenLinks = (settings?.platformLinks ?? []).map(({ platform, url }) => ({
-    label: { youtube: "YouTube", spotify: "Spotify", apple: "Apple Podcasts" }[platform] ?? platform,
+    label: platformLabel(platform),
     url,
   }));
   const socialLinks = (settings?.socialLinks ?? []).map(({ platform, url }) => ({ label: platform, url }));

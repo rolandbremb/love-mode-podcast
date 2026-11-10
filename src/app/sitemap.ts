@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
+import { episodePath } from "@/lib/episodes";
 import { getAllEpisodes } from "@/lib/rss";
 import { siteUrl } from "@/lib/siteUrl";
 import { getSiteSettings } from "@/sanity/client";
@@ -32,6 +33,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (settings?.showShop) pages.push({ path: "/shop", priority: 0.5, changeFrequency: "monthly" });
   if (settings?.showProducts) pages.push({ path: "/products", priority: 0.5, changeFrequency: "monthly" });
   if (settings?.showCourses) pages.push({ path: "/courses", priority: 0.5, changeFrequency: "monthly" });
+  for (const episode of episodes) {
+    const published = new Date(episode.pubDate);
+    pages.push({
+      path: episodePath(episode),
+      priority: 0.7,
+      changeFrequency: "monthly",
+      lastModified: Number.isNaN(published.getTime()) ? undefined : published,
+    });
+  }
 
   return pages.flatMap(({ path, ...details }) =>
     routing.locales.map((locale) => ({
