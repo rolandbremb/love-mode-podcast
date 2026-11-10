@@ -50,6 +50,19 @@ const stopPlacement = [
   "lg:left-[318px] lg:top-[340px] lg:-rotate-[1.5deg]",
 ];
 
+// A session price: the amount large and "USD" small beside it. "US$" set in the display
+// serif ran together, so a saved "US$65" (or "$65", "USD 65") is shown as "$65 USD".
+function Price({ value }: { value: string }) {
+  const amount = value.trim().match(/^(?:US\$|USD\s*\$?|\$)\s*([\d.,]+)(?:\s*USD)?$/i)?.[1];
+  if (!amount) return <span className="font-display text-[2.5rem] leading-none">{value}</span>;
+  return (
+    <span className="flex items-baseline gap-2">
+      <span className="font-display text-[2.75rem] leading-none">${amount}</span>
+      <span className="text-sm font-bold tracking-[0.08em]">USD</span>
+    </span>
+  );
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -364,46 +377,49 @@ export default async function Home({
               <p className="max-w-[37.5rem] text-lg leading-relaxed text-shell/85 sm:text-[1.1875rem]">{t("talkIntro")}</p>
             </div>
             <div className={`grid gap-8 ${emailReady ? "md:grid-cols-2" : "max-w-[40rem]"}`}>
-              <div className="grid gap-8 rounded-md bg-shell p-8 text-plum sm:grid-cols-[1fr_7.5rem] sm:p-11">
+              {/* Each card: the text with its stamp beside it, then the button and the price on one line */}
+              <div className="grid gap-8 rounded-md bg-shell p-8 text-plum sm:grid-cols-[1fr_7.5rem] sm:grid-rows-[1fr_auto] sm:p-11">
                 <div className="flex flex-col gap-4">
                   <Telephone className="h-14 w-14" />
                   <h3 className="font-display text-[2.25rem] leading-[1.08]">{t("callTitle")}</h3>
                   <p className="text-[1.0625rem] leading-relaxed text-mauve">{t("callBody")}</p>
-                  <a
-                    href={callBookingUrl || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary mt-auto self-start !text-base"
-                  >
-                    {t("callCta")}
-                  </a>
                 </div>
-                <div className="flex items-center justify-between gap-4 sm:flex-col sm:items-end sm:justify-start sm:border-l-[1.5px] sm:border-plum/15 sm:pl-6">
+                <div className="hidden sm:flex sm:flex-col sm:items-end">
                   <span className="stamp stamp-sm block w-24 rotate-[4deg] [--stamp-cut:#fff2ec]">
                     <span className="flex h-[6.25rem] flex-col items-center justify-center bg-tangerine">
                       <span className="font-display text-[2.125rem] leading-none">30</span>
                       <span className="text-xs font-bold">min</span>
                     </span>
                   </span>
-                  <span className="font-display text-4xl">{t("callPrice")}</span>
+                </div>
+                <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border-t-[1.5px] border-plum/15 pt-6 sm:col-span-2">
+                  <a href={callBookingUrl || "#"} target="_blank" rel="noopener noreferrer" className="btn-primary !text-base">
+                    {t("callCta")}
+                  </a>
+                  <span className="flex items-baseline gap-3">
+                    <span className="text-sm font-semibold text-mauve sm:hidden">30 min</span>
+                    <Price value={t("callPrice")} />
+                  </span>
                 </div>
               </div>
               {emailReady && (
-                <div className="relative grid gap-8 overflow-hidden rounded-md bg-bubblegum p-8 text-plum sm:grid-cols-[1fr_7.5rem] sm:p-11">
+                <div className="relative grid gap-8 overflow-hidden rounded-md bg-bubblegum p-8 text-plum sm:grid-cols-[1fr_7.5rem] sm:grid-rows-[1fr_auto] sm:p-11">
                   <svg className="absolute inset-x-0 top-0 h-[4.75rem] w-full" viewBox="0 0 600 76" preserveAspectRatio="none" aria-hidden="true">
                     <path d="M0 0L300 72 600 0" fill="none" stroke="rgba(45,21,48,0.28)" strokeWidth="1.5" />
                   </svg>
                   <div className="relative flex flex-col gap-4 pt-5">
                     <h3 className="font-display text-[2.25rem] leading-[1.08]">{t("emailTitle")}</h3>
                     <p className="text-[1.0625rem] leading-relaxed">{t("emailBody")}</p>
-                    <Link href="/cuentamelo" className="btn-primary mt-auto self-start !text-base">{t("emailCta")}</Link>
                   </div>
-                  <div className="relative flex items-center justify-between gap-4 sm:flex-col sm:items-end sm:justify-end">
+                  <div className="relative hidden sm:flex sm:flex-col sm:items-end sm:justify-end">
                     <svg className="h-20 w-20" viewBox="0 0 104 104" aria-hidden="true">
                       <path d="M52 4c6 0 8 5 12 6s9-2 12 2-2 9 0 13 7 6 4 11-8 4-10 8-1 10-6 12-9-2-13-1-7 6-12 3-2-8-6-10-10-2-12-7 4-8 3-12-7-6-4-11 9-3 12-5 3-9 8-12 7 4 10 3z" fill="#ff6339" />
                       <path d="M52 70C40 61 32 55 32 46c0-6 4-10 10-10 4 0 8 2 10 6 2-4 6-6 10-6 6 0 10 4 10 10 0 9-8 15-20 24z" fill="none" stroke="#2d1530" strokeWidth="3" strokeLinejoin="round" />
                     </svg>
-                    <span className="font-display text-4xl">{t("emailPrice")}</span>
+                  </div>
+                  <div className="relative flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border-t-[1.5px] border-plum/15 pt-6 sm:col-span-2">
+                    <Link href="/cuentamelo" className="btn-primary !text-base">{t("emailCta")}</Link>
+                    <Price value={t("emailPrice")} />
                   </div>
                 </div>
               )}
