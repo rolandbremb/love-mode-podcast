@@ -90,6 +90,7 @@ const home: CopyDocument = {
 
     { key: "home.mostViewedEpisodes", title: "Title", section: "episodes" },
     { key: "home.topEpisodesTitle", title: "Most listened: title", section: "episodes" },
+    { key: "home.reviewsTitle", title: "Listener reviews: title", section: "episodes", description: "The reviews themselves are in Brands & Reviews." },
     {
       key: "home.episodesIntro",
       title: "Intro",
@@ -244,9 +245,14 @@ const brands: CopyDocument = {
     { key: "collaborate.title", title: "Title", section: "page" },
     { key: "collaborate.subtitle", title: "Intro", type: "text", section: "page" },
     { key: "collaborate.sideTitle", title: "Side panel: title", section: "page" },
+    { key: "collaborate.statsLabel", title: "Numbers: label (for screen readers)", section: "page" },
+    { key: "collaborate.partnersTitle", title: "Partner logos: title", section: "page", description: "The logos themselves are in Brands & Reviews." },
+    { key: "collaborate.offersTitle", title: "What we can create: title", section: "page" },
+    { key: "collaborate.mediaKit", title: "Media kit button", section: "page", description: "Shows once a PDF is uploaded in Brands & Reviews." },
     { key: "home.brandsDescription", title: "Side panel: text", type: "text", section: "page" },
     { key: "home.statEpisodes", title: "Side panel: episodes label", section: "page" },
     { key: "home.statViews", title: "Side panel: views label", section: "page" },
+    { key: "home.statSubscribers", title: "Side panel: subscribers label", section: "page" },
     { key: "home.statPlatforms", title: "Side panel: platforms label", section: "page" },
     { key: "collaborate.nameCompany", title: "Name or company", section: "form" },
     { key: "collaborate.email", title: "Email", section: "form" },

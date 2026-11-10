@@ -266,6 +266,26 @@ export async function getLatestEpisodes(
   return episodes.slice(0, count);
 }
 
+// The channel's subscriber count, when the YouTube API key and a channel feed are set
+export async function getYouTubeSubscribers(rssUrl?: string | null): Promise<number> {
+  const url = rssUrl || FALLBACK_RSS_URL;
+  const apiKey = process.env.YOUTUBE_API_KEY;
+  const channelId = url ? extractChannelId(url) : undefined;
+  if (!apiKey || !channelId) return 0;
+  try {
+    const res = await fetch(
+      `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`,
+      YOUTUBE_CACHE
+    );
+    if (!res.ok) return 0;
+    const data = await res.json();
+    const stats = data.items?.[0]?.statistics;
+    return stats?.hiddenSubscriberCount ? 0 : parseInt(stats?.subscriberCount || "0", 10);
+  } catch {
+    return 0;
+  }
+}
+
 // Returns full channel history sorted by publish date (newest first)
 export async function getAllEpisodes(rssUrl?: string | null): Promise<Episode[]> {
   const url = rssUrl || FALLBACK_RSS_URL;

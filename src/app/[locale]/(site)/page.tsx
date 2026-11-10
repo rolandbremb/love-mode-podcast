@@ -17,14 +17,16 @@ import {
 } from "@/components/postal/Doodles";
 import Postmark, { CancelWaves, HostPostmark } from "@/components/postal/Postmark";
 import JsonLd from "@/components/JsonLd";
+import ListenerReviews from "@/components/ListenerReviews";
 import LatestEpisodePostcard from "@/components/LatestEpisodePostcard";
 import { localeAlternates } from "@/lib/metadata";
 import { episodePath, guestLine, splitEpisodeTitle } from "@/lib/episodes";
 import { platformLabel } from "@/lib/format";
+import { withPreviewSample } from "@/lib/socialProof";
 import { paidEmailReady } from "@/lib/stripe";
 import { getAllEpisodes } from "@/lib/rss";
 import { host, podcastSeries, website } from "@/lib/structuredData";
-import { getAboutPage, getSiteSettings } from "@/sanity/client";
+import { getAboutPage, getSiteSettings, getSocialProof } from "@/sanity/client";
 
 export const revalidate = 3600;
 
@@ -69,10 +71,12 @@ export default async function Home({
   const tMeta = await getTranslations({ locale, namespace: "meta" });
   const tEpisode = await getTranslations({ locale, namespace: "episode" });
 
-  const [settings, aboutData] = await Promise.all([
+  const [settings, aboutData, savedProof] = await Promise.all([
     getSiteSettings({ preview, locale }),
     getAboutPage({ preview, locale }),
+    getSocialProof({ preview, locale }),
   ]);
+  const { proof } = withPreviewSample(savedProof);
   const allEpisodes = await getAllEpisodes(settings?.podcastRssUrl);
   const latest = allEpisodes[0];
   // The most listened, leaving out the latest so it isn't shown twice
@@ -301,6 +305,8 @@ export default async function Home({
           </div>
         </section>
       )}
+
+      <ListenerReviews title={t("reviewsTitle")} reviews={proof.reviews} />
 
       {/* ===== A LETTER FROM ANDREA: the welcome and the host in one postcard, signed ===== */}
       <section className="page-container pb-24 lg:pb-32">

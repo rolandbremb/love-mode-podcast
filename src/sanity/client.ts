@@ -148,6 +148,47 @@ export async function getProducts(opts?: { preview?: boolean; locale?: string })
   }
 }
 
+export interface SocialProof {
+  audienceStats: { value: string; label: string }[];
+  partners: { name: string; logo: string | null; url: string | null }[];
+  brandQuote: { quote: string; name: string; role: string } | null;
+  mediaKitUrl: string | null;
+  reviews: { quote: string; name: string; source: string | null }[];
+}
+
+// Brands & Reviews in the Studio; empty lists until Andrea fills them in
+export async function getSocialProof(opts?: { preview?: boolean; locale?: string }): Promise<SocialProof> {
+  const empty: SocialProof = { audienceStats: [], partners: [], brandQuote: null, mediaKitUrl: null, reviews: [] };
+  const client = getClient(opts?.preview);
+  if (!client) return empty;
+  const locale = opts?.locale ?? "es";
+  try {
+    const data = await client.fetch(
+      `*[_type == "socialProof" && _id == "socialProof"][0]{
+        "audienceStats": audienceStats[defined(value)]{ value, "label": coalesce(label[$locale], label.es, "") },
+        "partners": partners[defined(name)]{ name, "logo": logo.asset->url, url },
+        "brandQuote": select(defined(brandQuote.quote) => brandQuote{
+          "quote": coalesce(quote[$locale], quote.es),
+          name,
+          "role": coalesce(role[$locale], role.es, "")
+        }),
+        "mediaKitUrl": mediaKit.asset->url,
+        "reviews": reviews[defined(quote)]{ quote, name, source }
+      }`,
+      { locale }
+    );
+    return {
+      audienceStats: data?.audienceStats ?? [],
+      partners: data?.partners ?? [],
+      brandQuote: data?.brandQuote?.quote ? data.brandQuote : null,
+      mediaKitUrl: data?.mediaKitUrl ?? null,
+      reviews: data?.reviews ?? [],
+    };
+  } catch {
+    return empty;
+  }
+}
+
 export async function getAboutPage(opts?: { preview?: boolean; locale?: string }): Promise<AboutPage | null> {
   const client = getClient(opts?.preview);
   if (!client) return null;

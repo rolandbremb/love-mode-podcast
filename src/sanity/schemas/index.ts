@@ -7,6 +7,7 @@ import seo from "./seo";
 import brandInquiry from "./brandInquiry";
 import guestApplication from "./guestApplication";
 import emailSession from "./emailSession";
+import socialProof from "./socialProof";
 import { bilingualTypes, websiteTextDocuments } from "./websiteText";
 
 export const schemaTypes = [
@@ -19,6 +20,7 @@ export const schemaTypes = [
   brandInquiry,
   guestApplication,
   emailSession,
+  socialProof,
   ...bilingualTypes,
   ...websiteTextDocuments,
 ];

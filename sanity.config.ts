@@ -8,7 +8,7 @@ import { schemaTypes } from "./src/sanity/schemas";
 import { copyDocuments } from "./src/sanity/copy/definition";
 
 // One document each: pick them from the list, never create new ones
-const singletonTypes = new Set(["siteSettings", ...copyDocuments.map((doc) => doc.id)]);
+const singletonTypes = new Set(["siteSettings", "socialProof", ...copyDocuments.map((doc) => doc.id)]);
 
 export default defineConfig({
   name: "love-mode-podcast",
@@ -66,6 +66,11 @@ export default defineConfig({
                   .schemaType("siteSettings")
                   .documentId("siteSettings")
               ),
+
+            // Singleton: numbers, partners and reviews for the brands and home pages
+            S.listItem()
+              .title("Brands & Reviews")
+              .child(S.document().schemaType("socialProof").documentId("socialProof").title("Brands & Reviews")),
 
             // Website text: every page's words, in Spanish and English
             S.listItem()

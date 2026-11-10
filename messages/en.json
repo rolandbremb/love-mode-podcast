@@ -14,6 +14,7 @@
     "meetHostCta": "More about me",
     "mostViewedEpisodes": "Find your next episode",
     "topEpisodesTitle": "Most listened",
+    "reviewsTitle": "What listeners say",
     "viewAllEpisodes": "View all episodes",
     "wantToBeAGuest": "Want to be part of Love Mode?",
     "applyNow": "I want to be on the podcast",
@@ -52,6 +53,7 @@
     "brandsCta": "Let's talk about your brand",
     "statEpisodes": "episodes",
     "statViews": "views on YouTube",
+    "statSubscribers": "YouTube subscribers",
     "statPlatforms": "listening platforms",
     "heroHome": "Love lovers, you're home.",
     "photoNote": "Pour yourself a drink. Let's talk love.",
@@ -250,7 +252,11 @@
     "typeHint": "Pick the one that fits best",
     "budgetHint": "Optional, but it helps us plan",
     "successTitle": "Proposal received!",
-    "successBody": "Thank you! We'll get back to you within 48 hours."
+    "successBody": "Thank you! We'll get back to you within 48 hours.",
+    "statsLabel": "Love Mode in numbers",
+    "partnersTitle": "Brands that have worked with Love Mode",
+    "offersTitle": "What we can create together",
+    "mediaKit": "Download the media kit (PDF)"
   },
   "about": {
     "meetYourHost": "your love & dating bestie",
