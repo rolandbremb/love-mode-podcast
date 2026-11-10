@@ -17,7 +17,7 @@
     "reviewsTitle": "Lo que dicen quienes escuchan",
     "viewAllEpisodes": "Ver todos los episodios",
     "wantToBeAGuest": "¿Quieres ser parte de Love Mode?",
-    "applyNow": "Quiero participar en el pódcast",
+    "applyNow": "Quiero participar en el podcast",
     "supportTheShow": "¿Me invitas un café?",
     "supportDescription": "Si alguna conversación te hizo compañía, te dejó pensando o terminaste enviándosela a tres amigas, puedes apoyar los próximos episodios con un café.",
     "buyMeCoffee": "Invitarte un café",
@@ -66,7 +66,7 @@
     "hostNote": "Let's believe in love again",
     "guestParagraphs": [
       "Ahora quiero escucharte a ti.",
-      "¿Tienes una historia de amor que te gustaría contar en el pódcast? ¿Te enamoraste cuando menos lo esperabas? ¿Te tocó empezar de nuevo? ¿Viviste algo que cambió tu forma de ver las relaciones?",
+      "¿Tienes una historia de amor que te gustaría contar en el podcast? ¿Te enamoraste cuando menos lo esperabas? ¿Te tocó empezar de nuevo? ¿Viviste algo que cambió tu forma de ver las relaciones?",
       "Cuéntame un poco de tu historia y por qué te gustaría compartirla.",
       "Si eres especialista y quieres proponer un tema para un episodio, también me encantará conocer tu trabajo."
     ],
@@ -149,7 +149,7 @@
       "Volver al ruedo después del divorcio"
     ],
     "newsCta": "Quiero enterarme",
-    "brandsShort": "Para marcas que conectan con este mundo: integraciones en el pódcast, contenido para redes y campañas que aporten algo a nuestra comunidad.",
+    "brandsShort": "Para marcas que conectan con este mundo: integraciones en el podcast, contenido para redes y campañas que aporten algo a nuestra comunidad.",
     "heroTitle": "Love Mode",
     "heroTagline": "Your Love and Dating Bestie",
     "heroDescription": "De primeras citas, relaciones, casi algos, despedidas y de volver a ilusionarte cuando pensabas que ya qué pereza.",
@@ -242,12 +242,12 @@
   },
   "collaborate": {
     "title": "Hagamos algo increíble juntos",
-    "subtitle": "Si tu marca conecta con el mundo de Love Mode, exploremos una colaboración. Podemos crear integraciones en el pódcast, contenido para redes y campañas que aporten algo a nuestra comunidad.",
+    "subtitle": "Si tu marca conecta con el mundo de Love Mode, exploremos una colaboración. Podemos crear integraciones en el podcast, contenido para redes y campañas que aporten algo a nuestra comunidad.",
     "nameCompany": "Nombre o empresa",
     "email": "Correo electrónico",
     "emailPlaceholder": "tu@empresa.com",
     "typeOfCollaboration": "Tipo de colaboración",
-    "podcastSponsorship": "Integración en el pódcast",
+    "podcastSponsorship": "Integración en el podcast",
     "brandPartnership": "Alianza de marca",
     "contentCollab": "Colaboración de contenido",
     "affiliatePartnership": "Afiliados",
@@ -284,7 +284,7 @@
     "listenDesc": "Ponte al día con cada conversación — nuevos episodios cada semana.",
     "listenCta": "Ver episodios",
     "guestTitle": "Comparte tu historia",
-    "guestDesc": "¿Tienes una historia de amor que te gustaría contar en el pódcast? Cuéntamela.",
+    "guestDesc": "¿Tienes una historia de amor que te gustaría contar en el podcast? Cuéntamela.",
     "guestCta": "Quiero participar",
     "supportTitle": "¿Me invitas un café?",
     "supportDesc": "Si alguna conversación te hizo compañía, puedes apoyar los próximos episodios con un café.",
@@ -319,7 +319,7 @@
     "episodesTitle": "Episodios: citas, desamor, divorcio y volver a empezar",
     "episodesDescription": "Todos los episodios de Love Mode: primeras citas, apps, relaciones a distancia, infidelidad, divorcio y volver a empezar. En YouTube, Spotify y Apple Podcasts.",
     "brandsTitle": "Patrocinios y colaboraciones con marcas",
-    "brandsDescription": "Colabora con Love Mode: integraciones en el pódcast, contenido para redes y campañas para una comunidad que habla de amor, dating y relaciones.",
+    "brandsDescription": "Colabora con Love Mode: integraciones en el podcast, contenido para redes y campañas para una comunidad que habla de amor, dating y relaciones.",
     "privacyDescription": "Tu confianza es lo más importante para Love Mode. Aquí te explico qué datos recojo cuando visitas lovemodepod.com, para qué los uso, con quién los comparto y qué derechos tienes.",
     "termsDescription": "Términos de las llamadas y respuestas por email de pago de Love Mode: qué incluyen, pagos, cancelaciones y reembolsos."
   },
@@ -330,7 +330,7 @@
     "sections": [
       {
         "heading": "Quién es responsable de tus datos",
-        "body": "Love Mode es el pódcast de Andrea Moreno, con base en Miami, Florida (Estados Unidos). Para cualquier pregunta sobre tus datos, escríbeme a andrea@lovemodepod.com."
+        "body": "Love Mode es el podcast de Andrea Moreno, con base en Miami, Florida (Estados Unidos). Para cualquier pregunta sobre tus datos, escríbeme a andrea@lovemodepod.com."
       },
       {
         "heading": "Qué datos recojo y para qué",
@@ -369,7 +369,7 @@
     "sections": [
       {
         "heading": "Quién ofrece el servicio",
-        "body": "Love Mode es el pódcast de Andrea Moreno, con base en Miami, Florida (Estados Unidos). Para cualquier pregunta, escríbeme a andrea@lovemodepod.com."
+        "body": "Love Mode es el podcast de Andrea Moreno, con base en Miami, Florida (Estados Unidos). Para cualquier pregunta, escríbeme a andrea@lovemodepod.com."
       },
       {
         "heading": "Qué incluye cada servicio",
