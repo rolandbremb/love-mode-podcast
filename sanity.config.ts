@@ -10,6 +10,9 @@ import { copyDocuments } from "./src/sanity/copy/definition";
 // One document each: pick them from the list, never create new ones
 const singletonTypes = new Set(["siteSettings", "socialProof", ...copyDocuments.map((doc) => doc.id)]);
 
+// Only ever created from the dashboard, under private ids: a copy made here would be public
+const dashboardOnlyTypes = new Set(["incomeEntry", "contact", "plannerEpisode", "contentPost"]);
+
 export default defineConfig({
   name: "love-mode-podcast",
   title: "Love Mode Podcast",
@@ -61,6 +64,28 @@ export default defineConfig({
                           .title("Guest Applications")
                           .defaultOrdering([{ field: "submittedAt", direction: "desc" }])
                       ),
+                  ])
+              ),
+
+            // Planner: added and edited on /dashboard, readable here too
+            S.listItem()
+              .title("Planner")
+              .child(
+                S.list()
+                  .title("Planner")
+                  .items([
+                    S.listItem()
+                      .title("Episodes")
+                      .schemaType("plannerEpisode")
+                      .child(S.documentTypeList("plannerEpisode").title("Episodes").defaultOrdering([{ field: "publishDate", direction: "desc" }])),
+                    S.listItem()
+                      .title("Social posts")
+                      .schemaType("contentPost")
+                      .child(S.documentTypeList("contentPost").title("Social posts").defaultOrdering([{ field: "date", direction: "desc" }])),
+                    S.listItem()
+                      .title("Contacts")
+                      .schemaType("contact")
+                      .child(S.documentTypeList("contact").title("Contacts").defaultOrdering([{ field: "name", direction: "asc" }])),
                   ])
               ),
 
@@ -152,14 +177,16 @@ export default defineConfig({
   ],
   schema: {
     types: schemaTypes,
-    // Singletons exist once; income is only created from the dashboard (under a private id)
+    // Singletons exist once; income and the planner are only created from the dashboard
     templates: (templates) =>
-      templates.filter(({ schemaType }) => !singletonTypes.has(schemaType) && schemaType !== "incomeEntry"),
+      templates.filter(({ schemaType }) => !singletonTypes.has(schemaType) && !dashboardOnlyTypes.has(schemaType)),
   },
   document: {
     actions: (actions, { schemaType }) =>
       singletonTypes.has(schemaType)
         ? actions.filter(({ action }) => action !== "duplicate" && action !== "delete")
-        : actions,
+        : dashboardOnlyTypes.has(schemaType)
+          ? actions.filter(({ action }) => action !== "duplicate")
+          : actions,
   },
 });

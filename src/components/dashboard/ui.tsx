@@ -131,3 +131,12 @@ export function TextLink({ href, children, external = false }: { href: string; c
     </a>
   );
 }
+
+// A small chevron for "back" links, nudged left so it sits optically in line with the text
+export function BackChevron() {
+  return (
+    <svg viewBox="0 0 16 16" className="-ml-0.5 h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M10 3.5 5.5 8l4.5 4.5" />
+    </svg>
+  );
+}

@@ -1,8 +1,9 @@
 import { Suspense } from "react";
-import { SectionSkeleton, pressable } from "@/components/dashboard/ui";
-import { signOut } from "@/lib/dashboard/actions";
+import DashboardNav from "@/components/dashboard/DashboardNav";
+import { SectionSkeleton } from "@/components/dashboard/ui";
 import { requireSignIn } from "@/lib/dashboard/auth";
 import { dayKey, formatDay } from "@/lib/dashboard/summary";
+import { PlannerWeekSection } from "./planner-week";
 import {
   BrandsSection,
   CalendarSection,
@@ -18,6 +19,7 @@ export const dynamic = "force-dynamic";
 
 const NAV = [
   ["Today", "#today"],
+  ["This week", "#planner"],
   ["Coming up", "#calendar"],
   ["Sessions", "#sessions"],
   ["Newsletter", "#newsletter"],
@@ -35,34 +37,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: Pr
 
   return (
     <>
-      {/* A slim bar that stays at the top while scrolling the long page */}
-      <nav
-        aria-label="Dashboard sections"
-        className="sticky top-0 z-20 border-b border-plum/10 bg-shell/90 backdrop-blur supports-[backdrop-filter]:bg-shell/75"
-      >
-        <div className="mx-auto flex max-w-[78rem] items-center gap-4 px-4 sm:px-8">
-          <span className="hidden shrink-0 font-display text-xl sm:block">Love Mode</span>
-          <ul className="-mx-1 flex flex-1 gap-1 overflow-x-auto py-1.5 [scrollbar-width:none]">
-            {NAV.map(([label, href]) => (
-              <li key={href} className="shrink-0">
-                <a href={href} className="inline-flex min-h-10 items-center rounded-full px-3 text-sm font-semibold hover:bg-white">
-                  {label}
-                </a>
-              </li>
-            ))}
-            <li className="shrink-0">
-              <a href="/studio" className="inline-flex min-h-10 items-center rounded-full px-3 text-sm font-semibold hover:bg-white">
-                Studio
-              </a>
-            </li>
-          </ul>
-          <form action={signOut} className="shrink-0">
-            <button type="submit" className={`min-h-10 rounded-full border-[1.5px] border-plum/25 px-4 text-sm font-semibold hover:bg-white ${pressable}`}>
-              Sign out
-            </button>
-          </form>
-        </div>
-      </nav>
+      <DashboardNav current="/dashboard" sections={NAV} />
 
       <main className="mx-auto flex max-w-[78rem] flex-col gap-14 px-4 pb-24 pt-8 sm:gap-16 sm:px-8">
         <header>
@@ -72,6 +47,9 @@ export default async function DashboardPage({ searchParams }: { searchParams: Pr
 
         <Suspense fallback={<SectionSkeleton id="today" title="Today" height="h-44" />}>
           <TodaySection />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton id="planner" title="This week in the planner" height="h-44" />}>
+          <PlannerWeekSection />
         </Suspense>
         <Suspense fallback={<SectionSkeleton id="calendar" title="Coming up" height="h-80" />}>
           <CalendarSection month={month} />

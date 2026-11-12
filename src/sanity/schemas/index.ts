@@ -9,6 +9,7 @@ import guestApplication from "./guestApplication";
 import emailSession from "./emailSession";
 import socialProof from "./socialProof";
 import incomeEntry from "./incomeEntry";
+import { contact, contentPost, plannerEpisode } from "./planner";
 import { bilingualTypes, websiteTextDocuments } from "./websiteText";
 
 export const schemaTypes = [
@@ -23,6 +24,9 @@ export const schemaTypes = [
   emailSession,
   socialProof,
   incomeEntry,
+  contact,
+  plannerEpisode,
+  contentPost,
   ...bilingualTypes,
   ...websiteTextDocuments,
 ];
