@@ -155,7 +155,7 @@
     ],
     "newsFinePrint": "Al suscribirte, recibirás los correos que hayas elegido. Puedes darte de baja cuando quieras.",
     "newsSuccessTitle": "¡Ya casi estás dentro!",
-    "newsSuccessBody": "Te envié un correo para confirmar tu suscripción. Qué rico seguir en contacto.",
+    "newsSuccessBody": "Te envié un correo para confirmar tu suscripción. Si no lo ves en unos minutos, revisa spam o Promociones. Qué rico seguir en contacto.",
     "newsPrivacy": "Política de privacidad",
     "topEpisodesIntro": "Los favoritos de la comunidad de Love Mode.",
     "hostSignOff": "Con amor,"
@@ -443,7 +443,7 @@
     "finePrint": "Puedes darte de baja cuando quieras.",
     "privacy": "Política de privacidad",
     "successTitle": "¡Ya casi!",
-    "successBody": "Te envié un correo para confirmar tu suscripción. Qué rico seguir en contacto.",
+    "successBody": "Te envié un correo para confirmar tu suscripción. Si no lo ves en unos minutos, revisa spam o Promociones. Qué rico seguir en contacto.",
     "close": "Cerrar"
   },
   "lista": {
@@ -461,7 +461,7 @@
     "finePrint": "Puedes darte de baja cuando quieras.",
     "privacy": "Política de privacidad",
     "successTitle": "¡Ya estás en la lista! 🤍",
-    "successBody": "Qué rico tenerte por aquí. Revisa tu correo para confirmar tu suscripción y pronto tendrás noticias mías.",
+    "successBody": "Qué rico tenerte por aquí. Revisa tu correo para confirmar tu suscripción y pronto tendrás noticias mías. Si no lo ves en unos minutos, revisa spam o Promociones.",
     "listen": "Mientras tanto, escucha Love Mode",
     "metaDescription": "Únete a la lista de Love Mode para recibir recursos, cursos y novedades sobre amor, dating y relaciones.",
     "postmark": "COMUNIDAD ★ LOVE MODE ★",
