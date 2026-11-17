@@ -58,6 +58,12 @@ const siteSettings = {
       description: "The public link of the paid call event, e.g. https://cal.com/…/una-llamada-con-tu-love-bestie",
     },
     {
+      name: "psychologistUrl",
+      title: "Psychologist's website",
+      type: "url",
+      description: "Linked from her name in the small print under the paid sessions, e.g. https://alejandramoreno.com.co",
+    },
+    {
       name: "podcastRssUrl",
       title: "Podcast RSS Feed URL",
       type: "url",
