@@ -125,6 +125,7 @@
     "emailCta": "Quiero escribirte",
     "emailPrice": "US$35",
     "talkDisclaimer": "Te comparto mi perspectiva desde mi experiencia personal y mi trabajo como periodista enfocada en amor y relaciones. No soy psicóloga: este espacio no es terapia ni sustituye la atención de un profesional de la salud mental. Tu historia no se compartirá en Love Mode ni en mis redes sin tu autorización explícita. Si buscas acompañamiento profesional, puedes contactar a Alejandra Moreno, psicóloga y psicoanalista, para conocer su enfoque y consultar su disponibilidad.",
+    "talkReferralName": "Alejandra Moreno",
     "hostTitle": "Hola, soy {name}.",
     "hostPostmark": "MIAMI ★ CON AMOR ★ LOVE MODE ★",
     "postcardTo": "Para: {name}, Love Mode",
@@ -155,7 +156,7 @@
     ],
     "newsFinePrint": "Al suscribirte, recibirás los correos que hayas elegido. Puedes darte de baja cuando quieras.",
     "newsSuccessTitle": "¡Ya casi estás dentro!",
-    "newsSuccessBody": "Te envié un correo para confirmar tu suscripción. Qué rico seguir en contacto.",
+    "newsSuccessBody": "Te envié un correo para confirmar tu suscripción. Si no lo ves en unos minutos, revisa spam o Promociones. Qué rico seguir en contacto.",
     "newsPrivacy": "Política de privacidad",
     "topEpisodesIntro": "Los favoritos de la comunidad de Love Mode.",
     "hostSignOff": "Con amor,"
@@ -443,7 +444,7 @@
     "finePrint": "Puedes darte de baja cuando quieras.",
     "privacy": "Política de privacidad",
     "successTitle": "¡Ya casi!",
-    "successBody": "Te envié un correo para confirmar tu suscripción. Qué rico seguir en contacto.",
+    "successBody": "Te envié un correo para confirmar tu suscripción. Si no lo ves en unos minutos, revisa spam o Promociones. Qué rico seguir en contacto.",
     "close": "Cerrar"
   },
   "lista": {
@@ -469,7 +470,7 @@
     "finePrint": "Puedes darte de baja cuando quieras.",
     "privacy": "Política de privacidad",
     "successTitle": "¡Ya estás en la lista! 🤍",
-    "successBody": "Qué rico tenerte por aquí. Revisa tu correo para confirmar tu suscripción y pronto tendrás noticias mías.",
+    "successBody": "Qué rico tenerte por aquí. Revisa tu correo para confirmar tu suscripción y pronto tendrás noticias mías. Si no lo ves en unos minutos, revisa spam o Promociones.",
     "listen": "Mientras tanto, escucha Love Mode",
     "metaDescription": "Únete a la lista de Love Mode para recibir recursos, cursos y novedades sobre amor, dating y relaciones.",
     "postmark": "COMUNIDAD ★ LOVE MODE ★",

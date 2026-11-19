@@ -125,6 +125,12 @@ const home: CopyDocument = {
     { key: "home.emailCta", title: "Email: button", section: "talk" },
     { key: "home.emailPrice", title: "Email: price", section: "talk" },
     { key: "home.talkDisclaimer", title: "Small print", type: "text", section: "talk" },
+    {
+      key: "home.talkReferralName",
+      title: "Small print: name that links to the psychologist",
+      section: "talk",
+      description: "Must appear exactly like this in the small print. The website address is in Site settings.",
+    },
 
     { key: "home.hostTitle", title: "Title", section: "host" },
     { key: "home.meetHostCta", title: "Button", section: "host" },

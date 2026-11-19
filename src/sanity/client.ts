@@ -41,6 +41,7 @@ export interface SiteSettings {
   showCourses: boolean;
   showSessions: boolean;
   callBookingUrl: string | null;
+  psychologistUrl: string | null;
   podcastRssUrl: string;
   buyMeCoffeeUrl: string;
   socialLinks: { platform: string; url: string }[];
@@ -95,6 +96,7 @@ export async function getSiteSettings(opts?: { preview?: boolean; locale?: strin
         "showCourses": coalesce(showCourses, true),
         "showSessions": coalesce(showSessions, false),
         callBookingUrl,
+        psychologistUrl,
         podcastRssUrl,
         buyMeCoffeeUrl,
         socialLinks[]{ platform, url },

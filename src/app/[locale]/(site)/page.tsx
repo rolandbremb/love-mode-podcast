@@ -63,6 +63,27 @@ function Price({ value }: { value: string }) {
   );
 }
 
+// The small print under the sessions, with the psychologist's name linked to her website.
+// Without the name in the text (or without a link) it stays plain text.
+function Disclaimer({ text, name, url }: { text: string; name: string; url: string }) {
+  const at = name ? text.indexOf(name) : -1;
+  if (at < 0 || !url) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, at)}
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener"
+        className="text-shell underline decoration-shell/40 underline-offset-[3px] transition-colors hover:decoration-shell"
+      >
+        {name}
+      </a>
+      {text.slice(at + name.length)}
+    </>
+  );
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -424,7 +445,13 @@ export default async function Home({
                 </div>
               )}
             </div>
-            <p className="max-w-[51rem] text-[0.9375rem] leading-relaxed text-shell/70">{t("talkDisclaimer")}</p>
+            <p className="max-w-[51rem] text-[0.9375rem] leading-relaxed text-shell/70">
+              <Disclaimer
+                text={t("talkDisclaimer")}
+                name={t("talkReferralName")}
+                url={settings?.psychologistUrl || "https://alejandramoreno.com.co"}
+              />
+            </p>
           </div>
         </section>
       )}
