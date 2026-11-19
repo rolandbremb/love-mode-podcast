@@ -447,6 +447,14 @@
     "close": "Close"
   },
   "lista": {
+    "volver": {
+      "title": "Volver al ruedo. 💌",
+      "intro": [
+        "I'm preparing Volver al ruedo, a course for dating again and starting over in love, at your own pace.",
+        "Leave your email to join the waitlist. I'll let you know when the course opens and, in the meantime, share resources about love, dating and relationships."
+      ],
+      "successBody": "So glad to have you here. Check your email to confirm your subscription, and I'll let you know as soon as the course opens."
+    },
     "title": "This is just the beginning. 💌",
     "intro": [
       "I'm preparing lovely things for this community and I'd love to share them with you.",

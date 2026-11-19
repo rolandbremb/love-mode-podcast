@@ -19,10 +19,28 @@ export async function generateMetadata(
   return pageMetadata(parent, { title, description: t("metaDescription"), locale, path: "/lista" });
 }
 
-export default async function ListaPage({ params }: { params: Promise<{ locale: string }> }) {
+/* Links can add ?lista=volver (the Volver al ruedo course waitlist: its own
+   headline and Kit tag) and ?fuente=instagram (tagged "Fuente: Instagram"
+   instead of "Fuente: Esto apenas empieza"). The plain /lista link is unchanged. */
+export default async function ListaPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ lista?: string; fuente?: string }>;
+}) {
   const { locale } = await params;
+  const { lista, fuente } = await searchParams;
   const t = await getTranslations({ locale, namespace: "lista" });
-  const intro = t.raw("intro") as string[];
+  const waitlist = lista === "volver";
+  const source = fuente === "instagram" ? "instagram" : "lista";
+  const copy = waitlist ? "volver." : "";
+  const intro = t.raw(`${copy}intro`) as string[];
+  // Recorded in Kit as the page the signup happened on
+  const query = new URLSearchParams();
+  if (waitlist) query.set("lista", "volver");
+  if (source === "instagram") query.set("fuente", "instagram");
+  const page = `https://lovemodepod.com/lista${query.toString() ? `?${query}` : ""}`;
 
   return (
     <section className="page-container flex justify-center pb-24 pt-10 md:pb-32 md:pt-16">
@@ -35,7 +53,7 @@ export default async function ListaPage({ params }: { params: Promise<{ locale: 
         <div className="grid overflow-hidden rounded-md bg-white shadow-postal md:grid-cols-[1fr_2px_1fr]">
           <div className="flex flex-col gap-5 bg-bubblegum px-6 pb-10 pt-14 sm:px-12 sm:py-14">
             <h1 className="max-w-[12ch] font-display text-[clamp(2.75rem,7vw,4.5rem)] leading-[0.98] tracking-[-0.03em] motion-safe:animate-rise">
-              {t("title")}
+              {t(`${copy}title`)}
             </h1>
             {intro.map((paragraph) => (
               <p key={paragraph} className="max-w-[28rem] text-lg leading-relaxed sm:text-[1.1875rem]">
@@ -49,7 +67,14 @@ export default async function ListaPage({ params }: { params: Promise<{ locale: 
             aria-hidden="true"
           />
           <div className="flex flex-col gap-8 px-6 py-10 sm:px-12 sm:py-14">
-            <QuickSignupForm namespace="lista" source="lista" page="https://lovemodepod.com/lista" withPhone />
+            <QuickSignupForm
+              namespace="lista"
+              source={source}
+              page={page}
+              interests={waitlist ? ["divorce", "news"] : ["news"]}
+              successBody={t(`${copy}successBody`)}
+              withPhone
+            />
             <Link
               href="/episodes"
               className="mt-auto inline-flex items-center gap-2 self-start text-[1.0625rem] font-semibold underline-offset-[5px] hover:underline"

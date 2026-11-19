@@ -17,6 +17,7 @@ const NEWSLETTER_INTERESTS = {
 const SOURCE_TAGS: Record<string, number> = {
   popup: 25644053, // Fuente: pop-up
   lista: 25644054, // Fuente: Esto apenas empieza
+  instagram: 26146812, // Fuente: Instagram (/lista?fuente=instagram, linked from ManyChat DMs)
 };
 const WHATSAPP_CONSENT_TAG = 25644055; // WhatsApp: acepta mensajes
 
