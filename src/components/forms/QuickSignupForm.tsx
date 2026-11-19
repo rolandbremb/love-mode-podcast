@@ -28,14 +28,20 @@ export default function QuickSignupForm({
   source,
   withPhone = false,
   page = "https://lovemodepod.com",
+  interests = ["news"],
+  successBody,
   compact = false,
   onSuccess,
 }: {
   namespace: "popup" | "lista";
-  source: "popup" | "lista";
+  source: "popup" | "lista" | "instagram";
   withPhone?: boolean;
   /** Page the signup happened on, recorded in Kit */
   page?: string;
+  /** Kit interest tags to add (keys of NEWSLETTER_INTERESTS in lib/newsletter) */
+  interests?: ("news" | "community" | "divorce")[];
+  /** Replaces the namespace's success message */
+  successBody?: string;
   /** Tighter spacing on phones, for the pop-up */
   compact?: boolean;
   onSuccess?: () => void;
@@ -60,7 +66,7 @@ export default function QuickSignupForm({
         <p ref={successRef} tabIndex={-1} className="font-display text-[1.75rem] leading-tight focus:outline-none">
           {t("successTitle")}
         </p>
-        <p className="text-[1.0625rem] leading-relaxed text-mauve">{t("successBody")}</p>
+        <p className="text-[1.0625rem] leading-relaxed text-mauve">{successBody ?? t("successBody")}</p>
       </div>
     );
   }
@@ -70,7 +76,9 @@ export default function QuickSignupForm({
       <Honeypot />
       <input type="hidden" name="source" value={source} />
       <input type="hidden" name="page" value={page} />
-      <input type="hidden" name="interests" value="news" />
+      {interests.map((interest) => (
+        <input key={interest} type="hidden" name="interests" value={interest} />
+      ))}
       <label className="flex flex-col gap-1.5 text-[0.9375rem] font-semibold">
         {t("name")}
         <input type="text" name="name" autoComplete="given-name" maxLength={80} className={fieldClass} />

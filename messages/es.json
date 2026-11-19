@@ -448,6 +448,14 @@
     "close": "Cerrar"
   },
   "lista": {
+    "volver": {
+      "title": "Volver al ruedo. 💌",
+      "intro": [
+        "Estoy preparando Volver al ruedo, un curso para volver a salir y empezar de nuevo en el amor, a tu ritmo.",
+        "Déjame tu correo para entrar en la lista de espera. Te avisaré cuando abra el curso y, mientras tanto, te compartiré recursos sobre amor, dating y relaciones."
+      ],
+      "successBody": "Qué alegría tenerte por aquí. Revisa tu correo para confirmar tu suscripción y te avisaré en cuanto abra el curso. Si no lo ves en unos minutos, revisa spam o Promociones."
+    },
     "title": "Esto apenas empieza. 💌",
     "intro": [
       "Estoy preparando cosas lindas para esta comunidad y me encantaría compartirlas contigo.",
